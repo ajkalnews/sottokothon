@@ -3,143 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আজকের খবর | প্রথম আলো স্টাইল নিউজ</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Google Fonts for Bengali -->
+    <title>নিউজ পোর্টাল | প্রথম আলো স্টাইল</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <style>
         body {
             font-family: 'Noto Sans Bengali', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .bg-prothomalo-red {
+            background-color: #C9252C;
+        }
+        .text-prothomalo-red {
+            color: #C9252C;
+        }
+        /* স্ক্রোলিং টিকারের জন্য */
+        .ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .ticker-item {
+            display: inline-block;
+            padding: 0 20px;
         }
     </style>
 </head>
-<body class="bg-white text-gray-900">
+<body>
 
-    <!-- ১. টপ হেডার (তারিখ ও লোগো) -->
-    <header class="border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col items-center justify-between md:flex-row">
-            <div class="text-sm text-gray-500 order-2 md:order-1">
-                শনিবার, ২৭ জুন ২০২৬ | ১৩ আষাঢ় ১৪৩৩
+    <div class="container bg-white shadow-sm my-3 p-4">
+
+        <div class="d-flex justify-content-between align-items-center border-b pb-2 mb-3 text-muted small border-bottom">
+            <div>
+                <i class="bi bi-calendar3"></i> শনিবার, ২৭ জুন ২০২৬ | ০৮:৫১:৩৩ PM
             </div>
-            <!-- লোগো (প্রথম আলোর মতো লাল বৃত্ত বা টেক্সট) -->
-            <div class="text-4xl font-extrabold text-[#C9252C] tracking-tight order-1 md:order-2 mb-2 md:mb-0">
-                প্রথম <span class="text-gray-900">খবর</span>
-            </div>
-            <div class="order-3 hidden md:block">
-                <button class="bg-[#C9252C] text-white px-4 py-1.5 text-sm font-semibold rounded">লগইন</button>
+            <div class="d-flex gap-3 fs-5">
+                <a href="#" class="text-muted"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-muted"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" class="text-muted"><i class="bi bi-youtube"></i></a>
+                <a href="#" class="text-muted"><i class="bi bi-instagram"></i></a>
             </div>
         </div>
-    </header>
 
-    <!-- ২. নেভিগেশন বার (মেনু) -->
-    <nav class="border-b border-gray-200 sticky top-0 bg-white z-50">
-        <div class="max-w-7xl mx-auto px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
-            <ul class="flex space-x-6 py-3 text-md font-semibold text-gray-700">
-                <li><a href="#" class="text-[#C9252C] hover:text-[#C9252C]">সর্বশেষ</a></li>
-                <li><a href="#" class="hover:text-[#C9252C]">রাজনীতি</a></li>
-                <li><a href="#" class="hover:text-[#C9252C]">বাংলাদেশ</a></li>
-                <li><a href="#" class="hover:text-[#C9252C]">বিশ্ব</a></li>
-                <li><a href="#" class="hover:text-[#C9252C]">বাণিজ্য</a></li>
-                <li><a href="#" class="hover:text-[#C9252C]">খেলা</a></li>
-                <li><a href="#" class="hover:text-[#C9252C]">বিনোদন</a></li>
-                <li><a href="#" class="hover:text-[#C9252C]">টেকনো</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- ৩. মূল কন্টেন্ট এরিয়া (৩ কলাম গ্রিড) -->
-    <main class="max-w-7xl mx-auto px-4 py-6">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            
-            <!-- বাম কলাম: ছোট খবর/শিরোনাম (১ কলাম) -->
-            <div class="lg:col-span-1 space-y-4 order-2 lg:order-1 border-r border-gray-100 pr-4 hidden lg:block">
-                <h3 class="font-bold text-lg text-[#C9252C] border-b-2 border-[#C9252C] pb-1 mb-3">আলোচিত খবর</h3>
-                
-                <div class="border-b border-gray-100 pb-3">
-                    <a href="#" class="hover:text-[#C9252C] transition-colors">
-                        <h4 class="font-semibold text-md leading-snug">বাজেট ২০২৬: মধ্যবিত্তের করের ক্ষেত্রে বড় পরিবর্তনের আভাস</h4>
-                    </a>
-                </div>
-                <div class="border-b border-gray-100 pb-3">
-                    <a href="#" class="hover:text-[#C9252C] transition-colors">
-                        <h4 class="font-semibold text-md leading-snug">মেট্রোরেলের নতুন রুট চালু, স্বস্তিতে রাজধানীবাসী</h4>
-                    </a>
-                </div>
-                <div class="border-b border-gray-100 pb-3">
-                    <a href="#" class="hover:text-[#C9252C] transition-colors">
-                        <h4 class="font-semibold text-md leading-snug">টি-টোয়েন্টি বিশ্বকাপ: টানটান উত্তেজনায় জিতল বাংলাদেশ</h4>
-                    </a>
+        <header class="row align-items-center mb-4">
+            <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                <h1 class="fw-extrabold m-0 display-5 font-black text-prothomalo-red">
+                    US<span class="text-dark">NEWS</span>
+                </h1>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-light border text-center py-3 text-muted small rounded">
+                    <span class="d-block text-uppercase text-center text-xs text-muted mb-1" style="font-size: 10px;">Advertisement</span>
+                    यहां विज्ञापन बैनर होगा (728x90)
                 </div>
             </div>
+        </header>
 
-            <!-- মাঝের কলাম: লিড নিউজ (২ কলাম) -->
-            <div class="lg:col-span-2 order-1 lg:order-2 space-y-6">
-                <!-- প্রধান লিড নিউজ -->
-                <div class="group cursor-pointer">
-                    <!-- প্রথম আলো স্টাইলে বড় ছবি -->
-                    <div class="overflow-hidden bg-gray-100 mb-3">
-                        <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800" alt="Lead News" class="w-full h-[300px] md:h-[400px] object-cover group-hover:scale-102 transition-transform duration-300">
-                    </div>
-                    <!-- শিরোনাম -->
-                    <a href="#">
-                        <h1 class="text-2xl md:text-4xl font-bold text-gray-900 leading-tight group-hover:text-[#C9252C] transition-colors">
-                            টানা বৃষ্টিতে ডুবল চট্টগ্রাম, দুর্ভোগে লাখো মানুষ
-                        </h1>
-                    </a>
-                    <p class="text-gray-600 mt-2 text-sm md:text-base leading-relaxed">
-                        টানা তিনদিনের ভারী বর্ষণ ও জোয়ারের পানিতে চট্টগ্রামের নিচু এলাকাগুলো তলিয়ে গেছে। প্রধান সড়কগুলোতে কোমর পানি থই থই করছে। ব্যাহত হচ্ছে যান চলাচল... <span class="text-gray-400 text-xs">১ ঘণ্টা আগে</span>
-                    </p>
-                </div>
-
-                <hr class="border-gray-200">
-
-                <!-- সাব-লিড নিউজ (পাশে বা নিচে দুটি ছোট গ্রিড) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="flex space-x-3">
-                        <div class="w-2/3">
-                            <a href="#" class="font-bold text-md hover:text-[#C9252C]">ডলারের বাজারে কিছুটা স্বস্তি, কমল দাম</a>
-                            <p class="text-xs text-gray-500 mt-1">অর্থনীতি • ২ ঘণ্টা আগে</p>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=150" class="w-1/3 h-20 object-cover">
-                    </div>
-                    <div class="flex space-x-3">
-                        <div class="w-2/3">
-                            <a href="#" class="font-bold text-md hover:text-[#C9252C]">প্রযুক্তির নতুন চমক: আসছে কৃত্রিম বুদ্ধিমত্তার নতুন চিপ</a>
-                            <p class="text-xs text-gray-500 mt-1">বিজ্ঞান ও প্রযুক্তি</p>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150" class="w-1/3 h-20 object-cover">
-                    </div>
-                </div>
-            </div>
-
-            <!-- ডান কলাম: বিজ্ঞাপন ও অন্যান্য খবর (১ কলাম) -->
-            <div class="lg:col-span-1 order-3 space-y-6 border-l border-gray-100 pl-4">
-                <!-- ডামি বিজ্ঞাপন বক্স -->
-                <div class="bg-gray-50 border border-gray-200 h-[250px] flex items-center justify-center text-gray-400 text-sm">
-                    বিজ্ঞাপন দিন এখানে
-                </div>
-
-                <!-- আরেকটি ছোট নিউজ লিস্ট -->
-                <div>
-                    <h3 class="font-bold text-lg text-gray-900 border-b border-gray-900 pb-1 mb-3">খেলাধুলার খবর</h3>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="hover:text-[#C9252C] block font-semibold">কিলিয়ান এমবাপের নতুন রেকর্ড, রিয়ালের বড় জয়</a></li>
-                        <li><a href="#" class="hover:text-[#C9252C] block font-semibold">বিপিএলের ড্রাফট চূড়ান্ত, কোন দলে কে?</a></li>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-top border-bottom py-1 mb-3">
+            <div class="container-fluid p-0">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-bold">
+                        <li class="nav-item"><a class="nav-link active text-prothomalo-red" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">English News</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">Bangla News</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">News Paper Lists</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">Login</a></li>
                     </ul>
+                    <form class="d-flex align-items-center">
+                        <button class="btn btn-sm border-0" type="submit"><i class="bi bi-search fs-5"></i></button>
+                    </form>
                 </div>
             </div>
+        </nav>
+
+        <div class="d-flex align-items-center border border-danger mb-4">
+            <span class="bg-prothomalo-red text-white px-3 py-2 fw-bold m-0 text-nowrap">শিরোনাম</span>
+            <div class="ticker-wrap w-100 py-1 bg-light text-dark small">
+                <marquee behavior="scroll" direction="left" scrollamount="5">
+                    <span class="ticker-item"><i class="bi bi-record-fill text-danger"></i> নর্থ আমেরিকা (মাকসুদ-মাসুদ) এর সংবাদ সম্মেলনে কুৎসা রটানোর প্রতিবাদ</span>
+                    <span class="ticker-item"><i class="bi bi-record-fill text-danger"></i> নারীর ক্ষমতায়ন এবং নারী, শান্তি ও নিরাপত্তা এজেন্ডা এগিয়ে নিতে বাংলাদেশ ও ইউএন উইমেনের ঘনিষ্ঠ সহযোগিতার অঙ্গীকার</span>
+                </marquee>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+            <main class="col-lg-8 border-end-lg">
+                
+                <div class="row g-4 mb-4">
+                    <div class="col-md-7">
+                        <div class="card border-0">
+                            <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=600" class="card-img-top rounded-0" alt="Lead News">
+                            <div class="card-body px-0">
+                                <h2 class="card-title fw-bold h3"><a href="#" class="text-decoration-none text-dark hover-danger">টানা বৃষ্টিতে ডুবল চট্টগ্রাম, দুর্ভোগে লাখো মানুষ</a></h2>
+                                <p class="card-text text-muted small">টানা তিনদিনের ভারী বর্ষণ ও জোয়ারের পানিতে চট্টগ্রামের নিচু এলাকাগুলো তলিয়ে গেছে। প্রধান সড়কগুলোতে কোমর পানি থই থই করছে...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 d-flex flex-column gap-3">
+                        <div class="d-flex gap-2 align-items-start border-bottom pb-2">
+                            <div class="w-60">
+                                <h5 class="fw-bold h6"><a href="#" class="text-decoration-none text-dark">ডলারের বাজারে কিছুটা স্বস্তি, কমল দাম</a></h5>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=120" class="img-fluid w-40" style="height: 60px; object-fit: cover;">
+                        </div>
+                        <div class="d-flex gap-2 align-items-start border-bottom pb-2">
+                            <div class="w-60">
+                                <h5 class="fw-bold h6"><a href="#" class="text-decoration-none text-dark">প্রযুক্তির নতুন চমক: আসছে কৃত্রিম বুদ্ধিমত্তার নতুন চিপ</a></h5>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=120" class="img-fluid w-40" style="height: 60px; object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="my-4">
+                    <h4 class="fw-bold text-prothomalo-red border-bottom border-danger border-3 pb-1 d-inline-block mb-3">বাংলাদেশ</h4>
+                    <div class="row row-cols-1 row-cols-md-3 g-3">
+                        <div class="col">
+                            <div class="card h-100 border-0 bg-light p-2">
+                                <h6 class="fw-bold"><a href="#" class="text-decoration-none text-dark">ঢাকার বায়ুমানের উন্নতি, সন্তোষ প্রকাশ বিশেষজ্ঞদের</a></h6>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 border-0 bg-light p-2">
+                                <h6 class="fw-bold"><a href="#" class="text-decoration-none text-dark">নতুন মহাসড়ক উদ্বোধন করলেন প্রধানমন্ত্রী</a></h6>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 border-0 bg-light p-2">
+                                <h6 class="fw-bold"><a href="#" class="text-decoration-none text-dark">আজ থেকে শুরু হচ্ছে একাদশের ভর্তি পরীক্ষা</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+            <aside class="col-lg-4 border-start">
+                <div class="bg-light border text-center py-5 text-muted small rounded mb-4">
+                    Square Ad <br> (300x250)
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold border-bottom pb-2 mb-3"><i class="bi bi-fire text-danger"></i> আলোচিত খবর</h5>
+                    <ol class="list-group list-group-numbered list-group-flush">
+                        <li class="list-group-item bg-transparent border-0 px-0 py-2"><a href="#" class="text-decoration-none text-dark fw-semibold">বাজেট ২০২৬: মধ্যবিত্তের করের বড় পরিবর্তন</a></li>
+                        <li class="list-group-item bg-transparent border-0 px-0 py-2"><a href="#" class="text-decoration-none text-dark fw-semibold">মেট্রোরেলের নতুন রুট চালু, স্বস্তিতে রাজধানীবাসী</a></li>
+                        <li class="list-group-item bg-transparent border-0 px-0 py-2"><a href="#" class="text-decoration-none text-dark fw-semibold">টি-টোয়েন্টি বিশ্বকাপ: জিতল বাংলাদেশ</a></li>
+                    </ol>
+                </div>
+            </aside>
 
         </div>
-    </main>
 
-    <!-- ৪. ফুটার -->
-    <footer class="bg-gray-50 border-t border-gray-200 mt-12 py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500">
-            <p class="font-bold text-[#C9252C] text-xl mb-2">প্রথম খবর</p>
-            <p>© ২০২৬ প্রথম খবর। সর্বস্বত্ব সংরক্ষিত।</p>
-        </div>
-    </footer>
+        <footer class="bg-light border-top text-center py-4 mt-5">
+            <p class="fw-bold text-prothomalo-red m-0">USNEWS</p>
+            <p class="text-muted small m-0">© ২০২৬ ইউএসনিউজঅনলাইন। সর্বস্বত্ব সংরক্ষিত।</p>
+        </footer>
 
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
