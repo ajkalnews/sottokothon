@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>খবর অনুসন্ধান - আমাদের নিউজ</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Solaimanlipi&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/search.css">
+</head>
+<body>
+    <div class="mi-container">
+        <div id="headerContainer"></div>
+
+        <div class="mi-main-wrapper">
+            <div id="sidebarContainer"></div>
+
+            <main class="mi-content">
+                <!-- সার্চ রেজাল্ট হেডার -->
+                <div class="mi-search-header">
+                    <h1>অনুসন্ধান ফলাফল</h1>
+                    <p id="searchQuery">আপনার অনুসন্ধান: <strong>"শিক্ষা"</strong></p>
+                    <p id="resultCount" class="mi-result-count">প্রায় ১২৪টি ফলাফল পাওয়া গেছে</p>
+                </div>
+
+                <!-- ফিল্টার ও সর্ট অপশন -->
+                <div class="mi-search-filters">
+                    <div class="mi-filter-group">
+                        <label>সময়কাল:</label>
+                        <select class="form-select form-select-sm">
+                            <option>সব সময়</option>
+                            <option>গত ২৪ ঘণ্টা</option>
+                            <option>গত সপ্তাহ</option>
+                            <option>গত মাস</option>
+                        </select>
+                    </div>
+                    <div class="mi-filter-group">
+                        <label>ক্যাটাগরি:</label>
+                        <select class="form-select form-select-sm">
+                            <option>সব ক্যাটাগরি</option>
+                            <option>জাতীয়</option>
+                            <option>আন্তর্জাতিক</option>
+                            <option>খেলাধুলা</option>
+                            <option>বিনোদন</option>
+                        </select>
+                    </div>
+                    <div class="mi-filter-group">
+                        <label>সর্টিং:</label>
+                        <select class="form-select form-select-sm">
+                            <option>সবচেয়ে প্রাসঙ্গিক</option>
+                            <option>সর্বশেষ প্রথম</option>
+                            <option>সবচেয়ে জনপ্রিয়</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- সার্চ রেজাল্ট লিস্ট -->
+                <div class="mi-search-results">
+                    <article class="mi-search-result">
+                        <h3><a href="single-post.html?id=1">সংসদে নতুন শিক্ষা বিল উপস্থাপন</a></h3>
+                        <p class="mi-result-url">আমাদের নিউজ › রাজনীতি › শিক্ষা</p>
+                        <p>সরকার ঘোষণা করেছে যে আগামী ত্রৈমাসিকে নতুন অর্থনৈতিক নীতি বাস্তবায়ন করা হবে যা দেশের জিডিপি বৃদ্ধিতে ভূমিকা রাখবে...</p>
+                        <small class="mi-result-meta">২ ঘণ্টা আগে</small>
+                    </article>
+
+                    <article class="mi-search-result">
+                        <h3><a href="single-post.html?id=2">শিক্ষা ক্ষেত্রে নতুন বাজেট বরাদ্দ</a></h3>
+                        <p class="mi-result-url">আমাদের নিউজ › ব্যবসা › বাজেট</p>
+                        <p>সরকার শিক্ষা খাতে নতুন বাজেট বরাদ্দ করেছে যা আগের বছরের তুলনায় ৩৫% বেশি। এটি শিক্ষার মান উন্নয়নে গুরুত্বপূর্ণ হবে...</p>
+                        <small class="mi-result-meta">৫ ঘণ্টা আগে</small>
+                    </article>
+
+                    <article class="mi-search-result">
+                        <h3><a href="single-post.html?id=3">বিশ্ববিদ্যালয়ে নতুন কোর্স চালু</a></h3>
+                        <p class="mi-result-url">আমাদের নিউজ › শিক্ষা › বিশ্ববিদ্যালয়</p>
+                        <p>ঢাকা বিশ্ববিদ্যালয় আগামী সেমিস্টারে কৃত্রিম বুদ্ধিমত্তা ও তথ্য প্রযুক্তিতে নতুন কোর্স চালু করবে। এটি শিক্ষার্থীদের আধুনিক দক্ষতা প্রদান করবে...</p>
+                        <small class="mi-result-meta">৮ ঘণ্টা আগে</small>
+                    </article>
+
+                    <article class="mi-search-result">
+                        <h3><a href="single-post.html?id=4">শিক্ষকদের জন্য নতুন প্রশিক্ষণ কর্মসূচি</a></h3>
+                        <p class="mi-result-url">আমাদের নিউজ › শিক্ষা › প্রশিক্ষণ</p>
+                        <p>সরকার শিক্ষকদের জন্য আন্তর্জাতিক মানের প্রশিক্ষণ কর্মসূচি চালু করেছে। এতে ১০,০০০ শিক্ষক অংশগ্রহণ করবেন...</p>
+                        <small class="mi-result-meta">১০ ঘণ্টা আগে</small>
+                    </article>
+
+                    <article class="mi-search-result">
+                        <h3><a href="single-post.html?id=5">গ্রামীণ এলাকায় স্কুল প্রকল্প</a></h3>
+                        <p class="mi-result-url">আমাদের নিউজ › সমাজ › উন্নয়ন</p>
+                        <p>সরকার দেশের গ্রামীণ এলাকায় ৫০০টি নতুন স্কুল প্রকল্প শুরু করবে। এটি শিক্ষার সুযোগ সবার জন্য নিশ্চিত করবে...</p>
+                        <small class="mi-result-meta">১২ ঘণ্টা আগে</small>
+                    </article>
+                </div>
+
+                <!-- পেজিনেশন -->
+                <nav aria-label="সার্চ রেজাল্ট পৃষ্ঠা" class="mi-pagination">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">আগের</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">১</a></li>
+                        <li class="page-item"><a class="page-link" href="#">২</a></li>
+                        <li class="page-item"><a class="page-link" href="#">৩</a></li>
+                        <li class="page-item"><a class="page-link" href="#">পরবর্তী</a></li>
+                    </ul>
+                </nav>
+            </main>
+        </div>
+
+        <div id="footerContainer"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
