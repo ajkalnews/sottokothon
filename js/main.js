@@ -1,4 +1,4 @@
-// js/main.js - সম্পূর্ণ নতুন সংস্করণ
+// js/main.js - সম্পূর্ণ নতুন সংস্করণ (ত্রুটিমুক্ত)
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM সম্পূর্ণভাবে লোড হয়েছে');
@@ -121,11 +121,11 @@ function updateDateTime() {
     }
 }
 
-// নেভিগেশন সেটআপ
+// নেভিগেশন সেটআপ (ملاحظة: নিশ্চিত করুন আপনার HTML এ mi-nav-link ক্লাসটি আছে)
 function setupNavigation() {
     document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('mi-nav-link')) {
-            const navLinks = document.querySelectorAll('.mi-nav-link');
+        if (e.target.classList.contains('mi-nav-link') || e.target.classList.contains('mi-nav-item')) {
+            const navLinks = document.querySelectorAll('.mi-nav-link, .mi-nav-item');
             navLinks.forEach(link => link.classList.remove('active'));
             e.target.classList.add('active');
         }
@@ -162,10 +162,9 @@ function setupArchiveToggle() {
 // =============== ফলব্যাক HTML কন্টেন্ট ===============
 
 function getHeaderHTML() {
-    return `<!-- উপরের টপ বার -->
-<div class="mi-top-bar">
+    return `<div class="mi-top-bar">
     <div class="mi-top-left">
-        <span class="mi-date-time" id="dateTime">বুধবার, ৮ জুলাই ২০२६ | ३:०१:४३ PM</span>
+        <span class="mi-date-time" id="dateTime">বুধবার, ৮ জুলাই ২০২৬ | ৩:০১:৪৩ PM</span>
     </div>
     <div class="mi-top-right">
         <a href="https://facebook.com" target="_blank" class="mi-social-icon-top">f</a>
@@ -177,7 +176,6 @@ function getHeaderHTML() {
     </div>
 </div>
 
-<!-- লোগো এবং স্লোগান সেকশন -->
 <div class="mi-logo-section">
     <div class="mi-logo-container">
         <div class="mi-logo">
@@ -186,7 +184,6 @@ function getHeaderHTML() {
         </div>
     </div>
     
-    <!-- বিজ্ঞাপন ব্যানার -->
     <div class="mi-banner-ad">
         <div class="mi-ad-content">
             <div class="mi-ad-icon">🌐</div>
@@ -199,7 +196,6 @@ function getHeaderHTML() {
     </div>
 </div>
 
-<!-- মেইন নেভিগেশন মেনু -->
 <nav class="mi-main-nav">
     <div class="mi-nav-wrapper">
         <a href="./index.html" class="mi-nav-item">
@@ -215,13 +211,12 @@ function getHeaderHTML() {
         <a href="./category.html?cat=education" class="mi-nav-item">শিক্ষা</a>
     </div>
     
-    <!-- সার্চ আইকন -->
-    <div class="mi-search-icon">
-        <a href="./search.html" class="mi-search-link">🔍</a>
-    </div>
+    <form id="headerSearchForm" action="./search.html" method="GET" style="display: flex; align-items: center; margin-left: 15px;">
+        <input type="text" name="q" placeholder="খুঁজুন..." style="padding: 3px 8px; border-radius: 4px; border: 1px solid #ccc;">
+        <button type="submit" style="background: none; border: none; cursor: pointer; margin-left: 5px;">🔍</button>
+    </form>
 </nav>
 
-<!-- ব্রেকিং নিউজ টিকার -->
 <div class="mi-breaking-news">
     <div class="mi-breaking-label">
         <span class="mi-breaking-dot">●</span>
@@ -230,18 +225,16 @@ function getHeaderHTML() {
     <div class="mi-ticker-content">
         <div class="mi-ticker-item">
             <a href="./single-post.html?id=1">
-                <strong>খবর ১:</strong> দেশে নতুন অর্থনৈতিক নীতি ঘোষণা করা হয়েছে
+                <strong>খ খবর ১:</strong> দেশে নতুন অর্থনৈতিক নীতি ঘোষণা করা হয়েছে
             </a>
         </div>
         <div class="mi-ticker-item">
             <a href="./single-post.html?id=2">
-                <strong>খবর २:</strong> শিক্ষা ক্ষেত্রে বড় সংস্কার আসতে চলেছে
+                <strong>খবর ২:</strong> শিক্ষা ক্ষেত্রে বড় সংস্কার আসতে চলেছে
             </a>
         </div>
     </div>
-</div>
-
-
+</div>`; // <--- এই ব্যাকটিকটি ঠিক করা হয়েছে
 }
 
 function getFooterHTML() {
@@ -282,14 +275,13 @@ function getFooterHTML() {
         </div>
     </div>
     <div class="mi-footer-bottom">
-        <p>&copy; २०२६ আমাদের নিউজ। সর্বাধিকার সংরক্ষিত।</p>
+        <p>&copy; ২০২৬ আমাদের নিউজ। সর্বাধিকার সংরক্ষিত।</p>
     </div>
 </footer>`;
 }
 
 function getSidebarHTML() {
     return `<aside class="mi-sidebar">
-    <!-- সর্বশেষ খবর উইজেট -->
     <div class="mi-widget">
         <h5>সর্বশেষ খবর</h5>
         <ul class="mi-widget-list">
@@ -301,7 +293,6 @@ function getSidebarHTML() {
         </ul>
     </div>
 
-    <!-- বিভাগসমূহ উইজেট -->
     <div class="mi-widget">
         <h5>বিভাগসমূহ</h5>
         <ul class="mi-widget-list">
@@ -314,7 +305,6 @@ function getSidebarHTML() {
         </ul>
     </div>
 
-    <!-- জনপ্রিয় খবর উইজেট -->
     <div class="mi-widget">
         <h5>জনপ্রিয় খবর</h5>
         <ul class="mi-widget-list">
@@ -324,7 +314,6 @@ function getSidebarHTML() {
         </ul>
     </div>
 
-    <!-- বিজ্ঞাপন প্লেসহোল্ডার -->
     <div class="mi-widget">
         <h5>বিজ্ঞাপন</h5>
         <div class="mi-ad-placeholder">
