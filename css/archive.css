@@ -1,0 +1,125 @@
+.mi-archive-header {
+    background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
+    color: white;
+    padding: 40px 24px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.mi-archive-header h1 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.mi-archive-years {
+    margin-bottom: 40px;
+}
+
+.mi-archive-years h3 {
+    margin-bottom: 16px;
+    font-size: 1.3rem;
+}
+
+.mi-year-list {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.mi-year-btn {
+    padding: 10px 20px;
+    border: 2px solid #dadce0;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--mi-dark);
+}
+
+.mi-year-btn:hover,
+.mi-year-btn.active {
+    background: var(--mi-primary);
+    color: white;
+    border-color: var(--mi-primary);
+}
+
+.mi-archive-year {
+    margin-bottom: 40px;
+}
+
+.mi-archive-year h2 {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #dadce0;
+}
+
+.mi-month-archive {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.mi-month-archive h4 {
+    padding: 16px 20px;
+    background: #f8f9fa;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+}
+
+.mi-month-archive h4 a {
+    color: var(--mi-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.mi-month-archive h4:hover a {
+    color: var(--mi-dark);
+}
+
+.mi-month-content {
+    padding: 0;
+    max-height: 1000px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.mi-archive-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid #dadce0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.mi-archive-item:last-child {
+    border-bottom: none;
+}
+
+.mi-date {
+    font-weight: 600;
+    color: var(--mi-primary);
+    min-width: 80px;
+}
+
+.mi-archive-item h5 {
+    margin: 0;
+    flex: 1;
+}
+
+.mi-archive-item a {
+    color: var(--mi-dark);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.mi-archive-item a:hover {
+    color: var(--mi-primary);
+}
