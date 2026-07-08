@@ -8,38 +8,52 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // হেডার লোড করুন
-function loadHeader() {
+async function loadHeader() {
     const headerContainer = document.getElementById('headerContainer');
     if (headerContainer) {
-        fetch('html/header.html')
-            .then(response => response.text())
-            .then(html => {
-                headerContainer.innerHTML = html;
-                setActiveNavLink();
-            })
-            .catch(error => console.log('Header লোড ব্যর্থ:', error));
+        try {
+            const response = await fetch('./html/header.html');
+            if (!response.ok) throw new Error('Header লোড ব্যর্থ');
+            const html = await response.text();
+            headerContainer.innerHTML = html;
+            setActiveNavLink();
+        } catch (error) {
+            console.error('Header লোড ত্রুটি:', error);
+            // ফলব্যাক হিসেবে সরাসরি হেডার তৈরি করুন
+            headerContainer.innerHTML = getHeaderHTML();
+        }
     }
 }
 
 // ফুটার লোড করুন
-function loadFooter() {
+async function loadFooter() {
     const footerContainer = document.getElementById('footerContainer');
     if (footerContainer) {
-        fetch('html/footer.html')
-            .then(response => response.text())
-            .then(html => footerContainer.innerHTML = html)
-            .catch(error => console.log('Footer লোড ব্যর্থ:', error));
+        try {
+            const response = await fetch('./html/footer.html');
+            if (!response.ok) throw new Error('Footer লোড ব্যর্থ');
+            const html = await response.text();
+            footerContainer.innerHTML = html;
+        } catch (error) {
+            console.error('Footer লোড ত্রুটি:', error);
+            footerContainer.innerHTML = getFooterHTML();
+        }
     }
 }
 
 // সাইডবার লোড করুন
-function loadSidebar() {
+async function loadSidebar() {
     const sidebarContainer = document.getElementById('sidebarContainer');
     if (sidebarContainer) {
-        fetch('html/sidebar.html')
-            .then(response => response.text())
-            .then(html => sidebarContainer.innerHTML = html)
-            .catch(error => console.log('Sidebar লোড ব্যর্থ:', error));
+        try {
+            const response = await fetch('./html/sidebar.html');
+            if (!response.ok) throw new Error('Sidebar লোড ব্যর্থ');
+            const html = await response.text();
+            sidebarContainer.innerHTML = html;
+        } catch (error) {
+            console.error('Sidebar লোড ত্রুটি:', error);
+            sidebarContainer.innerHTML = getSidebarHTML();
+        }
     }
 }
 
@@ -50,7 +64,8 @@ function setActiveNavLink() {
     
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === currentPage) {
+        const href = link.getAttribute('href');
+        if (href === currentPage || href === `/${currentPage}`) {
             link.classList.add('active');
         }
     });
@@ -60,10 +75,9 @@ function setActiveNavLink() {
 function setupNavigation() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('mi-nav-link')) {
+            const navLinks = document.querySelectorAll('.mi-nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
             e.target.classList.add('active');
-            document.querySelectorAll('.mi-nav-link').forEach(link => {
-                if (link !== e.target) link.classList.remove('active');
-            });
         }
     });
 }
@@ -76,7 +90,7 @@ function setupSearch() {
             e.preventDefault();
             const query = this.querySelector('input[name="q"]').value;
             if (query.trim()) {
-                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+                window.location.href = `./search.html?q=${encodeURIComponent(query)}`;
             }
         });
     }
@@ -98,25 +112,84 @@ function setupArchiveToggle() {
     });
 }
 
-// সার্চ পেজে ফিল্টার সেটআপ
-function setupSearchFilters() {
-    const filterGroups = document.querySelectorAll('.mi-filter-group select');
-    filterGroups.forEach(select => {
-        select.addEventListener('change', function() {
-            console.log('ফিল্টার পরিবর্তিত হয়েছে:', this.value);
-            // API কল করতে পারেন এখানে
-        });
-    });
+// ফলব্যাক হেডার HTML
+function getHeaderHTML() {
+    return `<header class="mi-header">
+        <div class="mi-header-top">
+            <div class="mi-logo">
+                <a href="./index.html" class="mi-logo-link">
+                    <h1>📰 আমাদের নিউজ</h1>
+                </a>
+            </div>
+            <nav class="mi-navbar">
+                <a href="./index.html" class="mi-nav-link active">হোম</a>
+                <a href="./category.html?cat=politics" class="mi-nav-link">রাজনীতি</a>
+                <a href="./category.html?cat=sports" class="mi-nav-link">খেলাধুলা</a>
+                <a href="./category.html?cat=tech" class="mi-nav-link">প্রযুক্তি</a>
+                <a href="./category.html?cat=entertainment" class="mi-nav-link">বিনোদন</a>
+                <a href="./archive.html" class="mi-nav-link">আর্কাইভ</a>
+            </nav>
+        </div>
+        <div class="mi-search-bar">
+            <form action="./search.html" method="GET" id="searchForm">
+                <input type="text" name="q" class="form-control" placeholder="খবর খুঁজুন...">
+                <button type="submit" class="btn btn-primary">অনুসন্ধান</button>
+            </form>
+        </div>
+    </header>`;
 }
 
-// ক্যাটাগরি পেজে ফিল্টার সেটআপ
-function setupCategoryFilters() {
-    const filterBtns = document.querySelectorAll('.mi-filter-btn');
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            console.log('সাজানো হয়েছে:', this.dataset.sort);
-        });
-    });
+// ফলব্যাক ফুটার HTML
+function getFooterHTML() {
+    return `<footer class="mi-footer">
+        <div class="mi-footer-content">
+            <div class="row">
+                <div class="col-md-3">
+                    <h6>আমাদের সম্পর্কে</h6>
+                    <p>আমরা একটি নির্ভরযোগ্য বাংলা সংবাদ মাধ্যম।</p>
+                </div>
+                <div class="col-md-3">
+                    <h6>কুইক লিংক</h6>
+                    <ul class="mi-footer-links">
+                        <li><a href="./index.html">হোম</a></li>
+                        <li><a href="./search.html">সার্চ</a></li>
+                        <li><a href="./archive.html">আর্কাইভ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>ক্যাটাগরি</h6>
+                    <ul class="mi-footer-links">
+                        <li><a href="./category.html?cat=politics">জাতীয় খবর</a></li>
+                        <li><a href="./category.html?cat=business">ব্যবসা</a></li>
+                        <li><a href="./category.html?cat=tech">প্রযুক্তি</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>সোশ্যাল মিডিয়া</h6>
+                    <div class="mi-social-links">
+                        <a href="https://facebook.com" class="mi-social-icon" target="_blank">📘</a>
+                        <a href="https://twitter.com" class="mi-social-icon" target="_blank">🐦</a>
+                        <a href="https://instagram.com" class="mi-social-icon" target="_blank">📷</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mi-footer-bottom">
+            <p>&copy; ২০२६ আমাদের নিউজ। সর্বাধিকার সংরক্ষিত।</p>
+        </div>
+    </footer>`;
+}
+
+// ফলব্যাক সাইডবার HTML
+function getSidebarHTML() {
+    return `<aside class="mi-sidebar">
+        <div class="mi-widget">
+            <h5>সর্বশেষ খবর</h5>
+            <ul class="mi-widget-list">
+                <li><a href="./single-post.html?id=1">দেশে নতুন অর্থনৈতিক নীতি</a></li>
+                <li><a href="./single-post.html?id=2">বন্যা পরিস্থিতি খারাপ</a></li>
+                <li><a href="./single-post.html?id=3">শিক্ষা ক্ষেত্রে সংস্কার</a></li>
+            </ul>
+        </div>
+    </aside>`;
 }
