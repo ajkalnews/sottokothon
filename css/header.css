@@ -238,7 +238,12 @@ img {
 }
 
 .mi-breaking-dot {
-    margin-right: 6px;
+    width: 10px; /* ডটের প্রস্থ */
+    height: 10px; /* ডটের উচ্চতা */
+    background-color: #fff; /* ডটের কালার সাদা */
+    border-radius: 50%; /* একদম গোল করার জন্য */
+    display: inline-block;
+    margin-right: 8px;
     animation: blink 1s infinite;
 }
 
