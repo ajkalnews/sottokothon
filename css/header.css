@@ -52,15 +52,23 @@ img {
     gap: 18px;
 }
 
+/* সোশ্যাল আইকনগুলোর সাইজ এবং সাধারণ কালার */
 .mi-social-icon-top {
-    color: #444;
-    font-size: 18px;
-    transition: .3s;
+    color: #555;
+    font-size: 16px;
+    transition: 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.mi-social-icon-top:hover {
-    color: var(--primary);
-}
+/* মাউস নিলে প্রতিটি ব্র্যান্ডের অরিজিনাল কালার শো করবে */
+.mi-social-icon-top.fb { color: #1877F2; }       /* Facebook Blue */
+.mi-social-icon-top.yt { color: #FF0000; }       /* YouTube Red */
+.mi-social-icon-top.tw { color: #000000; }       /* X (Twitter) Black */
+.mi-social-icon-top.insta { color: #E1306C; }    /* Instagram Pink/Red */
+.mi-social-icon-top.ln { color: #0077B5; }       /* LinkedIn Blue */
+.mi-social-icon-top.wa { color: #25D366; }       /* WhatsApp Green */
 
 /*==============================
   LOGO AREA & GRID
