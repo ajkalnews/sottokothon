@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>খবরের আর্কাইভ - আমাদের নিউজ</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Solaimanlipi&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/archive.css">
+</head>
+<body>
+    <div class="mi-container">
+        <div id="headerContainer"></div>
+
+        <div class="mi-main-wrapper">
+            <div id="sidebarContainer"></div>
+
+            <main class="mi-content">
+                <!-- আর্কাইভ হেডার -->
+                <div class="mi-archive-header">
+                    <h1>খবরের আর্কাইভ</h1>
+                    <p>আমাদের সমস্ত ঐতিহাসিক খবর এখানে সংরক্ষিত আছে</p>
+                </div>
+
+                <!-- বছর নির্বাচন -->
+                <div class="mi-archive-years">
+                    <h3>বছর অনুযায়ী সংবাদ</h3>
+                    <div class="mi-year-list">
+                        <a href="#year-2026" class="mi-year-btn active">২০২৬</a>
+                        <a href="#year-2025" class="mi-year-btn">২০২৫</a>
+                        <a href="#year-2024" class="mi-year-btn">২০২৪</a>
+                        <a href="#year-2023" class="mi-year-btn">২০২৩</a>
+                    </div>
+                </div>
+
+                <!-- ২০২৬ সালের আর্কাইভ -->
+                <section id="year-2026" class="mi-archive-year">
+                    <h2>২০২৬</h2>
+                    
+                    <!-- জুলাই মাস -->
+                    <div class="mi-month-archive">
+                        <h4><a href="#" class="mi-month-toggle">জুলাই (১২টি খবর)</a></h4>
+                        <div class="mi-month-content">
+                            <article class="mi-archive-item">
+                                <span class="mi-date">৮ জুলাই</span>
+                                <h5><a href="single-post.html?id=1">সংসদে নতুন বিল উপস্থাপন করা হয়েছে</a></h5>
+                            </article>
+                            <article class="mi-archive-item">
+                                <span class="mi-date">৭ জুলাই</span>
+                                <h5><a href="single-post.html?id=2">প্রধানমন্ত্রী নতুন মন্ত্রিসভা গঠন করেছেন</a></h5>
+                            </article>
+                            <article class="mi-archive-item">
+                                <span class="mi-date">৬ জুলাই</span>
+                                <h5><a href="single-post.html?id=3">জাতীয় ক্রীড়া দলের বড় জয়</a></h5>
+                            </article>
+                            <article class="mi-archive-item">
+                                <span class="mi-date">৫ জুলাই</span>
+                                <h5><a href="single-post.html?id=4">নতুন প্রযুক্তি স্টার্টআপ চালু হয়েছে</a></h5>
+                            </article>
+                            <article class="mi-archive-item">
+                                <span class="mi-date">৪ জুলাই</span>
+                                <h5><a href="single-post.html?id=5">স্বাস্থ্য সেবা প্রকল্প উদ্বোধন</a></h5>
+                            </article>
+                        </div>
+                    </div>
+
+                    <!-- জুন মাস -->
+                    <div class="mi-month-archive">
+                        <h4><a href="#" class="mi-month-toggle">জুন (১৮টি খবর)</a></h4>
+                        <div class="mi-month-content" style="display:none;">
+                            <article class="mi-archive-item">
+                                <span class="mi-date">৩০ জুন</span>
+                                <h5><a href="single-post.html?id=6">রপ্তানি আয় বৃদ্ধি পাচ্ছে</a></h5>
+                            </article>
+                            <article class="mi-archive-item">
+                                <span class="mi-date">২৯ জুন</span>
+                                <h5><a href="single-post.html?id=7">নতুন বিনিয়োগ আকর্ষণ হচ্ছে</a></h5>
+                            </article>
+                            <!-- আরও আইটেম... -->
+                        </div>
+                    </div>
+
+                    <!-- মে মাস -->
+                    <div class="mi-month-archive">
+                        <h4><a href="#" class="mi-month-toggle">মে (১৫টি খবর)</a></h4>
+                        <div class="mi-month-content" style="display:none;">
+                            <!-- আইটেম আসবে -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ২০২৫ সালের আর্কাইভ -->
+                <section id="year-2025" class="mi-archive-year" style="display:none;">
+                    <h2>২০২৫</h2>
+                    <p>২০২৫ সালের খবরগুলি এখানে পাওয়া যাবে।</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="footerContainer"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
