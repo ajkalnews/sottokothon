@@ -230,7 +230,7 @@ img {
     background: var(--primary) !important; /* লাল ব্যাকগ্রাউন্ড নিশ্চিত করার জন্য */
     color: #fff;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 20px;
     flex-shrink: 0;
     position: relative;
     z-index: 5; /* টেক্সট যেন এই লেবেলের নিচে দিয়ে যায়, উপর দিয়ে নয় */
@@ -251,7 +251,7 @@ img {
     display: flex;
     align-items: center;
     white-space: nowrap;
-    animation: tickerMove 35s linear infinite;
+    animation: tickerMove 10s linear infinite;
     padding-left: 20px; /* শুরুতেই যেন লেবেলের গায়ে লেগে না থাকে */
     z-index: 1;
 }
@@ -274,7 +274,7 @@ img {
 
 .mi-ticker-item a {
     color: #222;
-    font-size: 16px; /* ২০ পিক্সেল থেকে কমিয়ে স্ট্যান্ডার্ড ১৬ করা হলো */
+    font-size: 18px; /* ২০ পিক্সেল থেকে কমিয়ে স্ট্যান্ডার্ড ১৬ করা হলো */
     font-weight: 500;
 }
 
@@ -399,6 +399,4 @@ img {
     }
 }
 
-/* ==========================================
-   END OF FILE
-========================================== */
+
