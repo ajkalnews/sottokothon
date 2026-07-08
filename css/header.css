@@ -1,654 +1,401 @@
 /* ==========================================
-   SottoKothon Header CSS
-   Part 1
+   SottoKothon Header CSS - Complete Version
 ========================================== */
 
-:root{
-    --primary:#c40000;
-    --primary-dark:#a30000;
-    --text:#222;
-    --border:#e5e5e5;
-    --bg:#fff;
-    --light:#f8f8f8;
+:root {
+    --primary: #c40000;
+    --primary-dark: #a30000;
+    --text: #222;
+    --border: #e5e5e5;
+    --bg: #fff;
+    --light: #f8f8f8;
 }
 
 /* RESET */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-a{
-    text-decoration:none;
+a {
+    text-decoration: none;
 }
 
-img{
-    max-width:100%;
-    display:block;
-}
-
-/*==============================
- TOP BAR
-===============================*/
-
-.mi-top-bar{
-
-    height:38px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:0 20px;
-
-    border-bottom:1px solid var(--border);
-
-    background:#fafafa;
-
-    font-size:15px;
-
-}
-
-.mi-top-left{
-
-    color:#333;
-
-    font-weight:500;
-
-}
-
-.mi-top-right{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-}
-
-.mi-social-icon-top{
-
-    color:#444;
-
-    font-size:18px;
-
-    transition:.3s;
-
-}
-
-.mi-social-icon-top:hover{
-
-    color:var(--primary);
-
+img {
+    max-width: 100%;
+    display: block;
 }
 
 /*==============================
- LOGO AREA
+  TOP BAR
 ===============================*/
-
-.mi-logo-section{
-
-    display:grid;
-
-    grid-template-columns:320px 1fr;
-
-    gap:30px;
-
-    align-items:center;
-
-    padding:18px 20px;
-
-    background:#fff;
-
-    border-bottom:1px solid var(--border);
-
+.mi-top-bar {
+    height: 38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--border);
+    background: #fafafa;
+    font-size: 15px;
 }
 
-.mi-logo{
-
-    display:flex;
-
-    align-items:center;
-
+.mi-top-left {
+    color: #333;
+    font-weight: 500;
 }
 
-.mi-logo-img{
+.mi-top-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
 
-    height:72px;
+.mi-social-icon-top {
+    color: #444;
+    font-size: 18px;
+    transition: .3s;
+}
 
-    width:auto;
-
+.mi-social-icon-top:hover {
+    color: var(--primary);
 }
 
 /*==============================
- ADVERTISEMENT
+  LOGO AREA & GRID
 ===============================*/
-
-.mi-banner-ad{
-
-    width:100%;
-
-    min-height:90px;
-
-    border:2px solid #8cc8f8;
-
-    background:#f4fbff;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:12px;
-
+.mi-logo-section {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    align-items: center;
+    padding: 18px 20px;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
 }
 
-.mi-ad-content{
-
-    width:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
-
+.mi-logo {
+    display: flex;
+    align-items: center;
 }
 
-.mi-ad-icon{
-
-    font-size:48px;
-
+.mi-logo-img {
+    height: 72px;
+    width: auto;
+    transition: .3s;
 }
 
-.mi-ad-text{
-
-    flex:1;
-
-}
-
-.mi-ad-text h3{
-
-    font-size:30px;
-
-    font-weight:700;
-
-    color:#004e92;
-
-    margin-bottom:6px;
-
-}
-
-.mi-ad-text p{
-
-    font-size:17px;
-
-    color:#333;
-
-    margin-bottom:10px;
-
-}
-
-.mi-ad-btn{
-
-    display:inline-block;
-
-    padding:8px 18px;
-
-    background:var(--primary);
-
-    color:#fff;
-
-    border-radius:4px;
-
-    transition:.3s;
-
-}
-
-.mi-ad-btn:hover{
-
-    background:var(--primary-dark);
-
+.mi-logo-img:hover {
+    transform: scale(1.02);
 }
 
 /*==============================
- NAVIGATION
+  ADVERTISEMENT
 ===============================*/
-
-.mi-main-nav{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    background:#fff;
-
-    border-top:1px solid var(--border);
-
-    border-bottom:1px solid var(--border);
-
-    position:sticky;
-
-    top:0;
-
-    z-index:999;
-
+.mi-banner-ad {
+    width: 100%;
+    min-height: 90px;
+    border: 2px solid #8cc8f8;
+    background: #f4fbff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    transition: .3s;
 }
 
-.mi-nav-wrapper{
-
-    display:flex;
-
-    align-items:center;
-
-    overflow-x:auto;
-
-    scrollbar-width:none;
-
+.mi-banner-ad:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
 }
 
-.mi-nav-wrapper::-webkit-scrollbar{
-
-    display:none;
-
+.mi-ad-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.mi-nav-item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:6px;
-
-    padding:15px 18px;
-
-    color:#222;
-
-    font-size:18px;
-
-    font-weight:600;
-
-    border-bottom:3px solid transparent;
-
-    transition:.3s;
-
-    white-space:nowrap;
-
+.mi-ad-icon {
+    font-size: 48px;
 }
 
-.mi-nav-item:hover{
-
-    color:var(--primary);
-
-    border-bottom:3px solid var(--primary);
-
+.mi-ad-text {
+    flex: 1;
 }
 
-.mi-nav-item.active{
-
-    color:var(--primary);
-
-    border-bottom:3px solid var(--primary);
-
+.mi-ad-text h3 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #004e92;
+    margin-bottom: 6px;
 }
 
-.mi-nav-icon{
-
-    font-size:18px;
-
+.mi-ad-text p {
+    font-size: 17px;
+    color: #333;
+    margin-bottom: 10px;
 }
 
-/* SEARCH */
-
-.mi-search-icon{
-
-    width:60px;
-
-    text-align:center;
-
+.mi-ad-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 4px;
+    transition: .3s;
 }
 
-.mi-search-link{
-
-    color:#444;
-
-    font-size:22px;
-
-    transition:.3s;
-
+.mi-ad-btn:hover {
+    background: var(--primary-dark);
 }
 
-.mi-search-link:hover{
-
-    color:var(--primary);
-
+/*==============================
+  NAVIGATION
+===============================*/
+.mi-main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
 }
+
+.mi-nav-wrapper {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox এর জন্য স্ক্রোলবার হাইড */
+}
+
+.mi-nav-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari এবং Opera এর জন্য স্ক্রোলবার হাইড */
+}
+
+.mi-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 15px 18px;
+    color: #222;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    transition: .3s;
+    white-space: nowrap;
+}
+
+.mi-nav-item:hover,
+.mi-nav-item.active {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+}
+
+.mi-nav-icon {
+    font-size: 18px;
+}
+
+/* SEARCH ICON */
+.mi-search-icon {
+    width: 60px;
+    text-align: center;
+    background: #fff; /* মোবাইলে স্ক্রোল করার সময় টেক্সট যেন নিচে দেখা না যায় */
+    position: relative;
+    z-index: 2;
+}
+
+.mi-search-link {
+    color: #444;
+    font-size: 22px;
+    transition: .3s;
+}
+
+.mi-search-link:hover {
+    color: var(--primary);
+}
+
 /* ==========================================
    BREAKING NEWS
 ========================================== */
-
-.mi-breaking-news{
-    display:flex;
-    align-items:center;
-    overflow:hidden;
-    background:#fafafa;
-    border-bottom:1px solid var(--border);
-    height:42px;
+.mi-breaking-news {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: #fafafa;
+    border-bottom: 1px solid var(--border);
+    height: 42px;
 }
 
-.mi-breaking-label{
-    min-width:140px;
-    height:42px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--primary);
-    color:#fff;
-    font-weight:700;
-    font-size:15px;
-    flex-shrink:0;
+.mi-breaking-label {
+    min-width: 140px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
 }
 
-.mi-breaking-dot{
-    margin-right:6px;
-    animation:blink 1s infinite;
+.mi-breaking-dot {
+    margin-right: 6px;
+    animation: blink 1s infinite;
 }
 
-@keyframes blink{
-    50%{
-        opacity:.3;
+@keyframes blink {
+    50% { opacity: .3; }
+}
+
+.mi-ticker-content {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: tickerMove 35s linear infinite;
+}
+
+.mi-breaking-news:hover .mi-ticker-content {
+    animation-play-state: paused;
+}
+
+.mi-ticker-item {
+    padding: 0 40px;
+    position: relative;
+}
+
+.mi-ticker-item::before {
+    content: "•";
+    color: var(--primary);
+    position: absolute;
+    left: 18px;
+}
+
+.mi-ticker-item a {
+    color: #222;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.mi-ticker-item a:hover {
+    color: var(--primary);
+}
+
+@keyframes tickerMove {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+}
+
+/* ==========================================
+   RESPONSIVE (MEDIA QUERIES)
+========================================== */
+@media (max-width: 1200px) {
+    .mi-logo-section {
+        grid-template-columns: 280px 1fr;
+    }
+    .mi-logo-img {
+        height: 65px;
     }
 }
 
-.mi-ticker-content{
-    display:flex;
-    align-items:center;
-    white-space:nowrap;
-    animation:tickerMove 35s linear infinite;
-}
-
-.mi-breaking-news:hover .mi-ticker-content{
-    animation-play-state:paused;
-}
-
-.mi-ticker-item{
-    padding:0 40px;
-    position:relative;
-}
-
-.mi-ticker-item::before{
-    content:"•";
-    color:var(--primary);
-    position:absolute;
-    left:18px;
-}
-
-.mi-ticker-item a{
-    color:#222;
-    font-size:15px;
-    font-weight:500;
-}
-
-.mi-ticker-item a:hover{
-    color:var(--primary);
-}
-
-@keyframes tickerMove{
-
-    from{
-        transform:translateX(100%);
+@media (max-width: 992px) {
+    .mi-logo-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
-
-    to{
-        transform:translateX(-100%);
+    .mi-logo {
+        justify-content: center;
     }
-
+    .mi-banner-ad {
+        min-height: 90px;
+    }
+    .mi-ad-text {
+        text-align: center;
+    }
+    .mi-ad-icon {
+        display: none;
+    }
 }
 
-/* ===========================
-   HOVER EFFECT
-=========================== */
-
-.mi-banner-ad:hover{
-
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-
+@media (max-width: 768px) {
+    .mi-top-bar {
+        flex-direction: column;
+        height: auto;
+        padding: 8px 15px;
+        gap: 8px;
+    }
+    .mi-top-right {
+        gap: 14px;
+    }
+    .mi-logo-section {
+        padding: 15px;
+    }
+    .mi-logo-img {
+        height: 55px;
+        margin: auto;
+    }
+    .mi-main-nav {
+        overflow-x: auto;
+    }
+    .mi-nav-item {
+        padding: 14px 12px;
+        font-size: 15px;
+    }
+    .mi-search-icon {
+        width: 45px;
+    }
+    .mi-breaking-label {
+        min-width: 105px;
+        font-size: 13px;
+    }
+    .mi-ticker-item {
+        padding: 0 25px;
+    }
+    .mi-ad-text h3 {
+        font-size: 22px;
+    }
+    .mi-ad-text p {
+        font-size: 14px;
+    }
 }
 
-.mi-logo-img{
-
-    transition:.3s;
-
+@media (max-width: 576px) {
+    .mi-nav-item {
+        font-size: 14px;
+        padding: 12px 10px;
+    }
+    .mi-logo-img {
+        height: 48px;
+    }
+    .mi-banner-ad {
+        padding: 10px;
+    }
+    .mi-ad-text h3 {
+        font-size: 18px;
+    }
+    .mi-ad-text p {
+        display: none;
+    }
+    .mi-ad-btn {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+    .mi-breaking-news {
+        height: 38px;
+    }
+    .mi-breaking-label {
+        height: 38px;
+    }
+    .mi-ticker-item a {
+        font-size: 13px;
+    }
 }
 
-.mi-logo-img:hover{
-
-    transform:scale(1.02);
-
-}
-
-/* ===========================
-   STICKY SHADOW
-=========================== */
-
-.mi-main-nav{
-
-    box-shadow:0 2px 8px rgba(0,0,0,.05);
-
-}
-
-/* ===========================
-   RESPONSIVE
-=========================== */
-
-@media(max-width:1200px){
-
-.mi-logo-section{
-
-grid-template-columns:280px 1fr;
-
-}
-
-.mi-logo-img{
-
-height:65px;
-
-}
-
-}
-
-
-@media(max-width:992px){
-
-.mi-logo-section{
-
-grid-template-columns:1fr;
-
-gap:20px;
-
-}
-
-.mi-logo{
-
-justify-content:center;
-
-}
-
-.mi-banner-ad{
-
-min-height:90px;
-
-}
-
-.mi-ad-text{
-
-text-align:center;
-
-}
-
-.mi-ad-icon{
-
-display:none;
-
-}
-
-}
-
-
-@media(max-width:768px){
-
-.mi-top-bar{
-
-flex-direction:column;
-
-height:auto;
-
-padding:8px 15px;
-
-gap:8px;
-
-}
-
-.mi-top-right{
-
-gap:14px;
-
-}
-
-.mi-logo-section{
-
-padding:15px;
-
-}
-
-.mi-logo-img{
-
-height:55px;
-
-margin:auto;
-
-}
-
-.mi-main-nav{
-
-overflow-x:auto;
-
-}
-
-.mi-nav-item{
-
-padding:14px 12px;
-
-font-size:15px;
-
-}
-
-.mi-search-icon{
-
-width:45px;
-
-}
-
-.mi-breaking-label{
-
-min-width:105px;
-
-font-size:13px;
-
-}
-
-.mi-ticker-item{
-
-padding:0 25px;
-
-}
-
-.mi-ad-text h3{
-
-font-size:22px;
-
-}
-
-.mi-ad-text p{
-
-font-size:14px;
-
-}
-
-}
-
-
-@media(max-width:576px){
-
-.mi-nav-item{
-
-font-size:14px;
-
-padding:12px 10px;
-
-}
-
-.mi-logo-img{
-
-height:48px;
-
-}
-
-.mi-banner-ad{
-
-padding:10px;
-
-}
-
-.mi-ad-text h3{
-
-font-size:18px;
-
-}
-
-.mi-ad-text p{
-
-display:none;
-
-}
-
-.mi-ad-btn{
-
-padding:6px 14px;
-
-font-size:13px;
-
-}
-
-.mi-breaking-news{
-
-height:38px;
-
-}
-
-.mi-breaking-label{
-
-height:38px;
-
-}
-
-.mi-ticker-item a{
-
-font-size:13px;
-
-}
-
-}
-
-/* ===========================
-   END
-=========================== */
+/* ==========================================
+   END OF FILE
+========================================== */
