@@ -8,77 +8,31 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Google Fonts - সোলায়মানলিপি বাংলা ফন্ট -->
+    <!-- Google Fonts - সোলায়মানলিপি -->
     <link href="https://fonts.googleapis.com/css2?family=Solaimanlipi&display=swap" rel="stylesheet">
     
-    <!-- আমাদের কাস্টম CSS ফাইলগুলো -->
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- গ্লোবাল CSS -->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/main-content.css">
 </head>
 <body>
-    <!-- মেইন কনটেইনার -->
     <div class="mi-container">
         
-        <!-- হেডার সেকশন -->
-        <header class="mi-header">
-            <div class="mi-header-top">
-                <div class="mi-logo">
-                    <h1>📰 আমাদের নিউজ</h1>
-                </div>
-                <nav class="mi-navbar">
-                    <a href="#" class="mi-nav-link active">হোম</a>
-                    <a href="#" class="mi-nav-link">রাজনীতি</a>
-                    <a href="#" class="mi-nav-link">খেলাধুলা</a>
-                    <a href="#" class="mi-nav-link">প্রযুক্তি</a>
-                    <a href="#" class="mi-nav-link">বিনোদন</a>
-                    <a href="#" class="mi-nav-link">যোগাযোগ</a>
-                </nav>
-            </div>
-            <div class="mi-search-bar">
-                <input type="text" class="form-control" placeholder="খবর খুঁজুন...">
-                <button class="btn btn-primary">অনুসন্ধান</button>
-            </div>
-        </header>
+        <!-- হেডার লোড হবে JS দিয়ে -->
+        <div id="headerContainer"></div>
 
-        <!-- মেইন কনটেন্ট এরিয়া -->
+        <!-- মেইন কনটেন্ট -->
         <div class="mi-main-wrapper">
-            
-            <!-- সাইডবার -->
-            <aside class="mi-sidebar">
-                <div class="mi-widget">
-                    <h5>সর্বশেষ খবর</h5>
-                    <ul class="mi-widget-list">
-                        <li><a href="#">দেশে নতুন অর্থনৈতিক নীতি ঘোষণা</a></li>
-                        <li><a href="#">বন্যা পরিস্থিতি খারাপ হচ্ছে</a></li>
-                        <li><a href="#">শিক্ষা ক্ষেত্রে বড় সংস্কার আসছে</a></li>
-                    </ul>
-                </div>
+            <!-- সাইডবার লোড হবে JS দিয়ে -->
+            <div id="sidebarContainer"></div>
 
-                <div class="mi-widget">
-                    <h5>বিভাগসমূহ</h5>
-                    <ul class="mi-widget-list">
-                        <li><a href="#">জাতীয়</a></li>
-                        <li><a href="#">আন্তর্জাতিক</a></li>
-                        <li><a href="#">বিজনেস</a></li>
-                        <li><a href="#">বিজ্ঞান ও প্রযুক্তি</a></li>
-                        <li><a href="#">স্বাস্থ্য</a></li>
-                    </ul>
-                </div>
-
-                <div class="mi-widget">
-                    <h5>বিজ্ঞাপন</h5>
-                    <div class="mi-ad-placeholder">
-                        <p>আপনার বিজ্ঞাপন এখানে</p>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- মেইন কনটেন্ট -->
+            <!-- মেইন কনটেন্ট এরিয়া -->
             <main class="mi-content">
                 
-                <!-- প্রধান খবর -->
+                <!-- ফিচার্ড নিউজ -->
                 <section class="mi-featured">
                     <article class="mi-featured-article">
                         <img src="https://via.placeholder.com/800x400" alt="প্রধান খবর">
@@ -86,7 +40,8 @@
                             <span class="mi-category">জাতীয়</span>
                             <h2>দেশের অর্থনৈতিক উন্নয়ন নতুন উচ্চতায় পৌঁছেছে</h2>
                             <p>সরকার ঘোষণা করেছে যে আগামী ত্রৈমাসিকে নতুন অর্থনৈতিক নীতি বাস্তবায়ন করা হবে যা দেশের জিডিপি বৃদ্ধিতে ভূমিকা রাখবে।</p>
-                            <small class="mi-meta">প্রকাশিত: আজ, সকাল ৯টা</small>
+                            <a href="single-post.html?id=1" class="mi-read-more">বিস্তারিত পড়ুন →</a>
+                            <small class="mi-meta">প্রকাশিত: আজ, সকাল ৯টা | লেখক: আহমেদ করিম</small>
                         </div>
                     </article>
                 </section>
@@ -102,7 +57,7 @@
                                 <img src="https://via.placeholder.com/300x200" alt="খবর">
                                 <div class="mi-card-body">
                                     <span class="mi-category mi-cat-politics">রাজনীতি</span>
-                                    <h4>সংসদে নতুন বিল উপস্থাপন</h4>
+                                    <h4><a href="single-post.html?id=2">সংসদে নতুন বিল উপস্থাপন</a></h4>
                                     <p>আজ সংসদে একটি গুরুত্বপূর্ণ বিল উপস্থাপন করা হয়েছে যা শিক্ষা খাতের উন্নয়নে সহায়ক হবে।</p>
                                     <small class="mi-meta">২ ঘণ্টা আগে</small>
                                 </div>
@@ -115,7 +70,7 @@
                                 <img src="https://via.placeholder.com/300x200" alt="খবর">
                                 <div class="mi-card-body">
                                     <span class="mi-category mi-cat-sports">খেলাধুলা</span>
-                                    <h4>জাতীয় ফুটবল দলের বড় জয়</h4>
+                                    <h4><a href="single-post.html?id=3">জাতীয় ফুটবল দলের বড় জয়</a></h4>
                                     <p>আমাদের জাতীয় দল আন্তর্জাতিক ম্যাচে ৪-২ গোলে প্রতিদ্বন্দ্বী দলকে পরাজিত করেছে।</p>
                                     <small class="mi-meta">৫ ঘণ্টা আগে</small>
                                 </div>
@@ -128,7 +83,7 @@
                                 <img src="https://via.placeholder.com/300x200" alt="খবর">
                                 <div class="mi-card-body">
                                     <span class="mi-category mi-cat-tech">প্রযুক্তি</span>
-                                    <h4>নতুন প্রযুক্তি স্টার্টআপ চালু হয়েছে</h4>
+                                    <h4><a href="single-post.html?id=4">নতুন প্রযুক্তি স্টার্টআপ চালু হয়েছে</a></h4>
                                     <p>দেশের একটি নতুন টেক স্টার্টআপ আর্টিফিশিয়াল ইন্টেলিজেন্স ভিত্তিক সমাধান নিয়ে এসেছে।</p>
                                     <small class="mi-meta">৮ ঘণ্টা আগে</small>
                                 </div>
@@ -141,7 +96,7 @@
                                 <img src="https://via.placeholder.com/300x200" alt="খবর">
                                 <div class="mi-card-body">
                                     <span class="mi-category mi-cat-entertainment">বিনোদন</span>
-                                    <h4>নতুন সিনেমা রিলিজের প্রস্তুতি</h4>
+                                    <h4><a href="single-post.html?id=5">নতুন সিনেমা রিলিজের প্রস্তুতি</a></h4>
                                     <p>বলিউড এর একটি বড় বাজেটের সিনেমা আগামী মাসে রিলিজ হতে চলেছে।</p>
                                     <small class="mi-meta">১০ ঘণ্টা আগে</small>
                                 </div>
@@ -154,7 +109,7 @@
                                 <img src="https://via.placeholder.com/300x200" alt="খবর">
                                 <div class="mi-card-body">
                                     <span class="mi-category mi-cat-health">স্বাস্থ্য</span>
-                                    <h4>নতুন স্বাস্থ্য সেবা চালু হচ্ছে</h4>
+                                    <h4><a href="single-post.html?id=6">নতুন স্বাস্থ্য সেবা চালু হচ্ছে</a></h4>
                                     <p>সরকার সারা দেশে নতুন স্বাস্থ্য সেবা প্রকল্প চালু করার ঘোষণা দিয়েছে।</p>
                                     <small class="mi-meta">১২ ঘণ্টা আগে</small>
                                 </div>
@@ -167,7 +122,7 @@
                                 <img src="https://via.placeholder.com/300x200" alt="খবর">
                                 <div class="mi-card-body">
                                     <span class="mi-category mi-cat-business">ব্যবসা</span>
-                                    <h4>রপ্তানি আয় বৃদ্ধি পাচ্ছে</h4>
+                                    <h4><a href="single-post.html?id=7">রপ্তানি আয় বৃদ্ধি পাচ্ছে</a></h4>
                                     <p>গত ত্রৈমাসিকে দেশের মোট রপ্তানি আয় শতাংশ বৃদ্ধি পেয়েছে।</p>
                                     <small class="mi-meta">১৪ ঘণ্টা আগে</small>
                                 </div>
@@ -189,47 +144,8 @@
             </main>
         </div>
 
-        <!-- ফুটার সেকশন -->
-        <footer class="mi-footer">
-            <div class="mi-footer-content">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h6>আমাদের সম্পর্কে</h6>
-                        <p>আমরা একটি নির্ভরযোগ্য বাংলা সংবাদ মাধ্যম যা সত্যিকারের খবর নিয়ে আসে।</p>
-                    </div>
-                    <div class="col-md-3">
-                        <h6>কুইক লিংক</h6>
-                        <ul class="mi-footer-links">
-                            <li><a href="#">হোম</a></li>
-                            <li><a href="#">প্রাইভেসি পলিসি</a></li>
-                            <li><a href="#">শর্তাবলী</a></li>
-                            <li><a href="#">যোগাযোগ</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h6>ক্যাটাগরি</h6>
-                        <ul class="mi-footer-links">
-                            <li><a href="#">জাতীয় খবর</a></li>
-                            <li><a href="#">আন্তর্জাতিক খবর</a></li>
-                            <li><a href="#">ব্যবসা</a></li>
-                            <li><a href="#">প্রযুক্তি</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h6>সোশ্যাল মিডিয়া</h6>
-                        <div class="mi-social-links">
-                            <a href="#" class="mi-social-icon">📘</a>
-                            <a href="#" class="mi-social-icon">🐦</a>
-                            <a href="#" class="mi-social-icon">📷</a>
-                            <a href="#" class="mi-social-icon">▶️</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mi-footer-bottom">
-                <p>&copy; ২০২৬ আমাদের নিউজ। সর্বাধিকার সংরক্ষিত। | Powered by Cloudflare</p>
-            </div>
-        </footer>
+        <!-- ফুটার লোড হবে JS দিয়ে -->
+        <div id="footerContainer"></div>
 
     </div>
 
