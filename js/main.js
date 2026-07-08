@@ -54,7 +54,7 @@ async function loadFooter() {
     
     try {
         console.log('ফুটার লোড করা হচ্ছে...');
-        const response = await fetch('./html/footer.html');
+        const response = await fetch('./footer.html');
         
         if (!response.ok) {
             console.warn('ফুটার fetch ব্যর্থ:', response.status);
@@ -82,7 +82,7 @@ async function loadSidebar() {
     
     try {
         console.log('সাইডবার লোড করা হচ্ছে...');
-        const response = await fetch('./html/sidebar.html');
+        const response = await fetch('./sidebar.html');
         
         if (!response.ok) {
             console.warn('সাইডবার fetch ব্যর্থ:', response.status);
@@ -241,13 +241,7 @@ function getHeaderHTML() {
     </div>
 </div>
 
-<!-- ইনলাইন সার্চ বার -->
-<div class="mi-search-bar-inline">
-    <form action="./search.html" method="GET" id="headerSearchForm">
-        <input type="text" name="q" class="mi-search-input" placeholder="খবর খুঁজুন...">
-        <button type="submit" class="mi-search-btn">🔍</button>
-    </form>
-</div>`;
+
 }
 
 function getFooterHTML() {
