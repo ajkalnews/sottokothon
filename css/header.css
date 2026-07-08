@@ -1,0 +1,114 @@
+/* হেডার কনটেইনার */
+.mi-header {
+    background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
+    color: white;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.mi-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    gap: 40px;
+}
+
+/* লোগো স্টাইল */
+.mi-logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+}
+
+/* নেভিগেশন বার */
+.mi-navbar {
+    display: flex;
+    gap: 32px;
+    flex: 1;
+}
+
+.mi-nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 8px 4px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.mi-nav-link:hover,
+.mi-nav-link.active {
+    color: white;
+    border-bottom-color: white;
+}
+
+/* সার্চ বার */
+.mi-search-bar {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 12px 16px;
+    border-radius: 24px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.mi-search-bar input {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border: none !important;
+    border-radius: 20px !important;
+    padding: 8px 16px !important;
+    color: var(--mi-dark) !important;
+}
+
+.mi-search-bar input::placeholder {
+    color: #999;
+}
+
+.mi-search-bar .btn {
+    background-color: white;
+    color: var(--mi-primary);
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    padding: 6px 24px;
+    transition: all 0.3s ease;
+}
+
+.mi-search-bar .btn:hover {
+    background-color: #f1f3f4;
+    color: var(--mi-primary);
+}
+
+/* রেসপন্সিভ */
+@media (max-width: 768px) {
+    .mi-header-top {
+        flex-direction: column;
+        padding: 12px 16px;
+        gap: 16px;
+    }
+
+    .mi-navbar {
+        flex-wrap: wrap;
+        gap: 16px;
+        order: 3;
+        width: 100%;
+    }
+
+    .mi-nav-link {
+        font-size: 0.9rem;
+    }
+
+    .mi-logo h1 {
+        font-size: 1.5rem;
+    }
+
+    .mi-search-bar {
+        width: 100%;
+    }
+}
