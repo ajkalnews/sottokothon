@@ -209,28 +209,32 @@ img {
 }
 
 /* ==========================================
-   BREAKING NEWS
+   BREAKING NEWS (FIXED OVERLAP)
 ========================================== */
 .mi-breaking-news {
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: #fafafa;
+    background: #fafafa; /* টিকারের ব্যাকগ্রাউন্ড */
     border-bottom: 1px solid var(--border);
     height: 42px;
+    position: relative; /* z-index ঠিক রাখার জন্য */
 }
 
 .mi-breaking-label {
     min-width: 140px;
-    height: 42px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--primary);
+    background: var(--primary) !important; /* লাল ব্যাকগ্রাউন্ড নিশ্চিত করার জন্য */
     color: #fff;
     font-weight: 700;
     font-size: 15px;
     flex-shrink: 0;
+    position: relative;
+    z-index: 5; /* টেক্সট যেন এই লেবেলের নিচে দিয়ে যায়, উপর দিয়ে নয় */
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1); /* লেখা আলাদা করার জন্য হালকা শ্যাডো */
 }
 
 .mi-breaking-dot {
@@ -242,11 +246,14 @@ img {
     50% { opacity: .3; }
 }
 
+/* টিকারের ভেতরের মূল কন্টেন্ট বক্স */
 .mi-ticker-content {
     display: flex;
     align-items: center;
     white-space: nowrap;
     animation: tickerMove 35s linear infinite;
+    padding-left: 20px; /* শুরুতেই যেন লেবেলের গায়ে লেগে না থাকে */
+    z-index: 1;
 }
 
 .mi-breaking-news:hover .mi-ticker-content {
@@ -267,7 +274,7 @@ img {
 
 .mi-ticker-item a {
     color: #222;
-    font-size: 20px;
+    font-size: 16px; /* ২০ পিক্সেল থেকে কমিয়ে স্ট্যান্ডার্ড ১৬ করা হলো */
     font-weight: 500;
 }
 
@@ -277,9 +284,16 @@ img {
 
 @keyframes tickerMove {
     from { transform: translateX(100%); }
-    to { transform: translateX(-100%); }
+    to { transform: translateX(0%); } /* ওভারল্যাপ এড়াতে এনিমেশন এন্ডিং ফিক্স */
 }
 
+/* রেসপনসিভ ফিক্স */
+@media (max-width: 768px) {
+    .mi-breaking-label {
+        min-width: 110px;
+        font-size: 13px;
+    }
+}
 /* ==========================================
    RESPONSIVE (MEDIA QUERIES)
 ========================================== */
