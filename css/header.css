@@ -103,8 +103,8 @@ img {
 ===============================*/
 .mi-banner-ad {
     width: 100%;
-    min-height: 90px;
-    border: 2px solid #8cc8f8;
+    min-height: 100px;
+    
     background: #f4fbff;
     display: flex;
     align-items: center;
@@ -134,7 +134,7 @@ img {
 .mi-responsive-ad-img {
     width: 100%;
     height: auto;
-    max-height: 90px; /* আপনার হেডার লেআউটের সর্বোচ্চ উচ্চতা */
+    max-height: 100px; /* আপনার হেডার লেআউটের সর্বোচ্চ উচ্চতা */
     object-fit: cover; /* ইমেজ যেন ফেটে বা চ্যাপ্টা হয়ে না যায় */
     display: block;
     border-radius: 4px; /* কোণাগুলো সামান্য গোল করার জন্য */
