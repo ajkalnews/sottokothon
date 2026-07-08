@@ -184,7 +184,11 @@ img {
     color: var(--primary);
     border-bottom: 3px solid var(--primary);
 }
-
+/* প্রথম নেভিগেশন আইটেমে মাউস নিলে (Hover) বা অ্যাক্টিভ থাকলেও যেন নিচের বর্ডার না আসে */
+.mi-nav-wrapper .mi-nav-item:first-child:hover,
+.mi-nav-wrapper .mi-nav-item:first-child.active {
+    border-bottom: 3px solid transparent !important;
+}
 .mi-nav-icon {
     font-size: 18px;
 }
