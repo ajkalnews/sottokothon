@@ -26,14 +26,13 @@ html {
     scroll-behavior: smooth;
 }
 
-/* কনটেইনার স্টাইল */
+/* কনটেইনার */
 .mi-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     max-width: 1400px;
     margin: 0 auto;
-    background-color: #ffffff;
 }
 
 .mi-main-wrapper {
@@ -59,7 +58,7 @@ html {
     background: white;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
     transition: all 0.3s ease;
     border: 1px solid var(--mi-border);
     height: 100%;
@@ -90,7 +89,15 @@ html {
     font-weight: 600;
     margin: 8px 0;
     line-height: 1.4;
+}
+
+.mi-card-body h4 a {
     color: var(--mi-dark);
+    text-decoration: none;
+}
+
+.mi-card-body h4 a:hover {
+    color: var(--mi-primary);
 }
 
 .mi-card-body p {
@@ -100,7 +107,7 @@ html {
     flex: 1;
 }
 
-/* ক্যাটাগরি ব্যাজ */
+/* ক্যাটাগরি */
 .mi-category {
     display: inline-block;
     font-size: 0.75rem;
@@ -113,77 +120,17 @@ html {
     text-transform: uppercase;
 }
 
-.mi-cat-politics {
-    background-color: #d32f2f;
-}
+.mi-cat-politics { background-color: #d32f2f; }
+.mi-cat-sports { background-color: #1976d2; }
+.mi-cat-tech { background-color: #7b1fa2; }
+.mi-cat-entertainment { background-color: #f57c00; }
+.mi-cat-health { background-color: #388e3c; }
+.mi-cat-business { background-color: #455a64; }
 
-.mi-cat-sports {
-    background-color: #1976d2;
-}
-
-.mi-cat-tech {
-    background-color: #7b1fa2;
-}
-
-.mi-cat-entertainment {
-    background-color: #f57c00;
-}
-
-.mi-cat-health {
-    background-color: #388e3c;
-}
-
-.mi-cat-business {
-    background-color: #455a64;
-}
-
-/* মেটা তথ্য */
 .mi-meta {
     color: #999;
     font-size: 0.85rem;
     margin-top: auto;
-}
-
-/* ফিচার্ড নিউজ */
-.mi-featured {
-    margin-bottom: 40px;
-}
-
-.mi-featured-article {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    background: white;
-    padding: 24px;
-    border-radius: 8px;
-    border: 1px solid var(--mi-border);
-}
-
-.mi-featured-article img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.mi-featured-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.mi-featured-content h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin: 12px 0;
-    color: var(--mi-dark);
-}
-
-.mi-featured-content p {
-    font-size: 1rem;
-    color: var(--mi-secondary);
-    margin-bottom: 16px;
 }
 
 /* পেজিনেশন */
@@ -193,37 +140,9 @@ html {
     justify-content: center;
 }
 
-.page-link {
-    color: var(--mi-primary);
-    border: 1px solid var(--mi-border);
-}
-
-.page-link:hover {
-    background-color: var(--mi-light);
-    color: var(--mi-primary);
-}
-
-.page-item.active .page-link {
-    background-color: var(--mi-primary);
-    border-color: var(--mi-primary);
-}
-
-/* রেসপন্সিভ */
 @media (max-width: 768px) {
     .mi-main-wrapper {
         grid-template-columns: 1fr;
         padding: 12px;
-    }
-
-    .mi-featured-article {
-        grid-template-columns: 1fr;
-    }
-
-    .mi-section-title {
-        font-size: 1.5rem;
-    }
-
-    .mi-featured-content h2 {
-        font-size: 1.5rem;
     }
 }
