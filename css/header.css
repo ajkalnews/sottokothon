@@ -1,5 +1,5 @@
 /* ==========================================
-   SottoKothon Header CSS - Complete Version
+   SottoKothon Header CSS - Mega Menu & Sticky
 ========================================== */
 
 :root {
@@ -52,9 +52,7 @@ img {
     gap: 18px;
 }
 
-/* সোশ্যাল আইকনগুলোর সাইজ এবং সাধারণ কালার */
 .mi-social-icon-top {
-    color: #555;
     font-size: 16px;
     transition: 0.3s ease;
     display: inline-flex;
@@ -62,16 +60,20 @@ img {
     justify-content: center;
 }
 
-/* মাউস নিলে প্রতিটি ব্র্যান্ডের অরিজিনাল কালার শো করবে */
-.mi-social-icon-top.fb { color: #1877F2; }       /* Facebook Blue */
-.mi-social-icon-top.yt { color: #FF0000; }       /* YouTube Red */
-.mi-social-icon-top.tw { color: #000000; }       /* X (Twitter) Black */
-.mi-social-icon-top.insta { color: #E1306C; }    /* Instagram Pink/Red */
-.mi-social-icon-top.ln { color: #0077B5; }       /* LinkedIn Blue */
-.mi-social-icon-top.wa { color: #25D366; }       /* WhatsApp Green */
+.mi-social-icon-top.fb { color: #1877F2; }
+.mi-social-icon-top.yt { color: #FF0000; }
+.mi-social-icon-top.tw { color: #000000; }
+.mi-social-icon-top.insta { color: #E1306C; }
+.mi-social-icon-top.ln { color: #0077B5; }
+.mi-social-icon-top.wa { color: #25D366; }
+
+.mi-social-icon-top:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+}
 
 /*==============================
-  LOGO AREA & GRID
+  LOGO AREA
 ===============================*/
 .mi-logo-section {
     display: grid;
@@ -83,19 +85,24 @@ img {
     border-bottom: 1px solid var(--border);
 }
 
-.mi-logo {
+.mi-logo-container {
     display: flex;
     align-items: center;
+    gap: 15px;
+}
+
+/* মোবাইল হ্যামবার্গার বাটন */
+.mi-mobile-menu-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #222;
+    cursor: pointer;
 }
 
 .mi-logo-img {
     height: 72px;
     width: auto;
-    transition: .3s;
-}
-
-.mi-logo-img:hover {
-    transform: scale(1.02);
 }
 
 /*==============================
@@ -103,44 +110,37 @@ img {
 ===============================*/
 .mi-banner-ad {
     width: 100%;
-    min-height: 100px;
+    min-height: 90px;
+    border: 2px solid #8cc8f8;
     background: #f4fbff;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1px;
+    padding: 4px;
     transition: .3s;
+    border-radius: 4px;
 }
 
 .mi-banner-ad:hover {
     box-shadow: 0 8px 25px rgba(0,0,0,.08);
 }
 
-.mi-ad-content {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-/* বিজ্ঞাপন বক্সের ভেতরের লিংক */
 .mi-ad-image-link {
     display: block;
     width: 100%;
     height: 100%;
 }
 
-/* বিজ্ঞাপনের ইমেজকে রেসপনসিভ করার সিএসএস */
 .mi-responsive-ad-img {
     width: 100%;
     height: auto;
-    max-height: 100px; /* আপনার হেডার লেআউটের সর্বোচ্চ উচ্চতা */
-    object-fit: cover; /* ইমেজ যেন ফেটে বা চ্যাপ্টা হয়ে না যায় */
+    max-height: 90px;
+    object-fit: cover;
     display: block;
-    border-radius: 4px; /* কোণাগুলো সামান্য গোল করার জন্য */
 }
 
 /*==============================
-  NAVIGATION
+  STICKY NAVIGATION & MEGA MENU
 ===============================*/
 .mi-main-nav {
     display: flex;
@@ -149,7 +149,7 @@ img {
     background: #fff;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    position: sticky;
+    position: sticky; /* মেনু স্টিকি করা হলো */
     top: 0;
     z-index: 999;
     box-shadow: 0 2px 8px rgba(0,0,0,.05);
@@ -158,12 +158,7 @@ img {
 .mi-nav-wrapper {
     display: flex;
     align-items: center;
-    overflow-x: auto;
-    scrollbar-width: none; /* Firefox এর জন্য স্ক্রোলবার হাইড */
-}
-
-.mi-nav-wrapper::-webkit-scrollbar {
-    display: none; /* Chrome, Safari এবং Opera এর জন্য স্ক্রোলবার হাইড */
+    position: relative; /* মেগা মেনু পজিশনের জন্য */
 }
 
 .mi-nav-item {
@@ -184,45 +179,111 @@ img {
     color: var(--primary);
     border-bottom: 3px solid var(--primary);
 }
-/* প্রথম নেভিগেশন আইটেমে মাউস নিলে (Hover) বা অ্যাক্টিভ থাকলেও যেন নিচের বর্ডার না আসে */
+
+/* প্রথম আইটেমের (সর্বশেষ) নিচের বর্ডার বাদ দেওয়া হলো */
 .mi-nav-wrapper .mi-nav-item:first-child:hover,
 .mi-nav-wrapper .mi-nav-item:first-child.active {
     border-bottom: 3px solid transparent !important;
 }
-.mi-nav-icon {
-    font-size: 18px;
+
+/* --- মেগা মেনু স্ট্রাকচার --- */
+.mi-nav-item-mega {
+    position: static; /* পুরো নেভিগেশন জুড়েই মেগা মেনু ছড়াবে */
+}
+
+.mi-mega-menu-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-bottom: 3px solid var(--primary);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 25px 40px;
+    display: none; /* ডিফল্টভাবে হাইড থাকবে */
+    z-index: 1000;
+}
+
+/* মাউস নিলে মেগা মেনু দেখাবে */
+.mi-nav-item-mega:hover .mi-mega-menu-box {
+    display: block;
+}
+
+.mi-mega-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.mi-mega-col h4 {
+    font-size: 16px;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 6px;
+}
+
+.mi-mega-col a {
+    display: block;
+    color: #444;
+    font-size: 15px;
+    padding: 6px 0;
+    font-weight: 500;
+    transition: .2s;
+}
+
+.mi-mega-col a:hover {
+    color: var(--primary);
+    padding-left: 5px;
 }
 
 /* SEARCH ICON */
 .mi-search-icon {
     width: 60px;
     text-align: center;
-    background: #fff; /* মোবাইলে স্ক্রোল করার সময় টেক্সট যেন নিচে দেখা না যায় */
-    position: relative;
-    z-index: 2;
 }
 
 .mi-search-link {
     color: #444;
     font-size: 22px;
-    transition: .3s;
 }
 
-.mi-search-link:hover {
+/*==============================
+  OFFCANVAS MOBILE MENU
+===============================*/
+.mi-offcanvas-menu {
+    width: 280px !important;
+}
+
+.mi-mobile-nav-list a {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 1px solid #f1f1f1;
+    transition: .2s;
+}
+
+.mi-mobile-nav-list a:hover,
+.mi-mobile-nav-list a.active {
+    background: var(--light);
     color: var(--primary);
+    padding-left: 20px;
 }
 
-/* ==========================================
-   BREAKING NEWS (FIXED OVERLAP)
-========================================== */
+/*==============================
+  BREAKING NEWS
+===============================*/
 .mi-breaking-news {
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: #fafafa; /* টিকারের ব্যাকগ্রাউন্ড */
+    background: #fafafa;
     border-bottom: 1px solid var(--border);
     height: 42px;
-    position: relative; /* z-index ঠিক রাখার জন্য */
+    position: relative;
 }
 
 .mi-breaking-label {
@@ -231,38 +292,40 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--primary) !important; /* লাল ব্যাকগ্রাউন্ড নিশ্চিত করার জন্য */
+    background: var(--primary) !important;
     color: #fff;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 15px;
     flex-shrink: 0;
     position: relative;
-    z-index: 5; /* টেক্সট যেন এই লেবেলের নিচে দিয়ে যায়, উপর দিয়ে নয় */
-    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1); /* লেখা আলাদা করার জন্য হালকা শ্যাডো */
+    z-index: 5;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .mi-breaking-dot {
-    margin-right: 6px;
+    margin-right: 8px;
+    font-size: 22px;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
     animation: blink 1s infinite;
 }
 
+@keyframes blink { 50% { opacity: .3; } }
 
-@keyframes blink {
-    50% { opacity: .3; }
-}
-
-/* টিকারের ভেতরের মূল কন্টেন্ট বক্স */
 .mi-ticker-content {
     display: flex;
     align-items: center;
     white-space: nowrap;
-    animation: tickerMove 30s linear infinite; /* ২৫-৩০ সেকেন্ড দিলে স্পিড দেখতে প্রফেশনাল লাগবে */
-    padding-left: 100%; /* শুরুতেই যেন একদম ডানপাশ থেকে নিউজটি স্ক্রিনে প্রবেশ করে */
+    animation: tickerMove 30s linear infinite;
+    padding-left: 100%;
     z-index: 1;
 }
 
 .mi-breaking-news:hover .mi-ticker-content {
-    animation-play-state: paused; /* মাউস নিলে নিউজ স্ক্রোল হওয়া সাময়িক থামবে */
+    animation-play-state: paused;
 }
 
 .mi-ticker-item {
@@ -271,143 +334,45 @@ img {
 }
 
 .mi-ticker-item::before {
-    content: ""; /* টেক্সট খালি থাকবে */
-    width: 8px; /* ডটের প্রস্থ */
-    height: 8px; /* ডটের উচ্চতা */
-    background-color: var(--primary); /* আপনার সাইটের মেইন লাল কালার */
-    border-radius: 50%; /* ডটটিকে গোল করার জন্য */
+    content: "•";
+    color: var(--primary);
     position: absolute;
-    left: 18px;
+    left: 14px;
+    font-size: 28px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-53%);
+    line-height: 1;
 }
 
 .mi-ticker-item a {
     color: #222;
-    font-size: 22px; /* ২০ পিক্সেল থেকে কমিয়ে স্ট্যান্ডার্ড ১৬ করা হলো */
+    font-size: 16px;
     font-weight: 500;
 }
 
-.mi-ticker-item a:hover {
-    color: var(--primary);
-}
+.mi-ticker-item a:hover { color: var(--primary); }
 
-/* শেষ আইটেম পর্যন্ত সম্পূর্ণ স্ক্রোল করার নিখুঁত অ্যানিমেশন */
 @keyframes tickerMove {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); } /* এটি পুরো নিউজের উইডথ হিসাব করে শেষ পর্যন্ত স্ক্রোল করাবে */
+    100% { transform: translateX(-100%); }
 }
 
-/* রেসপনসিভ ফিক্স */
-@media (max-width: 768px) {
-    .mi-breaking-label {
-        min-width: 110px;
-        font-size: 13px;
-    }
-}
-/* ==========================================
-   RESPONSIVE (MEDIA QUERIES)
-========================================== */
+/*==============================
+  RESPONSIVE
+===============================*/
 @media (max-width: 1200px) {
-    .mi-logo-section {
-        grid-template-columns: 280px 1fr;
-    }
-    .mi-logo-img {
-        height: 65px;
-    }
+    .mi-logo-section { grid-template-columns: 280px 1fr; }
+    .mi-logo-img { height: 65px; }
 }
 
 @media (max-width: 992px) {
-    .mi-logo-section {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    .mi-logo {
-        justify-content: center;
-    }
-    .mi-banner-ad {
-        min-height: 90px;
-    }
-    .mi-ad-text {
-        text-align: center;
-    }
-    .mi-ad-icon {
-        display: none;
-    }
+    .mi-logo-section { grid-template-columns: 1fr; gap: 20px; }
+    .mi-logo { justify-content: center; }
 }
 
 @media (max-width: 768px) {
-    .mi-top-bar {
-        flex-direction: column;
-        height: auto;
-        padding: 8px 15px;
-        gap: 8px;
-    }
-    .mi-top-right {
-        gap: 14px;
-    }
-    .mi-logo-section {
-        padding: 15px;
-    }
-    .mi-logo-img {
-        height: 55px;
-        margin: auto;
-    }
-    .mi-main-nav {
-        overflow-x: auto;
-    }
-    .mi-nav-item {
-        padding: 14px 12px;
-        font-size: 15px;
-    }
-    .mi-search-icon {
-        width: 45px;
-    }
-    .mi-breaking-label {
-        min-width: 105px;
-        font-size: 13px;
-    }
-    .mi-ticker-item {
-        padding: 0 25px;
-    }
-    .mi-ad-text h3 {
-        font-size: 22px;
-    }
-    .mi-ad-text p {
-        font-size: 14px;
-    }
+    .mi-top-bar { flex-direction: column; height: auto; padding: 8px 15px; gap: 8px; }
+    .mi-logo-section { padding: 15px; }
+    .mi-logo-img { height: 50px; }
+    .mi-breaking-label { min-width: 110px; font-size: 13px; }
 }
-
-@media (max-width: 576px) {
-    .mi-nav-item {
-        font-size: 14px;
-        padding: 12px 10px;
-    }
-    .mi-logo-img {
-        height: 48px;
-    }
-    .mi-banner-ad {
-        padding: 10px;
-    }
-    .mi-ad-text h3 {
-        font-size: 18px;
-    }
-    .mi-ad-text p {
-        display: none;
-    }
-    .mi-ad-btn {
-        padding: 6px 14px;
-        font-size: 13px;
-    }
-    .mi-breaking-news {
-        height: 38px;
-    }
-    .mi-breaking-label {
-        height: 38px;
-    }
-    .mi-ticker-item a {
-        font-size: 13px;
-    }
-}
-
-
