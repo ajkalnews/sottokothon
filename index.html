@@ -3,188 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ইউএসনিউজঅনলাইন | প্রথম আলো স্টাইল পোর্টাল</title>
-    <!-- Bootstrap 5 CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- External Custom CSS File -->
-    <link rel="stylesheet" href="css/styles.css">
+    <title>আমাদের নিউজ - বাংলা সংবাদ পোর্টাল</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts - সোলায়মানলিপি বাংলা ফন্ট -->
+    <link href="https://fonts.googleapis.com/css2?family=Solaimanlipi&display=swap" rel="stylesheet">
+    
+    <!-- আমাদের কাস্টম CSS ফাইলগুলো -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/sidebar.css">
 </head>
 <body>
-
-    <!-- ১টি প্রধান কন্টেইনারের মধ্যে পুরো সাইট থাকবে -->
-    <div class="container-main shadow-sm">
-
-        <!-- টপ বার (তারিখ, সময় ও সোশ্যাল মিডিয়া লিংক) -->
-        <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3 text-muted small">
-            <div>
-                <i class="bi bi-calendar3"></i> শনিবার, ২৭ জুন ২০২৬ | ০৮:৫১:৩৩ PM
-            </div>
-            <div class="d-flex gap-3 fs-5">
-                <a href="#" class="text-muted"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="text-muted"><i class="bi bi-twitter-x"></i></a>
-                <a href="#" class="text-muted"><i class="bi bi-youtube"></i></a>
-                <a href="#" class="text-muted"><i class="bi bi-instagram"></i></a>
-            </div>
-        </div>
-
-        <!-- হেডার এরিয়া (বামে লোগো, ডানে অ্যাড) -->
-        <header class="row align-items-center mb-4">
-            <!-- বামে লোগো (ইমেজ অনুযায়ী স্টাইল করা) -->
-            <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                <h1 class="fw-bold m-0 display-4 text-prothomalo-red" style="letter-spacing: -1px;">
-                    US<span class="text-dark">NEWS</span><span class="fs-4 text-muted">ONLINE.COM</span>
-                </h1>
-            </div>
-            <!-- ডানে অ্যাড ব্যানার (728x90 রেসপনসিভ) -->
-            <div class="col-md-8">
-                <div class="ad-box">
-                    <span class="ad-label">Advertisement</span>
-                    <div class="fw-semibold py-2">এখানে আপনার বিজ্ঞাপন ব্যানারটি বসবে (728 × 90)</div>
+    <!-- মেইন কনটেইনার -->
+    <div class="mi-container">
+        
+        <!-- হেডার সেকশন -->
+        <header class="mi-header">
+            <div class="mi-header-top">
+                <div class="mi-logo">
+                    <h1>📰 আমাদের নিউজ</h1>
                 </div>
+                <nav class="mi-navbar">
+                    <a href="#" class="mi-nav-link active">হোম</a>
+                    <a href="#" class="mi-nav-link">রাজনীতি</a>
+                    <a href="#" class="mi-nav-link">খেলাধুলা</a>
+                    <a href="#" class="mi-nav-link">প্রযুক্তি</a>
+                    <a href="#" class="mi-nav-link">বিনোদন</a>
+                    <a href="#" class="mi-nav-link">যোগাযোগ</a>
+                </nav>
+            </div>
+            <div class="mi-search-bar">
+                <input type="text" class="form-control" placeholder="খবর খুঁজুন...">
+                <button class="btn btn-primary">অনুসন্ধান</button>
             </div>
         </header>
 
-        <!-- নেভিগেশন বার (মেনু) -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-top border-bottom py-1 mb-3">
-            <div class="container-fluid p-0">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mainNav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-bold">
-                        <li class="nav-item"><a class="nav-link active text-prothomalo-red" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark" href="#">English News</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark" href="#">Bangla News</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark" href="#">News Paper Lists</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark" href="#">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark" href="#">Login</a></li>
-                    </ul>
-                    <form class="d-flex align-items-center">
-                        <button class="btn btn-sm border-0" type="submit"><i class="bi bi-search fs-5"></i></button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-
-        <!-- ব্রেকিং নিউজ স্ক্রোলিং টিকার -->
-        <div class="d-flex align-items-center border border-danger mb-4">
-            <span class="bg-prothomalo-red text-white px-3 py-2 fw-bold m-0 text-nowrap">শিরোনাম</span>
-            <div class="ticker-wrap w-100 py-1 bg-light text-dark small">
-                <marquee behavior="scroll" direction="left" scrollamount="5">
-                    <span class="ticker-item text-dark"><i class="bi bi-record-fill text-danger"></i> নর্থ আমেরিকা (মাকসুদ-মাসুদ) এর সংবাদ সম্মেলনে কুৎসা রটানোর প্রতিবাদ</span>
-                    <span class="ticker-item text-dark"><i class="bi bi-record-fill text-danger"></i> নারীর ক্ষমতায়ন এবং নারী, শান্তি ও নিরাপত্তা এজেন্ডা এগিয়ে নিতে বাংলাদেশ ও ইউএন উইমেনের ঘনিষ্ঠ সহযোগিতার অঙ্গীকার</span>
-                </marquee>
-            </div>
-        </div>
-
-        <!-- মূল নিউজ গ্রিড এবং সাইডবার লেআউট (৮ + ৪ কলাম) -->
-        <div class="row g-4">
+        <!-- মেইন কনটেন্ট এরিয়া -->
+        <div class="mi-main-wrapper">
             
-            <!-- মূল কন্টেন্ট এরিয়া (৮ কলাম) -->
-            <main class="col-lg-8 border-end">
-                
-                <!-- প্রথম আলোর মতো মেইন লিড সেকশন -->
-                <div class="row g-4 mb-4">
-                    <!-- বড় প্রধান খবর -->
-                    <div class="col-md-7">
-                        <div class="card border-0">
-                            <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=600" class="card-img-top rounded-0" alt="Lead News">
-                            <div class="card-body px-0">
-                                <h2 class="card-title fw-bold h4 news-title">
-                                    <a href="#">টানা বৃষ্টিতে ডুবল চট্টগ্রাম, চরম দুর্ভোগে লাখো সাধারণ মানুষ</a>
-                                </h2>
-                                <p class="card-text text-muted small mt-2">
-                                    টানা তিনদিনের ভারী বর্ষণ ও জোয়ারের পানিতে চট্টগ্রামের নিছু এলাকাগুলো সম্পূর্ণ তলিয়ে গেছে। প্রধান সড়কগুলোতে এখন কোমর পানি থই থই করছে, যার ফলে যান চলাচল মারাত্মকভাবে ব্যাহত হচ্ছে...
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- পাশে দুটি ছোট গ্রিড খবর -->
-                    <div class="col-md-5 d-flex flex-column gap-3">
-                        <div class="d-flex gap-2 align-items-start border-bottom pb-2">
-                            <div class="w-60 news-title">
-                                <h5 class="fw-bold h6"><a href="#">ডলারের বাজারে কিছুটা স্বস্তি, এক লাফে কমল দাম</a></h5>
-                                <span class="text-xs text-muted" style="font-size: 11px;">২ ঘণ্টা আগে</span>
-                            </div>
-                            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=120" class="img-fluid w-40" style="height: 65px; object-fit: cover;">
-                        </div>
-                        <div class="d-flex gap-2 align-items-start border-bottom pb-2">
-                            <div class="w-60 news-title">
-                                <h5 class="fw-bold h6"><a href="#">প্রযুক্তির নতুন চমক: আসছে কৃত্রিম বুদ্ধিমত্তার নতুন সুপার ফাস্ট চিপ</a></h5>
-                                <span class="text-xs text-muted" style="font-size: 11px;">৩ ঘণ্টা আগে</span>
-                            </div>
-                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=120" class="img-fluid w-40" style="height: 65px; object-fit: cover;">
-                        </div>
-                    </div>
+            <!-- সাইডবার -->
+            <aside class="mi-sidebar">
+                <div class="mi-widget">
+                    <h5>সর্বশেষ খবর</h5>
+                    <ul class="mi-widget-list">
+                        <li><a href="#">দেশে নতুন অর্থনৈতিক নীতি ঘোষণা</a></li>
+                        <li><a href="#">বন্যা পরিস্থিতি খারাপ হচ্ছে</a></li>
+                        <li><a href="#">শিক্ষা ক্ষেত্রে বড় সংস্কার আসছে</a></li>
+                    </ul>
                 </div>
 
-                <hr class="text-muted my-4">
+                <div class="mi-widget">
+                    <h5>বিভাগসমূহ</h5>
+                    <ul class="mi-widget-list">
+                        <li><a href="#">জাতীয়</a></li>
+                        <li><a href="#">আন্তর্জাতিক</a></li>
+                        <li><a href="#">বিজনেস</a></li>
+                        <li><a href="#">বিজ্ঞান ও প্রযুক্তি</a></li>
+                        <li><a href="#">স্বাস্থ্য</a></li>
+                    </ul>
+                </div>
 
-                <!-- অন্যান্য ক্যাটাগরি সেকশন (যেমন: বাংলাদেশ) -->
-                <div class="my-4">
-                    <h4 class="fw-bold text-prothomalo-red border-bottom border-danger border-3 pb-1 d-inline-block mb-3">বাংলাদেশ</h4>
-                    <div class="row row-cols-1 row-cols-md-3 g-3">
-                        <div class="col">
-                            <div class="card h-100 border-0 bg-light p-3 news-title">
-                                <h6 class="fw-bold m-0"><a href="#">ঢাকার বায়ুমানের ব্যাপক উন্নতি, সন্তোষ প্রকাশ পরিবেশবিদদের</a></h6>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100 border-0 bg-light p-3 news-title">
-                                <h6 class="fw-bold m-0"><a href="#">আজকের নতুন চার লেনের আধুনিক মহাসড়ক উদ্বোধন করলেন প্রধানমন্ত্রী</a></h6>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100 border-0 bg-light p-3 news-title">
-                                <h6 class="fw-bold m-0"><a href="#">আজ সকাল থেকে শুরু হচ্ছে একাদশের চূড়ান্ত ভর্তি পরীক্ষা</a></h6>
-                            </div>
-                        </div>
+                <div class="mi-widget">
+                    <h5>বিজ্ঞাপন</h5>
+                    <div class="mi-ad-placeholder">
+                        <p>আপনার বিজ্ঞাপন এখানে</p>
                     </div>
-                </div>
-
-            </main>
-
-            <!-- ডান পাশের সাইডবার (৪ কলাম) -->
-            <aside class="col-lg-4">
-                <!-- সাইডবার স্কয়ার বিজ্ঞাপন (300x250) -->
-                <div class="ad-box py-5 mb-4">
-                    <span class="ad-label">Advertisement</span>
-                    <div class="fw-semibold">Square Ad Area<br>(300 × 250)</div>
-                </div>
-
-                <!-- আলোচিত সংবাদের তালিকা -->
-                <div class="mb-4">
-                    <h5 class="fw-bold border-bottom pb-2 mb-3 text-dark">
-                        <i class="bi bi-fire text-danger"></i> আলোচিত খবর
-                    </h5>
-                    <ol class="list-group list-group-numbered list-group-flush">
-                        <li class="list-group-item bg-transparent border-0 px-0 py-2 news-title">
-                            <a href="#" class="fw-semibold">বাজেট ২০২৬: মধ্যবিত্তের করের ক্ষেত্রে বড় ধরনের পরিবর্তন</a>
-                        </li>
-                        <li class="list-group-item bg-transparent border-0 px-0 py-2 news-title">
-                            <a href="#" class="fw-semibold">মেট্রোরেলের নতুন দীর্ঘ রুট চালু, স্বস্তিতে রাজধানীবাসী</a>
-                        </li>
-                        <li class="list-group-item bg-transparent border-0 px-0 py-2 news-title">
-                            <a href="#" class="fw-semibold">টি-টোয়েন্টি বিশ্বকাপ: শেষ ওভারের টানটান উত্তেজনায় জিতল বাংলাদেশ</a>
-                        </li>
-                    </ol>
                 </div>
             </aside>
 
+            <!-- মেইন কনটেন্ট -->
+            <main class="mi-content">
+                
+                <!-- প্রধান খবর -->
+                <section class="mi-featured">
+                    <article class="mi-featured-article">
+                        <img src="https://via.placeholder.com/800x400" alt="প্রধান খবর">
+                        <div class="mi-featured-content">
+                            <span class="mi-category">জাতীয়</span>
+                            <h2>দেশের অর্থনৈতিক উন্নয়ন নতুন উচ্চতায় পৌঁছেছে</h2>
+                            <p>সরকার ঘোষণা করেছে যে আগামী ত্রৈমাসিকে নতুন অর্থনৈতিক নীতি বাস্তবায়ন করা হবে যা দেশের জিডিপি বৃদ্ধিতে ভূমিকা রাখবে।</p>
+                            <small class="mi-meta">প্রকাশিত: আজ, সকাল ৯টা</small>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- খবরের গ্রিড -->
+                <section class="mi-news-grid">
+                    <h3 class="mi-section-title">সম্প্রতি প্রকাশিত খবর</h3>
+                    
+                    <div class="row g-4">
+                        <!-- খবর কার্ড ১ -->
+                        <div class="col-md-6 col-lg-4">
+                            <article class="mi-news-card">
+                                <img src="https://via.placeholder.com/300x200" alt="খবর">
+                                <div class="mi-card-body">
+                                    <span class="mi-category mi-cat-politics">রাজনীতি</span>
+                                    <h4>সংসদে নতুন বিল উপস্থাপন</h4>
+                                    <p>আজ সংসদে একটি গুরুত্বপূর্ণ বিল উপস্থাপন করা হয়েছে যা শিক্ষা খাতের উন্নয়নে সহায়ক হবে।</p>
+                                    <small class="mi-meta">২ ঘণ্টা আগে</small>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- খবর কার্ড ২ -->
+                        <div class="col-md-6 col-lg-4">
+                            <article class="mi-news-card">
+                                <img src="https://via.placeholder.com/300x200" alt="খবর">
+                                <div class="mi-card-body">
+                                    <span class="mi-category mi-cat-sports">খেলাধুলা</span>
+                                    <h4>জাতীয় ফুটবল দলের বড় জয়</h4>
+                                    <p>আমাদের জাতীয় দল আন্তর্জাতিক ম্যাচে ৪-২ গোলে প্রতিদ্বন্দ্বী দলকে পরাজিত করেছে।</p>
+                                    <small class="mi-meta">৫ ঘণ্টা আগে</small>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- খবর কার্ড ৩ -->
+                        <div class="col-md-6 col-lg-4">
+                            <article class="mi-news-card">
+                                <img src="https://via.placeholder.com/300x200" alt="খবর">
+                                <div class="mi-card-body">
+                                    <span class="mi-category mi-cat-tech">প্রযুক্তি</span>
+                                    <h4>নতুন প্রযুক্তি স্টার্টআপ চালু হয়েছে</h4>
+                                    <p>দেশের একটি নতুন টেক স্টার্টআপ আর্টিফিশিয়াল ইন্টেলিজেন্স ভিত্তিক সমাধান নিয়ে এসেছে।</p>
+                                    <small class="mi-meta">৮ ঘণ্টা আগে</small>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- খবর কার্ড ৪ -->
+                        <div class="col-md-6 col-lg-4">
+                            <article class="mi-news-card">
+                                <img src="https://via.placeholder.com/300x200" alt="খবর">
+                                <div class="mi-card-body">
+                                    <span class="mi-category mi-cat-entertainment">বিনোদন</span>
+                                    <h4>নতুন সিনেমা রিলিজের প্রস্তুতি</h4>
+                                    <p>বলিউড এর একটি বড় বাজেটের সিনেমা আগামী মাসে রিলিজ হতে চলেছে।</p>
+                                    <small class="mi-meta">১০ ঘণ্টা আগে</small>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- খবর কার্ড ৫ -->
+                        <div class="col-md-6 col-lg-4">
+                            <article class="mi-news-card">
+                                <img src="https://via.placeholder.com/300x200" alt="খবর">
+                                <div class="mi-card-body">
+                                    <span class="mi-category mi-cat-health">স্বাস্থ্য</span>
+                                    <h4>নতুন স্বাস্থ্য সেবা চালু হচ্ছে</h4>
+                                    <p>সরকার সারা দেশে নতুন স্বাস্থ্য সেবা প্রকল্প চালু করার ঘোষণা দিয়েছে।</p>
+                                    <small class="mi-meta">১২ ঘণ্টা আগে</small>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- খবর কার্ড ৬ -->
+                        <div class="col-md-6 col-lg-4">
+                            <article class="mi-news-card">
+                                <img src="https://via.placeholder.com/300x200" alt="খবর">
+                                <div class="mi-card-body">
+                                    <span class="mi-category mi-cat-business">ব্যবসা</span>
+                                    <h4>রপ্তানি আয় বৃদ্ধি পাচ্ছে</h4>
+                                    <p>গত ত্রৈমাসিকে দেশের মোট রপ্তানি আয় শতাংশ বৃদ্ধি পেয়েছে।</p>
+                                    <small class="mi-meta">১৪ ঘণ্টা আগে</small>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- পেজিনেশন -->
+                <nav aria-label="খবর পৃষ্ঠা" class="mi-pagination">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">আগের</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">১</a></li>
+                        <li class="page-item"><a class="page-link" href="#">২</a></li>
+                        <li class="page-item"><a class="page-link" href="#">৩</a></li>
+                        <li class="page-item"><a class="page-link" href="#">পরবর্তী</a></li>
+                    </ul>
+                </nav>
+            </main>
         </div>
 
         <!-- ফুটার সেকশন -->
-        <footer class="bg-light border-top text-center py-4 mt-5">
-            <p class="fw-bold text-prothomalo-red m-0 fs-5">USNEWS<span class="text-dark">ONLINE</span></p>
-            <p class="text-muted small m-0 mt-1">© ২০২৬ ইউএসনিউজঅনলাইন। সর্বস্বত্ব সংরক্ষিত।</p>
+        <footer class="mi-footer">
+            <div class="mi-footer-content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h6>আমাদের সম্পর্কে</h6>
+                        <p>আমরা একটি নির্ভরযোগ্য বাংলা সংবাদ মাধ্যম যা সত্যিকারের খবর নিয়ে আসে।</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>কুইক লিংক</h6>
+                        <ul class="mi-footer-links">
+                            <li><a href="#">হোম</a></li>
+                            <li><a href="#">প্রাইভেসি পলিসি</a></li>
+                            <li><a href="#">শর্তাবলী</a></li>
+                            <li><a href="#">যোগাযোগ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>ক্যাটাগরি</h6>
+                        <ul class="mi-footer-links">
+                            <li><a href="#">জাতীয় খবর</a></li>
+                            <li><a href="#">আন্তর্জাতিক খবর</a></li>
+                            <li><a href="#">ব্যবসা</a></li>
+                            <li><a href="#">প্রযুক্তি</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>সোশ্যাল মিডিয়া</h6>
+                        <div class="mi-social-links">
+                            <a href="#" class="mi-social-icon">📘</a>
+                            <a href="#" class="mi-social-icon">🐦</a>
+                            <a href="#" class="mi-social-icon">📷</a>
+                            <a href="#" class="mi-social-icon">▶️</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mi-footer-bottom">
+                <p>&copy; ২০২৬ আমাদের নিউজ। সর্বাধিকার সংরক্ষিত। | Powered by Cloudflare</p>
+            </div>
         </footer>
 
     </div>
 
-    <!-- Bootstrap 5 JS Bundle CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
