@@ -1,195 +1,282 @@
-document.addEventListener('DOMContentLoaded', function() {
-    loadHeader();
-    loadFooter();
-    loadSidebar();
+// js/main.js
+
+// ডকুমেন্ট লোড হওয়ার পর এক্সিকিউট করুন
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('Main.js loaded');
+    
+    // সব কম্পোনেন্ট লোড করুন
+    await loadHeader();
+    await loadSidebar();
+    await loadFooter();
+    
+    // অন্যান্য ফাংশন সেটআপ করুন
     setupNavigation();
     setupSearch();
     setupArchiveToggle();
+    updateDateTime();
+    
+    // প্রতি সেকেন্ডে সময় আপডেট করুন
+    setInterval(updateDateTime, 1000);
 });
 
+// ========================
 // হেডার লোড করুন
+// ========================
 async function loadHeader() {
     const headerContainer = document.getElementById('headerContainer');
-    if (headerContainer) {
-        try {
-            const response = await fetch('./html/header.html');
-            if (!response.ok) throw new Error('Header লোড ব্যর্থ');
-            const html = await response.text();
-            headerContainer.innerHTML = html;
-            setActiveNavLink();
-        } catch (error) {
-            console.error('Header লোড ত্রুটি:', error);
-            // ফলব্যাক হিসেবে সরাসরি হেডার তৈরি করুন
-            headerContainer.innerHTML = getHeaderHTML();
+    
+    if (!headerContainer) {
+        console.error('headerContainer element not found');
+        return;
+    }
+    
+    try {
+        console.log('Loading header...');
+        const response = await fetch('./html/header.html');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
+        const html = await response.text();
+        headerContainer.innerHTML = html;
+        console.log('Header loaded successfully');
+        
+        // হেডার লোড হওয়ার পর নেভিগেশন লিংক সেট করুন
+        setActiveNavLink();
+        
+    } catch (error) {
+        console.error('Header loading failed:', error);
+        // ফলব্যাক হেডার দেখান
+        headerContainer.innerHTML = getHeaderFallback();
     }
 }
 
-// ফুটার লোড করুন
-async function loadFooter() {
-    const footerContainer = document.getElementById('footerContainer');
-    if (footerContainer) {
-        try {
-            const response = await fetch('./html/footer.html');
-            if (!response.ok) throw new Error('Footer লোড ব্যর্থ');
-            const html = await response.text();
-            footerContainer.innerHTML = html;
-        } catch (error) {
-            console.error('Footer লোড ত্রুটি:', error);
-            footerContainer.innerHTML = getFooterHTML();
-        }
-    }
-}
-
+// ========================
 // সাইডবার লোড করুন
+// ========================
 async function loadSidebar() {
     const sidebarContainer = document.getElementById('sidebarContainer');
-    if (sidebarContainer) {
-        try {
-            const response = await fetch('./html/sidebar.html');
-            if (!response.ok) throw new Error('Sidebar লোড ব্যর্থ');
-            const html = await response.text();
-            sidebarContainer.innerHTML = html;
-        } catch (error) {
-            console.error('Sidebar লোড ত্রুটি:', error);
-            sidebarContainer.innerHTML = getSidebarHTML();
+    
+    if (!sidebarContainer) {
+        console.log('sidebarContainer not found (mobile view)');
+        return;
+    }
+    
+    try {
+        console.log('Loading sidebar...');
+        const response = await fetch('./html/sidebar.html');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
+        const html = await response.text();
+        sidebarContainer.innerHTML = html;
+        console.log('Sidebar loaded successfully');
+        
+    } catch (error) {
+        console.error('Sidebar loading failed:', error);
+        sidebarContainer.innerHTML = '<div class="alert alert-info">সাইডবার লোড হয়নি</div>';
     }
 }
 
-// সক্রিয় নেভিগেশন লিংক সেট করুন
-function setActiveNavLink() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('.mi-nav-link');
+// ========================
+// ফুটার লোড করুন
+// ========================
+async function loadFooter() {
+    const footerContainer = document.getElementById('footerContainer');
     
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        const href = link.getAttribute('href');
-        if (href === currentPage || href === `/${currentPage}`) {
-            link.classList.add('active');
+    if (!footerContainer) {
+        console.error('footerContainer element not found');
+        return;
+    }
+    
+    try {
+        console.log('Loading footer...');
+        const response = await fetch('./html/footer.html');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    });
+        
+        const html = await response.text();
+        footerContainer.innerHTML = html;
+        console.log('Footer loaded successfully');
+        
+    } catch (error) {
+        console.error('Footer loading failed:', error);
+        footerContainer.innerHTML = getFooterFallback();
+    }
 }
 
+// ========================
+// সক্রিয় নেভিগেশন লিংক সেট করুন
+// ========================
+function setActiveNavLink() {
+    try {
+        const currentPath = window.location.pathname;
+        const currentPage = currentPath.split('/').pop() || 'index.html';
+        
+        const navLinks = document.querySelectorAll('.mi-nav-item');
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            
+            // পাথ ম্যাচ করুন
+            if (href && (
+                href.includes(currentPage) || 
+                href.endsWith(currentPage) || 
+                (currentPage === '' && href.includes('index.html'))
+            )) {
+                link.classList.add('active');
+            }
+        });
+    } catch (error) {
+        console.error('setActiveNavLink error:', error);
+    }
+}
+
+// ========================
 // নেভিগেশন সেটআপ
+// ========================
 function setupNavigation() {
     document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('mi-nav-link')) {
-            const navLinks = document.querySelectorAll('.mi-nav-link');
+        if (e.target.classList.contains('mi-nav-item')) {
+            const navLinks = document.querySelectorAll('.mi-nav-item');
             navLinks.forEach(link => link.classList.remove('active'));
             e.target.classList.add('active');
         }
     });
 }
 
-// সার্চ ফর্ম সেটআপ
+// ========================
+// সার্চ ফাংশনালিটি
+// ========================
 function setupSearch() {
+    // হেডার সার্চ ফর্ম
+    const headerSearchForm = document.getElementById('headerSearchForm');
+    if (headerSearchForm) {
+        headerSearchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = this.querySelector('input[name="q"]');
+            const query = input ? input.value.trim() : '';
+            
+            if (query) {
+                window.location.href = `./search.html?q=${encodeURIComponent(query)}`;
+            }
+        });
+    }
+    
+    // বিকল্প সার্চ ফর্ম
     const searchForm = document.getElementById('searchForm');
     if (searchForm) {
         searchForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const query = this.querySelector('input[name="q"]').value;
-            if (query.trim()) {
+            const input = this.querySelector('input[name="q"]');
+            const query = input ? input.value.trim() : '';
+            
+            if (query) {
                 window.location.href = `./search.html?q=${encodeURIComponent(query)}`;
             }
         });
     }
 }
 
+// ========================
 // আর্কাইভ টগল সেটআপ
+// ========================
 function setupArchiveToggle() {
     const monthToggles = document.querySelectorAll('.mi-month-toggle');
     monthToggles.forEach(toggle => {
         toggle.addEventListener('click', function(e) {
             e.preventDefault();
-            const monthContent = this.parentElement.nextElementSibling;
-            if (monthContent.style.display === 'none') {
-                monthContent.style.display = 'block';
-            } else {
-                monthContent.style.display = 'none';
+            const monthContent = this.closest('.mi-month-archive').querySelector('.mi-month-content');
+            
+            if (monthContent) {
+                const isHidden = monthContent.style.display === 'none';
+                monthContent.style.display = isHidden ? 'block' : 'none';
             }
         });
     });
 }
 
-// ফলব্যাক হেডার HTML
-function getHeaderHTML() {
-    return `<header class="mi-header">
-        <div class="mi-header-top">
-            <div class="mi-logo">
-                <a href="./index.html" class="mi-logo-link">
-                    <h1>📰 আমাদের নিউজ</h1>
-                </a>
-            </div>
-            <nav class="mi-navbar">
-                <a href="./index.html" class="mi-nav-link active">হোম</a>
-                <a href="./category.html?cat=politics" class="mi-nav-link">রাজনীতি</a>
-                <a href="./category.html?cat=sports" class="mi-nav-link">খেলাধুলা</a>
-                <a href="./category.html?cat=tech" class="mi-nav-link">প্রযুক্তি</a>
-                <a href="./category.html?cat=entertainment" class="mi-nav-link">বিনোদন</a>
-                <a href="./archive.html" class="mi-nav-link">আর্কাইভ</a>
-            </nav>
-        </div>
-        <div class="mi-search-bar">
-            <form action="./search.html" method="GET" id="searchForm">
-                <input type="text" name="q" class="form-control" placeholder="খবর খুঁজুন...">
-                <button type="submit" class="btn btn-primary">অনুসন্ধান</button>
-            </form>
-        </div>
-    </header>`;
+// ========================
+// বর্তমান তারিখ এবং সময় আপডেট করুন
+// ========================
+function updateDateTime() {
+    try {
+        const now = new Date();
+        
+        // বাংলা ফরম্যাট
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        };
+        
+        const bengaliDate = new Intl.DateTimeFormat('bn-BD', options).format(now);
+        
+        // ডেট টাইম এলিমেন্ট আপডেট করুন
+        const dateTimeElement = document.getElementById('dateTime');
+        if (dateTimeElement) {
+            dateTimeElement.textContent = bengaliDate;
+        }
+        
+        // বিকল্প ID
+        const currentDateTimeElement = document.getElementById('currentDateTime');
+        if (currentDateTimeElement) {
+            currentDateTimeElement.textContent = bengaliDate;
+        }
+        
+    } catch (error) {
+        console.error('updateDateTime error:', error);
+    }
 }
 
-// ফলব্যাক ফুটার HTML
-function getFooterHTML() {
-    return `<footer class="mi-footer">
-        <div class="mi-footer-content">
-            <div class="row">
-                <div class="col-md-3">
-                    <h6>আমাদের সম্পর্কে</h6>
-                    <p>আমরা একটি নির্ভরযোগ্য বাংলা সংবাদ মাধ্যম।</p>
-                </div>
-                <div class="col-md-3">
-                    <h6>কুইক লিংক</h6>
-                    <ul class="mi-footer-links">
-                        <li><a href="./index.html">হোম</a></li>
-                        <li><a href="./search.html">সার্চ</a></li>
-                        <li><a href="./archive.html">আর্কাইভ</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h6>ক্যাটাগরি</h6>
-                    <ul class="mi-footer-links">
-                        <li><a href="./category.html?cat=politics">জাতীয় খবর</a></li>
-                        <li><a href="./category.html?cat=business">ব্যবসা</a></li>
-                        <li><a href="./category.html?cat=tech">প্রযুক্তি</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h6>সোশ্যাল মিডিয়া</h6>
-                    <div class="mi-social-links">
-                        <a href="https://facebook.com" class="mi-social-icon" target="_blank">📘</a>
-                        <a href="https://twitter.com" class="mi-social-icon" target="_blank">🐦</a>
-                        <a href="https://instagram.com" class="mi-social-icon" target="_blank">📷</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mi-footer-bottom">
-            <p>&copy; ২০२६ আমাদের নিউজ। সর্বাধিকার সংরক্ষিত।</p>
-        </div>
-    </footer>`;
+// ========================
+// ফলব্যাক কম্পোনেন্ট
+// ========================
+
+function getHeaderFallback() {
+    return `
+    <div style="padding: 20px; background: #fff9e6; border: 2px solid #ffc107; border-radius: 8px; margin: 10px;">
+        <p style="margin: 0; color: #856404;">
+            <strong>⚠️ নোটিস:</strong> হেডার লোড করতে সমস্যা হচ্ছে। 
+            <br>কনসোল দেখুন ত্রুটির জন্য বা <a href="./index.html">পেজ রিফ্রেশ</a> করুন।
+        </p>
+    </div>
+    `;
 }
 
-// ফলব্যাক সাইডবার HTML
-function getSidebarHTML() {
-    return `<aside class="mi-sidebar">
-        <div class="mi-widget">
-            <h5>সর্বশেষ খবর</h5>
-            <ul class="mi-widget-list">
-                <li><a href="./single-post.html?id=1">দেশে নতুন অর্থনৈতিক নীতি</a></li>
-                <li><a href="./single-post.html?id=2">বন্যা পরিস্থিতি খারাপ</a></li>
-                <li><a href="./single-post.html?id=3">শিক্ষা ক্ষেত্রে সংস্কার</a></li>
-            </ul>
-        </div>
-    </aside>`;
+function getFooterFallback() {
+    return `
+    <footer style="background: #333; color: white; padding: 20px; text-align: center; margin-top: 40px;">
+        <p>&copy; ২০२६ আমাদের নিউজ। সর্বাধিকার সংরক্ষিত।</p>
+    </footer>
+    `;
+}
+
+// ========================
+// ডেবাগিং ফাংশন
+// ========================
+function debugInfo() {
+    console.group('🔍 ডেবাগ ইনফরমেশন');
+    console.log('Current URL:', window.location.href);
+    console.log('Current Path:', window.location.pathname);
+    console.log('Header Container:', document.getElementById('headerContainer'));
+    console.log('Sidebar Container:', document.getElementById('sidebarContainer'));
+    console.log('Footer Container:', document.getElementById('footerContainer'));
+    console.groupEnd();
+}
+
+// ড্যাশবোর্ড খোললে debugInfo() চলবে
+if (window.location.search.includes('debug=true')) {
+    debugInfo();
 }
