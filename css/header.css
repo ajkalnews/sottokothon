@@ -252,13 +252,13 @@ img {
     display: flex;
     align-items: center;
     white-space: nowrap;
-    animation: tickerMove 10s linear infinite;
-    padding-left: 20px; /* শুরুতেই যেন লেবেলের গায়ে লেগে না থাকে */
+    animation: tickerMove 30s linear infinite; /* ২৫-৩০ সেকেন্ড দিলে স্পিড দেখতে প্রফেশনাল লাগবে */
+    padding-left: 100%; /* শুরুতেই যেন একদম ডানপাশ থেকে নিউজটি স্ক্রিনে প্রবেশ করে */
     z-index: 1;
 }
 
 .mi-breaking-news:hover .mi-ticker-content {
-    animation-play-state: paused;
+    animation-play-state: paused; /* মাউস নিলে নিউজ স্ক্রোল হওয়া সাময়িক থামবে */
 }
 
 .mi-ticker-item {
@@ -288,9 +288,10 @@ img {
     color: var(--primary);
 }
 
+/* শেষ আইটেম পর্যন্ত সম্পূর্ণ স্ক্রোল করার নিখুঁত অ্যানিমেশন */
 @keyframes tickerMove {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0%); } /* ওভারল্যাপ এড়াতে এনিমেশন এন্ডিং ফিক্স */
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); } /* এটি পুরো নিউজের উইডথ হিসাব করে শেষ পর্যন্ত স্ক্রোল করাবে */
 }
 
 /* রেসপনসিভ ফিক্স */
