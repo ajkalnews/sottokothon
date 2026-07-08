@@ -14,6 +14,9 @@
 
 <div class="mi-logo-section">
     <div class="mi-logo-container">
+        <button class="mi-mobile-menu-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#miMobileMenu">
+            <i class="fas fa-bars"></i>
+        </button>
         <div class="mi-logo">
             <a href="index.html">
                 <img src="img/logo.JPG" alt="sottokontho Logo" class="mi-logo-img">
@@ -22,17 +25,16 @@
     </div>
     
     <div class="mi-banner-ad">
-        <a href="আপনার_বিজ্ঞাপনের_লিংক_এখানে" target="_blank" class="mi-ad-image-link">
+        <a href="https://sottokothon.com" target="_blank" class="mi-ad-image-link">
             <img src="img/ads.JPG" alt="বিজ্ঞাপন" class="mi-responsive-ad-img">
         </a>
     </div>
 </div>
 
-<nav class="mi-main-nav">
+<nav class="mi-main-nav d-none d-lg-flex">
     <div class="mi-nav-wrapper">
         <a href="./index.html" class="mi-nav-item active">
-            <span class="mi-nav-icon">🏠</span>
-            সর্বশেষ
+            <span class="mi-nav-icon">🏠</span> সর্বশেষ
         </a>
         <a href="./category.html?cat=national" class="mi-nav-item">জাতীয়</a>
         <a href="./category.html?cat=world" class="mi-nav-item">বিশ্ব</a>
@@ -43,9 +45,32 @@
         <a href="./category.html?cat=lifestyle" class="mi-nav-item">লাইফস্টাইল</a>
         <a href="./category.html?cat=tech" class="mi-nav-item">তথ্য-প্রযুক্তি</a>
         <a href="./category.html?cat=entertainment" class="mi-nav-item">বিনোদন</a>
-        <a href="./category.html?cat=education" class="mi-nav-item">শিক্ষা</a>
-        <a href="./category.html?cat=job" class="mi-nav-item">চাকরি</a>
-        <a href="#" class="mi-nav-item mi-nav-more">আরও ▼</a>
+        
+        <div class="mi-nav-item-mega">
+            <a href="#" class="mi-nav-item mi-nav-more-btn">আরও ▼</a>
+            <div class="mi-mega-menu-box">
+                <div class="mi-mega-grid">
+                    <div class="mi-mega-col">
+                        <h4>অন্যান্য ক্যাটাগরি</h4>
+                        <a href="./category.html?cat=education">শিক্ষা</a>
+                        <a href="./category.html?cat=job">চাকরি</a>
+                        <a href="./category.html?cat=health">স্বাস্থ্য</a>
+                    </div>
+                    <div class="mi-mega-col">
+                        <h4>ফিচার ও স্পেশাল</h4>
+                        <a href="#">সাক্ষাৎকার</a>
+                        <a href="#">লাইফস্টাইল</a>
+                        <a href="#">প্রবাস</a>
+                    </div>
+                    <div class="mi-mega-col">
+                        <h4>যোগাযোগ</h4>
+                        <a href="#">আমাদের সম্পর্কে</a>
+                        <a href="#">বিজ্ঞাপন নীতিমালা</a>
+                        <a href="#">যোগাযোগ করুন</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <div class="mi-search-icon">
@@ -53,10 +78,36 @@
     </div>
 </nav>
 
+<div class="offcanvas offcanvas-start mi-offcanvas-menu d-lg-none" tabindex="-1" id="miMobileMenu">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title fw-bold text-danger">সত্য কথন</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="mi-mobile-nav-list">
+            <a href="./index.html" class="active">🏠 সর্বশেষ</a>
+            <a href="./category.html?cat=national">জাতীয়</a>
+            <a href="./category.html?cat=world">বিশ্ব</a>
+            <a href="./category.html?cat=politics">রাজনীতি</a>
+            <a href="./category.html?cat=country">সারাদেশ</a>
+            <a href="./category.html?cat=sports">খেলা</a>
+            <a href="./category.html?cat=business">অর্থ-বাণিজ্য</a>
+            <a href="./category.html?cat=lifestyle">লাইফস্টাইল</a>
+            <a href="./category.html?cat=tech">তথ্য-প্রযুক্তি</a>
+            <a href="./category.html?cat=entertainment">বিনোদন</a>
+            <hr>
+            <div class="fw-bold px-2 py-1 text-muted">অন্যান্য মেনু</div>
+            <a href="./category.html?cat=education">শিক্ষা</a>
+            <a href="./category.html?cat=job">চাকরি</a>
+            <a href="./category.html?cat=health">স্বাস্থ্য</a>
+            <a href="./search.html">🔍 অনুসন্ধান করুন</a>
+        </div>
+    </div>
+</div>
+
 <div class="mi-breaking-news">
     <div class="mi-breaking-label">
-        <span class="mi-breaking-dot">●</span>
-        সদ্য প্রাপ্ত:
+        <span class="mi-breaking-dot">●</span> সদ্য প্রাপ্ত:
     </div>
     <div class="mi-ticker-content">
         <div class="mi-ticker-item">
@@ -64,9 +115,6 @@
         </div>
         <div class="mi-ticker-item">
             <a href="./single-post.html?id=2">ভারী বর্ষণের কারণে ১০ জুলাই পর্যন্ত বান্দরবানের সব পর্যটন কেন্দ্র বন্ধ</a>
-        </div>
-        <div class="mi-ticker-item">
-            <a href="./single-post.html?id=3">ডি কেটেলারের জোড়া গোলে যুক্তরাষ্ট্রকে উড়িয়ে ফাইনালে ইতালি</a>
         </div>
     </div>
 </div>
