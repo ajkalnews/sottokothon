@@ -1,26 +1,67 @@
-.mi-header {
-    background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
-    color: white;
-    padding: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+/* নতুন প্রফেশনাল হেডার স্টাইল */
+
+.mi-container-full {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
-.mi-header-top {
+/* ====== টপ স্ট্রিপ (তারিখ এবং সোশ্যাল) ====== */
+.mi-top-strip {
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ddd;
+    padding: 8px 0;
+    font-size: 0.85rem;
+}
+
+.mi-top-strip .mi-container-full {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 24px;
-    gap: 40px;
 }
 
-.mi-logo h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0;
-    color: white;
+.mi-datetime {
+    color: #333;
+    font-weight: 500;
+}
+
+.mi-social-top {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.mi-social-top a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.mi-social-top a:hover {
+    color: #1a73e8;
+    transform: scale(1.15);
+}
+
+/* ====== মেইন হেডার ====== */
+.mi-main-header {
+    background: white;
+    padding: 20px 0;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.mi-header-content {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 30px;
+    align-items: center;
+}
+
+/* লোগো সেকশন */
+.mi-logo-section {
+    display: flex;
+    align-items: center;
 }
 
 .mi-logo-link {
@@ -28,67 +69,421 @@
     color: inherit;
 }
 
-.mi-navbar {
+.mi-logo h1 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a5c2f;
+    margin: 0;
+    line-height: 1.2;
+    font-family: 'Solaimanlipi', sans-serif;
+}
+
+.mi-logo-domain {
+    color: #d73c1f;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 2px 0 0 0;
+    letter-spacing: 1px;
+}
+
+/* হেডার ব্যানার */
+.mi-header-banner {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border: 2px solid #64b5f6;
+    border-radius: 8px;
+    padding: 15px 20px;
+    min-height: 100px;
     display: flex;
-    gap: 32px;
-    flex: 1;
-}
-
-.mi-nav-link {
-    color: rgba(255, 255, 255, 0.9);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    padding: 8px 4px;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s ease;
-}
-
-.mi-nav-link:hover,
-.mi-nav-link.active {
-    color: white;
-    border-bottom-color: white;
-}
-
-.mi-search-bar {
-    background-color: rgba(255, 255, 255, 0.15);
-    padding: 12px 16px;
-    border-radius: 24px;
-    display: flex;
-    gap: 8px;
     align-items: center;
 }
 
-.mi-search-bar form {
+.mi-banner-content {
     display: flex;
-    gap: 8px;
+    gap: 20px;
+    align-items: center;
     width: 100%;
 }
 
-.mi-search-bar input {
-    background-color: rgba(255, 255, 255, 0.9) !important;
-    border: none !important;
-    border-radius: 20px !important;
-    padding: 8px 16px !important;
+.mi-banner-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.mi-banner-text {
     flex: 1;
 }
 
-.mi-search-bar .btn {
-    background-color: white;
-    color: var(--mi-primary);
-    border: none;
+.mi-banner-text h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1565c0;
+    margin: 0 0 5px 0;
+}
+
+.mi-banner-text p {
+    font-size: 0.9rem;
+    color: #424242;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.mi-banner-btn {
+    display: inline-block;
+    background-color: #1565c0;
+    color: white;
+    padding: 6px 16px;
     border-radius: 20px;
+    text-decoration: none;
     font-weight: 600;
-    padding: 6px 24px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.mi-banner-btn:hover {
+    background-color: #0d47a1;
+}
+
+.mi-banner-image {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+/* সার্চ সেকশন */
+.mi-search-section {
+    display: flex;
+}
+
+.mi-header-search {
+    display: flex;
+    width: 100%;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.mi-header-search:focus-within {
+    border-color: #1a73e8;
+}
+
+.mi-search-input {
+    flex: 1;
+    border: none;
+    padding: 10px 15px;
+    font-family: 'Solaimanlipi', sans-serif;
+    font-size: 0.95rem;
+}
+
+.mi-search-input::placeholder {
+    color: #999;
+}
+
+.mi-search-btn {
+    background-color: #f5f5f5;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.mi-search-btn:hover {
+    background-color: #1a73e8;
+    color: white;
+}
+
+/* ====== নেভিগেশন মেনু ====== */
+.mi-navbar-section {
+    background-color: white;
+    border-bottom: 1px solid #e0e0e0;
+    sticky top: 0;
+    z-index: 50;
+}
+
+.mi-navbar-content {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.mi-nav-item {
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.mi-nav-item:hover {
+    color: #1a73e8;
+    border-bottom-color: #1a73e8;
+    background-color: #f5f5f5;
+}
+
+.mi-nav-item.active {
+    color: #1a73e8;
+    border-bottom-color: #1a73e8;
+}
+
+.mi-home-icon {
+    font-size: 1.2rem;
+    padding: 12px 10px;
+}
+
+/* ড্রপডাউন মেনু */
+.mi-dropdown {
+    position: relative;
+}
+
+.mi-more-btn {
+    padding: 12px 16px;
+    display: block;
+    cursor: pointer;
+}
+
+.mi-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.mi-dropdown:hover .mi-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.mi-dropdown-menu a {
+    padding: 10px 16px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.mi-dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+.mi-dropdown-menu a:hover {
+    background-color: #f5f5f5;
+    color: #1a73e8;
+    padding-left: 20px;
+}
+
+/* ====== নিউজ টিকার ====== */
+.mi-news-ticker {
+    background: linear-gradient(90deg, #f5f5f5 0%, white 100%);
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 8px 0;
+    overflow: hidden;
+}
+
+.mi-news-ticker .mi-container-full {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.mi-ticker-label {
+    background-color: #d32f2f;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.mi-ticker-content {
+    display: flex;
+    gap: 40px;
+    animation: scroll 20s linear infinite;
+    padding: 0;
+}
+
+.mi-ticker-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.mi-ticker-letter {
+    background-color: #d32f2f;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.mi-ticker-text {
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* ====== রেসপন্সিভ ====== */
+@media (max-width: 1024px) {
+    .mi-header-content {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .mi-navbar-content {
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .mi-nav-item {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 768px) {
-    .mi-header-top {
+    .mi-top-strip .mi-container-full {
         flex-direction: column;
-        gap: 16px;
+        gap: 8px;
+        text-align: center;
     }
 
-    .mi-navbar {
-        gap: 16px;
+    .mi-header-content {
+        grid-template-columns: 1fr;
+    }
+
+    .mi-logo h1 {
+        font-size: 1.1rem;
+    }
+
+    .mi-banner-content {
+        flex-wrap: wrap;
+    }
+
+    .mi-banner-text p {
+        font-size: 0.85rem;
+    }
+
+    .mi-navbar-content {
+        overflow-x: auto;
+        padding: 0;
+        gap: 0;
+    }
+
+    .mi-nav-item {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+
+    .mi-news-ticker .mi-container-full {
+        gap: 10px;
+    }
+
+    .mi-ticker-label {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
+
+    .mi-ticker-item {
+        gap: 8px;
+    }
+
+    .mi-ticker-letter {
+        width: 20px;
+        height: 20px;
+        font-size: 0.75rem;
+    }
+
+    .mi-ticker-text {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .mi-top-strip {
+        padding: 6px 0;
+        font-size: 0.75rem;
+    }
+
+    .mi-social-top {
+        gap: 10px;
+    }
+
+    .mi-main-header {
+        padding: 12px 0;
+    }
+
+    .mi-logo h1 {
+        font-size: 1rem;
+    }
+
+    .mi-logo-domain {
+        font-size: 0.9rem;
+    }
+
+    .mi-header-banner {
+        padding: 12px;
+        min-height: auto;
+    }
+
+    .mi-banner-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .mi-banner-icon,
+    .mi-banner-image {
+        font-size: 2rem;
+    }
+
+    .mi-banner-text h3 {
+        font-size: 1rem;
+    }
+
+    .mi-banner-text p {
+        font-size: 0.8rem;
+    }
+
+    .mi-search-input {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+
+    .mi-nav-item {
+        padding: 8px 10px;
+        font-size: 0.7rem;
+    }
+
+    .mi-navbar-content {
+        overflow-x: auto;
     }
 }
