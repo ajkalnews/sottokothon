@@ -1,23 +1,137 @@
-<header class="mi-header">
-    <div class="mi-header-top">
+<!-- html/header.html -->
+
+<!-- উপরের টপ বার -->
+<div class="mi-top-bar">
+    <div class="mi-top-left">
+        <span class="mi-date-time" id="dateTime">বুধবার, ৮ জুলাই ২০২৬ | ৩:০১:৪३ PM</span>
+    </div>
+    <div class="mi-top-right">
+        <a href="https://facebook.com" target="_blank" class="mi-social-icon-top">f</a>
+        <a href="https://youtube.com" target="_blank" class="mi-social-icon-top">▶</a>
+        <a href="https://twitter.com" target="_blank" class="mi-social-icon-top">𝕏</a>
+        <a href="https://instagram.com" target="_blank" class="mi-social-icon-top">📷</a>
+        <a href="https://linkedin.com" target="_blank" class="mi-social-icon-top">in</a>
+        <a href="https://whatsapp.com" target="_blank" class="mi-social-icon-top">💬</a>
+    </div>
+</div>
+
+<!-- লোগো এবং স্লোগান সেকশন -->
+<div class="mi-logo-section">
+    <div class="mi-logo-container">
         <div class="mi-logo">
-            <a href="index.html" class="mi-logo-link">
-                <h1>📰 আমাদের নিউজ</h1>
+            <h1>📰 BiramPur<span class="mi-logo-bd">bd</span></h1>
+            <p class="mi-slogan">সবার আগে সব খবর জানাতে</p>
+        </div>
+    </div>
+    
+    <!-- বিজ্ঞাপন ব্যানার -->
+    <div class="mi-banner-ad">
+        <div class="mi-ad-content">
+            <div class="mi-ad-icon">🌐</div>
+            <div class="mi-ad-text">
+                <h3>জনসংযোগাই আমাদের শক্তি</h3>
+                <p>পরিবেশ রক্ষা করুন, সুস্থ থাকুন</p>
+                <a href="#" class="mi-ad-btn">আরও জানুন</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- মেইন নেভিগেশন মেনু -->
+<nav class="mi-main-nav">
+    <div class="mi-nav-wrapper">
+        <a href="./index.html" class="mi-nav-item">
+            <span class="mi-nav-icon">🏠</span>
+            সর্বশেষ
+        </a>
+        <a href="./category.html?cat=national" class="mi-nav-item">জাতীয়</a>
+        <a href="./category.html?cat=world" class="mi-nav-item">বিশ্ব</a>
+        <a href="./category.html?cat=politics" class="mi-nav-item">রাজনীতি</a>
+        <a href="./category.html?cat=country" class="mi-nav-item">সারাদেশ</a>
+        <a href="./category.html?cat=sports" class="mi-nav-item">খেলা</a>
+        <a href="./category.html?cat=business" class="mi-nav-item">অর্থনীতি</a>
+        <a href="./category.html?cat=lifestyle" class="mi-nav-item">লাইফস্টাইল</a>
+        <a href="./category.html?cat=international" class="mi-nav-item">আন্তর্জাতিক</a>
+        <a href="./category.html?cat=entertainment" class="mi-nav-item">বিনোদন</a>
+        <a href="./category.html?cat=education" class="mi-nav-item">শিক্ষা</a>
+        <a href="./category.html?cat=job" class="mi-nav-item">চাকরি</a>
+        <a href="#" class="mi-nav-item mi-nav-more">আরও ▼</a>
+    </div>
+    
+    <!-- সার্চ আইকন -->
+    <div class="mi-search-icon">
+        <a href="./search.html" class="mi-search-link">🔍</a>
+    </div>
+</nav>
+
+<!-- ব্রেকিং নিউজ টিকার -->
+<div class="mi-breaking-news">
+    <div class="mi-breaking-label">
+        <span class="mi-breaking-dot">●</span>
+        সাড়া প্রথম:
+    </div>
+    <div class="mi-ticker-content">
+        <div class="mi-ticker-item">
+            <a href="./single-post.html?id=1">
+                <strong>খবর ১:</strong> দেশে নতুন অর্থনৈতিক নীতি ঘোষণা করা হয়েছে
             </a>
         </div>
-        <nav class="mi-navbar">
-            <a href="index.html" class="mi-nav-link active">হোম</a>
-            <a href="category.html?cat=politics" class="mi-nav-link">রাজনীতি</a>
-            <a href="category.html?cat=sports" class="mi-nav-link">খেলাধুলা</a>
-            <a href="category.html?cat=tech" class="mi-nav-link">প্রযুক্তি</a>
-            <a href="category.html?cat=entertainment" class="mi-nav-link">বিনোদন</a>
-            <a href="archive.html" class="mi-nav-link">আর্কাইভ</a>
-        </nav>
+        <div class="mi-ticker-item">
+            <a href="./single-post.html?id=2">
+                <strong>খবর ২:</strong> বন্যা পরিস্থিতি দ্রুত খারাপ হচ্ছে
+            </a>
+        </div>
+        <div class="mi-ticker-item">
+            <a href="./single-post.html?id=3">
+                <strong>খবর ৩:</strong> শিক্ষা ক্ষেত্রে বড় সংস্কার আসতে চলেছে
+            </a>
+        </div>
     </div>
-    <div class="mi-search-bar">
-        <form action="search.html" method="GET" id="searchForm">
-            <input type="text" name="q" class="form-control" placeholder="খবর খুঁজুন...">
-            <button type="submit" class="btn btn-primary">অনুসন্ধান</button>
-        </form>
-    </div>
-</header>
+</div>
+
+<!-- ইনলাইন সার্চ বার (অপশনাল) -->
+<div class="mi-search-bar-inline">
+    <form action="./search.html" method="GET" id="headerSearchForm">
+        <input type="text" name="q" class="mi-search-input" placeholder="খবর খুঁজুন...">
+        <button type="submit" class="mi-search-btn">🔍</button>
+    </form>
+</div>
+
+<script>
+// বর্তমান তারিখ এবং সময় আপডেট করুন
+function updateDateTime() {
+    const now = new Date();
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    };
+    
+    const bengaliDate = now.toLocaleDateString('bn-BD', options);
+    const dateTimeEl = document.getElementById('dateTime');
+    if (dateTimeEl) {
+        dateTimeEl.textContent = bengaliDate;
+    }
+}
+
+// পেজ লোড হলে এবং প্রতি সেকেন্ডে আপডেট করুন
+updateDateTime();
+setInterval(updateDateTime, 1000);
+
+// সার্চ ফর্ম সাবমিট হ্যান্ডেল করুন
+const headerSearchForm = document.getElementById('headerSearchForm');
+if (headerSearchForm) {
+    headerSearchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const query = this.querySelector('input[name="q"]').value;
+        if (query.trim()) {
+            window.location.href = `./search.html?q=${encodeURIComponent(query)}`;
+        }
+    });
+}
+</script>
