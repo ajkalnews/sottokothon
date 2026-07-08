@@ -267,10 +267,15 @@ img {
 }
 
 .mi-ticker-item::before {
-    content: "•";
-    color: var(--primary);
+    content: ""; /* টেক্সট খালি থাকবে */
+    width: 8px; /* ডটের প্রস্থ */
+    height: 8px; /* ডটের উচ্চতা */
+    background-color: var(--primary); /* আপনার সাইটের মেইন লাল কালার */
+    border-radius: 50%; /* ডটটিকে গোল করার জন্য */
     position: absolute;
     left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .mi-ticker-item a {
