@@ -1,4 +1,3 @@
-/* ফুটার কনটেইনার */
 .mi-footer {
     background: linear-gradient(135deg, #202124 0%, #35363a 100%);
     color: #f1f3f4;
@@ -17,17 +16,13 @@
     font-weight: 700;
     color: white;
     margin-bottom: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .mi-footer p {
     font-size: 0.9rem;
     color: #bdc1c6;
-    line-height: 1.6;
 }
 
-/* ফুটার লিংক */
 .mi-footer-links {
     list-style: none;
     padding: 0;
@@ -40,7 +35,6 @@
 .mi-footer-links a {
     color: #bdc1c6;
     text-decoration: none;
-    font-size: 0.9rem;
     transition: all 0.3s ease;
 }
 
@@ -49,7 +43,6 @@
     padding-left: 4px;
 }
 
-/* সোশ্যাল লিংক */
 .mi-social-links {
     display: flex;
     gap: 16px;
@@ -72,42 +65,12 @@
 
 .mi-social-icon:hover {
     background-color: #1a73e8;
-    color: white;
-    transform: translateY(-2px);
 }
 
-/* ফুটার বটম */
 .mi-footer-bottom {
     text-align: center;
     padding-top: 24px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.85rem;
     color: #bdc1c6;
-}
-
-.mi-footer-bottom p {
-    margin: 0;
-}
-
-/* রেসপন্সিভ */
-@media (max-width: 768px) {
-    .mi-footer {
-        padding: 24px 12px 16px;
-    }
-
-    .mi-footer-content .row {
-        text-align: center;
-    }
-
-    .mi-footer-links {
-        margin-left: 0;
-    }
-
-    .mi-social-links {
-        justify-content: center;
-    }
-
-    .mi-footer h6 {
-        margin-top: 20px;
-    }
 }
