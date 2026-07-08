@@ -25,7 +25,7 @@ async function loadHeader() {
     
     try {
         console.log('হেডার লোড করা হচ্ছে...');
-        const response = await fetch('./html/header.html');
+        const response = await fetch('./header.html');
         
         if (!response.ok) {
             console.warn('হেডার fetch ব্যর্থ:', response.status);
