@@ -1,468 +1,654 @@
-/* css/header.css */
+/* ==========================================
+   SottoKothon Header CSS
+   Part 1
+========================================== */
 
-/* টপ বার */
-.mi-top-bar {
-    background-color: #f8f9fa;
-    padding: 8px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #dadce0;
-    font-size: 0.9rem;
-    color: #666;
+:root{
+    --primary:#c40000;
+    --primary-dark:#a30000;
+    --text:#222;
+    --border:#e5e5e5;
+    --bg:#fff;
+    --light:#f8f8f8;
 }
 
-.mi-top-left {
-    flex: 1;
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.mi-date-time {
-    font-family: 'Solaimanlipi', sans-serif;
-    font-weight: 500;
-    color: #333;
+a{
+    text-decoration:none;
 }
 
-.mi-top-right {
-    display: flex;
-    gap: 16px;
-    align-items: center;
+img{
+    max-width:100%;
+    display:block;
 }
 
-.mi-social-icon-top {
-    color: #333;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    display: inline-block;
+/*==============================
+ TOP BAR
+===============================*/
+
+.mi-top-bar{
+
+    height:38px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 20px;
+
+    border-bottom:1px solid var(--border);
+
+    background:#fafafa;
+
+    font-size:15px;
+
 }
 
-.mi-social-icon-top:hover {
-    color: #1a73e8;
-    transform: scale(1.2);
+.mi-top-left{
+
+    color:#333;
+
+    font-weight:500;
+
 }
 
-/* লোগো এবং স্লোগান সেকশন */
-.mi-logo-section {
-    padding: 20px 24px;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 24px;
-    align-items: center;
-    border-bottom: 2px solid #dadce0;
+.mi-top-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
 }
 
-.mi-logo-container {
-    flex: 1;
+.mi-social-icon-top{
+
+    color:#444;
+
+    font-size:18px;
+
+    transition:.3s;
+
 }
 
-.mi-logo {
-    text-align: left;
+.mi-social-icon-top:hover{
+
+    color:var(--primary);
+
 }
 
-.mi-logo h1 {
-    font-size: 2rem;
-    font-weight: 900;
-    margin: 0;
-    color: #1a73e8;
-    letter-spacing: -0.5px;
+/*==============================
+ LOGO AREA
+===============================*/
+
+.mi-logo-section{
+
+    display:grid;
+
+    grid-template-columns:320px 1fr;
+
+    gap:30px;
+
+    align-items:center;
+
+    padding:18px 20px;
+
+    background:#fff;
+
+    border-bottom:1px solid var(--border);
+
 }
 
-.mi-logo-bd {
-    color: #ea4335;
-    font-weight: 900;
+.mi-logo{
+
+    display:flex;
+
+    align-items:center;
+
 }
 
-.mi-slogan {
-    margin: 4px 0 0 0;
-    font-size: 0.95rem;
-    color: #666;
-    font-weight: 500;
-    font-family: 'Solaimanlipi', sans-serif;
+.mi-logo-img{
+
+    height:72px;
+
+    width:auto;
+
 }
 
-/* বিজ্ঞাপন ব্যানার */
-.mi-banner-ad {
-    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-    border: 2px solid #1a73e8;
-    border-radius: 8px;
-    padding: 20px;
-    overflow: hidden;
+/*==============================
+ ADVERTISEMENT
+===============================*/
+
+.mi-banner-ad{
+
+    width:100%;
+
+    min-height:90px;
+
+    border:2px solid #8cc8f8;
+
+    background:#f4fbff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:12px;
+
 }
 
-.mi-ad-content {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.mi-ad-content{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
 }
 
-.mi-ad-icon {
-    font-size: 2.5rem;
-    min-width: 60px;
-    text-align: center;
+.mi-ad-icon{
+
+    font-size:48px;
+
 }
 
-.mi-ad-text {
-    flex: 1;
+.mi-ad-text{
+
+    flex:1;
+
 }
 
-.mi-ad-text h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1a73e8;
-    font-family: 'Solaimanlipi', sans-serif;
+.mi-ad-text h3{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:#004e92;
+
+    margin-bottom:6px;
+
 }
 
-.mi-ad-text p {
-    margin: 4px 0 8px 0;
-    font-size: 0.95rem;
-    color: #555;
-    font-family: 'Solaimanlipi', sans-serif;
+.mi-ad-text p{
+
+    font-size:17px;
+
+    color:#333;
+
+    margin-bottom:10px;
+
 }
 
-.mi-ad-btn {
-    display: inline-block;
-    background-color: #1a73e8;
-    color: white;
-    padding: 6px 16px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
+.mi-ad-btn{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    background:var(--primary);
+
+    color:#fff;
+
+    border-radius:4px;
+
+    transition:.3s;
+
 }
 
-.mi-ad-btn:hover {
-    background-color: #1557b0;
-    transform: translateY(-2px);
+.mi-ad-btn:hover{
+
+    background:var(--primary-dark);
+
 }
 
-/* মেইন নেভিগেশন মেনু */
-.mi-main-nav {
-    background-color: #fff;
-    border-bottom: 1px solid #dadce0;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 24px;
-    position: sticky;
-    top: 0;
-    z-index: 99;
+/*==============================
+ NAVIGATION
+===============================*/
+
+.mi-main-nav{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#fff;
+
+    border-top:1px solid var(--border);
+
+    border-bottom:1px solid var(--border);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+
 }
 
-.mi-nav-wrapper {
-    display: flex;
-    gap: 0;
-    flex: 1;
-    overflow-x: auto;
+.mi-nav-wrapper{
+
+    display:flex;
+
+    align-items:center;
+
+    overflow-x:auto;
+
+    scrollbar-width:none;
+
 }
 
-.mi-nav-wrapper::-webkit-scrollbar {
-    height: 4px;
+.mi-nav-wrapper::-webkit-scrollbar{
+
+    display:none;
+
 }
 
-.mi-nav-wrapper::-webkit-scrollbar-track {
-    background: #f1f1f1;
+.mi-nav-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:15px 18px;
+
+    color:#222;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    border-bottom:3px solid transparent;
+
+    transition:.3s;
+
+    white-space:nowrap;
+
 }
 
-.mi-nav-wrapper::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 2px;
+.mi-nav-item:hover{
+
+    color:var(--primary);
+
+    border-bottom:3px solid var(--primary);
+
 }
 
-.mi-nav-item {
-    padding: 12px 16px;
-    color: #333;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.5rem;
-    border-bottom: 3px solid transparent;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-    font-family: 'Solaimanlipi', sans-serif;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+.mi-nav-item.active{
+
+    color:var(--primary);
+
+    border-bottom:3px solid var(--primary);
+
 }
 
-.mi-nav-icon {
-    font-size: 1.1rem;
+.mi-nav-icon{
+
+    font-size:18px;
+
 }
 
-.mi-nav-item:hover {
-    background-color: #f8f9fa;
-    border-bottom-color: #1a73e8;
-    color: #1a73e8;
+/* SEARCH */
+
+.mi-search-icon{
+
+    width:60px;
+
+    text-align:center;
+
 }
 
-.mi-nav-item.mi-nav-more {
-    position: relative;
+.mi-search-link{
+
+    color:#444;
+
+    font-size:22px;
+
+    transition:.3s;
+
 }
 
-.mi-nav-more::after {
-    content: '';
+.mi-search-link:hover{
+
+    color:var(--primary);
+
+}
+/* ==========================================
+   BREAKING NEWS
+========================================== */
+
+.mi-breaking-news{
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    background:#fafafa;
+    border-bottom:1px solid var(--border);
+    height:42px;
 }
 
-/* সার্চ আইকন */
-.mi-search-icon {
-    min-width: 40px;
-    text-align: right;
+.mi-breaking-label{
+    min-width:140px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+    font-size:15px;
+    flex-shrink:0;
 }
 
-.mi-search-link {
-    color: #333;
-    text-decoration: none;
-    font-size: 1.2rem;
-    display: inline-block;
-    padding: 8px 12px;
-    transition: all 0.3s ease;
-    border-radius: 50%;
+.mi-breaking-dot{
+    margin-right:6px;
+    animation:blink 1s infinite;
 }
 
-.mi-search-link:hover {
-    background-color: #f8f9fa;
-    color: #1a73e8;
-}
-
-/* ব্রেকিং নিউজ টিকার */
-.mi-breaking-news {
-    background-color: #f8f9fa;
-    padding: 12px 24px;
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    border-bottom: 1px solid #dadce0;
-    overflow-x: auto;
-}
-
-.mi-breaking-label {
-    background-color: #ea4335;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-weight: 700;
-    white-space: nowrap;
-    font-size: 0.9rem;
-    font-family: 'Solaimanlipi', sans-serif;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    min-width: fit-content;
-}
-
-.mi-breaking-dot {
-    font-size: 1.2rem;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%, 50% {
-        opacity: 1;
-    }
-    51%, 100% {
-        opacity: 0.3;
-    }
-}
-
-.mi-ticker-content {
-    display: flex;
-    gap: 24px;
-    animation: scroll 30s linear infinite;
-    padding: 0;
-}
-
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-
-.mi-ticker-item {
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.mi-ticker-item a {
-    color: #333;
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-family: 'Solaimanlipi', sans-serif;
-    transition: all 0.3s ease;
-}
-
-.mi-ticker-item a:hover {
-    color: #1a73e8;
-}
-
-/* ইনলাইন সার্চ বার */
-.mi-search-bar-inline {
-    padding: 16px 24px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dadce0;
-}
-
-#headerSearchForm {
-    display: flex;
-    gap: 8px;
-    max-width: 500px;
-}
-
-.mi-search-input {
-    flex: 1;
-    padding: 10px 16px;
-    border: 1px solid #dadce0;
-    border-radius: 24px;
-    font-size: 0.95rem;
-    font-family: 'Solaimanlipi', sans-serif;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.mi-search-input:focus {
-    border-color: #1a73e8;
-    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
-}
-
-.mi-search-btn {
-    padding: 10px 16px;
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 24px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-}
-
-.mi-search-btn:hover {
-    background-color: #1557b0;
-    transform: translateY(-2px);
-}
-
-/* রেসপন্সিভ */
-@media (max-width: 1024px) {
-    .mi-logo-section {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    .mi-logo h1 {
-        font-size: 1.8rem;
-    }
-
-    .mi-banner-ad {
-        padding: 16px;
-    }
-
-    .mi-ad-text h3 {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .mi-top-bar {
-        padding: 8px 12px;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .mi-logo-section {
-        padding: 12px;
-        grid-template-columns: 1fr;
-    }
-
-    .mi-logo h1 {
-        font-size: 1.5rem;
-    }
-
-    .mi-slogan {
-        font-size: 0.85rem;
-    }
-
-    .mi-nav-item {
-        padding: 10px 12px;
-        font-size: 0.85rem;
-    }
-
-    .mi-nav-icon {
-        display: none;
-    }
-
-    .mi-main-nav {
-        padding-right: 12px;
-    }
-
-    .mi-breaking-news {
-        padding: 8px 12px;
-        gap: 8px;
-    }
-
-    .mi-ticker-content {
-        gap: 12px;
-    }
-
-    .mi-search-bar-inline {
-        padding: 12px;
-    }
-
-    #headerSearchForm {
-        max-width: 100%;
-    }
-
-    .mi-top-right {
-        gap: 8px;
-        font-size: 0.8rem;
-    }
-
-    .mi-ad-content {
-        gap: 12px;
-    }
-
-    .mi-ad-icon {
-        font-size: 2rem;
-        min-width: 50px;
-    }
-
-    .mi-banner-ad {
-        padding: 12px;
+@keyframes blink{
+    50%{
+        opacity:.3;
     }
 }
 
-@media (max-width: 480px) {
-    .mi-logo h1 {
-        font-size: 1.2rem;
-    }
-
-    .mi-nav-item {
-        padding: 8px 10px;
-        font-size: 0.8rem;
-    }
-
-    .mi-breaking-label {
-        padding: 6px 8px;
-        font-size: 0.75rem;
-    }
-
-    .mi-ticker-item a {
-        font-size: 0.85rem;
-    }
-
-    .mi-ad-text h3 {
-        font-size: 0.95rem;
-    }
-
-    .mi-ad-text p {
-        font-size: 0.85rem;
-    }
-
-    .mi-ad-btn {
-        padding: 4px 12px;
-        font-size: 0.75rem;
-    }
+.mi-ticker-content{
+    display:flex;
+    align-items:center;
+    white-space:nowrap;
+    animation:tickerMove 35s linear infinite;
 }
+
+.mi-breaking-news:hover .mi-ticker-content{
+    animation-play-state:paused;
+}
+
+.mi-ticker-item{
+    padding:0 40px;
+    position:relative;
+}
+
+.mi-ticker-item::before{
+    content:"•";
+    color:var(--primary);
+    position:absolute;
+    left:18px;
+}
+
+.mi-ticker-item a{
+    color:#222;
+    font-size:15px;
+    font-weight:500;
+}
+
+.mi-ticker-item a:hover{
+    color:var(--primary);
+}
+
+@keyframes tickerMove{
+
+    from{
+        transform:translateX(100%);
+    }
+
+    to{
+        transform:translateX(-100%);
+    }
+
+}
+
+/* ===========================
+   HOVER EFFECT
+=========================== */
+
+.mi-banner-ad:hover{
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+.mi-logo-img{
+
+    transition:.3s;
+
+}
+
+.mi-logo-img:hover{
+
+    transform:scale(1.02);
+
+}
+
+/* ===========================
+   STICKY SHADOW
+=========================== */
+
+.mi-main-nav{
+
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:1200px){
+
+.mi-logo-section{
+
+grid-template-columns:280px 1fr;
+
+}
+
+.mi-logo-img{
+
+height:65px;
+
+}
+
+}
+
+
+@media(max-width:992px){
+
+.mi-logo-section{
+
+grid-template-columns:1fr;
+
+gap:20px;
+
+}
+
+.mi-logo{
+
+justify-content:center;
+
+}
+
+.mi-banner-ad{
+
+min-height:90px;
+
+}
+
+.mi-ad-text{
+
+text-align:center;
+
+}
+
+.mi-ad-icon{
+
+display:none;
+
+}
+
+}
+
+
+@media(max-width:768px){
+
+.mi-top-bar{
+
+flex-direction:column;
+
+height:auto;
+
+padding:8px 15px;
+
+gap:8px;
+
+}
+
+.mi-top-right{
+
+gap:14px;
+
+}
+
+.mi-logo-section{
+
+padding:15px;
+
+}
+
+.mi-logo-img{
+
+height:55px;
+
+margin:auto;
+
+}
+
+.mi-main-nav{
+
+overflow-x:auto;
+
+}
+
+.mi-nav-item{
+
+padding:14px 12px;
+
+font-size:15px;
+
+}
+
+.mi-search-icon{
+
+width:45px;
+
+}
+
+.mi-breaking-label{
+
+min-width:105px;
+
+font-size:13px;
+
+}
+
+.mi-ticker-item{
+
+padding:0 25px;
+
+}
+
+.mi-ad-text h3{
+
+font-size:22px;
+
+}
+
+.mi-ad-text p{
+
+font-size:14px;
+
+}
+
+}
+
+
+@media(max-width:576px){
+
+.mi-nav-item{
+
+font-size:14px;
+
+padding:12px 10px;
+
+}
+
+.mi-logo-img{
+
+height:48px;
+
+}
+
+.mi-banner-ad{
+
+padding:10px;
+
+}
+
+.mi-ad-text h3{
+
+font-size:18px;
+
+}
+
+.mi-ad-text p{
+
+display:none;
+
+}
+
+.mi-ad-btn{
+
+padding:6px 14px;
+
+font-size:13px;
+
+}
+
+.mi-breaking-news{
+
+height:38px;
+
+}
+
+.mi-breaking-label{
+
+height:38px;
+
+}
+
+.mi-ticker-item a{
+
+font-size:13px;
+
+}
+
+}
+
+/* ===========================
+   END
+=========================== */
