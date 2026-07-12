@@ -37,7 +37,7 @@ html {
 
 .mi-main-wrapper {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 1fr 280px; /* ১ নম্বর পরিবর্তন: মেইন কনটেন্ট প্রথমে, সাইডবার ডানে */
     gap: 24px;
     padding: 24px;
     flex: 1;
@@ -142,7 +142,7 @@ html {
 
 @media (max-width: 768px) {
     .mi-main-wrapper {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* মোবাইলে এক কলামে দেখাবে */
         padding: 12px;
     }
 }
