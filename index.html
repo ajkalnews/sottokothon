@@ -24,16 +24,16 @@
         <!-- নতুন হেডার লোড হবে এখানে -->
         <div id="headerContainer"></div>
 
-        <!-- মেইন কনটেন্ট wrapper -->
-        <div class="mi-main-wrapper container my-4">
+        <!-- মেইন কনটেন্ট wrapper (বুটস্ট্র্যাপ কন্টেইনার দিয়ে মোড়ানো) -->
+        <div class="container my-4">
             <div class="row">
                 
-                <!-- বাম পাশে মেইন কনটেন্ট এরিয়া (এখানে main-content.html ফাইলটি লোড হবে) -->
+                <!-- বাম পাশে মেইন কনটেন্ট এরিয়া (১২ ভাগের ৮ ভাগ জায়গা নেবে) -->
                 <main id="mainContentContainer" class="mi-content col-lg-8 col-md-12">
-                    <!-- জাভাস্ক্রিপ্ট দিয়ে এখানে কনটেন্ট আসবে -->
+                    <!-- জাভাস্ক্রিপ্ট দিয়ে এখানে কনটেন্ট আসবে -->
                 </main>
 
-                <!-- ডান পাশে সাইডবার -->
+                <!-- ডান পাশে সাইডবার (১২ ভাগের ৪ ভাগ জায়গা নেবে) -->
                 <aside class="col-lg-4 col-md-12">
                     <div id="sidebarContainer"></div>
                 </aside>
@@ -51,17 +51,17 @@
     <script src="./js/main.js"></script>
     
     <script>
-        // main-content.html ফাইলটি ডায়নামিকালি লোড করার ফাংশন
+        // main-content.html ফাইলটি ডায়নামিকালি লোড করার ফাংশন
         function loadMainContent() {
             fetch('main-content.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('mainContentContainer').innerHTML = data;
                 })
-                .catch(error => console.error('কনটেন্ট লোড করতে সমস্যা হয়েছে:', error));
+                .catch(error => console.error('কনটেন্ট লোড করতে সমস্যা হয়েছে:', error));
         }
 
-        // পেজ লোড হওয়ার সাথে সাথে ফাংশনটি রান করবে
+        // পেজ লোড হওয়ার সাথে সাথে ফাংশনটি রান করবে
         document.addEventListener("DOMContentLoaded", function() {
             loadMainContent();
             updateDateTime();
