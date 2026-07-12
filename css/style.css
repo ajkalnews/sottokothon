@@ -36,11 +36,6 @@ html {
 }
 
 .mi-main-wrapper {
-    display: grid;
-    /* ১২ ভাগের হিসাব: মেইন কনটেন্ট ৮ ভাগ (8fr) এবং সাইডবার ৪ ভাগ (4fr) */
-    grid-template-columns: 8fr 4fr; 
-    gap: 24px;
-    padding: 24px 0; /* ডানে-বামে প্যাডিং ০ করে দিলে একদম হেডারের সমানে সমানে শুরু হবে */
     flex: 1;
     width: 100%;
 }
@@ -141,10 +136,9 @@ html {
     display: flex;
     justify-content: center;
 }
-
 @media (max-width: 768px) {
     .mi-main-wrapper {
-        grid-template-columns: 1fr; /* মোবাইলে এক কলামে দেখাবে */
+        /* grid-template-columns বাদ দেওয়া হয়েছে কারণ বুটস্ট্র্যাপের col-md-12 নিজেই রেসপন্সিভ হ্যান্ডেল করবে */
         padding: 12px;
     }
 }
