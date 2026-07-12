@@ -37,10 +37,12 @@ html {
 
 .mi-main-wrapper {
     display: grid;
-    grid-template-columns: 1fr 280px; /* ১ নম্বর পরিবর্তন: মেইন কনটেন্ট প্রথমে, সাইডবার ডানে */
+    /* ১২ ভাগের হিসাব: মেইন কনটেন্ট ৮ ভাগ (8fr) এবং সাইডবার ৪ ভাগ (4fr) */
+    grid-template-columns: 8fr 4fr; 
     gap: 24px;
-    padding: 24px;
+    padding: 24px 0; /* ডানে-বামে প্যাডিং ০ করে দিলে একদম হেডারের সমানে সমানে শুরু হবে */
     flex: 1;
+    width: 100%;
 }
 
 /* সেকশন টাইটেল */
