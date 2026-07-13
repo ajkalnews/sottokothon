@@ -1,36 +1,44 @@
+.mi-footer {
+    background: linear-gradient(135deg, #202124 0%, #35363a 100%);
+    color: #f1f3f4;
+    padding: 40px 24px 20px;
+    margin-top: auto;
+    /* 🔥 হেডারের মতো ফুটারের ওপরে একটি সুন্দর ও স্পষ্ট ৩ পিক্সেলের বর্ডার লাইন */
+    border-top: 3px solid #dc3545; /* লাল রঙের লাইন (সত্য কথন থিমের সাথে মিল রেখে) */
+}
+
 /* সোশ্যাল লিংক কন্টেইনার */
 .mi-social-links {
     display: flex;
-    flex-wrap: wrap; /* অনেকগুলো আইকন থাকলে মোবাইল স্ক্রিনে ভেঙে নিচে আসবে */
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 12px;
 }
 
-/* কমন সোশ্যাল আইকন স্টাইল (হেডারের মতো গোলাকার ও ট্রানজিশন) */
+/* কমন সোশ্যাল আইকন স্টাইল */
 .mi-social-icon {
     width: 36px;
     height: 36px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 0.08);
     border-radius: 50%;
-    color: #f1f3f4;
+    color: #ffffff !important; /* আইকন সবসময় সাদা থাকবে */
     text-decoration: none;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
 
-/* মাউস হোভার করলে টেক্সট বা আইকন সাদা থাকবে */
-.mi-social-icon:hover {
-    color: #ffffff !important;
-    transform: translateY(-3px); /* হালকা একটু ওপরে উঠবে */
-}
+/* 🔥 আইকনগুলো এখন আর হোভারের জন্য অপেক্ষা করবে না, সবসময় অরিজিনাল কালারেই থাকবে */
+.mi-social-icon.fb { background-color: #3b5998; }      /* ফেসবুক ব্লু */
+.mi-social-icon.yt { background-color: #ff0000; }      /* ইউটিউব রেড */
+.mi-social-icon.tw { background-color: #000000; }      /* এক্স/টুইটার ব্ল্যাক */
+.mi-social-icon.insta { background-color: #e1306c; }   /* ইনস্টাগ্রাম পিঙ্ক */
+.mi-social-icon.ln { background-color: #0077b5; }      /* লিংকডইন ব্লু */
+.mi-social-icon.wa { background-color: #25d366; }      /* হোয়াটসঅ্যাপ গ্রিন */
 
-/* প্রতিটি ব্র্যান্ডের জন্য হেডারের মতো নির্দিষ্ট ব্যাকগ্রাউন্ড কালার */
-.mi-social-icon.fb:hover { background-color: #3b5998 !important; }
-.mi-social-icon.yt:hover { background-color: #ff0000 !important; }
-.mi-social-icon.tw:hover { background-color: #000000 !important; } /* X (টুইটার) কালার */
-.mi-social-icon.insta:hover { background-color: #e1306c !important; }
-.mi-social-icon.ln:hover { background-color: #0077b5 !important; }
-.mi-social-icon.wa:hover { background-color: #25d366 !important; }
+/* মাউস ওপরে নিলে হালকা একটু অ্যানিমেশন হবে (কালার ঠিকই থাকবে) */
+.mi-social-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
