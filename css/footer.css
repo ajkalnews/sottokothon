@@ -1,44 +1,146 @@
-.mi-footer {
-    background: linear-gradient(135deg, #202124 0%, #35363a 100%);
-    color: #f1f3f4;
-    padding: 40px 24px 20px;
-    margin-top: auto;
-    /* 🔥 হেডারের মতো ফুটারের ওপরে একটি সুন্দর ও স্পষ্ট ৩ পিক্সেলের বর্ডার লাইন */
-    border-top: 3px solid #dc3545; /* লাল রঙের লাইন (সত্য কথন থিমের সাথে মিল রেখে) */
+/* প্রফেশনাল লাইট থিম ফুটার কন্টেইনার */
+.mi-pro-footer {
+    background-color: #ffffff;
+    color: #2b2b2b;
+    padding: 30px 20px 20px;
+    margin-top: 40px;
+    font-family: 'Solaimanlipi', sans-serif;
+    /* ফুটারের উপরের বর্ডার লাইন যা দিয়ে মেইন কন্টেন্ট থেকে আলাদা বুঝা যাবে */
+    border-top: 1px solid #e0e0e0;
 }
 
-/* সোশ্যাল লিংক কন্টেইনার */
-.mi-social-links {
+/* লোগো সেকশন */
+.mi-footer-logo-row {
+    max-width: 1200px;
+    margin: 0 auto 25px;
+    text-align: left;
+}
+
+.mi-f-logo-img {
+    height: 45px; /* লোগোর সাইজ ল্যান্ডস্কেপ অনুযায়ী পারফেক্ট রাখার জন্য */
+    object-fit: contain;
+}
+
+/* প্রথম আলোর মত ক্যাটাগরি গ্রিড লেআউট */
+.mi-footer-grid-links {
+    max-width: 1200px;
+    margin: 0 auto 25px;
+    display: grid;
+    grid-template-columns: repeat(6, 12fr); /* ৬ কলামের গ্রিড */
+    gap: 12px 15px;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 25px;
+}
+
+.mi-f-col a {
+    color: #333333;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+    display: inline-block;
+}
+
+.mi-f-col a:hover {
+    color: #dc3545; /* হোভার করলে লাল রঙ হবে */
+}
+
+/* সোশ্যাল মিডিয়া সেকশন রো */
+.mi-footer-middle-bar {
+    max-width: 1200px;
+    margin: 0 auto 20px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 12px;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 20px;
 }
 
-/* কমন সোশ্যাল আইকন স্টাইল */
-.mi-social-icon {
+.mi-f-label {
+    font-size: 0.85rem;
+    color: #666666;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.mi-f-social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+/* সোশ্যাল আইকন স্টাইল (সবসময় অরিজিনাল ব্র্যান্ড কালার) */
+.mi-f-icon {
     width: 36px;
     height: 36px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    color: #ffffff !important; /* আইকন সবসময় সাদা থাকবে */
+    color: #ffffff !important;
     text-decoration: none;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease;
 }
 
-/* 🔥 আইকনগুলো এখন আর হোভারের জন্য অপেক্ষা করবে না, সবসময় অরিজিনাল কালারেই থাকবে */
-.mi-social-icon.fb { background-color: #3b5998; }      /* ফেসবুক ব্লু */
-.mi-social-icon.yt { background-color: #ff0000; }      /* ইউটিউব রেড */
-.mi-social-icon.tw { background-color: #000000; }      /* এক্স/টুইটার ব্ল্যাক */
-.mi-social-icon.insta { background-color: #e1306c; }   /* ইনস্টাগ্রাম পিঙ্ক */
-.mi-social-icon.ln { background-color: #0077b5; }      /* লিংকডইন ব্লু */
-.mi-social-icon.wa { background-color: #25d366; }      /* হোয়াটসঅ্যাপ গ্রিন */
+/* অরিজিনাল ব্রান্ড ব্যাকগ্রাউন্ড কালারসমূহ */
+.mi-f-icon.fb { background-color: #1877f2; }
+.mi-f-icon.tw { background-color: #000000; }
+.mi-f-icon.insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+.mi-f-icon.yt { background-color: #ff0000; }
+.mi-f-icon.ln { background-color: #0077b5; }
+.mi-f-icon.wa { background-color: #25d366; }
 
-/* মাউস ওপরে নিলে হালকা একটু অ্যানিমেশন হবে (কালার ঠিকই থাকবে) */
-.mi-social-icon:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+.mi-f-icon:hover {
+    transform: scale(1.08);
+}
+
+/* নিচে লিগ্যাল লিংক ও কপিরাইট এরিয়া */
+.mi-footer-bottom-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.mi-f-bottom-links {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #777777;
+}
+
+.mi-f-bottom-links a {
+    color: #555555;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.mi-f-bottom-links a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.mi-f-copyright {
+    font-size: 0.85rem;
+    color: #777777;
+    margin: 0;
+}
+
+/* 📱 রেসপনসিভ ডিজাইন (মোবাইলের জন্য কলাম ঠিক করা) */
+@media (max-width: 768px) {
+    .mi-footer-grid-links {
+        grid-template-columns: repeat(3, 1fr); /* মোবাইলে ৩টি করে কলাম দেখাবে */
+        gap: 12px 10px;
+    }
+    .mi-footer-logo-row {
+        text-align: center;
+    }
+    .mi-footer-middle-bar {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .mi-footer-grid-links {
+        grid-template-columns: repeat(2, 1fr); /* খুব ছোট স্ক্রিনে ২টি করে কলাম */
+    }
 }
