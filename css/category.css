@@ -1,3 +1,33 @@
+/* মেইন র‍্যাপারকে ফ্লেক্সবক্স করা হলো যাতে উপাদানগুলো পাশাপাশি বসে */
+.mi-main-wrapper {
+    display: flex;
+    gap: 30px; /* মেইন কনটেন্ট ও সাইডবারের মাঝের দূরত্ব */
+    align-items: flex-start;
+}
+
+/* মেইন কনটেন্ট বামে থাকবে এবং বেশি জায়গা নিবে */
+.mi-content {
+    flex: 3; /* অথবা width: 70%; ব্যবহার করতে পারেন */
+}
+
+/* সাইডবার ডানে থাকবে এবং নির্দিষ্ট জায়গা নিবে */
+#sidebarContainer {
+    flex: 1; /* অথবা width: 30%; ব্যবহার করতে পারেন */
+    min-width: 300px; /* সাইডবারের একটি স্ট্যান্ডার্ড চওড়া সাইজ */
+}
+
+/* রেসপনসিভ: মোবাইল স্ক্রিনে যেন আবার একটির নিচে আরেকটি চলে আসে */
+@media (max-width: 992px) {
+    .mi-main-wrapper {
+        flex-direction: column;
+    }
+    
+    #sidebarContainer {
+        width: 100%;
+    }
+}
+
+
 .mi-category-header {
     background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
     color: white;
