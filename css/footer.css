@@ -5,20 +5,21 @@
     padding: 30px 20px 20px;
     margin-top: 40px;
     font-family: 'Solaimanlipi', sans-serif;
-    /* ফুটারের উপরের বর্ডার লাইন যা দিয়ে মেইন কন্টেন্ট থেকে আলাদা বুঝা যাবে */
+    /* ফুটারের উপরের বর্ডার লাইন যা দিয়ে মেইন কন্টেন্ট থেকে আলাদা বুঝা যাবে */
     border-top: 1px solid #e0e0e0;
 }
 
-/* লোগো সেকশন */
+/* 🎯 লোগো সেকশন - এখানে text-align: center; করে দেওয়া হয়েছে যাতে সব ডিভাইসে মিডলে থাকে */
 .mi-footer-logo-row {
     max-width: 1200px;
     margin: 0 auto 25px;
-    text-align: left;
+    text-align: center; 
 }
 
 .mi-f-logo-img {
-    height: 45px; /* লোগোর সাইজ ল্যান্ডস্কেপ অনুযায়ী পারফেক্ট রাখার জন্য */
+    height: 45px; /* লোগোর সাইজ ল্যান্ডস্কেপ অনুযায়ী পারফেক্ট রাখার জন্য */
     object-fit: contain;
+    display: inline-block; /* মাঝখানে থাকার জন্য নিশ্চিত করা হলো */
 }
 
 /* প্রথম আলোর মত ক্যাটাগরি গ্রিড লেআউট */
@@ -26,7 +27,7 @@
     max-width: 1200px;
     margin: 0 auto 25px;
     display: grid;
-    grid-template-columns: repeat(6, 12fr); /* ৬ কলামের গ্রিড */
+    grid-template-columns: repeat(6, 1fr); /* ৬ কলামের গ্রিড (12fr থেকে 1fr করা হলো যাতে সাইজ ঠিক থাকে) */
     gap: 12px 15px;
     border-bottom: 1px solid #eeeeee;
     padding-bottom: 25px;
@@ -44,7 +45,7 @@
     color: #dc3545; /* হোভার করলে লাল রঙ হবে */
 }
 
-/* সোশ্যাল মিডিয়া সেকশন রো */
+/* সোশ্যাল মিডিয়া সেকশন রো */
 .mi-footer-middle-bar {
     max-width: 1200px;
     margin: 0 auto 20px;
@@ -67,7 +68,7 @@
     gap: 12px;
 }
 
-/* সোশ্যাল আইকন স্টাইল (সবসময় অরিজিনাল ব্র্যান্ড কালার) */
+/* সোশ্যাল আইকন স্টাইল (সবসময় অরিジナাল ব্র্যান্ড কালার) */
 .mi-f-icon {
     width: 36px;
     height: 36px;
@@ -81,7 +82,7 @@
     transition: transform 0.2s ease;
 }
 
-/* অরিজিনাল ব্রান্ড ব্যাকগ্রাউন্ড কালারসমূহ */
+/* অরিジナাল ব্রান্ড ব্যাকগ্রাউন্ড কালারসমূহ */
 .mi-f-icon.fb { background-color: #1877f2; }
 .mi-f-icon.tw { background-color: #000000; }
 .mi-f-icon.insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
@@ -93,7 +94,7 @@
     transform: scale(1.08);
 }
 
-/* নিচে লিগ্যাল লিংক ও কপিরাইট এরিয়া */
+/* নিচে লিগ্যাল লিংক ও কপিরাইট এরিয়া */
 .mi-footer-bottom-bar {
     max-width: 1200px;
     margin: 0 auto;
@@ -130,12 +131,6 @@
         grid-template-columns: repeat(3, 1fr); /* মোবাইলে ৩টি করে কলাম দেখাবে */
         gap: 12px 10px;
     }
-  /* লোগো সেকশন (মাঝখানে দেখানোর জন্য আপডেট করা হয়েছে) */
-.mi-footer-logo-row {
-    max-width: 1200px;
-    margin: 0 auto 25px;
-    text-align: center; /* 🎯 লোগোটিকে একদম মাঝখানে নিয়ে আসার জন্য */
-}
     .mi-footer-middle-bar {
         justify-content: center;
         text-align: center;
