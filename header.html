@@ -1,120 +1,239 @@
-<div class="mi-top-bar">
-    <div class="mi-top-left">
-        <span class="mi-date-time" id="dateTime">বুধবার, ৮ জুলাই ২০২৬ | ৩:০১:৪৩ PM</span>
-    </div>
-    <div class="mi-top-right">
-        <a href="https://facebook.com" target="_blank" class="mi-social-icon-top fb"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://youtube.com" target="_blank" class="mi-social-icon-top yt"><i class="fab fa-youtube"></i></a>
-        <a href="https://twitter.com" target="_blank" class="mi-social-icon-top tw"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://instagram.com" target="_blank" class="mi-social-icon-top insta"><i class="fab fa-instagram"></i></a>
-        <a href="https://linkedin.com" target="_blank" class="mi-social-icon-top ln"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://whatsapp.com" target="_blank" class="mi-social-icon-top wa"><i class="fab fa-whatsapp"></i></a>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সত্যকণ্ঠ - হেডার</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (SolaimanLipi বিকল্প হিসেবে) -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
 
-<div class="mi-logo-section">
-    <div class="mi-logo-container">
-        <button class="mi-mobile-menu-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#miMobileMenu">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="mi-logo">
-            <a href="index.html">
-                <img src="img/logo.JPG" alt="sottokontho Logo" class="mi-logo-img">
+    <!-- ১. টপ বার (তারিখ ও সোশ্যাল লিঙ্ক) -->
+    <div class="mi-top-bar">
+        <div class="mi-top-left">
+            <span class="mi-date-time" id="dateTime">লোড হচ্ছে...</span>
+        </div>
+        <div class="mi-top-right">
+            <a href="https://facebook.com" target="_blank" class="mi-social-icon-top fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://youtube.com" target="_blank" class="mi-social-icon-top yt"><i class="fab fa-youtube"></i></a>
+            <a href="https://twitter.com" target="_blank" class="mi-social-icon-top tw"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://instagram.com" target="_blank" class="mi-social-icon-top insta"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com" target="_blank" class="mi-social-icon-top ln"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://whatsapp.com" target="_blank" class="mi-social-icon-top wa"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </div>
+
+    <!-- ২. লোগো ও বিজ্ঞাপন সেকশন -->
+    <div class="mi-logo-section">
+        <div class="mi-logo-container">
+            <div class="mi-logo">
+                <a href="index.html">
+                    <img src="img/logo.JPG" alt="sottokontho Logo" class="mi-logo-img">
+                </a>
+            </div>
+        </div>
+        
+        <div class="mi-banner-ad">
+            <a href="https://sottokothon.com" target="_blank" class="mi-ad-image-link">
+                <img src="img/ads.JPG" alt="বিজ্ঞাপন" class="mi-responsive-ad-img">
             </a>
         </div>
     </div>
-    
-    <div class="mi-banner-ad">
-        <a href="https://sottokothon.com" target="_blank" class="mi-ad-image-link">
-            <img src="img/ads.JPG" alt="বিজ্ঞাপন" class="mi-responsive-ad-img">
-        </a>
-    </div>
-</div>
 
-<nav class="mi-main-nav d-none d-lg-flex">
-    <div class="mi-nav-wrapper">
-        <a href="./index.html" class="mi-nav-item active">
-            <span class="mi-nav-icon">🏠</span> সর্বশেষ
-        </a>
-        <a href="./category.html?cat=national" class="mi-nav-item">জাতীয়</a>
-        <a href="./category.html?cat=world" class="mi-nav-item">বিশ্ব</a>
-        <a href="./category.html?cat=politics" class="mi-nav-item">রাজনীতি</a>
-        <a href="./category.html?cat=country" class="mi-nav-item">সারাদেশ</a>
-        <a href="./category.html?cat=sports" class="mi-nav-item">খেলা</a>
-        <a href="./category.html?cat=business" class="mi-nav-item">অর্থ-বাণিজ্য</a>
-        <a href="./category.html?cat=lifestyle" class="mi-nav-item">লাইফস্টাইল</a>
-        <a href="./category.html?cat=tech" class="mi-nav-item">তথ্য-প্রযুক্তি</a>
-        <a href="./category.html?cat=entertainment" class="mi-nav-item">বিনোদন</a>
-        
-        <div class="mi-nav-item-mega">
-            <a href="#" class="mi-nav-item mi-nav-more-btn">আরও ▼</a>
-            <div class="mi-mega-menu-box">
-                <div class="mi-mega-grid">
-                    <div class="mi-mega-col">
-                        <h4>অন্যান্য ক্যাটাগরি</h4>
-                        <a href="./category.html?cat=education">শিক্ষা</a>
-                        <a href="./category.html?cat=job">চাকরি</a>
-                        <a href="./category.html?cat=health">স্বাস্থ্য</a>
-                    </div>
-                    <div class="mi-mega-col">
-                        <h4>ফিচার ও স্পেশাল</h4>
-                        <a href="#">সাক্ষাৎকার</a>
-                        <a href="#">লাইফস্টাইল</a>
-                        <a href="#">প্রবাস</a>
-                    </div>
-                    <div class="mi-mega-col">
-                        <h4>যোগাযোগ</h4>
-                        <a href="#">আমাদের সম্পর্কে</a>
-                        <a href="#">বিজ্ঞাপন নীতিমালা</a>
-                        <a href="#">যোগাযোগ করুন</a>
+    <!-- ৩. মোবাইল অ্যাকশন বার (মোবাইলে লোগো/অ্যাডের নিচে এবং ব্রেকিং নিউজের ওপরে থাকবে) -->
+    <div class="mi-mobile-action-bar">
+        <button class="mi-mobile-menu-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#miMobileMenu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <span class="fw-bold text-danger d-block d-sm-none">সত্য কণ্ঠ</span>
+        <button class="mi-search-btn-trigger" type="button" onclick="toggleSearchOverlay()">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+
+    <!-- ৪. ডেস্কটপ নেভিগেশন বার -->
+    <nav class="mi-main-nav">
+        <div class="mi-nav-wrapper">
+            <a href="./index.html" class="mi-nav-item active">
+                <span class="mi-nav-icon">🏠</span> সর্বশেষ
+            </a>
+            <a href="./category.html?cat=national" class="mi-nav-item">জাতীয়</a>
+            <a href="./category.html?cat=world" class="mi-nav-item">বিশ্ব</a>
+            <a href="./category.html?cat=politics" class="mi-nav-item">রাজনীতি</a>
+            <a href="./category.html?cat=country" class="mi-nav-item">সারাদেশ</a>
+            <a href="./category.html?cat=sports" class="mi-nav-item">খেলা</a>
+            <a href="./category.html?cat=business" class="mi-nav-item">অর্থ-বাণিজ্য</a>
+            <a href="./category.html?cat=lifestyle" class="mi-nav-item">লাইফস্টাইল</a>
+            <a href="./category.html?cat=tech" class="mi-nav-item">তথ্য-প্রযুক্তি</a>
+            <a href="./category.html?cat=entertainment" class="mi-nav-item">বিনোদন</a>
+            
+            <div class="mi-nav-item-mega">
+                <a href="#" class="mi-nav-item mi-nav-more-btn">আরও ▼</a>
+                <div class="mi-mega-menu-box">
+                    <div class="mi-mega-grid">
+                        <div class="mi-mega-col">
+                            <h4>অন্যান্য ক্যাটাগরি</h4>
+                            <a href="./category.html?cat=education">শিক্ষা</a>
+                            <a href="./category.html?cat=job">চাকরি</a>
+                            <a href="./category.html?cat=health">স্বাস্থ্য</a>
+                        </div>
+                        <div class="mi-mega-col">
+                            <h4>ফিচার ও স্পেশাল</h4>
+                            <a href="#">সাক্ষাৎকার</a>
+                            <a href="#">লাইফস্টাইল</a>
+                            <a href="#">প্রবাস</a>
+                        </div>
+                        <div class="mi-mega-col">
+                            <h4>যোগাযোগ</h4>
+                            <a href="#">আমাদের সম্পর্কে</a>
+                            <a href="#">বিজ্ঞাপন নীতিমালা</a>
+                            <a href="#">যোগাযোগ করুন</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="mi-search-icon">
-        <a href="./search.html" class="mi-search-link">🔍</a>
-    </div>
-</nav>
+        
+        <div class="mi-search-icon">
+            <button class="mi-search-btn-trigger" type="button" onclick="toggleSearchOverlay()">🔍</button>
+        </div>
+    </nav>
 
-<div class="offcanvas offcanvas-start mi-offcanvas-menu d-lg-none" tabindex="-1" id="miMobileMenu">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title fw-bold text-danger">সত্য কথন</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="mi-mobile-nav-list">
-            <a href="./index.html" class="active">🏠 সর্বশেষ</a>
-            <a href="./category.html?cat=national">জাতীয়</a>
-            <a href="./category.html?cat=world">বিশ্ব</a>
-            <a href="./category.html?cat=politics">রাজনীতি</a>
-            <a href="./category.html?cat=country">সারাদেশ</a>
-            <a href="./category.html?cat=sports">খেলা</a>
-            <a href="./category.html?cat=business">অর্থ-বাণিজ্য</a>
-            <a href="./category.html?cat=lifestyle">লাইফস্টাইল</a>
-            <a href="./category.html?cat=tech">তথ্য-প্রযুক্তি</a>
-            <a href="./category.html?cat=entertainment">বিনোদন</a>
-            <hr>
-            <div class="fw-bold px-2 py-1 text-muted">অন্যান্য মেনু</div>
-            <a href="./category.html?cat=education">শিক্ষা</a>
-            <a href="./category.html?cat=job">চাকরি</a>
-            <a href="./category.html?cat=health">স্বাস্থ্য</a>
-            <a href="./search.html">🔍 অনুসন্ধান করুন</a>
+    <!-- ৫. মোবাইল অফক্যানভাস ড্রয়ার মেনু -->
+    <div class="offcanvas offcanvas-start mi-offcanvas-menu d-lg-none" tabindex="-1" id="miMobileMenu">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold text-danger">সত্য কণ্ঠ</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="mi-mobile-nav-list">
+                <a href="./index.html" class="active">🏠 সর্বশেষ</a>
+                <a href="./category.html?cat=national">জাতীয়</a>
+                <a href="./category.html?cat=world">বিশ্ব</a>
+                <a href="./category.html?cat=politics">রাজনীতি</a>
+                <a href="./category.html?cat=country">সারাদেশ</a>
+                <a href="./category.html?cat=sports">খেলা</a>
+                <a href="./category.html?cat=business">অর্থ-বাণিজ্য</a>
+                <a href="./category.html?cat=lifestyle">লাইফস্টাইল</a>
+                <a href="./category.html?cat=tech">তথ্য-প্রযুক্তি</a>
+                <a href="./category.html?cat=entertainment">বিনোদন</a>
+                <hr>
+                <div class="fw-bold px-2 py-1 text-muted">অন্যান্য মেনু</div>
+                <a href="./category.html?cat=education">শিক্ষা</a>
+                <a href="./category.html?cat=job">চাকরি</a>
+                <a href="./category.html?cat=health">স্বাস্থ্য</a>
+                <a href="#" onclick="toggleSearchOverlay(); return false;">🔍 অনুসন্ধান করুন</a>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="mi-breaking-news">
-    <div class="mi-breaking-label">
-        <span class="mi-breaking-dot">●</span> সদ্য প্রাপ্ত:
-    </div>
-    <div class="mi-ticker-content">
-        <div class="mi-ticker-item">
-            <a href="./single-post.html?id=1">দেশের অর্থনৈতিক উন্নয়ন নতুন উচ্চতায় পৌঁছেছে</a>
+    <!-- ৬. ফুল-স্ক্রিন সার্চ বক্স ওভারলে -->
+    <div class="mi-search-overlay" id="searchOverlay">
+        <button class="mi-search-close" onclick="toggleSearchOverlay()">&times;</button>
+        <div class="mi-search-form-wrapper">
+            <form action="./search.html" method="GET">
+                <div class="mi-search-input-group">
+                    <input type="text" name="q" class="mi-search-field" placeholder="যা খুঁজছেন তা এখানে লিখুন..." required autocomplete="off" id="searchField">
+                    <button type="submit" class="mi-search-submit-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="mi-ticker-item">
-            <a href="./single-post.html?id=2">ভারী বর্ষণের কারণে ১০ জুলাই পর্যন্ত বান্দরবানের সব পর্যটন কেন্দ্র বন্ধ</a>
+    </div>
+
+    <!-- ৭. ব্রেকিং নিউজ (সদ্য প্রাপ্ত) -->
+    <div class="mi-breaking-news">
+        <div class="mi-breaking-label">
+            <span class="mi-breaking-dot">●</span> সদ্য প্রাপ্ত:
+        </div>
+        <div class="mi-ticker-content">
+            <div class="mi-ticker-item">
+                <a href="./single-post.html?id=1">দেশের অর্থনৈতিক উন্নয়ন নতুন উচ্চতায় পৌঁছেছে</a>
+            </div>
+            <div class="mi-ticker-item">
+                <a href="./single-post.html?id=2">ভারী বর্ষণের কারণে ১০ জুলাই পর্যন্ত বান্দরবানের সব পর্যটন কেন্দ্র বন্ধ</a>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- জাভাস্ক্রিপ্ট কোড (লাইভ ঘড়ি ও সার্চ বক্স কন্ট্রোল) -->
+    <script>
+        // ১. বাংলা লাইভ ঘড়ি এবং লাইভ তারিখ লজিক
+        function updateLiveDateTime() {
+            const now = new Date();
+            
+            const days = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
+            const months = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+            
+            const dayName = days[now.getDay()];
+            const date = now.getDate();
+            const monthName = months[now.getMonth()];
+            const year = now.getFullYear();
+            
+            let hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            hours = hours % 12;
+            hours = hours ? hours : 12; // ১২ ঘন্টার ফরম্যাট
+            
+            // সংখ্যাকে বাংলায় রূপান্তর করার ফাংশন
+            const toBanglaNum = (num) => {
+                const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+                return num.toString().split('').map(digit => banglaDigits[digit] || digit).join('');
+            };
+
+            const formattedTime = `${toBanglaNum(hours)}:${toBanglaNum(minutes.toString().padStart(2, '0'))}:${toBanglaNum(seconds.toString().padStart(2, '0'))} ${ampm}`;
+            const formattedDate = `${dayName}, ${toBanglaNum(date)} ${monthName} ${toBanglaNum(year)}`;
+            
+            document.getElementById('dateTime').textContent = `${formattedDate} | ${formattedTime}`;
+        }
+
+        // প্রতি সেকেন্ডে ঘড়ি আপডেট হবে
+        setInterval(updateLiveDateTime, 1000);
+        updateLiveDateTime(); // পেজ লোড হওয়ার সাথে সাথেই রান করবে
+
+        // ২. সার্চ ওভারলে টগল ফাংশন
+        function toggleSearchOverlay() {
+            const overlay = document.getElementById('searchOverlay');
+            const searchField = document.getElementById('searchField');
+            
+            overlay.classList.toggle('active');
+            
+            // সার্চ বক্স ওপেন হলে অটোমেটিক কার্সার ফোকাস হবে
+            if(overlay.classList.contains('active')) {
+                setTimeout(() => {
+                    searchField.focus();
+                }, 100);
+                
+                // মোবাইল ড্রয়ার মেনু খোলা থাকলে তা বন্ধ করে দেবে
+                const mobileMenu = document.getElementById('miMobileMenu');
+                const bsOffcanvas = bootstrap.Offcanvas.getInstance(mobileMenu);
+                if (bsOffcanvas) {
+                    bsOffcanvas.hide();
+                }
+            }
+        }
+
+        // 'ESC' বাটন চাপলে সার্চ ওভারলে যেন বন্ধ হয়ে যায়
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const overlay = document.getElementById('searchOverlay');
+                if(overlay.classList.contains('active')) {
+                    toggleSearchOverlay();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
