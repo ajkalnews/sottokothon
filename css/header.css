@@ -340,7 +340,7 @@ img { max-width: 100%; display: block; }
     transform: translateY(-53%);
     line-height: 1;
 }
-.mi-ticker-item a { color: #222; font-size: 16px; font-weight: 500; }
+.mi-ticker-item a { color: #222; font-size: 18px; font-weight: 500; }
 .mi-ticker-item a:hover { color: var(--primary); }
 
 @keyframes tickerMove {
