@@ -1,76 +1,36 @@
-.mi-footer {
-    background: linear-gradient(135deg, #202124 0%, #35363a 100%);
-    color: #f1f3f4;
-    padding: 40px 24px 20px;
-    margin-top: auto;
-    border-top: 3px solid #1a73e8;
-}
-
-.mi-footer-content {
-    max-width: 1400px;
-    margin: 0 auto 30px;
-}
-
-.mi-footer h6 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 16px;
-}
-
-.mi-footer p {
-    font-size: 0.9rem;
-    color: #bdc1c6;
-}
-
-.mi-footer-links {
-    list-style: none;
-    padding: 0;
-}
-
-.mi-footer-links li {
-    margin-bottom: 12px;
-}
-
-.mi-footer-links a {
-    color: #bdc1c6;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.mi-footer-links a:hover {
-    color: white;
-    padding-left: 4px;
-}
-
+/* সোশ্যাল লিংক কন্টেইনার */
 .mi-social-links {
     display: flex;
-    gap: 16px;
+    flex-wrap: wrap; /* অনেকগুলো আইকন থাকলে মোবাইল স্ক্রিনে ভেঙে নিচে আসবে */
+    gap: 10px;
     margin-top: 12px;
 }
 
+/* কমন সোশ্যাল আইকন স্টাইল (হেডারের মতো গোলাকার ও ট্রানজিশন) */
 .mi-social-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.08);
     border-radius: 50%;
     color: #f1f3f4;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
     transition: all 0.3s ease;
 }
 
+/* মাউস হোভার করলে টেক্সট বা আইকন সাদা থাকবে */
 .mi-social-icon:hover {
-    background-color: #1a73e8;
+    color: #ffffff !important;
+    transform: translateY(-3px); /* হালকা একটু ওপরে উঠবে */
 }
 
-.mi-footer-bottom {
-    text-align: center;
-    padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.85rem;
-    color: #bdc1c6;
-}
+/* প্রতিটি ব্র্যান্ডের জন্য হেডারের মতো নির্দিষ্ট ব্যাকগ্রাউন্ড কালার */
+.mi-social-icon.fb:hover { background-color: #3b5998 !important; }
+.mi-social-icon.yt:hover { background-color: #ff0000 !important; }
+.mi-social-icon.tw:hover { background-color: #000000 !important; } /* X (টুইটার) কালার */
+.mi-social-icon.insta:hover { background-color: #e1306c !important; }
+.mi-social-icon.ln:hover { background-color: #0077b5 !important; }
+.mi-social-icon.wa:hover { background-color: #25d366 !important; }
