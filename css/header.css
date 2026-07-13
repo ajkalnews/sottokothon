@@ -302,7 +302,7 @@ img { max-width: 100%; display: block; }
     background: var(--primary) !important;
     color: #fff;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 18px;
     flex-shrink: 0;
     position: relative;
     z-index: 5;
