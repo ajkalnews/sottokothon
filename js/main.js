@@ -1,4 +1,4 @@
-// js/main.js - সম্পূর্ণ নতুন সংস্করণ (ত্রুটিমুক্ত ও মার্জ করা)
+// js/main.js - সম্পূর্ণ নতুন সংস্করণ (তারিখ ও সময় সমস্যার স্থায়ী সমাধানসহ)
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM সম্পূর্ণভাবে লোড হয়েছে');
@@ -9,9 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
     setupSearch();
     setupArchiveToggle();
-    updateDateTime();
     
-    // প্রতি সেকেন্ডে সময় আপডেট করুন
+    // প্রতি সেকেন্ডে সময় আপডেট করার জন্য ইন্টারভাল সেট করা হলো
     setInterval(updateDateTime, 1000);
 });
 
@@ -30,6 +29,7 @@ async function loadHeader() {
         if (!response.ok) {
             console.warn('হেডার fetch ব্যর্থ:', response.status);
             headerContainer.innerHTML = getHeaderHTML();
+            updateDateTime(); // ফলব্যাক লোড হলেও ঘড়ি প্রথমবার রান করাবে
             return;
         }
         
@@ -37,10 +37,14 @@ async function loadHeader() {
         headerContainer.innerHTML = html;
         console.log('✅ হেডার সফলভাবে লোড হয়েছে');
         
+        // হেডার পেজে সফলভাবে বসার ঠিক পর পরই ঘড়িটি প্রথমবার রান করানো হলো
+        updateDateTime();
+        
     } catch (error) {
         console.error('হেডার লোড ত্রুটি:', error);
         console.log('ফলব্যাক হেডার ব্যবহার করছি...');
         headerContainer.innerHTML = getHeaderHTML();
+        updateDateTime(); // এরর আসলেও ঘড়ি রান করাবে
     }
 }
 
@@ -100,8 +104,13 @@ async function loadSidebar() {
     }
 }
 
-// বর্তমান তারিখ এবং সময় আপডেট করুন (লাইভ বাংলা ঘড়িসহ উন্নত লজিক)
+// বর্তমান তারিখ এবং সময় আপডেট করুন (লাইভ বাংলা ঘড়িসহ নিরাপদ লজিক)
 function updateDateTime() {
+    const dateTimeEl = document.getElementById('dateTime');
+    
+    // হেডার লোড হতে দেরি হলে বা এলিমেন্ট পেজে না থাকলে ফাংশনটি এরর না দিয়ে এখানেই থেমে যাবে
+    if (!dateTimeEl) return; 
+
     const now = new Date();
     const options = { 
         weekday: 'long', 
@@ -117,13 +126,10 @@ function updateDateTime() {
     // আন্তর্জাতিক স্ট্যান্ডার্ড অনুযায়ী বাংলা লোকাল ফরম্যাট তৈরি
     let bengaliDate = new Intl.DateTimeFormat('bn-BD', options).format(now);
     
-    // AM/PM অংশকে সুন্দরভাবে আলাদা বা ঠিক করার জন্য
+    // AM/PM টেক্সট ফরম্যাট ঠিক রাখা হলো
     bengaliDate = bengaliDate.replace('AM', 'AM').replace('PM', 'PM');
 
-    const dateTimeEl = document.getElementById('dateTime');
-    if (dateTimeEl) {
-        dateTimeEl.textContent = bengaliDate;
-    }
+    dateTimeEl.textContent = bengaliDate;
 }
 
 // নেভিগেশন সেটআপ 
@@ -139,7 +145,7 @@ function setupNavigation() {
 
 // সার্চ বক্স এবং নতুন ফুল-স্ক্রিন সার্চ ওভারলে সেটআপ
 function setupSearch() {
-    // ১. প্রজেক্টের যদি কোনো ট্র্যাডিশনাল সার্চ ফর্ম থাকে তার হ্যান্ডলার
+    // প্রজেক্টের যদি কোনো ট্র্যাডিশনাল সার্চ ফর্ম থাকে তার হ্যান্ডলার
     const searchForm = document.getElementById('headerSearchForm');
     if (searchForm) {
         searchForm.addEventListener('submit', function(e) {
@@ -151,7 +157,7 @@ function setupSearch() {
         });
     }
 
-    // ২. কিবোর্ডের 'Escape' বাটন চাপলে ফুল-স্ক্রিন সার্চ ওভারলে বন্ধ করার গ্লোবাল লিসেনার
+    // কিবোর্ডের 'Escape' বাটন চাপলে ফুল-স্ক্রিন সার্চ ওভারলে বন্ধ করার গ্লোবাল লিসেনার
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             const overlay = document.getElementById('searchOverlay');
@@ -162,7 +168,7 @@ function setupSearch() {
     });
 }
 
-// নতুন গ্লোবাল ফাংশন: সার্চ ওভারলে খোলা/বন্ধ করা (যা HTML এর onclick থেকে কল হবে)
+// নতুন গ্লোবাল ফাংশন: সার্চ ওভারলে খোলা/বন্ধ করা (HTML এর ক্লিক ইভেন্ট থেকে কল হবে)
 function toggleSearchOverlay() {
     const overlay = document.getElementById('searchOverlay');
     const searchField = document.getElementById('searchField');
@@ -188,7 +194,7 @@ function toggleSearchOverlay() {
     }
 }
 
-// আর্কাইভ টগল সেটআপ
+// архив টগল সেটআপ
 function setupArchiveToggle() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('mi-month-toggle')) {
@@ -201,7 +207,7 @@ function setupArchiveToggle() {
     });
 }
 
-// =============== ফলব্যাক HTML কন্টেন্ট (নতুন হেডারের স্ট্রাকচার অনুযায়ী আপডেট করা) ===============
+// =============== ফলব্যাক HTML কন্টেন্ট (সার্ভার ফেইল করলে বা সরাসরি ফাইল ওপেন করলে এটি দেখাবে) ===============
 
 function getHeaderHTML() {
     return `<!-- ১. টপ বার -->
