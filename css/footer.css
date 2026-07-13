@@ -130,9 +130,12 @@
         grid-template-columns: repeat(3, 1fr); /* মোবাইলে ৩টি করে কলাম দেখাবে */
         gap: 12px 10px;
     }
-    .mi-footer-logo-row {
-        text-align: center;
-    }
+  /* লোগো সেকশন (মাঝখানে দেখানোর জন্য আপডেট করা হয়েছে) */
+.mi-footer-logo-row {
+    max-width: 1200px;
+    margin: 0 auto 25px;
+    text-align: center; /* 🎯 লোগোটিকে একদম মাঝখানে নিয়ে আসার জন্য */
+}
     .mi-footer-middle-bar {
         justify-content: center;
         text-align: center;
