@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>সত্য কথন- বাংলা নিউজ পেপার</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Google Fonts - সোলায়মানলিপি -->
     <link href="https://fonts.googleapis.com/css2?family=Solaimanlipi&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <!-- গ্লোবাল CSS -->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/header.css">
@@ -24,16 +26,16 @@
         <!-- নতুন হেডার লোড হবে এখানে -->
         <div id="headerContainer"></div>
 
-        <!-- মেইন কনটেন্ট wrapper (বুটস্ট্র্যাপ কন্টেইনার দিয়ে মোড়ানো) -->
+        <!-- মেইন কনটেন্ট wrapper (বুটস্ট্র্যাপ কন্টেইনার দিয়ে মোড়ানো) -->
         <div class="container my-2 px-0">
             <div class="row ">
                 
-                <!-- বাম পাশে মেইন কনটেন্ট এরিয়া (১২ ভাগের ৮ ভাগ জায়গা নেবে) -->
+                <!-- বাম পাশে মেইন কনটেন্ট এরিয়া (১২ ভাগের ৮ ভাগ জায়গা নেবে) -->
                 <main id="mainContentContainer" class="mi-content col-lg-8 col-md-12">
                     <!-- জাভাস্ক্রিপ্ট দিয়ে এখানে কনটেন্ট আসবে -->
                 </main>
 
-                <!-- ডান পাশে সাইডবার (১২ ভাগের ৪ ভাগ জায়গা নেবে) -->
+                <!-- ডান পাশে সাইডবার (১২ ভাগের ৪ ভাগ জায়গা নেবে) -->
                 <aside class="col-lg-4 col-md-12">
                     <div id="sidebarContainer"></div>
                 </aside>
@@ -48,6 +50,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- আমাদের মূল জাভাস্ক্রিপ্ট ফাইল (যা ঘড়ি, হেডার, সার্চ সবকিছু হ্যান্ডেল করবে) -->
     <script src="./js/main.js"></script>
     
     <script>
@@ -61,33 +64,11 @@
                 .catch(error => console.error('কনটেন্ট লোড করতে সমস্যা হয়েছে:', error));
         }
 
-        // পেজ লোড হওয়ার সাথে সাথে ফাংশনটি রান করবে
+        // পেজ লোড হওয়ার সাথে সাথে শুধুমাত্র কনটেন্ট লোড হবে
+        // ঘড়ির বাকি সব কাজ অটোমেটিক main.js ফাইল সামলে নেবে
         document.addEventListener("DOMContentLoaded", function() {
             loadMainContent();
-            updateDateTime();
-            setInterval(updateDateTime, 1000);
         });
-
-        // বর্তমান তারিখ এবং সময় আপডেট করুন
-        function updateDateTime() {
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric', 
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            };
-            const now = new Date();
-            const formatter = new Intl.DateTimeFormat('bn-BD', options);
-            const dateTimeStr = formatter.format(now);
-            const dateTimeElement = document.getElementById('currentDateTime');
-            if (dateTimeElement) {
-                dateTimeElement.textContent = dateTimeStr;
-            }
-        }
     </script>
 </body>
 </html>
