@@ -17,7 +17,7 @@ export async function onRequestPost(context) {
     const uniqueFileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExtension}`;
 
     // ফাইলটি R2 বাকেটে আপলোড করা
-    await context.env.BUCKET.put(uniqueFileName, file.stream(), {
+    await context.env.Bucket.put(uniqueFileName, file.stream(), {
       httpMetadata: { contentType: file.type }
     });
 
