@@ -1,8 +1,125 @@
-<!-- ফিচার্ড নিউজ সেকশন (ডাইনামিক) -->
-<section class="mi-featured mb-4" id="featuredSection">
-    <div style="text-align: center; padding: 50px; color: #6b7280; width: 100%;">
-        <div class="spinner-border text-danger" role="status"></div>
-        <div class="mt-2">ফিচার্ড নিউজ লোড হচ্ছে...</div>
+<!-- ফিচার্ড নিউজ -->
+<section class="mi-featured mb-4">
+    <!-- ১. ওপরের মেইন লিড নিউজ (৫০%-৫০% গ্রিড) -->
+    <article class="mi-featured-main-article">
+        <div class="mi-featured-image-block">
+            <img src="img/Tarek Rahman.JPG" alt="প্রধান খবর">
+            <div class="mi-image-caption">
+                সংবিধান সংশোধনে কমিটি গঠনের প্রতিবাদে সংসদ অধিবেশন থেকে বেরিয়ে যাচ্ছেন বিরোধী দলের সদস্যরা। | ছবি: সংগৃহীত
+            </div>
+        </div>
+        <div class="mi-featured-content">
+            <h2><a href="./single-post.html?id=1">সংবিধান সংশোধনে বিশেষ কমিটি, বিরোধী দলের প্রত্যাখ্যান, ওয়াকআউট</a></h2>
+            <p>সংবিধান সংশোধন নয়, জুলাই সনদ অনুসারে সংবিধান সংস্কার চায় জামায়াতে ইসলামী। আজ সংসদ অধিবেশনে এই বিষয়ে জোর দাবি জানানো হয়।</p>
+            <div class="mi-meta">৬ ঘণ্টা আগে</div>
+        </div>
+    </article>
+
+    <!-- ২. নিচের ২টি সাব-নিউজের গ্রিড (পাশাপাশি দুটি নিউজ) -->
+    <div class="mi-featured-sub-grid">
+        
+        <!-- বাম পাশের নিউজ -->
+        <article class="mi-sub-news-item">
+            <div class="mi-sub-text">
+                <h3><a href="./single-post.html?id=2">হরিদাস চন্দ্রের রিমান্ড শুনানিতে যেসব বিষয় উঠে এল</a></h3>
+                <p>গাইবান্ধার পলাশবাড়ীতে ৮১ ফুট উচ্চতার রামমূর্তি নির্মাণের উদ্যোগ নিয়ে আলোচনায় আসা হরিদাস চন্দ্রকে গতকাল রাতে গ্রেফতার করে সিআইডি।</p>
+                <div class="mi-meta">৮ ঘণ্টা আগে</div>
+            </div>
+            <div class="mi-sub-img">
+                <img src="https://via.placeholder.com/120x90" alt="সাব নিউজ ১">
+            </div>
+        </article>
+
+        <!-- ডান পাশের নিউজ -->
+        <article class="mi-sub-news-item">
+            <div class="mi-sub-text">
+                <h3><a href="./single-post.html?id=3"><span class="mi-red-text">চট্টগ্রামে ব্যবসাপ্রতিষ্ঠানে সশস্ত্র হামলা</span> • ‘ব্যবসা করতে হলে এককালীন ২ কোটি টাকা দিবি, মাসে দিবি ১০ লাখ’</a></h3>
+                <p>চট্টগ্রাম নগরে চাঁদা না পেয়ে দিন-দুপুরে একটি ইন্টারনেট সেবাদানকারী প্রতিষ্ঠানে হামলা চালিয়ে ভাঙচুর ও ৩৫ লাখ টাকা লুটের অভিযোগ উঠেছে।</p>
+                <div class="mi-meta">১১ ঘণ্টা আগে</div>
+            </div>
+            <div class="mi-sub-img">
+                <img src="https://via.placeholder.com/120x90" alt="সাব নিউজ ২">
+            </div>
+        </article>
+
     </div>
 </section>
 
+<!-- খবরের গ্রিড -->
+<section class="mi-news-grid">
+    <h3 class="mi-section-title">সম্প্রতি প্রকাশিত খবর</h3>
+    
+    <div class="row g-4">
+        <div class="col-md-6">
+            <article class="mi-news-card">
+                <img src="https://via.placeholder.com/300x200" class="img-fluid" alt="খবর">
+                <div class="mi-card-body">
+                    <span class="mi-category mi-cat-politics">রাজনীতি</span>
+                    <h4><a href="./single-post.html?id=2">সংসদে নতুন বিল উপস্থাপন</a></h4>
+                    <p>আজ সংসদে একটি গুরুত্বপূর্ণ বিল উপস্থাপন করা হয়েছে যা শিক্ষা খাতের উন্নয়নে সহায়ক হবে।</p>
+                    <small class="mi-meta">২ ঘণ্টা আগে</small>
+                </div>
+            </article>
+        </div>
+
+        <div class="col-md-6">
+            <article class="mi-news-card">
+                <img src="https://via.placeholder.com/300x200" class="img-fluid" alt="খবর">
+                <div class="mi-card-body">
+                    <span class="mi-category mi-cat-sports">খেলাধুলা</span>
+                    <h4><a href="./single-post.html?id=3">জাতীয় ফুটবল দলের বড় জয়</a></h4>
+                    <p>আমাদের জাতীয় দল আন্তর্জাতিক ম্যাচে ৪-২ গোলে প্রতিদ্বন্দ্বী দলকে পরাজিত করেছে।</p>
+                    <small class="mi-meta">৫ ঘণ্টা আগে</small>
+                </div>
+            </article>
+        </div>
+
+        <div class="col-md-6">
+            <article class="mi-news-card">
+                <img src="https://via.placeholder.com/300x200" class="img-fluid" alt="খবর">
+                <div class="mi-card-body">
+                    <span class="mi-category mi-cat-tech">প্রযুক্তি</span>
+                    <h4><a href="./single-post.html?id=4">নতুন প্রযুক্তি স্টার্টআপ চালু হয়েছে</a></h4>
+                    <p>দেশের একটি নতুন টেক স্টার্টআপ আর্টিফিশিয়াল ইন্টেলিজেন্স ভিত্তিক সমাধান নিয়ে এসেছে।</p>
+                    <small class="mi-meta">৮ ঘণ্টা আগে</small>
+                </div>
+            </article>
+        </div>
+
+        <div class="col-md-6">
+            <article class="mi-news-card">
+                <img src="https://via.placeholder.com/300x200" class="img-fluid" alt="খবর">
+                <div class="mi-card-body">
+                    <span class="mi-category mi-cat-entertainment">বিনোদন</span>
+                    <h4><a href="./single-post.html?id=5">নতুন সিনেমা রিলিজের প্রস্তুতি</a></h4>
+                    <p>বলিউড এর একটি বড় বাজেটের সিনেমা আগামী মাসে রিলিজ হতে চলেছে।</p>
+                    <small class="mi-meta">১০ ঘণ্টা আগে</small>
+                </div>
+            </article>
+        </div>
+
+        <div class="col-md-6">
+            <article class="mi-news-card">
+                <img src="https://via.placeholder.com/300x200" class="img-fluid" alt="খবর">
+                <div class="mi-card-body">
+                    <span class="mi-category mi-cat-health">স্বাস্থ্য</span>
+                    <h4><a href="./single-post.html?id=6">নতুন স্বাস্থ্য সেবা চালু হচ্ছে</a></h4>
+                    <p>সরকার সারা দেশে নতুন স্বাস্থ্য সেবা প্রকল্প চালু করার ঘোষণা দিয়েছে।</p>
+                    <small class="mi-meta">১২ ঘণ্টা আগে</small>
+                </div>
+            </article>
+        </div>
+
+        <div class="col-md-6">
+            <article class="mi-news-card">
+                <img src="https://via.placeholder.com/300x200" class="img-fluid" alt="খবর">
+                <div class="mi-card-body">
+                    <span class="mi-category mi-cat-business">ব্যবসা</span>
+                    <h4><a href="./single-post.html?id=7">রপ্তানি আয় বৃদ্ধি পাচ্ছে</a></h4>
+                    <p>গত ত্রৈমাসিকে দেশের মোট রপ্তানি আয় ৩৫% বৃদ্ধি পেয়েছে।</p>
+                    <small class="mi-meta">১৪ ঘণ্টা আগে</small>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
