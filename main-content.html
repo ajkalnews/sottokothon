@@ -1,49 +1,77 @@
 <!-- ফিচার্ড নিউজ -->
-<section class="mi-featured mb-4">
-    <!-- ১. ওপরের মেইন লিড নিউজ (৫০%-৫০% গ্রিড) -->
-    <article class="mi-featured-main-article">
-        <div class="mi-featured-image-block">
-            <img src="img/Tarek Rahman.JPG" alt="প্রধান খবর">
-            <div class="mi-image-caption">
-                সংবিধান সংশোধনে কমিটি গঠনের প্রতিবাদে সংসদ অধিবেশন থেকে বেরিয়ে যাচ্ছেন বিরোধী দলের সদস্যরা। | ছবি: সংগৃহীত
+async function fetchFeaturedNews() {
+  try {
+    // ১. মেইন লিড নিউজ নিয়ে আসা
+    const leadRes = await fetch('/api/posts?type=lead');
+    const leadPosts = await leadRes.json();
+    
+    if (leadPosts.length > 0) {
+      const lead = leadPosts[0];
+      const leadHtml = `
+        <article class="mi-featured-main-article">
+            <div class="mi-featured-image-block">
+                <img src="${lead.image_url}" alt="${lead.title}">
+                <div class="mi-image-caption">
+                    ${lead.image_caption || ''}
+                </div>
             </div>
-        </div>
-        <div class="mi-featured-content">
-            <h2><a href="./single-post.html?id=1">সংবিধান সংশোধনে বিশেষ কমিটি, বিরোধী দলের প্রত্যাখ্যান, ওয়াকআউট</a></h2>
-            <p>সংবিধান সংশোধন নয়, জুলাই সনদ অনুসারে সংবিধান সংস্কার চায় জামায়াতে ইসলামী। আজ সংসদ অধিবেশনে এই বিষয়ে জোর দাবি জানানো হয়।</p>
-            <div class="mi-meta">৬ ঘণ্টা আগে</div>
-        </div>
-    </article>
-
-    <!-- ২. নিচের ২টি সাব-নিউজের গ্রিড (পাশাপাশি দুটি নিউজ) -->
-    <div class="mi-featured-sub-grid">
-        
-        <!-- বাম পাশের নিউজ -->
-        <article class="mi-sub-news-item">
-            <div class="mi-sub-text">
-                <h3><a href="./single-post.html?id=2">হরিদাস চন্দ্রের রিমান্ড শুনানিতে যেসব বিষয় উঠে এল</a></h3>
-                <p>গাইবান্ধার পলাশবাড়ীতে ৮১ ফুট উচ্চতার রামমূর্তি নির্মাণের উদ্যোগ নিয়ে আলোচনায় আসা হরিদাস চন্দ্রকে গতকাল রাতে গ্রেফতার করে সিআইডি।</p>
-                <div class="mi-meta">৮ ঘণ্টা আগে</div>
-            </div>
-            <div class="mi-sub-img">
-                <img src="https://via.placeholder.com/120x90" alt="সাব নিউজ ১">
+            <div class="mi-featured-content">
+                <h2><a href="./single-post.html?slug=${lead.slug}">${lead.title}</a></h2>
+                <p>${lead.content.substring(0, 150)}...</p>
+                <div class="mi-meta">${timeAgo(lead.created_at)} | ক্যাটাগরি: ${lead.category_name || 'অন্যান্য'}</div>
             </div>
         </article>
+      `;
+      document.querySelector('.mi-featured').innerHTML = leadHtml;
+    }
 
-        <!-- ডান পাশের নিউজ -->
-        <article class="mi-sub-news-item">
-            <div class="mi-sub-text">
-                <h3><a href="./single-post.html?id=3"><span class="mi-red-text">চট্টগ্রামে ব্যবসাপ্রতিষ্ঠানে সশস্ত্র হামলা</span> • ‘ব্যবসা করতে হলে এককালীন ২ কোটি টাকা দিবি, মাসে দিবি ১০ লাখ’</a></h3>
-                <p>চট্টগ্রাম নগরে চাঁদা না পেয়ে দিন-দুপুরে একটি ইন্টারনেট সেবাদানকারী প্রতিষ্ঠানে হামলা চালিয়ে ভাঙচুর ও ৩৫ লাখ টাকা লুটের অভিযোগ উঠেছে।</p>
-                <div class="mi-meta">১১ ঘণ্টা আগে</div>
-            </div>
-            <div class="mi-sub-img">
-                <img src="https://via.placeholder.com/120x90" alt="সাব নিউজ ২">
-            </div>
-        </article>
+    // ২. ২টি সাব-নিউজ নিয়ে আসা
+    const subRes = await fetch('/api/posts?type=sub');
+    const subPosts = await subRes.json();
+    
+    if (subPosts.length > 0) {
+      let subHtml = '<div class="mi-featured-sub-grid">';
+      
+      subPosts.forEach(post => {
+        subHtml += `
+          <article class="mi-sub-news-item">
+              <div class="mi-sub-text">
+                  <h3><a href="./single-post.html?slug=${post.slug}">${post.title}</a></h3>
+                  <p>${post.content.substring(0, 100)}...</p>
+                  <div class="mi-meta">${timeAgo(post.created_at)}</div>
+              </div>
+              <div class="mi-sub-img">
+                  <img src="${post.image_url}" alt="${post.title}">
+              </div>
+          </article>
+        `;
+      });
+      
+      subHtml += '</div>';
+      // মেইন লিডের নিচে সাব-গ্রিড অ্যাপেন্ড করা
+      document.querySelector('.mi-featured').innerHTML += subHtml;
+    }
 
-    </div>
-</section>
+  } catch (error) {
+    console.error("নিউজ লোড করতে ব্যর্থ:", error);
+  }
+}
+
+// কত সময় আগে পোস্ট করা হয়েছে তা বের করার সিম্পল ফাংশন
+function timeAgo(dateString) {
+  const now = new Date();
+  const postDate = new Date(dateString);
+  const diffMs = now - postDate;
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMins / 60);
+
+  if (diffMins < 60) return `${diffMins} মিনিট আগে`;
+  if (diffHours < 24) return `${diffHours} ঘণ্টা আগে`;
+  return postDate.toLocaleDateString('bn-BD');
+}
+
+// পেজ লোড হলে রান হবে
+document.addEventListener('DOMContentLoaded', fetchFeaturedNews);
 
 <!-- খবরের গ্রিড -->
 <section class="mi-news-grid">
