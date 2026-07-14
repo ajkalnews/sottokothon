@@ -146,4 +146,134 @@
         padding-right: 0;
         padding-bottom: 20px;
     }
+/* প্রধান কন্টেইনার কার্ড */
+.mi-news-widget-wrapper {
+    display: flex;
+    justify-content: center; /* স্ক্রিনের মাঝখানে রাখার জন্য */
+    padding: 20px 0;
+}
+
+.mi-news-widget-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px; /* sec.JPG-এর মতো সরু প্রস্থ */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    padding: 15px;
+    font-family: 'SolaimanLipi', Arial, sans-serif; /* বাংলা ফন্ট নিশ্চিত করুন */
+}
+
+/* সেকশন হেডার স্টাইল (বিজ্ঞানচিন্তা-এর মতো) */
+.mi-widget-header {
+    border-bottom: 2px solid #ddd; /* হালকা রেখা */
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    display: flex;
+}
+
+.mi-widget-header .mi-category {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* ক্যাটাগরি নামের নিচে লাল রেখা */
+.mi-widget-header .mi-category::after {
+    content: '';
+    position: absolute;
+    bottom: -7px; /* বর্ডারের ঠিক ওপরে */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #d9534f; /* লাল রঙ */
+}
+
+/* ছবির সাথে প্রধান খবর */
+.mi-news-card-featured {
+    margin-bottom: 15px;
+}
+
+.mi-news-card-featured img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.mi-news-card-featured .mi-card-body h4 {
+    font-size: 16px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.mi-news-card-featured .mi-card-body h4 a {
+    color: #333;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.mi-news-card-featured .mi-card-body h4 a:hover {
+    color: #007bff;
+}
+
+/* অন্যান্য খবরের তালিকা */
+.mi-widget-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mi-widget-list li {
+    padding: 10px 0;
+    border-top: 1px solid #eee; /* প্রতি খবরের মাঝে হালকা রেখা */
+}
+
+.mi-widget-list li:first-child {
+    border-top: none; /* প্রথম খবরের ওপরে রেখা থাকবে না */
+}
+
+.mi-widget-list li h4 {
+    font-size: 15px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.mi-widget-list li h4 a {
+    color: #333;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.mi-widget-list li h4 a:hover {
+    color: #007bff;
+}
+
+/* সেকশন বিভাজক */
+.mi-divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* আরও বাটন */
+.mi-widget-footer {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.mi-btn-more {
+    background-color: #007bff; /* নীল রঙ */
+    color: white;
+    padding: 8px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    display: inline-block;
+}
+
+.mi-btn-more:hover {
+    background-color: #0056b3;
 }
