@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অ্যাডমিন ড্যাশবোর্ড - সত্যকথন</title>
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --success-color: #10b981;
+      --danger-color: #ef4444;
+      --bg-color: #f3f4f6;
+      --card-bg: #ffffff;
+      --text-color: #1f2937;
+      --border-color: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* সাইডবার ডিজাইন */
+    .sidebar {
+      width: 260px;
+      background: #1e293b;
+      color: white;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .sidebar h2 {
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #38bdf8;
+    }
+
+    .sidebar a {
+      color: #cbd5e1;
+      padding: 12px 15px;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      display: block;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background: #334155;
+      color: white;
+    }
+
+    .logout-btn {
+      margin-top: auto;
+      background: var(--danger-color);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    .logout-btn:hover {
+      background: #dc2626;
+    }
+
+    /* মেইন কন্টেন্ট এরিয়া */
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      box-sizing: border-box;
+      max-width: 1200px;
+    }
+
+    .header-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .header-area h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    /* গ্রিড লেআউট (বাম পাশে ফর্ম, ডান পাশে পোস্ট লিস্ট) */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    @media (min-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: 1.2fr 1.8fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      box-sizing: border-box;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 20px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    /* ফর্ম ডিজাইন */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #4b5563;
+    }
+
+    input[type="text"], textarea, input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-sizing: border-box;
+      background: #f9fafb;
+      font-size: 15px;
+    }
+
+    input[type="text"]:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .btn-submit {
+      background: var(--success-color);
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      background: #059669;
+    }
+
+    .btn-submit:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    /* পোস্ট লিস্ট টেবিল */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: #f8fafc;
+      font-weight: 600;
+    }
+
+    .post-thumb {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .btn-delete {
+      background: var(--danger-color);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .btn-delete:hover {
+      background: #dc2626;
+    }
+  </style>
+
+  <script>
+    // ড্যাশবোর্ড লোড হওয়ার আগে টোকেন যাচাই করা হচ্ছে
+    async function checkAuth() {
+      const token = localStorage.getItem('admin_token');
+      if (!token) {
+        window.location.href = '/admin/';
+        return;
+      }
+      
+      try {
+        const res = await fetch('/api/admin/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token })
+        });
+        
+        if (!res.ok) {
+          throw new Error('Invalid Token');
+        }
+      } catch (err) {
+        localStorage.removeItem('admin_token');
+        window.location.href = '/admin/';
+      }
+    }
+    // ইনস্ট্যান্ট এক্সিকিউশন
+    checkAuth();
+  </script>
+</head>
+<body>
+
+  <!-- সাইডবার -->
+  <div class="sidebar">
+    <h2>সত্যকথন</h2>
+    <a href="/admin/dashboard.html" class="active">📰 ড্যাশবোর্ড</a>
+    <a href="/" target="_blank">🌐 ওয়েবসাইট দেখুন</a>
+    <button class="logout-btn" onclick="logout()">লগআউট</button>
+  </div>
+
+  <!-- মূল কন্টেন্ট -->
+  <div class="main-content">
+    <div class="header-area">
+      <h1>নিয়ন্ত্রণ কক্ষ (Control Panel)</h1>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- বাম পাশ: নিউজ ফর্ম -->
+      <div class="card">
+        <h3>নতুন নিউজ পোস্ট করুন</h3>
+        <form id="newsForm">
+          <div class="form-group">
+            <label for="title">শিরোনাম (Title)</label>
+            <input type="text" id="title" required placeholder="খবরের শিরোনাম লিখুন">
+          </div>
+          <div class="form-group">
+            <label for="content">বিস্তারিত খবর (Content)</label>
+            <textarea id="content" rows="10" required placeholder="খবরের বিস্তারিত বিবরণ এখানে লিখুন..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="image">ফিচার্ড ইমেজ (R2 Storage-এ আপলোড হবে)</label>
+            <input type="file" id="image" accept="image/*" required>
+          </div>
+          <button type="submit" id="submitBtn" class="btn-submit">পাবলিশ করুন</button>
+        </form>
+      </div>
+
+      <!-- ডান পাশ: পূর্বের পোস্টগুলোর তালিকা -->
+      <div class="card">
+        <h3>সাম্প্রতিক পোস্টসমূহ</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ছবি</th>
+                <th>শিরোনাম</th>
+                <th>অ্যাকশন</th>
+              </tr>
+            </thead>
+            <tbody id="postsTableBody">
+              <tr>
+                <td colspan="3" style="text-align: center; color: #6b7280;">পোস্ট লোড হচ্ছে...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // লগআউট ফাংশন
+    function logout() {
+      localStorage.removeItem('admin_token');
+      window.location.href = '/admin/';
+    }
+
+    // নিউজ ডাটাবেজ থেকে লোড করার ফাংশন
+    async function loadPosts() {
+      try {
+        const res = await fetch('/api/posts');
+        if (!res.ok) throw new Error('পোস্ট লোড করতে ব্যর্থ!');
+        
+        const posts = await res.json();
+        const tbody = document.getElementById('postsTableBody');
+        
+        if (posts.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: #6b7280;">কোনো পোস্ট পাওয়া যায়নি।</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = posts.map(post => `
+          <tr>
+            <td>
+              <img src="${post.image_url || 'https://via.placeholder.com/50'}" class="post-thumb" alt="thumb">
+            </td>
+            <td style="font-weight: 500;">${post.title}</td>
+            <td>
+              <button class="btn-delete" onclick="deletePost(${post.id})">ডিলিট</button>
+            </td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        document.getElementById('postsTableBody').innerHTML = `<tr><td colspan="3" style="color: red; text-align: center;">ত্রুটি: ${err.message}</td></tr>`;
+      }
+    }
+
+    // নিউজ পোস্ট করার প্রসেস
+    document.getElementById('newsForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'আপলোড ও পোস্ট হচ্ছে...';
+
+      const title = document.getElementById('title').value;
+      const content = document.getElementById('content').value;
+      const imageFile = document.getElementById('image').files[0];
+
+      try {
+        // ১. ছবি আপলোড R2 বাকেটে
+        const formData = new FormData();
+        formData.append('file', imageFile);
+
+        const uploadRes = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+        
+        if (!uploadRes.ok) throw new Error('ছবি আপলোড ব্যর্থ হয়েছে!');
+        const uploadData = await uploadRes.json();
+        const imageUrl = uploadData.url;
+
+        // ২. ডাটাবেজে পোস্ট ডাটা পাঠানো
+        const postRes = await fetch('/api/posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, content, imageUrl })
+        });
+
+        if (!postRes.ok) throw new Error('ডাটাবেজে পোস্ট সেভ করা যায়নি!');
+
+        alert('নিউজ সফলভাবে লাইভ পাবলিশ করা হয়েছে!');
+        document.getElementById('newsForm').reset();
+        loadPosts(); // টেবিল আপডেট করা
+      } catch (err) {
+        alert('ত্রুটি: ' + err.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'পাবলিশ করুন';
+      }
+    });
+
+    // নিউজ ডিলিট করার ফাংশন
+    async function deletePost(id) {
+      if (!confirm('আপনি কি নিশ্চিত যে এই পোস্টটি ডিলিট করতে চান?')) return;
+
+      try {
+        const res = await fetch(`/api/posts?id=${id}`, {
+          method: 'DELETE'
+        });
+
+        if (res.ok) {
+          alert('পোস্টটি সফলভাবে মুছে ফেলা হয়েছে।');
+          loadPosts();
+        } else {
+          throw new Error('মুছে ফেলা সম্ভব হয়নি!');
+        }
+      } catch (err) {
+        alert('ত্রুটি: ' + err.message);
+      }
+    }
+
+    // পেজ লোড হলে পোস্টগুলোর তালিকা দেখাবে
+    loadPosts();
+  </script>
+</body>
+</html>
