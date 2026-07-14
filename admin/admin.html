@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>অ্যাডমিন প্যানেল - সত্যকথন</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; }
+    .form-group { margin-bottom: 15px; }
+    input, textarea, button { width: 100%; padding: 10px; margin-top: 5px; box-sizing: border-box; }
+    button { background-color: #0070f3; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #0051a2; }
+  </style>
+</head>
+<body>
+
+  <h2>নতুন নিউজ পোস্ট করুন</h2>
+  
+  <form id="newsForm">
+    <div class="form-group">
+      <label>শিরোনাম:</label>
+      <input type="text" id="title" required>
+    </div>
+    <div class="form-group">
+      <label>খবরের বিবরণ:</label>
+      <textarea id="content" rows="6" required></textarea>
+    </div>
+    <div class="form-group">
+      <label>ফিচার্ড ইমেজ (ছবি):</label>
+      <input type="file" id="image" accept="image/*" required>
+    </div>
+    <button type="submit" id="submitBtn">পোস্ট করুন</button>
+  </form>
+
+  <script>
+    document.getElementById('newsForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.innerText = 'আপলোড হচ্ছে...';
+      submitBtn.disabled = true;
+
+      const title = document.getElementById('title').value;
+      const content = document.getElementById('content').value;
+      const imageFile = document.getElementById('image').files[0];
+
+      try {
+        // ১. ছবি আপলোড
+        const formData = new FormData();
+        formData.append('file', imageFile);
+
+        const uploadRes = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+        
+        if (!uploadRes.ok) throw new Error('ছবি আপলোড ব্যর্থ হয়েছে!');
+        const uploadData = await uploadRes.json();
+        const imageUrl = uploadData.url;
+
+        // ২. নিউজ ডেটা ডাটাবেজে পাঠানো
+        const postRes = await fetch('/api/posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, content, imageUrl })
+        });
+
+        if (postRes.ok) {
+          alert('নিউজটি সফলভাবে লাইভ হয়েছে!');
+          document.getElementById('newsForm').reset();
+        } else {
+          throw new Error('ডাটাবেজে নিউজ সেভ করা যায়নি।');
+        }
+      } catch (error) {
+        alert('ভুল হয়েছে: ' + error.message);
+      } finally {
+        submitBtn.innerText = 'পোস্ট করুন';
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
