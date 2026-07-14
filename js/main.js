@@ -21,7 +21,6 @@ async function loadHeader() {
     const headerContainer = document.getElementById('headerContainer');
     if (!headerContainer) {
         console.warn('headerContainer এলিমেন্ট পাওয়া যায়নি');
-        // যদি কন্টেইনার না থাকে কিন্তু পেজে সরাসরি ID থাকে, তবুও ঘড়ি ট্রিপ করার চেষ্টা করবে
         updateDateTime(); 
         return;
     }
@@ -54,7 +53,7 @@ async function loadHeader() {
 // ফুটার লোড করুন
 async function loadFooter() {
     const footerContainer = document.getElementById('footerContainer');
-    if (!footerContainer) return; // পেজে ফুটার কন্টেইনার না থাকলে এরর না দিয়ে স্কিপ করবে
+    if (!footerContainer) return; 
     
     try {
         const response = await fetch('./footer.html');
@@ -73,7 +72,7 @@ async function loadFooter() {
 // সাইডবার লোড করুন
 async function loadSidebar() {
     const sidebarContainer = document.getElementById('sidebarContainer');
-    if (!sidebarContainer) return; // পেজে সাইডবার কন্টেইনার না থাকলে স্কিপ করবে
+    if (!sidebarContainer) return; 
     
     try {
         const response = await fetch('./sidebar.html');
@@ -93,7 +92,6 @@ async function loadSidebar() {
 function updateDateTime() {
     const dateTimeEl = document.getElementById('dateTime');
     
-    // যদি পেজে এখনও dateTime আইডি না আসে, তবে এরর না জেনারেট করে ফিরে যাবে
     if (!dateTimeEl) return; 
 
     const now = new Date();
@@ -184,7 +182,7 @@ function setupArchiveToggle() {
 
 // =============== ডাইনামিক মেইন কন্টেন্ট রেন্ডারিং লজিক ===============
 
-// ১. পোস্ট কখন করা হয়েছে তা বাংলায় রূপান্তর করার ইউটিলিটি ফাংশন
+// ১. পোস্ট কখন করা হয়েছে তা বাংলায় রূপান্তর করার ইউটিলিটি ফাংশন
 function timeAgoBengali(dateString) {
     const now = new Date();
     const postDate = new Date(dateString);
@@ -223,27 +221,32 @@ function getCategoryData(categoryId) {
     return categories[categoryId] || { name: 'সাধারণ', class: 'mi-cat-politics' };
 }
 
-// ৩. মেইন কন্টেন্টকে ডাইনামিক করার ফাংশন
+// ৩. মেইন কন্টেন্টকে ডাইনামিক করার ফাংশন (Cloudflare D1 ডেটাবেজের জন্য অপ্টিমাইজড)
 async function renderMainContentNews() {
     const featuredSection = document.getElementById('featuredSection');
     const recentNewsGrid = document.getElementById('recentNewsGrid');
     
-    // যদি পেজে মেইন কন্টেন্টের আইডিগুলো না থাকে (যেমন আলাদা কোনো সাব-পেজে), তবে এরর ছাড়াই রিটার্ন করবে
     if (!featuredSection && !recentNewsGrid) return;
 
     try {
-        // এপিআই বা এন্ডপয়েন্ট থেকে ডেটা ফেচ করা হচ্ছে (আপনার প্রোজেক্টের এপিআই রুট অনুযায়ী পরিবর্তন করতে পারেন)
+        // এপিআই থেকে ডেটা ফেচ করা হচ্ছে
         const [leadRes, subRes, allRes] = await Promise.all([
             fetch('/api/posts?type=lead'),
             fetch('/api/posts?type=sub'),
             fetch('/api/posts')
         ]);
 
-        if (!leadRes.ok || !subRes.ok || !allRes.ok) throw new Error('এপিআই সার্ভার থেকে ডাটা পাওয়া যায়নি');
+        if (!leadRes.ok || !subRes.ok || !allRes.ok) throw new Error('এপিআই সার্ভার থেকে ডাটা পাওয়া যায়নি');
 
-        const leadPosts = await leadRes.json();
-        const subPosts = await subRes.json();
-        const allPosts = await allRes.json();
+        const leadData = await leadRes.json();
+        const subData = await subRes.json();
+        const allData = await allRes.json();
+
+        // 🛡️ Cloudflare D1 সেফটি চেক: 
+        // যদি ডাটাবেজের রেসপন্স অবজেক্ট আকারে আসে এবং ভেতর results থাকে তবে তা নিবে, অন্যথায় সরাসরি অ্যারে ব্যবহার করবে।
+        const leadPosts = Array.isArray(leadData) ? leadData : (leadData.results || []);
+        const subPosts = Array.isArray(subData) ? subData : (subData.results || []);
+        const allPosts = Array.isArray(allData) ? allData : (allData.results || []);
 
         // --- ক. ফিচার্ড নিউজ ব্লক রেন্ডার ---
         if (featuredSection) {
@@ -318,17 +321,18 @@ async function renderMainContentNews() {
                 });
                 recentNewsGrid.innerHTML = gridHtml;
             } else {
-                recentNewsGrid.innerHTML = `<div class="text-center p-4 width-100 w-100">কোনো সাম্প্রতিক খবর পাওয়া যায়নি।</div>`;
+                recentNewsGrid.innerHTML = `<div class="text-center p-4 w-100">কোনো সাম্প্রতিক খবর পাওয়া যায়নি।</div>`;
             }
         }
 
     } catch (err) {
         console.error('কন্টেন্ট ডাইনামিক রেন্ডারিং ত্রুটি:', err);
+        // ত্রুটি ঘটলে স্পিনার আটকে না রেখে ইউজার ফ্রেন্ডলি মেসেজ দেখানো হবে
         if (featuredSection) {
-            featuredSection.innerHTML = `<div class="text-center p-4 text-danger">⚠️ ফিচার্ড নিউজ লোড করতে ত্রুটি হয়েছে।</div>`;
+            featuredSection.innerHTML = `<div class="text-center p-4 text-danger">⚠️ ফিচার্ড নিউজ লোড করতে ত্রুটি হয়েছে।</div>`;
         }
         if (recentNewsGrid) {
-            recentNewsGrid.innerHTML = `<div class="text-center p-4 text-danger">⚠️ সাম্প্রতিক খবর লোড করতে ত্রুটি হয়েছে।</div>`;
+            recentNewsGrid.innerHTML = `<div class="text-center p-4 text-danger">⚠️ সাম্প্রতিক খবর লোড করতে ত্রুটি হয়েছে।</div>`;
         }
     }
 }
