@@ -3,14 +3,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM সম্পূর্ণভাবে লোড হয়েছে');
     
-    // প্রতিটি ফাংশনকে আলাদাভাবে ট্রাই-ক্যাচ দিয়ে রান করা হলো, যাতে একটির এররে অন্যটি না আটকায়
+    // প্রতিটি ফাংশনকে আলাদাভাবে ট্রাই-ক্যাচ দিয়ে রান করা হলো, যাতে একটির এররে অন্যটি না আটকায়
     try { loadHeader(); } catch(e) { console.error(e); }
     try { loadFooter(); } catch(e) { console.error(e); }
     try { loadSidebar(); } catch(e) { console.error(e); }
     try { setupNavigation(); } catch(e) { console.error(e); }
     try { setupSearch(); } catch(e) { console.error(e); }
     try { setupArchiveToggle(); } catch(e) { console.error(e); }
-    try { renderMainContentNews(); } catch(e) { console.error(e); } // মেইন ডাইনামিক কন্টেন্ট লোড করার ফাংশন
     
     // প্রতি সেকেন্ডে সময় আপডেট করার জন্য ইন্টারভাল
     setInterval(updateDateTime, 1000);
@@ -21,6 +20,7 @@ async function loadHeader() {
     const headerContainer = document.getElementById('headerContainer');
     if (!headerContainer) {
         console.warn('headerContainer এলিমেন্ট পাওয়া যায়নি');
+        // যদি কন্টেইনার না থাকে কিন্তু পেজে সরাসরি ID থাকে, তবুও ঘড়ি ট্রিপ করার চেষ্টা করবে
         updateDateTime(); 
         return;
     }
@@ -40,7 +40,7 @@ async function loadHeader() {
         headerContainer.innerHTML = html;
         console.log('✅ হেডার সফলভাবে লোড হয়েছে');
         
-        // হেডার বসার পর সাথে সাথে ঘড়ি চালু
+        // হেডার বসার পর সাথে সাথে ঘড়ি চালু
         updateDateTime();
         
     } catch (error) {
@@ -53,7 +53,7 @@ async function loadHeader() {
 // ফুটার লোড করুন
 async function loadFooter() {
     const footerContainer = document.getElementById('footerContainer');
-    if (!footerContainer) return; 
+    if (!footerContainer) return; // পেজে ফুটার কন্টেইনার না থাকলে এরর না দিয়ে স্কিপ করবে
     
     try {
         const response = await fetch('./footer.html');
@@ -72,7 +72,7 @@ async function loadFooter() {
 // সাইডবার লোড করুন
 async function loadSidebar() {
     const sidebarContainer = document.getElementById('sidebarContainer');
-    if (!sidebarContainer) return; 
+    if (!sidebarContainer) return; // পেজে সাইডবার কন্টেইনার না থাকলে স্কিপ করবে
     
     try {
         const response = await fetch('./sidebar.html');
@@ -92,6 +92,7 @@ async function loadSidebar() {
 function updateDateTime() {
     const dateTimeEl = document.getElementById('dateTime');
     
+    // যদি পেজে এখনও dateTime আইডি না আসে, তবে এরর না জেনারেট করে ফিরে যাবে
     if (!dateTimeEl) return; 
 
     const now = new Date();
@@ -179,164 +180,6 @@ function setupArchiveToggle() {
         }
     });
 }
-
-// =============== ডাইনামিক মেইন কন্টেন্ট রেন্ডারিং লজিক ===============
-
-// ১. পোস্ট কখন করা হয়েছে তা বাংলায় রূপান্তর করার ইউটিলিটি ফাংশন
-function timeAgoBengali(dateString) {
-    const now = new Date();
-    const postDate = new Date(dateString);
-    const diffMs = now - postDate;
-    const diffMins = Math.floor(diffMs / 60000);
-    const diffHours = Math.floor(diffMins / 60);
-
-    const translateNumber = (num) => {
-        const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        const bengaliNumbers = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-        return num.toString().split('').map(digit => {
-            const index = englishNumbers.indexOf(digit);
-            return index !== -1 ? bengaliNumbers[index] : digit;
-        }).join('');
-    };
-
-    if (diffMins < 1) return 'এইমাত্র';
-    if (diffMins < 60) return `${translateNumber(diffMins)} মিনিট আগে`;
-    if (diffHours < 24) return `${translateNumber(diffHours)} ঘণ্টা আগে`;
-    
-    return postDate.toLocaleDateString('bn-BD');
-}
-
-// ২. ক্যাটাগরি ম্যাপিং অবজেক্ট
-function getCategoryData(categoryId) {
-    const categories = {
-        1: { name: 'জাতীয়', class: 'mi-cat-national' },
-        2: { name: 'রাজনীতি', class: 'mi-cat-politics' },
-        3: { name: 'বিশ্ব', class: 'mi-cat-world' },
-        4: { name: 'খেলাধুলা', class: 'mi-cat-sports' },
-        5: { name: 'প্রযুক্তি', class: 'mi-cat-tech' },
-        6: { name: 'বিনোদন', class: 'mi-cat-entertainment' },
-        7: { name: 'স্বাস্থ্য', class: 'mi-cat-health' },
-        8: { name: 'ব্যবসা', class: 'mi-cat-business' }
-    };
-    return categories[categoryId] || { name: 'সাধারণ', class: 'mi-cat-politics' };
-}
-
-// ৩. মেইন কন্টেন্টকে ডাইনামিক করার ফাংশন (Cloudflare D1 ডেটাবেজের জন্য অপ্টিমাইজড)
-async function renderMainContentNews() {
-    const featuredSection = document.getElementById('featuredSection');
-    const recentNewsGrid = document.getElementById('recentNewsGrid');
-    
-    if (!featuredSection && !recentNewsGrid) return;
-
-    try {
-        // এপিআই থেকে ডেটা ফেচ করা হচ্ছে
-        const [leadRes, subRes, allRes] = await Promise.all([
-            fetch('/api/posts?type=lead'),
-            fetch('/api/posts?type=sub'),
-            fetch('/api/posts')
-        ]);
-
-        if (!leadRes.ok || !subRes.ok || !allRes.ok) throw new Error('এপিআই সার্ভার থেকে ডাটা পাওয়া যায়নি');
-
-        const leadData = await leadRes.json();
-        const subData = await subRes.json();
-        const allData = await allRes.json();
-
-        // 🛡️ Cloudflare D1 সেফটি চেক: 
-        // যদি ডাটাবেজের রেসপন্স অবজেক্ট আকারে আসে এবং ভেতর results থাকে তবে তা নিবে, অন্যথায় সরাসরি অ্যারে ব্যবহার করবে।
-        const leadPosts = Array.isArray(leadData) ? leadData : (leadData.results || []);
-        const subPosts = Array.isArray(subData) ? subData : (subData.results || []);
-        const allPosts = Array.isArray(allData) ? allData : (allData.results || []);
-
-        // --- ক. ফিচার্ড নিউজ ব্লক রেন্ডার ---
-        if (featuredSection) {
-            let featuredHtml = '';
-
-            // ১. প্রথম মেইন লিড নিউজ
-            if (leadPosts.length > 0) {
-                const lead = leadPosts[0];
-                const leadImg = lead.image_url || 'img/placeholder.jpg';
-                const leadCaption = lead.image_caption ? `<div class="mi-image-caption">${lead.image_caption}</div>` : '';
-
-                featuredHtml += `
-                    <article class="mi-featured-main-article">
-                        <div class="mi-featured-image-block">
-                            <img src="${leadImg}" alt="${lead.title}">
-                            ${leadCaption}
-                        </div>
-                        <div class="mi-featured-content">
-                            <h2><a href="./single-post.html?id=${lead.id}">${lead.title}</a></h2>
-                            <p>${lead.content ? lead.content.substring(0, 150) : ''}...</p>
-                            <div class="mi-meta">${timeAgoBengali(lead.created_at || new Date())}</div>
-                        </div>
-                    </article>
-                `;
-            }
-
-            // ২. নিচে ২ টি সাব-নিউজ গ্রিড
-            if (subPosts.length > 0) {
-                featuredHtml += `<div class="mi-featured-sub-grid">`;
-                subPosts.slice(0, 2).forEach(post => {
-                    const subImg = post.image_url || 'https://via.placeholder.com/120x90';
-                    featuredHtml += `
-                        <article class="mi-sub-news-item">
-                            <div class="mi-sub-text">
-                                <h3><a href="./single-post.html?id=${post.id}">${post.title}</a></h3>
-                                <p class="text-muted m-0" style="font-size: 14px;">${post.content ? post.content.substring(0, 80) : ''}...</p>
-                                <div class="mi-meta mt-1">${timeAgoBengali(post.created_at || new Date())}</div>
-                            </div>
-                            <div class="mi-sub-img">
-                                <img src="${subImg}" alt="${post.title}">
-                            </div>
-                        </article>
-                    `;
-                });
-                featuredHtml += `</div>`;
-            }
-
-            featuredSection.innerHTML = featuredHtml || `<div class="text-center p-4">কোনো ফিচার্ড নিউজ নেই।</div>`;
-        }
-
-        // --- খ. সাম্প্রতিক খবরের গ্রিড রেন্ডার ---
-        if (recentNewsGrid) {
-            if (allPosts.length > 0) {
-                let gridHtml = '';
-                allPosts.forEach(post => {
-                    const catData = getCategoryData(post.category_id);
-                    const postImg = post.image_url || 'https://via.placeholder.com/300x200';
-                    
-                    gridHtml += `
-                        <div class="col-md-6">
-                            <article class="mi-news-card">
-                                <img src="${postImg}" class="img-fluid" alt="${post.title}">
-                                <div class="mi-card-body">
-                                    <span class="mi-category ${catData.class}">${catData.name}</span>
-                                    <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
-                                    <p>${post.content ? post.content.substring(0, 120) : ''}...</p>
-                                    <small class="mi-meta">${timeAgoBengali(post.created_at || new Date())}</small>
-                                </div>
-                            </article>
-                        </div>
-                    `;
-                });
-                recentNewsGrid.innerHTML = gridHtml;
-            } else {
-                recentNewsGrid.innerHTML = `<div class="text-center p-4 w-100">কোনো সাম্প্রতিক খবর পাওয়া যায়নি।</div>`;
-            }
-        }
-
-    } catch (err) {
-        console.error('কন্টেন্ট ডাইনামিক রেন্ডারিং ত্রুটি:', err);
-        // ত্রুটি ঘটলে স্পিনার আটকে না রেখে ইউজার ফ্রেন্ডলি মেসেজ দেখানো হবে
-        if (featuredSection) {
-            featuredSection.innerHTML = `<div class="text-center p-4 text-danger">⚠️ ফিচার্ড নিউজ লোড করতে ত্রুটি হয়েছে।</div>`;
-        }
-        if (recentNewsGrid) {
-            recentNewsGrid.innerHTML = `<div class="text-center p-4 text-danger">⚠️ সাম্প্রতিক খবর লোড করতে ত্রুটি হয়েছে।</div>`;
-        }
-    }
-}
-
 
 // =============== ফলব্যাক HTML কন্টেন্ট ===============
 
