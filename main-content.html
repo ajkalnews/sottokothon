@@ -81,3 +81,127 @@
         </div>
     </div>
 </section>
+
+// কত সময় আগে নিউজটি পোস্ট করা হয়েছে তা বাংলায় দেখানোর জন্য ফাংশন
+function timeAgoBengali(dateString) {
+  const now = new Date();
+  const postDate = new Date(dateString);
+  const diffMs = now - postDate;
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMins / 60);
+
+  // ইংরেজি সংখ্যাকে বাংলায় কনভার্ট করার জন্য
+  const translateNumber = (num) => {
+    const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const bengaliNumbers = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return num.toString().split('').map(digit => {
+      const index = englishNumbers.indexOf(digit);
+      return index !== -1 ? bengaliNumbers[index] : digit;
+    }).join('');
+  };
+
+  if (diffMins < 1) {
+    return 'এইমাত্র';
+  }
+  if (diffMins < 60) {
+    return `${translateNumber(diffMins)} মিনিট আগে`;
+  }
+  if (diffHours < 24) {
+    return `${translateNumber(diffHours)} ঘণ্টা আগে`;
+  }
+  
+  // ২৪ ঘণ্টার বেশি হলে তারিখ দেখাবে
+  return postDate.toLocaleDateString('bn-BD');
+}
+
+// এপিআই থেকে ডেটা নিয়ে এসে গ্রিড সাজানোর মূল ফাংশন
+async function renderFeaturedNews() {
+  const featuredSection = document.getElementById('featuredSection');
+  
+  try {
+    // ১. মেইন লিড এবং সাব-নিউজ এক সাথে ফেচ করা
+    const [leadRes, subRes] = await Promise.all([
+      fetch('/api/posts?type=lead'),
+      fetch('/api/posts?type=sub')
+    ]);
+
+    if (!leadRes.ok || !subRes.ok) {
+      throw new Error('সার্ভার থেকে নিউজ লোড করা সম্ভব হয়নি!');
+    }
+
+    const leadPosts = await leadRes.json();
+    const subPosts = await subRes.json();
+
+    let htmlContent = '';
+
+    // ২. মেইন লিড নিউজের অংশটি তৈরি করা (যদি থাকে)
+    if (leadPosts.length > 0) {
+      const lead = leadPosts[0];
+      
+      // ডাটাবেজের ডিরেক্ট ইমেজ অথবা আপনার R2 পাবলিক ইউআরএল হ্যান্ডেল করার জন্য
+      const leadImg = lead.image_url || 'img/placeholder.jpg';
+      const leadCaption = lead.image_caption 
+        ? `<div class="mi-image-caption">${lead.image_caption}</div>` 
+        : '';
+
+      htmlContent += `
+        <!-- ১. ওপরের মেইন লিড নিউজ (৫০%-৫০% গ্রিড) -->
+        <article class="mi-featured-main-article">
+            <div class="mi-featured-image-block">
+                <img src="${leadImg}" alt="${lead.title}">
+                ${leadCaption}
+            </div>
+            <div class="mi-featured-content">
+                <h2><a href="./single-post.html?slug=${lead.slug}">${lead.title}</a></h2>
+                <p>${lead.content.substring(0, 160)}...</p>
+                <div class="mi-meta">${timeAgoBengali(lead.created_at)}</div>
+            </div>
+        </article>
+      `;
+    }
+
+    // ৩. নিচের ২টি সাব-নিউজের অংশটি তৈরি করা (যদি থাকে)
+    if (subPosts.length > 0) {
+      htmlContent += `<!-- ২. নিচের ২টি সাব-নিউজের গ্রিড (পাশাপাশি দুটি নিউজ) -->`;
+      htmlContent += `<div class="mi-featured-sub-grid">`;
+
+      subPosts.forEach(post => {
+        const subImg = post.image_url || 'https://via.placeholder.com/120x90';
+        
+        htmlContent += `
+          <article class="mi-sub-news-item">
+              <div class="mi-sub-text">
+                  <h3><a href="./single-post.html?slug=${post.slug}">${post.title}</a></h3>
+                  <p>${post.content.substring(0, 110)}...</p>
+                  <div class="mi-meta">${timeAgoBengali(post.created_at)}</div>
+              </div>
+              <div class="mi-sub-img">
+                  <img src="${subImg}" alt="${post.title}">
+              </div>
+          </article>
+        `;
+      });
+
+      htmlContent += `</div>`;
+    }
+
+    // ৪. যদি কোনো নিউজই না থাকে
+    if (leadPosts.length === 0 && subPosts.length === 0) {
+      featuredSection.innerHTML = `<div style="text-align: center; padding: 40px; color: #6b7280;">এই মুহূর্তে কোনো ফিচার্ড নিউজ নেই।</div>`;
+      return;
+    }
+
+    // জেনারেট হওয়া সব HTML মূল সেকশনে ঢুকিয়ে দেওয়া
+    featuredSection.innerHTML = htmlContent;
+
+  } catch (err) {
+    console.error(err);
+    featuredSection.innerHTML = `
+      <div style="text-align: center; padding: 40px; color: var(--danger-color); font-weight: bold;">
+        ⚠️ নিউজ লোড করতে ব্যর্থ হয়েছে। অনুগ্রহ করে পেজটি রিফ্রেশ করুন।
+      </div>`;
+  }
+}
+
+// পেজ লোড হওয়া মাত্রই ফাংশনটি রান হবে
+document.addEventListener('DOMContentLoaded', renderFeaturedNews);
