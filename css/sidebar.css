@@ -311,3 +311,93 @@
 .mi-sidebar-thumb-text h4 a:hover {
     color: #007bff; /* হোভার করলে লিংক নীল হবে */
 }
+/* ==========================================================================
+   আর্কাইভ ক্যালেন্ডার উইজেট স্টাইল
+   ========================================================================== */
+.mi-archive-calendar-wrapper {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 15px;
+    font-family: 'SolaimanLipi', Arial, sans-serif;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ক্যালেন্ডার হেডার (মাস ও নেভিগেশন) */
+.mi-cal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.mi-cal-month-year {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #333333;
+}
+
+.mi-cal-btn {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: #777777;
+    cursor: pointer;
+    padding: 0 8px;
+    transition: color 0.2s;
+}
+
+.mi-cal-btn:hover {
+    color: #007bff;
+}
+
+/* ক্যালেন্ডার গ্রিড লেআউট */
+.mi-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* সপ্তাহের ৭ দিনের জন্য ৭টি কলাম */
+    gap: 6px;
+    text-align: center;
+}
+
+/* বারের নাম (শনি-শুক্র) */
+.mi-cal-day-name {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #666666;
+    padding-bottom: 5px;
+}
+
+/* প্রতিটি তারিখের ঘরের স্টাইল */
+.mi-cal-date {
+    font-size: 0.95rem;
+    color: #333333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+/* যেসব তারিখে খবর আছে সেগুলোর হোভার ইফেক্ট */
+.mi-cal-date:not(.mi-empty):hover {
+    background-color: #f0f4f8;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* আজকের তারিখ (Highlighted) */
+.mi-cal-date.mi-current {
+    background-color: #007bff;
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+/* ফাঁকা ঘরের জন্য */
+.mi-cal-date.mi-empty {
+    cursor: default;
+    background: none;
+}
