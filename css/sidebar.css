@@ -542,3 +542,103 @@
     from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
 }
+/* ==========================================================================
+   নিউজ পোর্টাল মতামত ও বিশ্লেষণ উইজেট স্টাইল (হুবহু ইমেজ অনুযায়ী)
+   ========================================================================== */
+.mi-opinion-widget {
+    background: transparent;
+    font-family: 'SolaimanLipi', Arial, sans-serif;
+    padding: 10px 0;
+}
+
+.mi-opinion-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.mi-opinion-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0; /* ইমেজের মতো নিচের চিকন দাগ */
+}
+
+.mi-opinion-list li:last-child {
+    border-bottom: none; /* শেষ আইটেমের নিচে বর্ডার থাকবে না */
+}
+
+/* বাম পাশের গোল পেনসিল/ডামি আইকন */
+.mi-author-avatar {
+    width: 50px;
+    height: 50px;
+    background-color: #e6e6e6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* আইকনের ভেতরের পেনসিল ডিজাইন (ফন্টঅসাম ব্যবহার না করলে সিএসএস দিয়েও পেনসিল বানানো যায়) */
+.mi-author-avatar i, 
+.mi-author-avatar::before {
+    content: '✎'; /* ডামি পেনসিল ক্যারেক্টার */
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.mi-author-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* টেক্সট এরিয়া */
+.mi-opinion-content {
+    flex: 1;
+}
+
+.mi-opinion-title {
+    font-size: 1.1rem;
+    font-weight: normal;
+    line-height: 1.5;
+    margin: 0 0 6px 0;
+    color: #333333;
+}
+
+/* লাল রঙের ক্যাটাগরি ট্যাগ */
+.mi-op-tag {
+    color: #cc0000; /* ইমেজের মতো লাল রং */
+    font-weight: bold;
+}
+
+.mi-opinion-title a {
+    color: #222222;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.mi-opinion-title a:hover {
+    color: #007bff;
+}
+
+/* লেখকের নাম (ছোট এবং হালকা ধূসর রঙের) */
+.mi-op-author {
+    font-size: 0.85rem;
+    color: #666666;
+    display: block;
+}
+
+.mi-op-author a {
+    color: #555555;
+    text-decoration: none;
+}
+
+.mi-op-author a:hover {
+    text-decoration: underline;
+}
