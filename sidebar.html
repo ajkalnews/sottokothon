@@ -39,4 +39,41 @@
         <a href="#" class="mi-btn-more">আরও</a>
     </div>
 </div>
+    <!-- এলাকার খবর ফ্ল্যাট উইজেট সেকশন (s2.JPG অনুযায়ী) -->
+<div class="mi-flat-widget">
+    <div class="mi-widget-header-flat">
+        <span class="mi-category-flat">এলাকার খবর</span>
+    </div>
+    
+    <form class="mi-area-filter-form" action="#" method="GET">
+        <!-- বিভাগ সিলেক্ট -->
+        <div class="mi-filter-group">
+            <select name="division" class="mi-filter-select">
+                <option value="">বিভাগ</option>
+                <option value="dhaka">ঢাকা</option>
+                <option value="chittagong">চট্টগ্রাম</option>
+                <!-- অন্যান্য বিভাগ এখানে যুক্ত করতে পারেন -->
+            </select>
+        </div>
+
+        <!-- জেলা সিলেক্ট -->
+        <div class="mi-filter-group">
+            <select name="district" class="mi-filter-select">
+                <option value="">জেলা</option>
+                <!-- ডাইনামিক ডেটা বা অপশনসমূহ -->
+            </select>
+        </div>
+
+        <!-- উপজেলা সিলেক্ট -->
+        <div class="mi-filter-group">
+            <select name="upazila" class="mi-filter-select">
+                <option value="">উপজেলা</option>
+                <!-- ডাইনামিক ডেটা বা অপশনসমূহ -->
+            </select>
+        </div>
+
+        <!-- খুঁজুন বাটন -->
+        <button type="submit" class="mi-btn-search">খুঁজুন</button>
+    </form>
+</div>
 </aside>
