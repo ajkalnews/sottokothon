@@ -401,3 +401,63 @@
     cursor: default;
     background: none;
 }
+/* ==========================================================================
+   সাইডবার ট্যাবড নিউজ উইজেট স্টাইল
+   ========================================================================== */
+.mi-tab-header {
+    display: flex;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 15px;
+}
+
+/* প্রতিটি ট্যাব বাটনের ডিফল্ট স্টাইল */
+.mi-tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 10px 5px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    font-family: 'SolaimanLipi', Arial, sans-serif;
+    color: #555555;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    transition: color 0.2s ease;
+    outline: none;
+}
+
+.mi-tab-btn:hover {
+    color: #007bff;
+}
+
+/* একটিভ ট্যাবের নিচের বর্ডার ও কালার ইফেক্ট */
+.mi-tab-btn.active {
+    color: #007bff;
+}
+
+.mi-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; /* মূল হেডার বর্ডারের ওপর বসার জন্য */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #007bff; /* একটিভ নীল দাগ */
+}
+
+/* ট্যাব প্যানেল কন্ট্রোল (ডিফল্টভাবে সব হাইড থাকবে, শুধু একটিভটি শো করবে) */
+.mi-tab-pane {
+    display: none;
+}
+
+.mi-tab-pane.active {
+    display: block;
+    animation: fadeInTab 0.3s ease-in-out;
+}
+
+/* হালকা অ্যানিমেশন ইফেক্ট */
+@keyframes fadeInTab {
+    from { opacity: 0; transform: translateY(2px); }
+    to { opacity: 1; transform: translateY(0); }
+}
