@@ -254,3 +254,60 @@
 .mi-btn-search:hover {
     background-color: #0076cf; /* হোভার কালার */
 }
+/* ==========================================================================
+   সাইডবার থাম্বনেইল লিস্ট উইজেট স্টাইল (s3.JPG অনুযায়ী)
+   ========================================================================== */
+.mi-sidebar-thumb-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.mi-sidebar-thumb-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #e0e0e0; /* খবরের মাঝখানের আড়াআড়ি চিকন ডিভাইডার */
+    align-items: flex-start;
+}
+
+/* প্রথম আইটেমের ওপরের বাড়তি প্যাডিং রিসেট */
+.mi-sidebar-thumb-list .mi-sidebar-thumb-item:first-child {
+    padding-top: 0;
+}
+
+/* শেষ আইটেমের নিচের বর্ডার ও প্যাডিং রিমুভ */
+.mi-sidebar-thumb-list .mi-sidebar-thumb-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* বামের ছোট ছবির স্টাইল */
+.mi-sidebar-thumb-img img {
+    width: 105px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 2px; /* ছবির কোণাগুলো হালকা স্মুথ রাখার জন্য */
+    display: block;
+}
+
+/* ডানের লেখার স্টাইল */
+.mi-sidebar-thumb-text {
+    flex: 1;
+}
+
+.mi-sidebar-thumb-text h4 {
+    font-size: 1.08rem;
+    font-weight: bold;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.mi-sidebar-thumb-text h4 a {
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.mi-sidebar-thumb-text h4 a:hover {
+    color: #007bff; /* হোভার করলে লিংক নীল হবে */
+}
