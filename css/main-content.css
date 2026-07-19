@@ -351,6 +351,110 @@ css_content = """/* ============================================================
 }
 
 /* ==========================================================================
+   ৭. বিনোদন সেকশন স্টাইল (বাম পাশে ৩ নিউজ, ডান পাশে মেইন নিউজ - se3.JPG)
+   ========================================================================== */
+.mi-entertainment-section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-family: 'Solaimanlipi', sans-serif;
+}
+
+.mi-entertainment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr; /* বাম ও ডান কলামের অনুপাত */
+    gap: 24px;
+}
+
+/* বাম পাশের কলামের স্টাইল */
+.mi-ent-left-column {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #c0c0c0; /* মাঝখানের লম্বালম্বি ধূসর বর্ডার */
+    padding-right: 24px;
+}
+
+/* বাম পাশের প্রতিটি ছোট নিউজের লেআউট */
+.mi-ent-sub-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0; /* খবরের মাঝখানের আড়াআড়ি রেখা */
+}
+
+.mi-ent-left-column .mi-ent-sub-item:first-child {
+    padding-top: 0;
+}
+
+.mi-ent-left-column .mi-ent-sub-item:last-child {
+    border-bottom: none; /* শেষ খবরের নিচে আড়াআড়ি রেখা থাকবে না */
+    padding-bottom: 0;
+}
+
+.mi-ent-sub-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.mi-ent-sub-item h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.45;
+    margin: 0 0 8px 0;
+}
+
+.mi-ent-sub-item h3 a,
+.mi-ent-main-content h2 a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.mi-ent-sub-item h3 a:hover,
+.mi-ent-main-content h2 a:hover {
+    color: #007bff;
+}
+
+.mi-ent-sub-img img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+}
+
+/* ডান পাশের প্রধান নিউজের স্টাইল */
+.mi-ent-right-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.mi-ent-main-article {
+    display: flex;
+    flex-direction: column;
+}
+
+.mi-ent-main-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.mi-ent-main-content h2 {
+    font-size: 1.65rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 12px 0;
+}
+
+.mi-ent-main-content p {
+    font-size: 0.98rem;
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+
+/* ==========================================================================
    ৬. মোবাইল রেসপনসিভ ডিজাইন (Responsive Layouts)
    ========================================================================== */
 @media (max-width: 768px) {
