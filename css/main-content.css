@@ -1,3 +1,6 @@
+css_content = """/* ==========================================================================
+   ১. গ্লোবাল এবং লেআউট স্টাইল (Global & Layout Styles)
+   ========================================================================== */
 .mi-content {
     flex: 1;
 }
@@ -8,13 +11,20 @@
     background: #ffffff;
 }
 
-/* --- ১. ওপরের প্রধান লিড নিউজের স্টাইল --- */
+/* বক্স মডেল রিসেট নিশ্চিত করার জন্য */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   ২. ওপরের প্রধান লিড নিউজের স্টাইল (Main Lead Article)
+   ========================================================================== */
 .mi-featured-main-article {
     display: grid;
     grid-template-columns: 1.2fr 1fr; /* ছবি একটু বড়, লেখা ডানে */
     gap: 24px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #c0c0c0; /* ছবির মতো মাঝখানের স্পষ্ট আড়াআড়ি কালো/ধূসর দাগ */
+    border-bottom: 1px solid #c0c0c0; /* মাঝখানের স্পষ্ট আড়াআড়ি ধূসর দাগ */
 }
 
 .mi-featured-image-block {
@@ -54,8 +64,12 @@
 }
 
 .mi-featured-content h2 a:hover,
-.mi-sub-news-item h3 a:hover {
-    color: #007bff; /* হোভার কালার */
+.mi-sub-news-item h3 a:hover,
+.mi-news-card-featured .mi-card-body h4 a:hover,
+.mi-widget-list li h4 a:hover,
+.mi-block-featured h3 a:hover,
+.mi-block-list li h4 a:hover {
+    color: #007bff; /* হোভার কালার - নীল */
 }
 
 .mi-featured-content p {
@@ -65,7 +79,9 @@
     margin-bottom: 16px;
 }
 
-/* --- ২. নিচের দুটি সাব-নিউজের গ্রিড লেআউট --- */
+/* ==========================================================================
+   ৩. নিচের দুটি সাব-নিউজের গ্রিড লেআউট (Sub News Grid)
+   ========================================================================== */
 .mi-featured-sub-grid {
     display: grid;
     grid-template-columns: 1fr 1fr; /* ৫০%-৫০% পাশাপাশি দুটি নিউজ */
@@ -80,7 +96,7 @@
     gap: 16px;
 }
 
-/* বাম পাশের নিউজটির ডানপাশে একটি হালকা লম্বালম্বি বর্ডার (ছবির মতো আলাদা করতে) */
+/* বাম পাশের নিউজটির ডানপাশে একটি হালকা লম্বালম্বি বর্ডার */
 .mi-featured-sub-grid > article:first-child {
     border-right: 1px solid #e0e0e0;
     padding-right: 15px;
@@ -105,7 +121,7 @@
 }
 
 .mi-red-text {
-    color: #dc3545; /* 'চট্টগ্রামে ব্যবসাপ্রতিষ্ঠানে সশস্ত্র হামলা' লেখার লাল রঙ */
+    color: #dc3545; /* শিরোনামের আংশিক লেখার লাল রঙ */
 }
 
 .mi-sub-news-item p {
@@ -128,25 +144,89 @@
     margin-top: auto; /* সময়কে খবরের নিচে পুশ করবে */
 }
 
-/* 📱 মোবাইল রেসপনসিভ ডিজাইন */
-@media (max-width: 768px) {
-    .mi-featured-main-article {
-        grid-template-columns: 1fr; /* মোবাইলে মেইন নিউজ উপর-নিচ হবে */
-        gap: 16px;
-    }
-    
-    .mi-featured-sub-grid {
-        grid-template-columns: 1fr; /* মোবাইলে ছোট নিউজ দুটিও উপর-নিচ হবে */
-        gap: 24px;
-    }
+/* ==========================================================================
+   ৪. নতুন যুক্ত হওয়া ক্যাটাগরি গ্রিড সেকশন (শিক্ষা ও চাকরি - 1grid.JPG অনুযায়ী)
+   ========================================================================== */
+.mi-category-grid-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* ৫০%-৫০% পাশাপাশি দুটি কলাম */
+    gap: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-family: 'Solaimanlipi', sans-serif;
+}
 
-    .mi-featured-sub-grid > article:first-child {
-        border-right: none;
-        border-bottom: 1px solid #e0e0e0;
-        padding-right: 0;
-        padding-bottom: 20px;
-    }
-/* প্রধান কন্টেইনার কার্ড */
+/* ক্যাটাগরি হেডার স্টাইল (উপরে ধূসর মোটা বর্ডার) */
+.mi-block-header {
+    border-top: 4px solid #777777; /* ছবির মতো ওপরে স্পষ্ট ধূসর দাগ */
+    padding-top: 8px;
+    margin-bottom: 15px;
+}
+
+.mi-block-title {
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* লাল রঙের অ্যারো চিহ্নের স্টাইল */
+.mi-arrow {
+    color: #dc3545; /* লাল কালার */
+    margin-left: 6px;
+    font-family: sans-serif;
+    font-size: 1.1rem;
+}
+
+/* ফিচার্ড অংশ (ছবি ও প্রধান শিরোনাম) */
+.mi-block-featured {
+    margin-bottom: 15px;
+}
+
+.mi-block-featured img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+.mi-block-featured h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.mi-block-featured h3 a,
+.mi-block-list li h4 a {
+    color: #000000;
+    text-decoration: none;
+}
+
+/* নিচে অন্যান্য খবরের তালিকা */
+.mi-block-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mi-block-list li {
+    padding: 12px 0;
+    border-top: 1px solid #e0e0e0; /* খবরের মাঝখানের হালকা ডিভাইডার */
+}
+
+.mi-block-list li h4 {
+    font-size: 1.05rem;
+    font-weight: normal;
+    line-height: 1.45;
+    margin: 0;
+}
+
+/* ==========================================================================
+   ৫. সিঙ্গেল উইজেট কার্ড সেকশন (রাজনীতি ও খেলাধুলা - sec.JPG অনুযায়ী)
+   ========================================================================== */
 .mi-news-widget-wrapper {
     display: flex;
     justify-content: center; /* স্ক্রিনের মাঝখানে রাখার জন্য */
@@ -157,10 +237,10 @@
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
-    width: 300px; /* sec.JPG-এর মতো সরু প্রস্থ */
+    width: 300px; /* সরু উইজেট প্রস্থ */
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     padding: 15px;
-    font-family: 'SolaimanLipi', Arial, sans-serif; /* বাংলা ফন্ট নিশ্চিত করুন */
+    font-family: 'SolaimanLipi', Arial, sans-serif;
 }
 
 /* সেকশন হেডার স্টাইল (বিজ্ঞানচিন্তা-এর মতো) */
@@ -183,7 +263,7 @@
 .mi-widget-header .mi-category::after {
     content: '';
     position: absolute;
-    bottom: -7px; /* বর্ডারের ঠিক ওপরে */
+    bottom: -7px;
     left: 0;
     width: 100%;
     height: 2px;
@@ -214,10 +294,6 @@
     font-weight: normal;
 }
 
-.mi-news-card-featured .mi-card-body h4 a:hover {
-    color: #007bff;
-}
-
 /* অন্যান্য খবরের তালিকা */
 .mi-widget-list {
     list-style: none;
@@ -244,10 +320,6 @@
     color: #333;
     text-decoration: none;
     font-weight: normal;
-}
-
-.mi-widget-list li h4 a:hover {
-    color: #007bff;
 }
 
 /* সেকশন বিভাজক */
@@ -277,3 +349,39 @@
 .mi-btn-more:hover {
     background-color: #0056b3;
 }
+
+/* ==========================================================================
+   ৬. মোবাইল রেসপনসিভ ডিজাইন (Responsive Layouts)
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* প্রধান ফিচার্ড নিউজ মোবাইলে ওপর-নিচ হবে */
+    .mi-featured-main-article {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    /* সাব-নিউজ দুটি মোবাইলে ওপর-নিচ হবে */
+    .mi-featured-sub-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .mi-featured-sub-grid > article:first-child {
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+        padding-right: 0;
+        padding-bottom: 20px;
+    }
+
+    /* নতুন যুক্ত হওয়া শিক্ষা ও চাকরি সেকশন মোবাইলে ওপর-নিচ হবে */
+    .mi-category-grid-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+"""
+
+with open("main-content-v2.css", "w", encoding="utf-8") as f:
+    f.write(css_content)
+
+print("CSS File written successfully.")
