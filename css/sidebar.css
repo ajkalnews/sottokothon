@@ -103,7 +103,7 @@
     display: flex;
 }
 
-.mi-widget-header{
+.mi-widget-header.mi-span{
     font-size: 1.15rem;
     font-weight: bold;
     color: #333;
@@ -112,7 +112,7 @@
 }
 
 /* শিরোনামের নিচের লাল চিকন আন্ডারলাইন */
-.mi-widget-header .mi-category::after {
+.mi-widget-header .mi-span::after {
     content: '';
     position: absolute;
     bottom: -6px;
