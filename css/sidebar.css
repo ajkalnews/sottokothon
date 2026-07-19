@@ -103,7 +103,7 @@
     display: flex;
 }
 
-.mi-widget-header .mi-category {
+.mi-widget-header{
     font-size: 1.15rem;
     font-weight: bold;
     color: #333;
