@@ -7,7 +7,8 @@
     <link rel="icon" type="image/png" href="img/favicon.png">
     <meta name="monetag" content="254d749cec89f73b310bb40d56cea871">
     <script src="https://5gvci.com/act/files/tag.min.js?z=11281902" data-cfasync="false" async></script>
-   <script>(function(s){s.dataset.zone='11281907',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script>(function(s){s.dataset.zone='11281907',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -30,29 +31,44 @@
 
         <!-- মেইন কনটেন্ট wrapper (বুটস্ট্র্যাপ কন্টেইনার দিয়ে মোড়ানো) -->
         <div class="container my-2 px-0">
-            <div class="row ">
+            
+            <!-- মেইন কন্টেন্ট ও সাইডবার সেকশন -->
+            <div class="row">
                 
                 <!-- বাম পাশে মেইন কনটেন্ট এরিয়া (১২ ভাগের ৮ ভাগ জায়গা নেবে) -->
                 <main id="mainContentContainer" class="mi-content col-lg-8 col-md-12">
                     <!-- জাভাস্ক্রিপ্ট দিয়ে এখানে কনটেন্ট আসবে -->
                 </main>
-<div class"row"><img src="img/6211266836143166852.gif"></div>
+
                 <!-- ডান পাশে সাইডবার (১২ ভাগের ৪ ভাগ জায়গা নেবে) -->
                 <aside class="col-lg-4 col-md-12">
                     <div id="sidebarContainer"></div>
                 </aside>
 
+            </div> <!-- /row (মেইন কনটেন্ট ও সাইডবার শেষ) -->
+
+            <!-- ==========================================
+                 অ্যাড সেকশন (মেইন কন্টেন্ট ও সাইডবারের নিচে মিডিলে)
+                 ========================================== -->
+            <div class="row my-4 justify-content-center text-center">
+                <div class="col-12">
+                    <div class="mi-middle-ad-wrapper">
+                        <!-- img-fluid দিয়ে রেসপন্সিভ, d-block ও mx-auto দিয়ে পারফেক্টলি মিডিলে সেট করা হয়েছে -->
+                        <img src="img/6211266836143166852.gif" alt="Advertisement" class="img-fluid d-block mx-auto rounded shadow-sm">
+                    </div>
+                </div>
             </div>
-        </div>
+
+        </div> <!-- /container -->
 
         <!-- ফুটার -->
         <div id="footerContainer"></div>
 
-    </div>
+    </div> <!-- /mi-container -->
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- আমাদের মূল জাভাস্ক্রিপ্ট ফাইল (যা ঘড়ি, হেডার, সার্চ সবকিছু হ্যান্ডেল করবে) -->
+    <!-- আমাদের মূল জাভাস্ক্রিপ্ট ফাইল (যা ঘড়ি, হেডার, সার্চ সবকিছু হ্যান্ডেল করবে) -->
     <script src="./js/main.js"></script>
     
     <script>
@@ -67,7 +83,7 @@
         }
 
         // পেজ লোড হওয়ার সাথে সাথে শুধুমাত্র কনটেন্ট লোড হবে
-        // ঘড়ির বাকি সব কাজ অটোমেটিক main.js ফাইল সামলে নেবে
+        // ঘড়ির বাকি সব কাজ অটোমেটিক main.js ফাইল সামলে নেবে
         document.addEventListener("DOMContentLoaded", function() {
             loadMainContent();
         });
