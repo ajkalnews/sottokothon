@@ -1,48 +1,65 @@
 <aside class="mi-sidebar">
     <!-- সাইডবার ট্যাবড নিউজ উইজেট -->
-<div class="mi-flat-widget">
-    <!-- ট্যাব বাটনসমূহ -->
-    <div class="mi-tab-header">
-        <button class="mi-tab-btn active" onclick="switchTab(event, 'latest-news')">সর্বশেষ</button>
-        <button class="mi-tab-btn" onclick="switchTab(event, 'popular-news')">সর্বাধিক পঠিত</button>
-        <button class="mi-tab-btn" onclick="switchTab(event, 'comment-news')">মন্তব্য</button>
-    </div>
-    
-    <!-- ট্যাব কন্টেন্ট এরিয়া -->
-    <div class="mi-tab-content-wrapper">
-        
-        <!-- ১. সর্বশেষ খবরের তালিকা -->
-        <div id="latest-news" class="mi-tab-pane active">
-            <ul class="mi-widget-list">
-                <li><h4><a href="#">১. এই মাত্র পাওয়া: দেশের বিভিন্ন অঞ্চলে তীব্র ঝড়-বৃষ্টির পূর্বাভাস</a></h4></li>
-                <li><h4><a href="#">২. স্বর্ণের বাজারে বড় পতন, ভরি প্রতি কমল ৩ হাজার টাকা</a></h4></li>
-                <li><h4><a href="#">৩. ঢাকা বিশ্ববিদ্যালয়ে নতুন শিক্ষাবর্ষের ভর্তি পরীক্ষার তারিখ ঘোষণা</a></h4></li>
-                <li><h4><a href="#">৪. টি-টোয়েন্টি সিরিজে জয় দিয়ে শুরু করল বাংলাদেশ</a></h4></li>
-            </ul>
-        </div>
+/* ==========================================================================
+   সাইডবার ট্যাবড নিউজ উইজেট স্টাইল
+   ========================================================================== */
+.mi-tab-header {
+    display: flex;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 15px;
+}
 
-        <!-- ২. সর্বাধিক পঠিত খবরের তালিকা -->
-        <div id="popular-news" class="mi-tab-pane">
-            <ul class="mi-widget-list">
-                <li><h4><a href="#">১. ফুতবলের অন্ধ ভক্ত হলে শরীরে যেসব সমস্যা হতে পারে</a></h4></li>
-                <li><h4><a href="#">২. ভাইজান বলেছিলেন—একদিন তোমাদের বিচ্ছেদ হবে: সোনাক্ষী</a></h4></li>
-                <li><h4><a href="#">৩. ২০২৬ বিশ্বকাপ থেকে রেকর্ড ১৫ বিলিয়ন ডলার আয় করছে ফিফা</a></h4></li>
-                <li><h4><a href="#">৪. আন্তর্জাতিক গণিত অলিম্পিয়াডে বাংলাদেশের ছয় পদক</a></h4></li>
-            </ul>
-        </div>
+/* প্রতিটি ট্যাব বাটনের ডিফল্ট স্টাইল */
+.mi-tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 10px 5px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    font-family: 'SolaimanLipi', Arial, sans-serif;
+    color: #555555;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    transition: color 0.2s ease;
+    outline: none;
+}
 
-        <!-- ৩. কমেন্টস/মন্তব্য হওয়া খবরের তালিকা -->
-        <div id="comment-news" class="mi-tab-pane">
-            <ul class="mi-widget-list">
-                <li><h4><a href="#">১. রেফারি নিয়ে আর্জেন্টিনার আপত্তিতে যা বলল ফিফা (১২০টি মন্তব্য)</a></h4></li>
-                <li><h4><a href="#">২. নতুন বাজেট নিয়ে সাধারণ মানুষের মিশ্র প্রতিক্রিয়া (৮৫টি মন্তব্য)</a></h4></li>
-                <li><h4><a href="#">৩. মেট্রো রেলের সময়সূচীতে পরিবর্তন, ক্ষোভ প্রকাশ (৬৫টি মন্তব্য)</a></h4></li>
-                <li><h4><a href="#">৪. প্রিয়াঙ্কা চোপড়ার নতুন সিনেমা নিয়ে সোশ্যাল মিডিয়ায় ঝড় (৪২টি মন্তব্য)</a></h4></li>
-            </ul>
-        </div>
+.mi-tab-btn:hover {
+    color: #007bff;
+}
 
-    </div>
-</div>
+/* একটিভ ট্যাবের নিচের বর্ডার ও কালার ইফেক্ট */
+.mi-tab-btn.active {
+    color: #007bff;
+}
+
+.mi-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; /* মূল হেডার বর্ডারের ওপর বসার জন্য */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #007bff; /* একটিভ নীল দাগ */
+}
+
+/* ট্যাব প্যানেল কন্ট্রোল (ডিফল্টভাবে সব হাইড থাকবে, শুধু একটিভটি শো করবে) */
+.mi-tab-pane {
+    display: none;
+}
+
+.mi-tab-pane.active {
+    display: block;
+    animation: fadeInTab 0.3s ease-in-out;
+}
+
+/* হালকা অ্যানিমেশন ইফেক্ট */
+@keyframes fadeInTab {
+    from { opacity: 0; transform: translateY(2px); }
+    to { opacity: 1; transform: translateY(0); }
+}
     <!-- বিজ্ঞাপন প্লেসহোল্ডার -->
     <div class="mi-widget">
        <div class="mi-ad-placeholder">
