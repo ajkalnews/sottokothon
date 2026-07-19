@@ -1,65 +1,90 @@
 <aside class="mi-sidebar">
-    <!-- সাইডবার ট্যাবড নিউজ উইজেট -->
-/* ==========================================================================
-   সাইডবার ট্যাবড নিউজ উইজেট স্টাইল
-   ========================================================================== */
-.mi-tab-header {
-    display: flex;
-    border-bottom: 2px solid #e0e0e0;
-    margin-bottom: 15px;
-}
+<!-- মডার্ন কার্ড ট্যাবড নিউজ উইজেট -->
+<div class="mi-premium-tab-card">
+    <!-- ট্যাব বাটনসমূহ (কার্ডের ভেতরে প্রিমিয়াম লুকে) -->
+    <div class="mi-modern-tabs">
+        <button class="mi-modern-tab-btn active" onclick="switchModernTab(event, 'mod-latest')">
+            <span class="mi-tab-icon">✨</span> সর্বশেষ
+        </button>
+        <button class="mi-modern-tab-btn" onclick="switchModernTab(event, 'mod-popular')">
+            <span class="mi-tab-icon">🔥</span> পঠিত
+        </button>
+        <button class="mi-modern-tab-btn" onclick="switchModernTab(event, 'mod-comments')">
+            <span class="mi-tab-icon">💬</span> মন্তব্য
+        </button>
+    </div>
+    
+    <!-- ট্যাব কন্টেন্ট বডি -->
+    <div class="mi-modern-tab-body">
+        
+        <!-- ১. সর্বশেষ খবরের তালিকা -->
+        <div id="mod-latest" class="mi-modern-pane active">
+            <ul class="mi-premium-list">
+                <li>
+                    <span class="mi-news-number">১</span>
+                    <a href="#">এই মাত্র পাওয়া: দেশের বিভিন্ন অঞ্চলে তীব্র ঝড়-বৃষ্টির পূর্বাভাস</a>
+                </li>
+                <li>
+                    <span class="mi-news-number">২</span>
+                    <a href="#">স্বর্ণের বাজারে বড় পতন, ভরি প্রতি কমল ৩ হাজার টাকা</a>
+                </li>
+                <li>
+                    <span class="mi-news-number">৩</span>
+                    <a href="#">ঢাকা বিশ্ববিদ্যালয়ে নতুন শিক্ষাবর্ষের ভর্তি পরীক্ষার তারিখ ঘোষণা</a>
+                </li>
+                <li>
+                    <span class="mi-news-number">৪</span>
+                    <a href="#">টি-টোয়েন্টি সিরিজে জয় দিয়ে শুরু করল বাংলাদেশ</a>
+                </li>
+            </ul>
+        </div>
 
-/* প্রতিটি ট্যাব বাটনের ডিফল্ট স্টাইল */
-.mi-tab-btn {
-    flex: 1;
-    background: none;
-    border: none;
-    padding: 10px 5px;
-    font-size: 1.05rem;
-    font-weight: bold;
-    font-family: 'SolaimanLipi', Arial, sans-serif;
-    color: #555555;
-    cursor: pointer;
-    text-align: center;
-    position: relative;
-    transition: color 0.2s ease;
-    outline: none;
-}
+        <!-- ২. সর্বাধিক পঠিত খবরের তালিকা -->
+        <div id="mod-popular" class="mi-modern-pane">
+            <ul class="mi-premium-list">
+                <li>
+                    <span class="mi-news-number">১</span>
+                    <a href="#">ফুটবলের অন্ধ ভক্ত হলে শরীরে যেসব समस्या হতে পারে</a>
+                </li>
+                <li>
+                    <span class="mi-news-number">২</span>
+                    <a href="#">ভাইজান বলেছিলেন—একদিন তোমাদের বিচ্ছেদ হবে: সোনাক্ষী</a>
+                </li>
+                <li>
+                    <span class="mi-news-number">৩</span>
+                    <a href="#">২০২৬ বিশ্বকাপ থেকে রেকর্ড ১৫ বিলিয়ন ডলার আয় করছে ফিফা</a>
+                </li>
+                <li>
+                    <span class="mi-news-number">৪</span>
+                    <a href="#">আন্তর্জাতিক গণিত অলিম্পিয়াডে বাংলাদেশের ছয় পদক</a>
+                </li>
+            </ul>
+        </div>
 
-.mi-tab-btn:hover {
-    color: #007bff;
-}
+        <!-- ৩. মন্তব্য হওয়া খবরের তালিকা -->
+        <div id="mod-comments" class="mi-modern-pane">
+            <ul class="mi-premium-list">
+                <li>
+                    <span class="mi-news-number">১</span>
+                    <a href="#">রেফারি নিয়ে আর্জেন্টিনার আপত্তিতে যা বলল ফিফা <span class="mi-comment-count">১২০</span></a>
+                </li>
+                <li>
+                    <span class="mi-news-number">২</span>
+                    <a href="#">নতুন বাজেট নিয়ে সাধারণ মানুষের মিশ্র প্রতিক্রিয়া <span class="mi-comment-count">৮৫</span></a>
+                </li>
+                <li>
+                    <span class="mi-news-number">৩</span>
+                    <a href="#">মেট্রো রেলের সময়সূচীতে পরিবর্তন, ক্ষোভ প্রকাশ <span class="mi-comment-count">৬৫</span></a>
+                </li>
+                <li>
+                    <span class="mi-news-number">৪</span>
+                    <a href="#">প্রিয়াঙ্কা চোপড়ার নতুন সিনেমা নিয়ে সোশ্যাল মিডিয়ায় ঝড় <span class="mi-comment-count">৪২</span></a>
+                </li>
+            </ul>
+        </div>
 
-/* একটিভ ট্যাবের নিচের বর্ডার ও কালার ইফেক্ট */
-.mi-tab-btn.active {
-    color: #007bff;
-}
-
-.mi-tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px; /* মূল হেডার বর্ডারের ওপর বসার জন্য */
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #007bff; /* একটিভ নীল দাগ */
-}
-
-/* ট্যাব প্যানেল কন্ট্রোল (ডিফল্টভাবে সব হাইড থাকবে, শুধু একটিভটি শো করবে) */
-.mi-tab-pane {
-    display: none;
-}
-
-.mi-tab-pane.active {
-    display: block;
-    animation: fadeInTab 0.3s ease-in-out;
-}
-
-/* হালকা অ্যানিমেশন ইফেক্ট */
-@keyframes fadeInTab {
-    from { opacity: 0; transform: translateY(2px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+    </div>
+</div>
     <!-- বিজ্ঞাপন প্লেসহোল্ডার -->
     <div class="mi-widget">
        <div class="mi-ad-placeholder">
