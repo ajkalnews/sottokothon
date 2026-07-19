@@ -9,9 +9,9 @@
 .mi-widget {
     background: white;
     border-radius: 8px;
-    padding: 20px;
+    padding: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-    border: 1px solid #dadce0;
+    border: 0px solid #dadce0;
 }
 
 .mi-widget h5 {
