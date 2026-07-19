@@ -402,62 +402,143 @@
     background: none;
 }
 /* ==========================================================================
-   সাইডবার ট্যাবড নিউজ উইজেট স্টাইল
+   প্রিমিয়াম ও ইউনিক কার্ড ট্যাবড নিউজ উইজেট
    ========================================================================== */
-.mi-tab-header {
-    display: flex;
-    border-bottom: 2px solid #e0e0e0;
-    margin-bottom: 15px;
+.mi-premium-tab-card {
+    background: #ffffff;
+    border-radius: 16px; /* মডার্ন রাউন্ডেড কোণা */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+    border: 1px solid #f0f0f0;
+    overflow: hidden;
+    font-family: 'SolaimanLipi', Arial, sans-serif;
+    margin-bottom: 24px;
 }
 
-/* প্রতিটি ট্যাব বাটনের ডিফল্ট স্টাইল */
-.mi-tab-btn {
+/* মডার্ন ট্যাব বার */
+.mi-modern-tabs {
+    display: flex;
+    background: #f8fafc; /* হালকা মিনিমাল ব্যাকগ্রাউন্ড */
+    padding: 6px;
+    gap: 4px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+/* ইউনিক ক্যাপসুল ডিজাইন ট্যাব বাটন */
+.mi-modern-tab-btn {
     flex: 1;
-    background: none;
+    background: transparent;
     border: none;
-    padding: 10px 5px;
-    font-size: 1.05rem;
-    font-weight: bold;
-    font-family: 'SolaimanLipi', Arial, sans-serif;
-    color: #555555;
+    padding: 10px 2px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #64748b;
     cursor: pointer;
-    text-align: center;
-    position: relative;
-    transition: color 0.2s ease;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     outline: none;
 }
 
-.mi-tab-btn:hover {
-    color: #007bff;
+.mi-tab-icon {
+    font-size: 1rem;
 }
 
-/* একটিভ ট্যাবের নিচের বর্ডার ও কালার ইফেক্ট */
-.mi-tab-btn.active {
-    color: #007bff;
+/* একটিভ ট্যাবের আকর্ষণীয় গ্রেডিয়েন্ট লুক */
+.mi-modern-tab-btn.active {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
-.mi-tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px; /* মূল হেডার বর্ডারের ওপর বসার জন্য */
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #007bff; /* একটিভ নীল দাগ */
+.mi-modern-tab-btn:not(.active):hover {
+    background: #e2e8f0;
+    color: #1e293b;
 }
 
-/* ট্যাব প্যানেল কন্ট্রোল (ডিফল্টভাবে সব হাইড থাকবে, শুধু একটিভটি শো করবে) */
-.mi-tab-pane {
+/* কন্টেন্ট এরিয়া */
+.mi-modern-tab-body {
+    padding: 18px;
+}
+
+.mi-modern-pane {
     display: none;
 }
 
-.mi-tab-pane.active {
+.mi-modern-pane.active {
     display: block;
-    animation: fadeInTab 0.3s ease-in-out;
+    animation: smoothEffect 0.4s ease;
 }
 
-/* হালকা অ্যানিমেশন ইফেক্ট */
-@keyframes fadeInTab {
-    from { opacity: 0; transform: translateY(2px); }
+/* মডার্ন লিস্ট এবং ট্রেন্ডিং নম্বর স্টাইল */
+.mi-premium-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.mi-premium-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.mi-premium-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* ১, ২, ৩ নম্বরগুলোর জন্য ইউনিক ডিজাইন */
+.mi-news-number {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #2563eb;
+    background: #eff6ff;
+    min-width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.mi-premium-list li a {
+    color: #1e293b;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.45;
+    transition: color 0.2s;
+}
+
+.mi-premium-list li a:hover {
+    color: #2563eb;
+}
+
+/* কমেন্ট কাউন্টার ব্যাজ */
+.mi-comment-count {
+    font-size: 0.8rem;
+    background: #fee2e2;
+    color: #ef4444;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+/* স্মুথ ট্রানজিশন অ্যানিমেশন */
+@keyframes smoothEffect {
+    from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
 }
