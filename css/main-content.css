@@ -16,6 +16,40 @@
     box-sizing: border-box;
 }
 
+/* গ্লোবাল টাইম/মেটা স্টাইল */
+.mi-meta {
+    font-size: 0.85rem;
+    color: #777777;
+    margin-top: auto; /* সময়কে খবরের নিচে পুশ করবে */
+}
+
+/* ক্যাটাগরি শিরোনামের পাশে ছোট নীল স্কয়ার আইকন */
+.mi-square-icon {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #007bff; /* নীল রঙ */
+    margin-left: 8px;
+}
+
+/* গ্লোবাল লিংক হোভার ইফেক্ট */
+.mi-featured-content h2 a:hover,
+.mi-sub-news-item h3 a:hover,
+.mi-news-card-featured .mi-card-body h4 a:hover,
+.mi-widget-list li h4 a:hover,
+.mi-block-featured h3 a:hover,
+.mi-block-list li h4 a:hover,
+.mi-ent-sub-item h3 a:hover,
+.mi-ent-main-content h2 a:hover,
+.mi-two-col-main h3 a:hover,
+.mi-two-col-list-item h4 a:hover,
+.mi-sports-main-content h3 a:hover,
+.mi-sports-sub-feat-text h4 a:hover,
+.mi-sports-list-text h4 a:hover {
+    color: #007bff; /* সব শিরোনামে হোভার করলে নীল রঙ হবে */
+}
+
+
 /* ==========================================================================
    ২. ওপরের প্রধান লিড নিউজের স্টাইল (Main Lead Article)
    ========================================================================== */
@@ -63,25 +97,13 @@
     text-decoration: none;
 }
 
-.mi-featured-content h2 a:hover,
-.mi-sub-news-item h3 a:hover,
-.mi-news-card-featured .mi-card-body h4 a:hover,
-.mi-widget-list li h4 a:hover,
-.mi-block-featured h3 a:hover,
-.mi-block-list li h4 a:hover,
-.mi-ent-sub-item h3 a:hover,
-.mi-ent-main-content h2 a:hover,
-.mi-two-col-main h3 a:hover,
-.mi-two-col-list-item h4 a:hover {
-    color: #007bff; /* হোভার কালার - নীল */
-}
-
 .mi-featured-content p {
     font-size: 1.05rem;
     color: #333333;
     line-height: 1.6;
     margin-bottom: 16px;
 }
+
 
 /* ==========================================================================
    ৩. নিচের দুটি সাব-নিউজের গ্রিড লেআউট (Sub News Grid)
@@ -141,12 +163,6 @@
     object-fit: cover;
 }
 
-/* গ্লোবাল টাইম/মেটা স্টাইল */
-.mi-meta {
-    font-size: 0.85rem;
-    color: #777777;
-    margin-top: auto; /* সময়কে খবরের নিচে পুশ করবে */
-}
 
 /* ==========================================================================
    ৪. ক্যাটাগরি গ্রিড সেকশন (শিক্ষা ও চাকরি - 1grid.JPG অনুযায়ী)
@@ -228,12 +244,13 @@
     margin: 0;
 }
 
+
 /* ==========================================================================
    ৫. সিঙ্গেল উইজেট কার্ড সেকশন (রাজনীতি ও খেলাধুলা - sec.JPG অনুযায়ী)
    ========================================================================== */
 .mi-news-widget-wrapper {
     display: flex;
-    justify-content: center; /* স্ক্রিনের মাঝখানে রাখার জন্য */
+    justify-content: center;
     padding: 20px 0;
 }
 
@@ -241,15 +258,14 @@
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
-    width: 300px; /* সরু উইজেট প্রস্থ */
+    width: 300px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     padding: 15px;
     font-family: 'SolaimanLipi', Arial, sans-serif;
 }
 
-/* সেকশন হেডার স্টাইল (বিজ্ঞানচিন্তা-এর মতো) */
 .mi-widget-header {
-    border-bottom: 2px solid #ddd; /* হালকা রেখা */
+    border-bottom: 2px solid #ddd;
     margin-bottom: 15px;
     padding-bottom: 5px;
     display: flex;
@@ -263,7 +279,6 @@
     padding-bottom: 5px;
 }
 
-/* ক্যাটাগরি নামের নিচে লাল রেখা */
 .mi-widget-header .mi-category::after {
     content: '';
     position: absolute;
@@ -271,10 +286,9 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #d9534f; /* লাল রঙ */
+    background-color: #d9534f;
 }
 
-/* ছবির সাথে প্রধান খবর */
 .mi-news-card-featured {
     margin-bottom: 15px;
 }
@@ -298,7 +312,6 @@
     font-weight: normal;
 }
 
-/* অন্যান্য খবরের তালিকা */
 .mi-widget-list {
     list-style: none;
     padding: 0;
@@ -307,11 +320,11 @@
 
 .mi-widget-list li {
     padding: 10px 0;
-    border-top: 1px solid #eee; /* প্রতি খবরের মাঝে হালকা রেখা */
+    border-top: 1px solid #eee;
 }
 
 .mi-widget-list li:first-child {
-    border-top: none; /* প্রথম খবরের ওপরে রেখা থাকবে না */
+    border-top: none;
 }
 
 .mi-widget-list li h4 {
@@ -326,21 +339,19 @@
     font-weight: normal;
 }
 
-/* সেকশন বিভাজক */
 .mi-divider {
     border: none;
     border-top: 1px solid #ddd;
     margin: 20px 0;
 }
 
-/* আরও বাটন */
 .mi-widget-footer {
     text-align: center;
     margin-top: 15px;
 }
 
 .mi-btn-more {
-    background-color: #007bff; /* নীল রঙ */
+    background-color: #007bff;
     color: white;
     padding: 8px 20px;
     border-radius: 4px;
@@ -353,6 +364,7 @@
 .mi-btn-more:hover {
     background-color: #0056b3;
 }
+
 
 /* ==========================================================================
    ৬. বিনোদন সেকশন স্টাইল (বাম পাশে ৩ নিউজ, ডান পাশে মেইন নিউজ - se3.JPG)
@@ -369,21 +381,19 @@
     gap: 24px;
 }
 
-/* বাম পাশের কলামের স্টাইল */
 .mi-ent-left-column {
     display: flex;
     flex-direction: column;
-    border-right: 1px solid #c0c0c0; /* মাঝখানের লম্বালম্বি ধূসর বর্ডার */
+    border-right: 1px solid #c0c0c0; /* লম্বালম্বি বর্ডার */
     padding-right: 24px;
 }
 
-/* বাম পাশের প্রতিটি ছোট নিউজের লেআউট */
 .mi-ent-sub-item {
     display: flex;
     justify-content: space-between;
     gap: 16px;
     padding: 15px 0;
-    border-bottom: 1px solid #e0e0e0; /* খবরের মাঝখানের আড়াআড়ি রেখা */
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .mi-ent-left-column .mi-ent-sub-item:first-child {
@@ -391,7 +401,7 @@
 }
 
 .mi-ent-left-column .mi-ent-sub-item:last-child {
-    border-bottom: none; /* শেষ খবরের নিচে আড়াআড়ি রেখা থাকবে না */
+    border-bottom: none;
     padding-bottom: 0;
 }
 
@@ -408,13 +418,18 @@
     margin: 0 0 8px 0;
 }
 
+.mi-ent-sub-item h3 a,
+.mi-ent-main-content h2 a {
+    color: #000000;
+    text-decoration: none;
+}
+
 .mi-ent-sub-img img {
     width: 120px;
     height: 90px;
     object-fit: cover;
 }
 
-/* ডান পাশের প্রধান নিউজের স্টাইল */
 .mi-ent-right-column {
     display: flex;
     flex-direction: column;
@@ -446,21 +461,21 @@
     margin-bottom: 12px;
 }
 
+
 /* ==========================================================================
-   ৭. নতুন ২-কলাম বিশিষ্ট ক্যাটাগরি তালিকা সেকশন (লাইফস্টাইল ও টেক - se4.JPG অনুযায়ী)
+   ৭. ক্যাটাগরি তালিকা সেকশন (লাইফস্টাইল ও টেক - se4.JPG অনুযায়ী)
    ========================================================================== */
 .mi-two-column-list-section {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* ৫০%-৫০% পাশাপাশি দুটি কলাম */
+    grid-template-columns: 1fr 1fr; /* ৫০%-৫০% কলাম */
     gap: 30px;
     margin-top: 40px;
     margin-bottom: 40px;
     font-family: 'Solaimanlipi', sans-serif;
 }
 
-/* ক্যাটাগরি হেডার (উপরে চিকন ধূসর দাগ) */
 .mi-two-col-header {
-    border-top: 1px solid #c0c0c0;
+    border-top: 1px solid #c0c0c0; /* চিকন ধূসর দাগ */
     padding-top: 12px;
     margin-bottom: 18px;
 }
@@ -474,16 +489,6 @@
     align-items: center;
 }
 
-/* পাশে ছোট নীল স্কয়ার আইকন */
-.mi-square-icon {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: #007bff; /* নীল রঙ */
-    margin-left: 8px;
-}
-
-/* প্রতিটি কলামের প্রধান টপ নিউজ */
 .mi-two-col-main {
     margin-bottom: 15px;
     border-bottom: 1px solid #e0e0e0;
@@ -510,7 +515,6 @@
     text-decoration: none;
 }
 
-/* নিচে ৩টি খবরের তালিকা (লেখা বামে, ছবি ডানে) */
 .mi-two-col-list {
     display: flex;
     flex-direction: column;
@@ -526,7 +530,7 @@
 }
 
 .mi-two-col-list-item:last-child {
-    border-bottom: none; /* শেষটির নিচে রেখা থাকবে না */
+    border-bottom: none;
 }
 
 .mi-two-col-list-item h4 {
@@ -543,17 +547,154 @@
     object-fit: cover;
 }
 
+
 /* ==========================================================================
-   ৮. মোবাইল রেসপনসিভ ডিজাইন (Responsive Layouts)
+   ৮. খেলাধুলা সেকশন স্টাইল (বাম পাশে বড় ও মাঝারি নিউজ, ডান পাশে ৩টি লিস্ট - se5.JPG)
+   ========================================================================== */
+.mi-sports-section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-family: 'Solaimanlipi', sans-serif;
+}
+
+.mi-sports-header {
+    border-top: 1px solid #c0c0c0;
+    padding-top: 12px;
+    margin-bottom: 18px;
+}
+
+.mi-sports-title {
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.mi-sports-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.mi-sports-left-col {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #c0c0c0; /* মাঝখানের লম্বালম্বি বর্ডার */
+    padding-right: 24px;
+}
+
+.mi-sports-main-feat {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 20px;
+}
+
+.mi-sports-main-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+.mi-sports-main-content h3 {
+    font-size: 1.45rem;
+    font-weight: bold;
+    line-height: 1.35;
+    margin: 0 0 8px 0;
+}
+
+.mi-sports-main-content p,
+.mi-sports-sub-feat-text p,
+.mi-sports-list-text p {
+    font-size: 0.92rem;
+    color: #555555;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.mi-sports-sub-feat {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.mi-sports-sub-feat-img img {
+    width: 160px;
+    height: 105px;
+    object-fit: cover;
+}
+
+.mi-sports-sub-feat-text {
+    flex: 1;
+}
+
+.mi-sports-sub-feat-text h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1.4;
+    margin: 0 0 6px 0;
+}
+
+.mi-sports-main-content h3 a,
+.mi-sports-sub-feat-text h4 a,
+.mi-sports-list-text h4 a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.mi-sports-right-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.mi-sports-list-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #e0e0e0;
+    align-items: flex-start;
+}
+
+.mi-sports-right-col .mi-sports-list-item:first-child {
+    padding-top: 0;
+}
+
+.mi-sports-right-col .mi-sports-list-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.mi-sports-list-img img {
+    width: 150px;
+    height: 95px;
+    object-fit: cover;
+}
+
+.mi-sports-list-text {
+    flex: 1;
+}
+
+.mi-sports-list-text h4 {
+    font-size: 1.15rem;
+    font-weight: bold;
+    line-height: 1.4;
+    margin: 0 0 6px 0;
+}
+
+
+/* ==========================================================================
+   ৯. মোবাইল রেসপনসিভ ডিজাইন (Responsive Layouts)
    ========================================================================== */
 @media (max-width: 768px) {
-    /* প্রধান ফিচার্ড নিউজ মোবাইলে ওপর-নিচ হবে */
+    /* প্রধান ফিচার্ড নিউজ */
     .mi-featured-main-article {
         grid-template-columns: 1fr;
         gap: 16px;
     }
     
-    /* সাব-নিউজ দুটি মোবাইলে ওপর-নিচ হবে */
+    /* সাব-নিউজ গ্রিড */
     .mi-featured-sub-grid {
         grid-template-columns: 1fr;
         gap: 24px;
@@ -566,13 +707,13 @@
         padding-bottom: 20px;
     }
 
-    /* শিক্ষা ও চাকরি সেকশন মোবাইলে ওপর-নিচ হবে */
+    /* শিক্ষা ও চাকরি সেকশন */
     .mi-category-grid-section {
         grid-template-columns: 1fr;
         gap: 40px;
     }
 
-    /* বিনোদন সেকশন মোবাইলে উপর-নিচ হবে */
+    /* বিনোদন সেকশন */
     .mi-entertainment-grid {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -589,9 +730,26 @@
         border-bottom: none;
     }
 
-    /* লাইফস্টাইল ও টেক সেকশন মোবাইলে ওপর-নিচ হবে */
+    /* লাইফস্টাইল ও টেক সেকশন */
     .mi-two-column-list-section {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+
+    /* খেলাধুলা সেকশন */
+    .mi-sports-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .mi-sports-left-col {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid #c0c0c0;
+        padding-bottom: 25px;
+    }
+    
+    .mi-sports-right-col .mi-sports-list-item:first-child {
+        padding-top: 15px;
     }
 }
