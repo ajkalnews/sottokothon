@@ -1,11 +1,42 @@
-/* সাইডবার কনটেইনার */
+/* ==========================================================================
+   ১. সাইডবার কনটেইনার ও রেসপন্সিভ লেআউট
+   ========================================================================== */
 .mi-sidebar {
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
-/* উইজেট */
+/* স্টিকি উইজেট (বড় স্ক্রিনের জন্য) */
+@media (min-width: 992px) {
+    .mi-sidebar {
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+    }
+}
+
+/* রেসপন্সিভ ব্রেকপয়েন্টস */
+@media (max-width: 1024px) {
+    .mi-sidebar {
+        position: static;
+    }  
+}
+
+@media (max-width: 768px) {
+    .mi-sidebar {
+        display: none;
+    }
+
+    .mi-main-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==========================================================================
+   ২. স্ট্যান্ডার্ড উইজেট বক্স স্টাইল (ব্যাকগ্রাউন্ড ও বর্ডারসহ)
+   ========================================================================== */
 .mi-widget {
     background: white;
     border-radius: 8px;
@@ -21,6 +52,62 @@
     margin-bottom: 16px;
     padding-bottom: 12px;
     border-bottom: 2px solid #1a73e8;
+}
+
+
+/* ==========================================================================
+   ৩. নতুন: ফ্ল্যাট উইজেট স্টাইল ("বিজ্ঞানচিন্তা" এর জন্য - ব্যাকগ্রাউন্ড ছাড়া)
+   ========================================================================== */
+.mi-flat-widget {
+    background: transparent; /* কোনো ব্যাকগ্রাউন্ড বা বাক্স থাকবে না */
+    padding: 10px 0;
+    font-family: 'SolaimanLipi', Arial, sans-serif;
+}
+
+/* উইজেটের ওপরের লম্বা চিকন বর্ডার */
+.mi-widget-header-flat {
+    border-top: 1px solid #c0c0c0; /* ছবির মতো ওপর দিয়ে চলে যাওয়া চিকন ধূসর দাগ */
+    padding-top: 12px;
+    margin-bottom: 18px;
+    position: relative;
+    display: flex;
+}
+
+.mi-category-flat {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 6px;
+}
+
+/* "বিজ্ঞানচিন্তা" লেখার ঠিক নিচের লাল আন্ডারলাইন */
+.mi-category-flat::after {
+    content: '';
+    position: absolute;
+    bottom: -13px; /* বর্ডার-টপ ও প্যাডিংয়ের সাথে পজিশন ম্যাচ করার জন্য */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #dc3545; /* লাল রঙের বার */
+}
+
+
+/* ==========================================================================
+   ৪. উইজেট কন্টেন্ট, লিস্ট এবং ইনার এলিমেন্টস স্টাইল
+   ========================================================================== */
+/* ফিচার্ড উইজেট কার্ড */
+.mi-news-card-featured .mi-card-body h4 {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin: 8px 0 0 0;
+}
+
+.mi-news-card-featured .mi-card-body h4 a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 /* উইজেট লিস্ট */
@@ -39,109 +126,13 @@
     border-bottom: none;
 }
 
-.mi-widget-list a {
-    color: #1a73e8;
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.mi-widget-list a:before {
-    content: '→';
-    opacity: 0;
-    margin-right: -8px;
-    transition: all 0.3s ease;
-}
-
-.mi-widget-list a:hover {
-    color: var(--mi-dark);
-    padding-left: 8px;
-}
-
-.mi-widget-list a:hover:before {
-    opacity: 1;
-    margin-right: 0;
-}
-
-/* বিজ্ঞাপন প্লেসহোল্ডার */
-.mi-ad-placeholder {
-    background: linear-gradient(135deg, #f1f3f4 0%, #e8eaed 100%);
-    border-radius: 8px;
-    padding: 2px 2px;
-    text-align: center;
-    color: #5f6368;
-    font-size: 0.95rem;
-    border: 2px dashed #dadce0;
-    min-height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.mi-ad-placeholder p {
-    margin: 0;
-    font-weight: 500;
-}
-
-/* স্টিকি উইজেট */
-@media (min-width: 992px) {
-    .mi-sidebar {
-        position: sticky;
-        top: 100px;
-        height: fit-content;
-    }
-}
-/* উইজেট হেডার ডিজাইন রিসেট ও ছবির মতো বর্ডার বটম */
-.mi-widget-header {
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-    display: flex;
-}
-
-.mi-widget-header.mi-category{
-    font-size: 1.15rem;
-    font-weight: bold;
-    color: #333;
-    position: relative;
-    padding-bottom: 5px;
-}
-
-/* শিরোনামের নিচের লাল চিকন আন্ডারলাইন */
-.mi-widget-header .mi-category::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #a31e22; /* লাল রঙ */
-}
-
-/* ফিচার্ড নিউজের বোল্ড টাইটেল স্টাইল */
-.mi-news-card-featured .mi-card-body h4 {
-    font-size: 1.1rem;
-    line-height: 1.4;
-    margin: 8px 0 0 0;
-}
-
-.mi-news-card-featured .mi-card-body h4 a {
-    color: #000000;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* লিস্ট আইটেমগুলোর স্টাইল (ডিফল্ট অ্যারো ইফেক্ট বাদ দিয়ে সাধারণ টেক্সট) */
 .mi-widget-list li h4 {
     font-size: 1.05rem;
     line-height: 1.45;
     margin: 0;
 }
 
+/* লিস্টের ভেতরের সাধারণ লিংক স্টাইল (অ্যারো ইফেক্ট ছাড়া টেক্সট) */
 .mi-widget-list li h4 a {
     color: #333;
     text-decoration: none;
@@ -153,7 +144,7 @@
     color: #007bff;
 }
 
-/* মাঝখানের আড়াআড়ি দাগ */
+/* মাঝখানের আড়াআড়ি ডিভাইডার দাগ */
 .mi-divider {
     border: none;
     border-top: 1px solid #e0e0e0;
@@ -180,19 +171,26 @@
 .mi-btn-more:hover {
     background-color: #0056b3;
 }
-/* রেসপন্সিভ */
-@media (max-width: 768px) {
-    .mi-sidebar {
-        display: none;
-    }
 
-    .mi-main-wrapper {
-        grid-template-columns: 1fr;
-    }
+
+/* ==========================================================================
+   ৫. বিজ্ঞাপন প্লেসহোল্ডার স্টাইল
+   ========================================================================== */
+.mi-ad-placeholder {
+    background: linear-gradient(135deg, #f1f3f4 0%, #e8eaed 100%);
+    border-radius: 8px;
+    padding: 2px 2px;
+    text-align: center;
+    color: #5f6368;
+    font-size: 0.95rem;
+    border: 2px dashed #dadce0;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@media (max-width: 1024px) {
-    .mi-sidebar {
-        position: static;
-    }
+.mi-ad-placeholder p {
+    margin: 0;
+    font-weight: 500;
 }
