@@ -24,9 +24,9 @@
       min-height: 100vh;
     }
 
-    /* সাইডবার ডিজাইন (বামপাশের মেনু) */
+    /* সাইডবার ডিজাইন */
     .sidebar {
-      width: 320px;
+      width: 260px;
       background: #0f172a;
       color: white;
       padding: 25px 20px;
@@ -52,10 +52,11 @@
       padding: 12px 15px;
       text-decoration: none;
       border-radius: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: block;
       transition: all 0.2s ease;
       font-weight: 500;
+      cursor: pointer;
     }
 
     .sidebar a:hover, .sidebar a.active {
@@ -63,94 +64,8 @@
       color: white;
     }
 
-    /* সাইডবারে সাম্প্রতিক পোস্ট সেকশন */
-    .recent-posts-sidebar {
-      margin-top: 15px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      border-top: 1px solid #334155;
-      padding-top: 15px;
-    }
-
-    .recent-posts-sidebar h3 {
-      font-size: 15px;
-      color: #94a3b8;
-      margin: 0 0 12px 5px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .sidebar-posts-list {
-      overflow-y: auto;
-      flex: 1;
-      padding-right: 5px;
-    }
-
-    /* স্ক্রোলবার কাস্টমাইজেশন */
-    .sidebar-posts-list::-webkit-scrollbar {
-      width: 5px;
-    }
-    .sidebar-posts-list::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 4px;
-    }
-
-    .post-item-mini {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: #1e293b;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      transition: background 0.2s ease;
-    }
-
-    .post-item-mini:hover {
-      background: #334155;
-    }
-
-    .post-item-mini img {
-      width: 45px;
-      height: 45px;
-      border-radius: 6px;
-      object-fit: cover;
-    }
-
-    .post-item-mini .info {
-      flex: 1;
-      overflow: hidden;
-    }
-
-    .post-item-mini .title {
-      font-size: 13px;
-      color: #f1f5f9;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 4px;
-    }
-
-    .post-item-mini .btn-delete-mini {
-      background: #ef444422;
-      color: #f87171;
-      border: 1px solid #ef444444;
-      padding: 4px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 11px;
-      transition: all 0.2s ease;
-    }
-
-    .post-item-mini .btn-delete-mini:hover {
-      background: var(--danger-color);
-      color: white;
-    }
-
     .logout-btn {
-      margin-top: 15px;
+      margin-top: auto;
       background: #dc2626;
       color: white;
       border: none;
@@ -165,12 +80,12 @@
       background: #b91c1c;
     }
 
-    /* মেইন কন্টেন্ট এরিয়া (ফুল উইডথ ফর্ম) */
+    /* মেইন কন্টেন্ট এরিয়া */
     .main-content {
       flex: 1;
       padding: 40px;
       box-sizing: border-box;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
@@ -199,6 +114,15 @@
       border-bottom: 2px solid var(--border-color);
       padding-bottom: 12px;
       color: var(--primary-color);
+    }
+
+    /* ট্যাব স্যুইচিং ক্লাসেস */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
     }
 
     /* ফর্ম ডিজাইন */
@@ -279,6 +203,50 @@
       background: #9ca3af;
       cursor: not-allowed;
     }
+
+    /* পোস্ট লিস্ট টেবিল ডিজাইন */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: #f8fafc;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .post-thumb {
+      width: 55px;
+      height: 55px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .btn-delete {
+      background: var(--danger-color);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.2s ease;
+    }
+
+    .btn-delete:hover {
+      background: #dc2626;
+    }
   </style>
 
   <script>
@@ -310,92 +278,110 @@
 </head>
 <body>
 
-  <!-- বামপাশের আপডেট করা সাইডবার (সাম্প্রতিক পোস্টসহ) -->
+  <!-- সাইডবার -->
   <div class="sidebar">
     <h2>সত্যকথন</h2>
-    <a href="/admin/dashboard.html" class="active">📰 ড্যাশবোর্ড</a>
+    <a id="nav-create" class="active" onclick="switchTab('create')">➕ নতুন পোস্ট তৈরি</a>
+    <a id="nav-list" onclick="switchTab('list')">📋 সব পোস্টসমূহ</a>
     <a href="/" target="_blank">🌐 ওয়েবসাইট দেখুন</a>
-
-    <!-- সাইডবারে সাম্প্রতিক পোস্ট সেকশন -->
-    <div class="recent-posts-sidebar">
-      <h3>সাম্প্রতিক পোস্টসমূহ</h3>
-      <div class="sidebar-posts-list" id="sidebarPostsList">
-        <div style="text-align: center; color: #64748b; font-size: 13px; padding-top: 10px;">
-          লোডিং...
-        </div>
-      </div>
-    </div>
 
     <button class="logout-btn" onclick="logout()">লগআউট</button>
   </div>
 
-  <!-- মূল কন্টেন্ট (ফুল উইডথ ফর্ম) -->
+  <!-- মূল কন্টেন্ট -->
   <div class="main-content">
     <div class="header-area">
       <h1>নিয়ন্ত্রণ কক্ষ (Control Panel)</h1>
     </div>
 
-    <div class="card">
-      <h3>নতুন নিউজ পোস্ট করুন</h3>
-      <form id="newsForm">
-        <div class="form-group">
-          <label for="title">শিরোনাম (Title)</label>
-          <input type="text" id="title" required placeholder="খবরের শিরোনাম লিখুন" oninput="generateSlug()">
-        </div>
+    <!-- ১. নতুন নিউজ পোস্ট করার ফর্ম (ট্যাব ১) -->
+    <div id="tab-create" class="tab-content active">
+      <div class="card">
+        <h3>নতুন নিউজ পোস্ট করুন</h3>
+        <form id="newsForm">
+          <div class="form-group">
+            <label for="title">শিরোনাম (Title)</label>
+            <input type="text" id="title" required placeholder="খবরের শিরোনাম লিখুন" oninput="generateSlug()">
+          </div>
 
-        <div class="form-group">
-          <label for="slug">স্লাগ (Slug / URL বান্ধব নাম)</label>
-          <input type="text" id="slug" required placeholder="যেমন: custom-news-url">
-        </div>
+          <div class="form-group">
+            <label for="slug">স্লাগ (Slug / URL বান্ধব নাম)</label>
+            <input type="text" id="slug" required placeholder="যেমন: custom-news-url">
+          </div>
 
-        <div class="form-group">
-          <label for="categoryId">ক্যাটাগরি (Category)</label>
-          <select id="categoryId" required>
-            <option value="1">জাতীয়</option>
-            <option value="2">রাজনীতি</option>
-            <option value="3">অপরাধ</option>
-            <option value="4">অর্থনীতি</option>
-            <option value="5">শিক্ষা</option>
-            <option value="6">চাকরি</option>
-            <option value="7">সারাদেশ</option>
-            <option value="8">লাইফস্টাইল</option>
-            <option value="9">টেক</option>
-            <option value="10">খেলা</option>
-            <option value="11">বিনোদন</option>
-          </select>
-        </div>
+          <div class="form-group">
+            <label for="categoryId">ক্যাটাগরি (Category)</label>
+            <select id="categoryId" required>
+              <option value="1">জাতীয়</option>
+              <option value="2">রাজনীতি</option>
+              <option value="3">অপরাধ</option>
+              <option value="4">অর্থনীতি</option>
+              <option value="5">শিক্ষা</option>
+              <option value="6">চাকরি</option>
+              <option value="7">সারাদেশ</option>
+              <option value="8">লাইফস্টাইল</option>
+              <option value="9">টেক</option>
+              <option value="10">খেলা</option>
+              <option value="11">বিনোদন</option>
+            </select>
+          </div>
 
-        <div class="form-group">
-          <label for="content">বিস্তারিত খবর (Content)</label>
-          <textarea id="content" rows="10" required placeholder="খবরের বিস্তারিত বিবরণ এখানে লিখুন..."></textarea>
-        </div>
+          <div class="form-group">
+            <label for="content">বিস্তারিত খবর (Content)</label>
+            <textarea id="content" rows="10" required placeholder="খবরের বিস্তারিত বিবরণ এখানে লিখুন..."></textarea>
+          </div>
 
-        <div class="form-group">
-          <label for="image">ফিচার্ড ইমেজ (R2 Storage-এ আপলোড হবে)</label>
-          <input type="file" id="image" accept="image/*" required>
-        </div>
+          <div class="form-group">
+            <label for="image">ফিচার্ড ইমেজ (R2 Storage-এ আপলোড হবে)</label>
+            <input type="file" id="image" accept="image/*" required>
+          </div>
 
-        <div class="form-group">
-          <label for="imageCaption">ছবির ক্যাপশন (Caption)</label>
-          <input type="text" id="imageCaption" placeholder="যেমন: ফাইল ছবি">
-        </div>
+          <div class="form-group">
+            <label for="imageCaption">ছবির ক্যাপশন (Caption)</label>
+            <input type="text" id="imageCaption" placeholder="যেমন: ফাইল ছবি">
+          </div>
 
-        <label>হোমপেজ প্লেসমেন্ট অপশন:</label>
-        <div class="checkbox-group">
-          <label class="checkbox-item">
-            <input type="checkbox" id="isLead"> শীর্ষ প্রধান খবর (Main Lead)
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" id="isSubLead"> শীর্ষ সাব-নিউজ (Sub Lead)
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" id="isCategoryFeatured"> ক্যাটাগরির প্রধান খবর (Featured)
-          </label>
-        </div>
+          <label>হোমপেজ প্লেসমেন্ট অপশন:</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" id="isLead"> শীর্ষ প্রধান খবর (Main Lead)
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="isSubLead"> শীর্ষ সাব-নিউজ (Sub Lead)
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="isCategoryFeatured"> ক্যাটাগরির প্রধান খবর (Featured)
+            </label>
+          </div>
 
-        <button type="submit" id="submitBtn" class="btn-submit">পাবলিশ করুন</button>
-      </form>
+          <button type="submit" id="submitBtn" class="btn-submit">পাবলিশ করুন</button>
+        </form>
+      </div>
     </div>
+
+    <!-- ২. সাম্প্রতিক পোস্ট সমূহের পূর্ণাঙ্গ তালিকা (ট্যাব ২) -->
+    <div id="tab-list" class="tab-content">
+      <div class="card">
+        <h3>সাম্প্রতিক পোস্টসমূহ</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 80px;">ছবি</th>
+                <th>শিরোনাম</th>
+                <th style="width: 100px; text-align: center;">অ্যাকশন</th>
+              </tr>
+            </thead>
+            <tbody id="postsTableBody">
+              <tr>
+                <td colspan="3" style="text-align: center; color: #6b7280;">পোস্ট লোড হচ্ছে...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script>
@@ -403,6 +389,22 @@
     function logout() {
       localStorage.removeItem('admin_token');
       window.location.href = '/admin/';
+    }
+
+    // নেভিগেশন/ট্যাব স্যুইচিং ফাংশন
+    function switchTab(tabName) {
+      // সব ট্যাব ও নেভিগেশন একটিভ স্টেট রিমুভ করা
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.sidebar a').forEach(el => el.classList.remove('active'));
+
+      if (tabName === 'create') {
+        document.getElementById('tab-create').classList.add('active');
+        document.getElementById('nav-create').classList.add('active');
+      } else if (tabName === 'list') {
+        document.getElementById('tab-list').classList.add('active');
+        document.getElementById('nav-list').classList.add('active');
+        loadPosts(); // লিস্ট ট্যাবে আসলে পোস্ট লোড করবে
+      }
     }
 
     // টাইটেল থেকে স্বয়ংক্রিয় স্লাগ জেনারেটর
@@ -417,31 +419,35 @@
       document.getElementById('slug').value = slug ? `${slug}-${Math.floor(Math.random() * 1000)}` : '';
     }
 
-    // সাইডবারে পোস্ট লোড করার ফাংশন
+    // ড্যাশবোর্ডে পোস্টের তালিকা লোড করার ফাংশন
     async function loadPosts() {
+      const tbody = document.getElementById('postsTableBody');
+      tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: #6b7280;">পোস্ট লোড হচ্ছে...</td></tr>`;
+
       try {
         const res = await fetch('/api/posts');
         if (!res.ok) throw new Error('পোস্ট লোড করতে ব্যর্থ!');
         
         const posts = await res.json();
-        const sidebarList = document.getElementById('sidebarPostsList');
         
         if (posts.length === 0) {
-          sidebarList.innerHTML = `<div style="text-align: center; color: #64748b; font-size: 13px; padding-top: 10px;">কোনো পোস্ট পাওয়া যায়নি</div>`;
+          tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: #6b7280;">কোনো পোস্ট পাওয়া যায়নি।</td></tr>`;
           return;
         }
 
-        sidebarList.innerHTML = posts.map(post => `
-          <div class="post-item-mini">
-            <img src="${post.image_url || 'https://via.placeholder.com/45'}" alt="thumb">
-            <div class="info">
-              <div class="title" title="${post.title}">${post.title}</div>
-              <button class="btn-delete-mini" onclick="deletePost(${post.id})">ডিলিট</button>
-            </div>
-          </div>
+        tbody.innerHTML = posts.map(post => `
+          <tr>
+            <td>
+              <img src="${post.image_url || 'https://via.placeholder.com/55'}" class="post-thumb" alt="thumb">
+            </td>
+            <td style="font-weight: 500; font-size: 15px; color: #1e293b;">${post.title}</td>
+            <td style="text-align: center;">
+              <button class="btn-delete" onclick="deletePost(${post.id})">ডিলিট</button>
+            </td>
+          </tr>
         `).join('');
       } catch (err) {
-        document.getElementById('sidebarPostsList').innerHTML = `<div style="color: #f87171; font-size: 12px;">ত্রুটি: ${err.message}</div>`;
+        tbody.innerHTML = `<tr><td colspan="3" style="color: red; text-align: center;">ত্রুটি: ${err.message}</td></tr>`;
       }
     }
 
@@ -497,7 +503,7 @@
 
         alert('নিউজ সফলভাবে লাইভ পাবলিশ করা হয়েছে!');
         document.getElementById('newsForm').reset();
-        loadPosts(); // সাইডবারের তালিকা আপডেট করা
+        switchTab('list'); // পোস্ট সম্পন্ন হলে অটোমেটিক পোস্টের লিস্ট ট্যাবে নিয়ে যাবে
       } catch (err) {
         alert('ত্রুটি: ' + err.message);
       } finally {
@@ -525,9 +531,6 @@
         alert('ত্রুটি: ' + err.message);
       }
     }
-
-    // পেজ লোড হলে সাইডবারে পোস্ট লোড হবে
-    loadPosts();
   </script>
 </body>
 </html>
