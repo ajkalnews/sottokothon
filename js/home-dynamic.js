@@ -1,4 +1,3 @@
-// সময় হিসাব করার হেল্পার ফাংশন
 function timeAgo(dateString) {
   if (!dateString) return '';
   const postDate = new Date(dateString);
@@ -26,13 +25,12 @@ async function loadDynamicHome() {
     
     const posts = await res.json();
     
-    // লোডার বন্ধ করা
     const loader = document.getElementById('loading-spinner');
     if (loader) loader.style.display = 'none';
 
     if (!posts || posts.length === 0) return;
 
-    // ১. ফিচার্ড সেকশন (Main Lead & Sub Leads)
+    // ১. ফিচার্ড সেকশন
     const mainLead = posts.find(p => p.is_lead === 1) || posts[0];
     const subLeads = posts.filter(p => p.is_sub_lead === 1 && p.id !== mainLead.id).slice(0, 2);
 
@@ -52,11 +50,11 @@ async function loadDynamicHome() {
       titleElem.innerText = mainLead.title;
       titleElem.href = `./single-post.html?id=${mainLead.id}`;
 
-      document.getElementById('lead-excerpt').innerText = mainLead.content ? mainLead.content.substring(0, 180) + '...' : '';
+      document.getElementById('lead-excerpt').innerText = mainLead.content ? mainLead.content.substring(0, 160) + '...' : '';
       document.getElementById('lead-time').innerText = timeAgo(mainLead.created_at);
     }
 
-    // সাব-লিড পোস্ট
+    // সাব-লিড পোস্ট (বাম ও ডান ২ কলাম)
     const subContainer = document.getElementById('sub-lead-container');
     if (subContainer && subLeads.length > 0) {
       subContainer.innerHTML = subLeads.map(post => `
@@ -67,13 +65,12 @@ async function loadDynamicHome() {
                 <div class="mi-meta">${timeAgo(post.created_at)}</div>
             </div>
             <div class="mi-sub-img">
-                <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+                <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" style="width:100%; height:auto;">
             </div>
         </article>
       `).join('');
     }
 
-    // ক্যাটাগরি অনুযায়ী ফিল্টার করার নিরাপদ ফাংশন
     const getPostsByCategory = (catTarget) => {
       return posts.filter(p => {
         const catName = p.category_name ? p.category_name.trim().toLowerCase() : '';
@@ -105,7 +102,7 @@ async function loadDynamicHome() {
                     <div class="mi-meta">${timeAgo(post.created_at)}</div>
                 </div>
                 <div class="mi-ent-sub-img">
-                    <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+                    <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" style="max-width:100px; height:auto;">
                 </div>
             </article>
           `).join('');
@@ -115,11 +112,11 @@ async function loadDynamicHome() {
           rightCol.innerHTML = `
             <article class="mi-ent-main-article">
                 <div class="mi-ent-main-img">
-                    <img src="${entMain.image_url || 'img/default.jpg'}" alt="${entMain.title}">
+                    <img src="${entMain.image_url || 'img/default.jpg'}" alt="${entMain.title}" style="width:100%; height:auto;">
                 </div>
                 <div class="mi-ent-main-content">
                     <h2><a href="./single-post.html?id=${entMain.id}">${entMain.title}</a></h2>
-                    <p>${entMain.content ? entMain.content.substring(0, 140) + '...' : ''}</p>
+                    <p>${entMain.content ? entMain.content.substring(0, 130) + '...' : ''}</p>
                     <div class="mi-meta">${timeAgo(entMain.created_at)}</div>
                 </div>
             </article>
@@ -148,22 +145,22 @@ async function loadDynamicHome() {
           leftCol.innerHTML = `
             <article class="mi-sports-main-feat">
                 <div class="mi-sports-main-img">
-                    <img src="${sportsMain.image_url || 'img/default.jpg'}" alt="${sportsMain.title}">
+                    <img src="${sportsMain.image_url || 'img/default.jpg'}" alt="${sportsMain.title}" style="width:100%; height:auto;">
                 </div>
                 <div class="mi-sports-main-content">
                     <h3><a href="./single-post.html?id=${sportsMain.id}">${sportsMain.title}</a></h3>
-                    <p>${sportsMain.content ? sportsMain.content.substring(0, 110) + '...' : ''}</p>
+                    <p>${sportsMain.content ? sportsMain.content.substring(0, 100) + '...' : ''}</p>
                 </div>
             </article>
 
             ${sportsSubFeat ? `
             <article class="mi-sports-sub-feat">
                 <div class="mi-sports-sub-feat-img">
-                    <img src="${sportsSubFeat.image_url || 'img/default.jpg'}" alt="${sportsSubFeat.title}">
+                    <img src="${sportsSubFeat.image_url || 'img/default.jpg'}" alt="${sportsSubFeat.title}" style="max-width:110px; height:auto;">
                 </div>
                 <div class="mi-sports-sub-feat-text">
                     <h4><a href="./single-post.html?id=${sportsSubFeat.id}">${sportsSubFeat.title}</a></h4>
-                    <p>${sportsSubFeat.content ? sportsSubFeat.content.substring(0, 70) + '...' : ''}</p>
+                    <p>${sportsSubFeat.content ? sportsSubFeat.content.substring(0, 60) + '...' : ''}</p>
                 </div>
             </article>
             ` : ''}
@@ -174,11 +171,11 @@ async function loadDynamicHome() {
           rightCol.innerHTML = sportsList.map(post => `
             <article class="mi-sports-list-item">
                 <div class="mi-sports-list-img">
-                    <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+                    <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" style="max-width:100px; height:auto;">
                 </div>
                 <div class="mi-sports-list-text">
                     <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
-                    <p>${post.content ? post.content.substring(0, 70) + '...' : ''}</p>
+                    <p>${post.content ? post.content.substring(0, 60) + '...' : ''}</p>
                 </div>
             </article>
           `).join('');
@@ -188,8 +185,6 @@ async function loadDynamicHome() {
 
   } catch (error) {
     console.error('ডাটা লোড করতে ব্যর্থ:', error);
-    const loader = document.getElementById('loading-spinner');
-    if (loader) loader.innerHTML = '<p class="text-danger">সংবাদ লোড করতে সমস্যা হয়েছে।</p>';
   }
 }
 
@@ -199,7 +194,7 @@ function renderCategoryBlock(catName, catPosts) {
   
   if (block) {
     const featured = catPosts[0];
-    const list = catPosts.slice(1, 4);
+    const list = catPosts.slice(1, 3);
 
     const featElem = block.querySelector('.mi-block-featured');
     const listElem = block.querySelector('.mi-block-list');
@@ -207,7 +202,7 @@ function renderCategoryBlock(catName, catPosts) {
     if (featElem && featured) {
       featElem.innerHTML = `
         <a href="./single-post.html?id=${featured.id}">
-            <img src="${featured.image_url || 'img/default.jpg'}" alt="${featured.title}">
+            <img src="${featured.image_url || 'img/default.jpg'}" alt="${featured.title}" style="width:100%; height:auto;">
         </a>
         <h3><a href="./single-post.html?id=${featured.id}">${featured.title}</a></h3>
       `;
@@ -237,7 +232,7 @@ function renderTwoColSection(catName, catPosts) {
     if (mainElem && main) {
       mainElem.innerHTML = `
         <a href="./single-post.html?id=${main.id}">
-            <img src="${main.image_url || 'img/default.jpg'}" alt="${main.title}">
+            <img src="${main.image_url || 'img/default.jpg'}" alt="${main.title}" style="width:100%; height:auto;">
         </a>
         <h3><a href="./single-post.html?id=${main.id}">${main.title}</a></h3>
       `;
@@ -247,7 +242,7 @@ function renderTwoColSection(catName, catPosts) {
       listElem.innerHTML = list.map(post => `
         <article class="mi-two-col-list-item">
             <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
-            <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+            <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" style="max-width:70px; height:auto;">
         </article>
       `).join('');
     }
