@@ -30,7 +30,7 @@ async function loadDynamicHome() {
 
     if (!posts || posts.length === 0) return;
 
-    // ১. ফিচার্ড সেকশন
+    // ১. ফিচার্ড মেইন লিড
     const mainLead = posts.find(p => p.is_lead === 1) || posts[0];
     const subLeads = posts.filter(p => p.is_sub_lead === 1 && p.id !== mainLead.id).slice(0, 2);
 
@@ -54,28 +54,28 @@ async function loadDynamicHome() {
       document.getElementById('lead-time').innerText = timeAgo(mainLead.created_at);
     }
 
-    // সাব-লিড পোস্ট (বাম ও ডান ২ কলাম)
+    // সাব-লিড পোস্ট (ছবি ও শিরোনামের পারফেক্ট লেআউট)
     const subContainer = document.getElementById('sub-lead-container');
     if (subContainer && subLeads.length > 0) {
       subContainer.innerHTML = subLeads.map(post => `
         <article class="mi-sub-news-item">
             <div class="mi-sub-text">
                 <h3><a href="./single-post.html?id=${post.id}">${post.title}</a></h3>
-                <p>${post.content ? post.content.substring(0, 80) + '...' : ''}</p>
                 <div class="mi-meta">${timeAgo(post.created_at)}</div>
             </div>
             <div class="mi-sub-img">
-                <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" style="width:100%; height:auto;">
+                <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
             </div>
         </article>
       `).join('');
     }
 
+    // ক্যাটাগরি ফিল্টার হেল্পার (নাম বা আইডি যাই থাকুক ধরবে)
     const getPostsByCategory = (catTarget) => {
       return posts.filter(p => {
         const catName = p.category_name ? p.category_name.trim().toLowerCase() : '';
         const target = catTarget.trim().toLowerCase();
-        return catName === target || String(p.category_id) === String(catTarget);
+        return catName === target || String(p.category_id) === String(catTarget) || catName.includes(target);
       });
     };
 
@@ -102,7 +102,7 @@ async function loadDynamicHome() {
                     <div class="mi-meta">${timeAgo(post.created_at)}</div>
                 </div>
                 <div class="mi-ent-sub-img">
-                    <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" style="max-width:100px; height:auto;">
+                    <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
                 </div>
             </article>
           `).join('');
@@ -112,7 +112,7 @@ async function loadDynamicHome() {
           rightCol.innerHTML = `
             <article class="mi-ent-main-article">
                 <div class="mi-ent-main-img">
-                    <img src="${entMain.image_url || 'img/default.jpg'}" alt="${entMain.title}" style="width:100%; height:auto;">
+                    <img src="${entMain.image_url || 'img/default.jpg'}" alt="${entMain.title}">
                 </div>
                 <div class="mi-ent-main-content">
                     <h2><a href="./single-post.html?id=${entMain.id}">${entMain.title}</a></h2>
@@ -145,7 +145,7 @@ async function loadDynamicHome() {
           leftCol.innerHTML = `
             <article class="mi-sports-main-feat">
                 <div class="mi-sports-main-img">
-                    <img src="${sportsMain.image_url || 'img/default.jpg'}" alt="${sportsMain.title}" style="width:100%; height:auto;">
+                    <img src="${sportsMain.image_url || 'img/default.jpg'}" alt="${sportsMain.title}">
                 </div>
                 <div class="mi-sports-main-content">
                     <h3><a href="./single-post.html?id=${sportsMain.id}">${sportsMain.title}</a></h3>
@@ -156,7 +156,7 @@ async function loadDynamicHome() {
             ${sportsSubFeat ? `
             <article class="mi-sports-sub-feat">
                 <div class="mi-sports-sub-feat-img">
-                    <img src="${sportsSubFeat.image_url || 'img/default.jpg'}" alt="${sportsSubFeat.title}" style="max-width:110px; height:auto;">
+                    <img src="${sportsSubFeat.image_url || 'img/default.jpg'}" alt="${sportsSubFeat.title}">
                 </div>
                 <div class="mi-sports-sub-feat-text">
                     <h4><a href="./single-post.html?id=${sportsSubFeat.id}">${sportsSubFeat.title}</a></h4>
@@ -171,7 +171,7 @@ async function loadDynamicHome() {
           rightCol.innerHTML = sportsList.map(post => `
             <article class="mi-sports-list-item">
                 <div class="mi-sports-list-img">
-                    <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" style="max-width:100px; height:auto;">
+                    <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
                 </div>
                 <div class="mi-sports-list-text">
                     <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
@@ -202,7 +202,7 @@ function renderCategoryBlock(catName, catPosts) {
     if (featElem && featured) {
       featElem.innerHTML = `
         <a href="./single-post.html?id=${featured.id}">
-            <img src="${featured.image_url || 'img/default.jpg'}" alt="${featured.title}" style="width:100%; height:auto;">
+            <img src="${featured.image_url || 'img/default.jpg'}" alt="${featured.title}">
         </a>
         <h3><a href="./single-post.html?id=${featured.id}">${featured.title}</a></h3>
       `;
@@ -232,7 +232,7 @@ function renderTwoColSection(catName, catPosts) {
     if (mainElem && main) {
       mainElem.innerHTML = `
         <a href="./single-post.html?id=${main.id}">
-            <img src="${main.image_url || 'img/default.jpg'}" alt="${main.title}" style="width:100%; height:auto;">
+            <img src="${main.image_url || 'img/default.jpg'}" alt="${main.title}">
         </a>
         <h3><a href="./single-post.html?id=${main.id}">${main.title}</a></h3>
       `;
@@ -242,7 +242,7 @@ function renderTwoColSection(catName, catPosts) {
       listElem.innerHTML = list.map(post => `
         <article class="mi-two-col-list-item">
             <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
-            <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" style="max-width:70px; height:auto;">
+            <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
         </article>
       `).join('');
     }
