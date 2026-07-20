@@ -155,8 +155,13 @@
     /* চেকবক্স লেআউট */
     .checkbox-group {
       display: flex;
-      gap: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
       margin-bottom: 20px;
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
     }
 
     .checkbox-item {
@@ -164,6 +169,7 @@
       align-items: center;
       gap: 8px;
       cursor: pointer;
+      font-size: 14px;
     }
 
     .checkbox-item input {
@@ -300,10 +306,16 @@
             <select id="categoryId" required>
               <option value="1">জাতীয়</option>
               <option value="2">রাজনীতি</option>
+
               <option value="3">অপরাধ</option>
               <option value="4">অর্থনীতি</option>
-              <option value="5">খেলা</option>
-              <option value="6">বিনোদন</option>
+              <option value="5">শিক্ষা</option>
+              <option value="6">চাকরি</option>
+              <option value="7">সারাদেশ</option>
+              <option value="8">লাইফস্টাইল</option>
+              <option value="9">টেক</option>
+              <option value="10">খেলা</option>
+              <option value="11">বিনোদন</option>
             </select>
           </div>
 
@@ -322,12 +334,17 @@
             <input type="text" id="imageCaption" placeholder="যেমন: প্রথম আলো ফাইল ছবি">
           </div>
 
+          <!-- হোমপেজের অবস্থান ও প্রদর্শন অপশনসমূহ -->
+          <label>হোমপেজ প্লেসমেন্ট ও লেআউট অপশন:</label>
           <div class="checkbox-group">
             <label class="checkbox-item">
-              <input type="checkbox" id="isLead"> প্রধান খবর (Main Lead)
+              <input type="checkbox" id="isLead"> শীর্ষ প্রধান খবর (Main Lead)
             </label>
             <label class="checkbox-item">
-              <input type="checkbox" id="isSubLead"> সাব-নিউজ গ্রিড (Sub Lead)
+              <input type="checkbox" id="isSubLead"> শীর্ষ সাব-নিউজ (Sub Lead)
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="isCategoryFeatured"> ক্যাটাগরির প্রধান খবর (Featured)
             </label>
           </div>
 
@@ -422,6 +439,7 @@
       const imageCaption = document.getElementById('imageCaption').value;
       const isLead = document.getElementById('isLead').checked;
       const isSubLead = document.getElementById('isSubLead').checked;
+      const isCategoryFeatured = document.getElementById('isCategoryFeatured').checked;
       const imageFile = document.getElementById('image').files[0];
 
       try {
@@ -450,7 +468,8 @@
             imageUrl, 
             imageCaption, 
             isLead, 
-            isSubLead 
+            isSubLead,
+            isCategoryFeatured
           })
         });
 
