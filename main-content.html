@@ -9,85 +9,82 @@
         <p class="mt-2 text-muted">সর্বশেষ খবর লোড হচ্ছে...</p>
     </div>
 
-    <!-- ১. প্রধান সংবাদ (Featured Section) -->
-    <section class="mi-featured-section mb-4">
-        <div class="row">
-            <div class="col-md-7">
-                <article class="mi-featured-main-article">
-                    <div class="mi-featured-image-block">
-                        <img id="lead-img" src="img/default.jpg" alt="Lead News">
-                        <div id="lead-caption" class="mi-image-caption"></div>
-                    </div>
-                    <div class="mi-featured-content">
-                        <h2><a id="lead-title" href="#">সংবাদ লোড হচ্ছে...</a></h2>
-                        <p id="lead-excerpt"></p>
-                        <div id="lead-time" class="mi-meta"></div>
-                    </div>
-                </article>
+    <!-- ১. ফিচার্ড নিউজ -->
+    <section class="mi-featured mb-4">
+        <!-- ওপরের মেইন লিড নিউজ -->
+        <article class="mi-featured-main-article">
+            <div class="mi-featured-image-block">
+                <img id="lead-img" src="img/default.jpg" alt="প্রধান খবর">
+                <div id="lead-caption" class="mi-image-caption"></div>
             </div>
-            <div class="col-md-5">
-                <div id="sub-lead-container" class="mi-featured-sub-grid">
-                    <!-- সাব-লিড পোস্ট জাভাস্ক্রিপ্ট থেকে এখানে বসবে -->
-                </div>
+            <div class="mi-featured-content">
+                <h2><a id="lead-title" href="#">সংবাদ লোড হচ্ছে...</a></h2>
+                <p id="lead-excerpt"></p>
+                <div id="lead-time" class="mi-meta"></div>
             </div>
+        </article>
+
+        <!-- নিচের ২টি সাব-নিউজের গ্রিড -->
+        <div id="sub-lead-container" class="mi-featured-sub-grid"></div>
+    </section>
+
+    <!-- ২. ক্যাটাগরি গ্রিড সেকশন (শিক্ষা ও চাকরি) -->
+    <section class="mi-category-grid-section">
+        <div class="mi-category-block" data-category="শিক্ষা">
+            <div class="mi-block-header">
+                <a href="./category.html?cat=শিক্ষা" class="mi-block-title">শিক্ষা <span class="mi-arrow">&gt;</span></a>
+            </div>
+            <article class="mi-block-featured"></article>
+            <ul class="mi-block-list"></ul>
+        </div>
+
+        <div class="mi-category-block" data-category="চাকরি">
+            <div class="mi-block-header">
+                <a href="./category.html?cat=চাকরি" class="mi-block-title">চাকরি <span class="mi-arrow">&gt;</span></a>
+            </div>
+            <article class="mi-block-featured"></article>
+            <ul class="mi-block-list"></ul>
         </div>
     </section>
 
-    <hr class="my-4">
-
-    <!-- ২. শিক্ষা ও চাকরি (ক্যাটাগরি ব্লক) -->
-    <section class="mi-cat-two-col mb-4">
-        <div class="row">
-            <div class="col-md-6 mi-category-block" data-category="শিক্ষা">
-                <h2 class="mi-block-title"><a href="./category.html?cat=শিক্ষা">শিক্ষা</a></h2>
-                <div class="mi-block-featured"></div>
-                <ul class="mi-block-list list-unstyled mt-3"></ul>
-            </div>
-            <div class="col-md-6 mi-category-block" data-category="চাকরি">
-                <h2 class="mi-block-title"><a href="./category.html?cat=চাকরি">চাকরি</a></h2>
-                <div class="mi-block-featured"></div>
-                <ul class="mi-block-list list-unstyled mt-3"></ul>
-            </div>
+    <!-- ৩. বিনোদন / সারাদেশে সেকশন -->
+    <section class="mi-entertainment-section" data-category="সারাদেশ">
+        <div class="mi-block-header">
+            <a href="./category.html?cat=সারাদেশ" class="mi-block-title"> সারাদেশে <span class="mi-arrow">&gt;</span></a>
+        </div>
+        <div class="mi-entertainment-grid">
+            <div class="mi-ent-left-column"></div>
+            <div class="mi-ent-right-column"></div>
         </div>
     </section>
-
-    <hr class="my-4">
-
-    <!-- ৩. সারাদেশ / বিনোদন সেকশন -->
-    <section class="mi-entertainment-section mb-4" data-category="সারাদেশ">
-        <h2 class="mi-section-title"><a href="./category.html?cat=সারাদেশ">সারাদেশ</a></h2>
-        <div class="row">
-            <div class="col-md-6 mi-ent-left-column"></div>
-            <div class="col-md-6 mi-ent-right-column"></div>
-        </div>
-    </section>
-
-    <hr class="my-4">
 
     <!-- ৪. লাইফস্টাইল ও টেক -->
-    <section class="mi-two-col-section mb-4">
-        <div class="row">
-            <div class="col-md-6 mi-two-col-block" data-category="লাইফস্টাইল">
-                <h2 class="mi-two-col-title"><a href="./category.html?cat=লাইফস্টাইল">লাইফস্টাইল</a></h2>
-                <div class="mi-two-col-main"></div>
-                <div class="mi-two-col-list mt-3"></div>
+    <section class="mi-two-column-list-section">
+        <div class="mi-two-col-block" data-category="লাইফস্টাইল">
+            <div class="mi-two-col-header">
+                <a href="./category.html?cat=লাইফস্টাইল" class="mi-two-col-title">লাইফস্টাইল <span class="mi-square-icon"></span></a>
             </div>
-            <div class="col-md-6 mi-two-col-block" data-category="টেক">
-                <h2 class="mi-two-col-title"><a href="./category.html?cat=টেক">টেক</a></h2>
-                <div class="mi-two-col-main"></div>
-                <div class="mi-two-col-list mt-3"></div>
+            <article class="mi-two-col-main"></article>
+            <div class="mi-two-col-list"></div>
+        </div>
+
+        <div class="mi-two-col-block" data-category="টেক">
+            <div class="mi-two-col-header">
+                <a href="./category.html?cat=টেক" class="mi-two-col-title">টেক <span class="mi-square-icon"></span></a>
             </div>
+            <article class="mi-two-col-main"></article>
+            <div class="mi-two-col-list"></div>
         </div>
     </section>
 
-    <hr class="my-4">
-
-    <!-- ৫. খেলা -->
-    <section class="mi-sports-section mb-4" data-category="খেলা">
-        <h2 class="mi-section-title"><a href="./category.html?cat=খেলা">খেলা</a></h2>
-        <div class="row">
-            <div class="col-md-7 mi-sports-left-col"></div>
-            <div class="col-md-5 mi-sports-right-col"></div>
+    <!-- ৫. খেলা সেকশন -->
+    <section class="mi-sports-section" data-category="খেলা">
+        <div class="mi-sports-header">
+            <a href="./category.html?cat=খেলা" class="mi-sports-title">খেলা <span class="mi-square-icon"></span></a>
+        </div>
+        <div class="mi-sports-grid">
+            <div class="mi-sports-left-col"></div>
+            <div class="mi-sports-right-col"></div>
         </div>
     </section>
 
