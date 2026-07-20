@@ -70,7 +70,7 @@
 .mi-post-content {
     font-size: 1.5rem;
     line-height: 1.8;
-    color: var(--mi-secondary);
+    color: #000;
     margin-bottom: 24px;
 }
 
