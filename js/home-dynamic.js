@@ -25,6 +25,11 @@ async function loadDynamicHome() {
     if (!res.ok) throw new Error('ডাটা ফেচ করা যায়নি');
     
     const posts = await res.json();
+    
+    // ডাটা আসার পর লোডার বন্ধ করে দেওয়া
+    const loader = document.getElementById('loading-spinner');
+    if (loader) loader.style.display = 'none';
+
     if (!posts || posts.length === 0) return;
 
     // ১. ফিচার্ড সেকশন (Main Lead & Sub Leads)
@@ -32,16 +37,16 @@ async function loadDynamicHome() {
     const subLeads = posts.filter(p => p.is_sub_lead === 1 && p.id !== mainLead.id).slice(0, 2);
 
     const mainLeadElem = document.querySelector('.mi-featured-main-article');
-    if (mainLeadElem) {
+    if (mainLeadElem && mainLead) {
       mainLeadElem.innerHTML = `
-        <div class="mi-featured-image-block">
-            <img src="${mainLead.image_url || 'img/default.jpg'}" alt="${mainLead.title}">
-            ${mainLead.image_caption ? `<div class="mi-image-caption">${mainLead.image_caption}</div>` : ''}
+        <div class="mi-featured-image-block mb-3">
+            <img src="${mainLead.image_url || 'img/default.jpg'}" alt="${mainLead.title}" class="img-fluid rounded">
+            ${mainLead.image_caption ? `<div class="mi-image-caption small text-muted mt-1">${mainLead.image_caption}</div>` : ''}
         </div>
         <div class="mi-featured-content">
-            <h2><a href="./single-post.html?id=${mainLead.id}">${mainLead.title}</a></h2>
+            <h2><a href="./single-post.html?id=${mainLead.id}" class="text-decoration-none text-dark fw-bold">${mainLead.title}</a></h2>
             <p>${mainLead.content.substring(0, 180)}...</p>
-            <div class="mi-meta">${timeAgo(mainLead.created_at)}</div>
+            <div class="mi-meta small text-muted">${timeAgo(mainLead.created_at)}</div>
         </div>
       `;
     }
@@ -49,14 +54,14 @@ async function loadDynamicHome() {
     const subGridElem = document.querySelector('.mi-featured-sub-grid');
     if (subGridElem && subLeads.length > 0) {
       subGridElem.innerHTML = subLeads.map(post => `
-        <article class="mi-sub-news-item">
+        <article class="mi-sub-news-item mb-3">
             <div class="mi-sub-text">
-                <h3><a href="./single-post.html?id=${post.id}">${post.title}</a></h3>
+                <h3><a href="./single-post.html?id=${post.id}" class="text-decoration-none text-dark">${post.title}</a></h3>
                 <p>${post.content.substring(0, 90)}...</p>
-                <div class="mi-meta">${timeAgo(post.created_at)}</div>
+                <div class="mi-meta small text-muted">${timeAgo(post.created_at)}</div>
             </div>
             <div class="mi-sub-img">
-                <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+                <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" class="img-fluid rounded">
             </div>
         </article>
       `).join('');
@@ -81,13 +86,13 @@ async function loadDynamicHome() {
 
       if (leftCol && entSubs.length > 0) {
         leftCol.innerHTML = entSubs.map(post => `
-          <article class="mi-ent-sub-item">
-              <div class="mi-ent-sub-text">
-                  <h3><a href="./single-post.html?id=${post.id}">${post.title}</a></h3>
-                  <div class="mi-meta">${timeAgo(post.created_at)}</div>
+          <article class="mi-ent-sub-item mb-3 d-flex justify-content-between">
+              <div class="mi-ent-sub-text me-2">
+                  <h4><a href="./single-post.html?id=${post.id}" class="text-decoration-none text-dark">${post.title}</a></h4>
+                  <div class="mi-meta small text-muted">${timeAgo(post.created_at)}</div>
               </div>
               <div class="mi-ent-sub-img">
-                  <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+                  <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" style="width: 80px; height: 60px; object-fit: cover;" class="rounded">
               </div>
           </article>
         `).join('');
@@ -96,13 +101,13 @@ async function loadDynamicHome() {
       if (rightCol && entMain) {
         rightCol.innerHTML = `
           <article class="mi-ent-main-article">
-              <div class="mi-ent-main-img">
-                  <img src="${entMain.image_url || 'img/default.jpg'}" alt="${entMain.title}">
+              <div class="mi-ent-main-img mb-2">
+                  <img src="${entMain.image_url || 'img/default.jpg'}" alt="${entMain.title}" class="img-fluid rounded">
               </div>
               <div class="mi-ent-main-content">
-                  <h2><a href="./single-post.html?id=${entMain.id}">${entMain.title}</a></h2>
+                  <h3><a href="./single-post.html?id=${entMain.id}" class="text-decoration-none text-dark fw-bold">${entMain.title}</a></h3>
                   <p>${entMain.content.substring(0, 150)}...</p>
-                  <div class="mi-meta">${timeAgo(entMain.created_at)}</div>
+                  <div class="mi-meta small text-muted">${timeAgo(entMain.created_at)}</div>
               </div>
           </article>
         `;
@@ -125,24 +130,24 @@ async function loadDynamicHome() {
 
       if (leftCol && sportsMain) {
         leftCol.innerHTML = `
-          <article class="mi-sports-main-feat">
-              <div class="mi-sports-main-img">
-                  <img src="${sportsMain.image_url || 'img/default.jpg'}" alt="${sportsMain.title}">
+          <article class="mi-sports-main-feat mb-3">
+              <div class="mi-sports-main-img mb-2">
+                  <img src="${sportsMain.image_url || 'img/default.jpg'}" alt="${sportsMain.title}" class="img-fluid rounded">
               </div>
               <div class="mi-sports-main-content">
-                  <h3><a href="./single-post.html?id=${sportsMain.id}">${sportsMain.title}</a></h3>
+                  <h3><a href="./single-post.html?id=${sportsMain.id}" class="text-decoration-none text-dark fw-bold">${sportsMain.title}</a></h3>
                   <p>${sportsMain.content.substring(0, 120)}...</p>
               </div>
           </article>
 
           ${sportsSubFeat ? `
-          <article class="mi-sports-sub-feat">
+          <article class="mi-sports-sub-feat d-flex gap-2">
               <div class="mi-sports-sub-feat-img">
-                  <img src="${sportsSubFeat.image_url || 'img/default.jpg'}" alt="${sportsSubFeat.title}">
+                  <img src="${sportsSubFeat.image_url || 'img/default.jpg'}" alt="${sportsSubFeat.title}" style="width: 100px; height: 70px; object-fit: cover;" class="rounded">
               </div>
               <div class="mi-sports-sub-feat-text">
-                  <h4><a href="./single-post.html?id=${sportsSubFeat.id}">${sportsSubFeat.title}</a></h4>
-                  <p>${sportsSubFeat.content.substring(0, 80)}...</p>
+                  <h5><a href="./single-post.html?id=${sportsSubFeat.id}" class="text-decoration-none text-dark">${sportsSubFeat.title}</a></h5>
+                  <p class="small text-muted">${sportsSubFeat.content.substring(0, 80)}...</p>
               </div>
           </article>
           ` : ''}
@@ -151,13 +156,13 @@ async function loadDynamicHome() {
 
       if (rightCol && sportsList.length > 0) {
         rightCol.innerHTML = sportsList.map(post => `
-          <article class="mi-sports-list-item">
-              <div class="mi-sports-list-img">
-                  <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+          <article class="mi-sports-list-item mb-3 d-flex justify-content-between">
+              <div class="mi-sports-list-img me-2">
+                  <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" style="width: 90px; height: 60px; object-fit: cover;" class="rounded">
               </div>
               <div class="mi-sports-list-text">
-                  <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
-                  <p>${post.content.substring(0, 80)}...</p>
+                  <h6><a href="./single-post.html?id=${post.id}" class="text-decoration-none text-dark">${post.title}</a></h6>
+                  <p class="small text-muted">${post.content.substring(0, 80)}...</p>
               </div>
           </article>
         `).join('');
@@ -166,6 +171,8 @@ async function loadDynamicHome() {
 
   } catch (error) {
     console.error('ডাটা লোড করতে ব্যর্থ:', error);
+    const loader = document.getElementById('loading-spinner');
+    if (loader) loader.innerHTML = '<p class="text-danger">সংবাদ লোড করতে সমস্যা হয়েছে। দয়া করে পেজটি রিফ্রেশ করুন।</p>';
   }
 }
 
@@ -185,16 +192,16 @@ function renderCategoryBlock(catName, catPosts) {
       if (featElem && featured) {
         featElem.innerHTML = `
           <a href="./single-post.html?id=${featured.id}">
-              <img src="${featured.image_url || 'img/default.jpg'}" alt="${featured.title}">
+              <img src="${featured.image_url || 'img/default.jpg'}" alt="${featured.title}" class="img-fluid rounded mb-2">
           </a>
-          <h3><a href="./single-post.html?id=${featured.id}">${featured.title}</a></h3>
+          <h4><a href="./single-post.html?id=${featured.id}" class="text-decoration-none text-dark fw-bold">${featured.title}</a></h4>
         `;
       }
 
       if (listElem && list.length > 0) {
         listElem.innerHTML = list.map(post => `
-          <li>
-              <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
+          <li class="border-bottom py-2">
+              <h6><a href="./single-post.html?id=${post.id}" class="text-decoration-none text-dark">${post.title}</a></h6>
           </li>
         `).join('');
       }
@@ -218,17 +225,17 @@ function renderTwoColSection(catName, catPosts) {
       if (mainElem && main) {
         mainElem.innerHTML = `
           <a href="./single-post.html?id=${main.id}">
-              <img src="${main.image_url || 'img/default.jpg'}" alt="${main.title}">
+              <img src="${main.image_url || 'img/default.jpg'}" alt="${main.title}" class="img-fluid rounded mb-2">
           </a>
-          <h3><a href="./single-post.html?id=${main.id}">${main.title}</a></h3>
+          <h4><a href="./single-post.html?id=${main.id}" class="text-decoration-none text-dark fw-bold">${main.title}</a></h4>
         `;
       }
 
       if (listElem && list.length > 0) {
         listElem.innerHTML = list.map(post => `
-          <article class="mi-two-col-list-item">
-              <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
-              <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+          <article class="mi-two-col-list-item d-flex justify-content-between align-items-center mb-2 border-bottom pb-2">
+              <h6 class="mb-0 me-2"><a href="./single-post.html?id=${post.id}" class="text-decoration-none text-dark">${post.title}</a></h6>
+              <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}" style="width: 60px; height: 45px; object-fit: cover;" class="rounded">
           </article>
         `).join('');
       }
