@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-   <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সত্য কথন- বাংলা নিউজ পেপার</title>
+    <title id="pageTitle">সত্য কথন - খবর লোড হচ্ছে...</title>
     
-    <!-- 🔥 ফেভিকন কোডটি এখানে থাকবে -->
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Solaimanlipi&display=swap" rel="stylesheet">
@@ -23,56 +22,46 @@
         <!-- মূল কনটেন্ট এবং সাইডবার র‍্যাপার -->
         <div class="mi-main-wrapper">
             
-            <!-- খবর বা মেইন কনটেন্ট সেকশন (বাম পাশে থাকবে) -->
+            <!-- খবর বা মেইন কনটেন্ট সেকশন -->
             <main class="mi-content">
-                <article class="mi-post">
+                
+                <!-- লোডার -->
+                <div id="loadingSpinner" class="text-center my-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">লোডিং...</span>
+                    </div>
+                    <p class="mt-2 text-muted">সংবাদ লোড হচ্ছে...</p>
+                </div>
+
+                <!-- পোস্ট কন্টেইনার (ডিফল্টভাবে হাইড থাকবে) -->
+                <article class="mi-post" id="postArticle" style="display: none;">
                     <!-- খবর হেডার -->
                     <div class="mi-post-header">
-                        <span class="mi-category mi-cat-politics">রাজনীতি</span>
-                        <h1>সংসদে নতুন বিল উপস্থাপনে সৃষ্টি হয়েছে নতুন ইতিহাস</h1>
+                        <span id="postCategory" class="mi-category mi-cat-politics">সাধারণ</span>
+                        <h1 id="postTitle"></h1>
                         <div class="mi-post-meta">
-                            <span>লেখক: <strong>আহমেদ করিম</strong></span>
-                            <span>প্রকাশ: <strong>আজ, সকাল ৯:৩০</strong></span>
-                            <span>আপডেট: <strong>২ ঘণ্টা আগে</strong></span>
+                            <span>লেখক: <strong id="postAuthor">সত্যকথন ডেস্ক</strong></span>
+                            <span>প্রকাশ: <strong id="postTime"></strong></span>
                         </div>
                     </div>
 
                     <!-- ফিচার ইমেজ -->
                     <div class="mi-post-image">
-                        <img src="https://via.placeholder.com/800x450" alt="খবর ছবি">
+                        <img id="postImage" src="" alt="খবর ছবি">
+                        <div id="postCaption" class="text-muted fs-6 mt-1" style="font-style: italic;"></div>
                     </div>
 
                     <!-- খবর কনটেন্ট -->
-                    <div class="mi-post-content">
-                        <p><strong>সংসদে আজ ঐতিহাসিক একটি মুহূর্ত সৃষ্টি হয়েছে।</strong> প্রধানমন্ত্রী নেতৃত্বে সংসদ একটি গুরুত্বপূর্ণ বিল উপস্থাপন করেছেন যা শিক্ষা খাতের সম্পূর্ণ রূপান্তর আনবে।</p>
-                        <p>এই বিলটি তিন মাস ধরে আলোচনা এবং পরিমার্জন করা হয়েছে। বিভিন্ন দল এবং বিশেষজ্ঞদের সাথে পরামর্শ করে এটি প্রস্তুত করা হয়েছে।</p>
-
-                        <h3>বিলের প্রধান বৈশিষ্ট্য</h3>
-                        <ul>
-                            <li>প্রাথমিক শিক্ষায় বিনামূল্যে শিক্ষা উপকরণ সরবরাহ</li>
-                            <li>শিক্ষকদের জন্য নতুন প্রশিক্ষণ কর্মসূচি</li>
-                            <li>ডিজিটাল শিক্ষা প্ল্যাটফর্ম সম্প্রসারণ</li>
-                            <li>গ্রামীণ এলাকায় শিক্ষা অবকাঠামো উন্নয়ন</li>
-                        </ul>
-
-                        <p>বিল উপস্থাপনের সময় সংসদের সকল সদস্য এটি সমর্থন করেছেন। এটি এক অভূতপূর্ব ঐক্য প্রদর্শন করে।</p>
-                        <blockquote>
-                            "এই বিলটি আমাদের দেশের শিক্ষা ব্যবস্থায় বিপ্লব আনবে। আমরা বিশ্বাস করি যে শিক্ষা হল উন্নয়নের চাবিকাঠি।" - প্রধানমন্ত্রী
-                        </blockquote>
-
-                        <p>বিশেষজ্ঞরা মনে করেন এই পদক্ষেপ শিক্ষার মান উন্নয়নে গুরুত্বপূর্ণ ভূমিকা পালন করবে।</p>
-                        <h3>সামাজিক মাধ্যমে সাড়া</h3>
-                        <p>টুইটার এবং ফেসবুকে এই খবরটি ভাইরাল হয়েছে। হাজার হাজার মানুষ এই বিলের প্রশংসা করেছেন।</p>
-                    </div>
+                    <div class="mi-post-content" id="postContent"></div>
 
                     <!-- শেয়ার বোতাম -->
                     <div class="mi-post-share">
                         <h5>এই খবর শেয়ার করুন:</h5>
                         <div class="mi-share-buttons">
-                            <a href="#" class="mi-share-btn mi-facebook">📘 ফেসবুক</a>
-                            <a href="#" class="mi-share-btn mi-twitter">🐦 টুইটার</a>
-                            <a href="#" class="mi-share-btn mi-whatsapp">💬 হোয়াটসঅ্যাপ</a>
-                            <a href="#" class="mi-share-btn mi-copy">📋 কপি লিংক</a>
+                            <a id="shareFb" href="#" target="_blank" class="mi-share-btn mi-facebook">📘 ফেসবুক</a>
+                            <a id="shareTw" href="#" target="_blank" class="mi-share-btn mi-twitter">🐦 টুইটার</a>
+                            <a id="shareWa" href="#" target="_blank" class="mi-share-btn mi-whatsapp">💬 হোয়াটসঅ্যাপ</a>
+                            <button onclick="copyLink()" class="mi-share-btn mi-copy">📋 কপি লিংক</button>
                         </div>
                     </div>
 
@@ -80,66 +69,23 @@
                     <div class="mi-author-info">
                         <div class="mi-author-image">👤</div>
                         <div class="mi-author-content">
-                            <h5>আহমেদ করিম</h5>
-                            <p>সিনিয়র রাজনৈতিক সাংবাদিক এবং বিশ্লেষক। ১৫ বছরের অভিজ্ঞতা নিয়ে কাজ করছেন।</p>
-                            <a href="#">আরও লেখা পড়ুন →</a>
+                            <h5 id="authorName">সত্যকথন ডেস্ক</h5>
+                            <p>সত্যকথন নিউজ পোর্টালে সর্বশেষ আপডেট এবং বস্তুনিষ্ঠ খবর পরিবেশন করা হয়।</p>
                         </div>
                     </div>
 
-                    <!-- সংক্রান্ত খবর -->
+                    <!-- সংক্রান্ত খবর (সম্পর্কিত ক্যাটাগরির পোস্ট) -->
                     <div class="mi-related-posts">
                         <h3>সংক্রান্ত খবর</h3>
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <a href="single-post.html?id=2" class="mi-related-item">
-                                    <img src="https://via.placeholder.com/250x150" alt="">
-                                    <h6>শিক্ষা মন্ত্রীর বিবৃতি</h6>
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="single-post.html?id=3" class="mi-related-item">
-                                    <img src="https://via.placeholder.com/250x150" alt="">
-                                    <h6>বিরোধী দল সাড়া দিয়েছে</h6>
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="single-post.html?id=4" class="mi-related-item">
-                                    <img src="https://via.placeholder.com/250x150" alt="">
-                                    <h6>শিক্ষা খাতে বিনিয়োগ পরিকল্পনা</h6>
-                                </a>
-                            </div>
+                        <div class="row g-3" id="relatedPostsContainer">
+                            <p class="text-muted">সংক্রান্ত খবর লোড হচ্ছে...</p>
                         </div>
                     </div>
 
-                    <!-- মন্তব্য সেকশন -->
-                    <div class="mi-comments-section">
-                        <h3>পাঠকদের মন্তব্য (২৩)</h3>
-                        <form class="mi-comment-form">
-                            <textarea placeholder="আপনার মন্তব্য লিখুন..."></textarea>
-                            <input type="text" placeholder="আপনার নাম">
-                            <input type="email" placeholder="আপনার ইমেল">
-                            <button type="submit" class="btn btn-primary">মন্তব্য পাঠান</button>
-                        </form>
-
-                        <div class="mi-comments-list">
-                            <div class="mi-comment">
-                                <h6>রফিকুল ইসলাম</h6>
-                                <small>২ ঘণ্টা আগে</small>
-                                <p>এটি একটি দুর্দান্ত পদক্ষেপ。আমরা দীর্ঘদিন এর জন্য অপেক্ষা করছিলাম।</p>
-                                <a href="#">উত্তর দিন</a>
-                            </div>
-                            <div class="mi-comment">
-                                <h6>সালমা বেগম</h6>
-                                <small>১ ঘণ্টা আগে</small>
-                                <p>গ্রামীণ এলাকার শিক্ষায় এটি বড় ভূমিকা রাখবে বলে আমি বিশ্বাস করি।</p>
-                                <a href="#">উত্তর দিন</a>
-                            </div>
-                        </div>
-                    </div>
                 </article>
             </main>
 
-            <!-- সাইডবার কনটেইনার (ডান পাশে দেখাবে) -->
+            <!-- সাইডবার কনটেইনার -->
             <div id="sidebarContainer"></div>
 
         </div>
@@ -149,5 +95,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
+    <!-- সিঙ্গেল পোস্টের ডাইনামিক স্ক্রিপ্ট -->
+    <script src="js/single-post-dynamic.js"></script>
 </body>
 </html>
