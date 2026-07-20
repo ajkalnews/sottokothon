@@ -36,7 +36,7 @@
 .mi-f-col a {
     color: #333333;
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size:1.2rem;
     transition: color 0.2s ease;
     display: inline-block;
 }
@@ -104,7 +104,7 @@
 
 .mi-f-bottom-links {
     margin-bottom: 12px;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: #777777;
 }
 
@@ -120,7 +120,7 @@
 }
 
 .mi-f-copyright {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     color: #777777;
     margin: 0;
 }
