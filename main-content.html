@@ -1,82 +1,255 @@
-<!-- মেইন কন্টেন্ট স্টার্ট -->
-<div class="mi-main-layout">
+// সময় হিসাব করার হেল্পার ফাংশন
+function timeAgo(dateString) {
+  if (!dateString) return '';
+  const postDate = new Date(dateString);
+  const now = new Date();
+  const diffInSeconds = Math.floor((now - postDate) / 1000);
+
+  if (diffInSeconds < 60) return 'এইমাত্র';
+  const minutes = Math.floor(diffInSeconds / 60);
+  if (minutes < 60) return `${toBanglaNum(minutes)} মিনিট আগে`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${toBanglaNum(hours)} ঘণ্টা আগে`;
+  const days = Math.floor(hours / 24);
+  return `${toBanglaNum(days)} দিন আগে`;
+}
+
+function toBanglaNum(num) {
+  const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return num.toString().replace(/\d/g, d => banglaDigits[d]);
+}
+
+async function loadDynamicHome() {
+  try {
+    const res = await fetch('/api/posts');
+    if (!res.ok) throw new Error('ডাটা ফেচ করা যায়নি');
     
-    <!-- প্রাথমিক লোডিং স্টেট (ডাটা আসার আগ পর্যন্ত থাকবে) -->
-    <div id="loading-spinner" class="text-center my-5">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">লোডিং...</span>
-        </div>
-        <p class="mt-2 text-muted">সর্বশেষ খবর লোড হচ্ছে...</p>
-    </div>
+    const posts = await res.json();
+    
+    // লোডার বন্ধ করা
+    const loader = document.getElementById('loading-spinner');
+    if (loader) loader.style.display = 'none';
 
-    <!-- ১. প্রধান সংবাদ (Featured Section) -->
-    <section class="mi-featured-section mb-4">
-        <div class="row">
-            <div class="col-md-7">
-                <article class="mi-featured-main-article"></article>
+    if (!posts || posts.length === 0) return;
+
+    // ১. ফিচার্ড সেকশন (Main Lead & Sub Leads)
+    const mainLead = posts.find(p => p.is_lead === 1) || posts[0];
+    const subLeads = posts.filter(p => p.is_sub_lead === 1 && p.id !== mainLead.id).slice(0, 2);
+
+    if (mainLead) {
+      document.getElementById('lead-img').src = mainLead.image_url || 'img/default.jpg';
+      document.getElementById('lead-img').alt = mainLead.title;
+      
+      const captionElem = document.getElementById('lead-caption');
+      if (mainLead.image_caption) {
+        captionElem.innerText = mainLead.image_caption;
+        captionElem.style.display = 'block';
+      } else {
+        captionElem.style.display = 'none';
+      }
+
+      const titleElem = document.getElementById('lead-title');
+      titleElem.innerText = mainLead.title;
+      titleElem.href = `./single-post.html?id=${mainLead.id}`;
+
+      document.getElementById('lead-excerpt').innerText = mainLead.content ? mainLead.content.substring(0, 180) + '...' : '';
+      document.getElementById('lead-time').innerText = timeAgo(mainLead.created_at);
+    }
+
+    // সাব-লিড পোস্ট
+    const subContainer = document.getElementById('sub-lead-container');
+    if (subContainer && subLeads.length > 0) {
+      subContainer.innerHTML = subLeads.map(post => `
+        <article class="mi-sub-news-item">
+            <div class="mi-sub-text">
+                <h3><a href="./single-post.html?id=${post.id}">${post.title}</a></h3>
+                <p>${post.content ? post.content.substring(0, 80) + '...' : ''}</p>
+                <div class="mi-meta">${timeAgo(post.created_at)}</div>
             </div>
-            <div class="col-md-5">
-                <div class="mi-featured-sub-grid"></div>
+            <div class="mi-sub-img">
+                <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
             </div>
-        </div>
-    </section>
+        </article>
+      `).join('');
+    }
 
-    <hr class="my-4">
+    // ক্যাটাগরি অনুযায়ী ফিল্টার করার নিরাপদ ফাংশন
+    const getPostsByCategory = (catTarget) => {
+      return posts.filter(p => {
+        const catName = p.category_name ? p.category_name.trim().toLowerCase() : '';
+        const target = catTarget.trim().toLowerCase();
+        return catName === target || String(p.category_id) === String(catTarget);
+      });
+    };
 
-    <!-- ২. শিক্ষা ও চাকরি -->
-    <section class="mi-cat-two-col mb-4">
-        <div class="row">
-            <div class="col-md-6 mi-category-block">
-                <h2 class="mi-block-title">শিক্ষা</h2>
-                <div class="mi-block-featured"></div>
-                <ul class="mi-block-list list-unstyled mt-3"></ul>
-            </div>
-            <div class="col-md-6 mi-category-block">
-                <h2 class="mi-block-title">চাকরি</h2>
-                <div class="mi-block-featured"></div>
-                <ul class="mi-block-list list-unstyled mt-3"></ul>
-            </div>
-        </div>
-    </section>
+    // ২. শিক্ষা ও চাকরি
+    renderCategoryBlock('শিক্ষা', getPostsByCategory('শিক্ষা'));
+    renderCategoryBlock('চাকরি', getPostsByCategory('চাকরি'));
 
-    <hr class="my-4">
+    // ৩. সারাদেশ
+    const saradeshPosts = getPostsByCategory('সারাদেশ');
+    if (saradeshPosts.length > 0) {
+      const entMain = saradeshPosts[0];
+      const entSubs = saradeshPosts.slice(1, 4);
 
-    <!-- ৩. সারাদেশ / বিনোদন সেকশন -->
-    <section class="mi-entertainment-section mb-4">
-        <h2 class="mi-section-title">সারাদেশ</h2>
-        <div class="row">
-            <div class="col-md-6 mi-ent-left-column"></div>
-            <div class="col-md-6 mi-ent-right-column"></div>
-        </div>
-    </section>
+      const sectionElem = document.querySelector('section[data-category="সারাদেশ"]');
+      if (sectionElem) {
+        const leftCol = sectionElem.querySelector('.mi-ent-left-column');
+        const rightCol = sectionElem.querySelector('.mi-ent-right-column');
 
-    <hr class="my-4">
+        if (leftCol && entSubs.length > 0) {
+          leftCol.innerHTML = entSubs.map(post => `
+            <article class="mi-ent-sub-item">
+                <div class="mi-ent-sub-text">
+                    <h3><a href="./single-post.html?id=${post.id}">${post.title}</a></h3>
+                    <div class="mi-meta">${timeAgo(post.created_at)}</div>
+                </div>
+                <div class="mi-ent-sub-img">
+                    <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+                </div>
+            </article>
+          `).join('');
+        }
 
-    <!-- ৪. লাইফস্টাইল ও টেক -->
-    <section class="mi-two-col-section mb-4">
-        <div class="row">
-            <div class="col-md-6 mi-two-col-block">
-                <h2 class="mi-two-col-title">লাইফস্টাইল</h2>
-                <div class="mi-two-col-main"></div>
-                <div class="mi-two-col-list mt-3"></div>
-            </div>
-            <div class="col-md-6 mi-two-col-block">
-                <h2 class="mi-two-col-title">টেক</h2>
-                <div class="mi-two-col-main"></div>
-                <div class="mi-two-col-list mt-3"></div>
-            </div>
-        </div>
-    </section>
+        if (rightCol && entMain) {
+          rightCol.innerHTML = `
+            <article class="mi-ent-main-article">
+                <div class="mi-ent-main-img">
+                    <img src="${entMain.image_url || 'img/default.jpg'}" alt="${entMain.title}">
+                </div>
+                <div class="mi-ent-main-content">
+                    <h2><a href="./single-post.html?id=${entMain.id}">${entMain.title}</a></h2>
+                    <p>${entMain.content ? entMain.content.substring(0, 140) + '...' : ''}</p>
+                    <div class="mi-meta">${timeAgo(entMain.created_at)}</div>
+                </div>
+            </article>
+          `;
+        }
+      }
+    }
 
-    <hr class="my-4">
+    // ৪. লাইফস্টাইল ও টেক
+    renderTwoColSection('লাইফস্টাইল', getPostsByCategory('লাইফস্টাইল'));
+    renderTwoColSection('টেক', getPostsByCategory('টেক'));
 
-    <!-- ৫. খেলা -->
-    <section class="mi-sports-section mb-4">
-        <h2 class="mi-section-title">খেলা</h2>
-        <div class="row">
-            <div class="col-md-7 mi-sports-left-col"></div>
-            <div class="col-md-5 mi-sports-right-col"></div>
-        </div>
-    </section>
+    // ৫. খেলা
+    const sportsPosts = getPostsByCategory('খেলা');
+    if (sportsPosts.length > 0) {
+      const sportsMain = sportsPosts[0];
+      const sportsSubFeat = sportsPosts[1];
+      const sportsList = sportsPosts.slice(2, 5);
 
-</div>
+      const sportsSection = document.querySelector('section[data-category="খেলা"]');
+      if (sportsSection) {
+        const leftCol = sportsSection.querySelector('.mi-sports-left-col');
+        const rightCol = sportsSection.querySelector('.mi-sports-right-col');
+
+        if (leftCol && sportsMain) {
+          leftCol.innerHTML = `
+            <article class="mi-sports-main-feat">
+                <div class="mi-sports-main-img">
+                    <img src="${sportsMain.image_url || 'img/default.jpg'}" alt="${sportsMain.title}">
+                </div>
+                <div class="mi-sports-main-content">
+                    <h3><a href="./single-post.html?id=${sportsMain.id}">${sportsMain.title}</a></h3>
+                    <p>${sportsMain.content ? sportsMain.content.substring(0, 110) + '...' : ''}</p>
+                </div>
+            </article>
+
+            ${sportsSubFeat ? `
+            <article class="mi-sports-sub-feat">
+                <div class="mi-sports-sub-feat-img">
+                    <img src="${sportsSubFeat.image_url || 'img/default.jpg'}" alt="${sportsSubFeat.title}">
+                </div>
+                <div class="mi-sports-sub-feat-text">
+                    <h4><a href="./single-post.html?id=${sportsSubFeat.id}">${sportsSubFeat.title}</a></h4>
+                    <p>${sportsSubFeat.content ? sportsSubFeat.content.substring(0, 70) + '...' : ''}</p>
+                </div>
+            </article>
+            ` : ''}
+          `;
+        }
+
+        if (rightCol && sportsList.length > 0) {
+          rightCol.innerHTML = sportsList.map(post => `
+            <article class="mi-sports-list-item">
+                <div class="mi-sports-list-img">
+                    <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+                </div>
+                <div class="mi-sports-list-text">
+                    <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
+                    <p>${post.content ? post.content.substring(0, 70) + '...' : ''}</p>
+                </div>
+            </article>
+          `).join('');
+        }
+      }
+    }
+
+  } catch (error) {
+    console.error('ডাটা লোড করতে ব্যর্থ:', error);
+    const loader = document.getElementById('loading-spinner');
+    if (loader) loader.innerHTML = '<p class="text-danger">সংবাদ লোড করতে সমস্যা হয়েছে।</p>';
+  }
+}
+
+function renderCategoryBlock(catName, catPosts) {
+  if (!catPosts || catPosts.length === 0) return;
+  const block = document.querySelector(`.mi-category-block[data-category="${catName}"]`);
+  
+  if (block) {
+    const featured = catPosts[0];
+    const list = catPosts.slice(1, 4);
+
+    const featElem = block.querySelector('.mi-block-featured');
+    const listElem = block.querySelector('.mi-block-list');
+
+    if (featElem && featured) {
+      featElem.innerHTML = `
+        <a href="./single-post.html?id=${featured.id}">
+            <img src="${featured.image_url || 'img/default.jpg'}" alt="${featured.title}">
+        </a>
+        <h3><a href="./single-post.html?id=${featured.id}">${featured.title}</a></h3>
+      `;
+    }
+
+    if (listElem && list.length > 0) {
+      listElem.innerHTML = list.map(post => `
+        <li>
+            <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
+        </li>
+      `).join('');
+    }
+  }
+}
+
+function renderTwoColSection(catName, catPosts) {
+  if (!catPosts || catPosts.length === 0) return;
+  const block = document.querySelector(`.mi-two-col-block[data-category="${catName}"]`);
+
+  if (block) {
+    const main = catPosts[0];
+    const list = catPosts.slice(1, 4);
+
+    const mainElem = block.querySelector('.mi-two-col-main');
+    const listElem = block.querySelector('.mi-two-col-list');
+
+    if (mainElem && main) {
+      mainElem.innerHTML = `
+        <a href="./single-post.html?id=${main.id}">
+            <img src="${main.image_url || 'img/default.jpg'}" alt="${main.title}">
+        </a>
+        <h3><a href="./single-post.html?id=${main.id}">${main.title}</a></h3>
+      `;
+    }
+
+    if (listElem && list.length > 0) {
+      listElem.innerHTML = list.map(post => `
+        <article class="mi-two-col-list-item">
+            <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
+            <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+        </article>
+      `).join('');
+    }
+  }
+}
