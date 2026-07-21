@@ -1,8 +1,91 @@
 /* ==========================================
-   ক্যাটাগরি গ্রিড লেআউট (ছবি অনুযায়ী)
+   ১. মেইন লেআউট (সাইডবার ডানপাশে ফিক্স করার জন্য)
    ========================================== */
 
-/* প্রথম সারি: ২ কলামের গ্রিড (হিডলাইন ১ ও ২) */
+/* মেইন র‍্যাপার */
+.mi-main-wrapper {
+    display: flex;
+    gap: 25px; /* কন্টেন্ট ও সাইডবারের দূরত্ব */
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* বাম পাশের মেইন কন্টেন্ট এলাকা (৭০% জায়গা নিবে) */
+.mi-content {
+    flex: 0 0 70%;
+    max-width: 70%;
+    min-width: 0; /* গ্রিডের কারণে সাইডবার যেন নিচে না নেমে যায় */
+}
+
+/* ডান পাশের সাইডবার এলাকা (৩০% জায়গা নিবে) */
+#sidebarContainer {
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+
+
+/* ==========================================
+   ২. ক্যাটাগরি হেডার ও ফিল্টার বার
+   ========================================== */
+
+.mi-category-header {
+    background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
+    color: white;
+    padding: 30px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.mi-category-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.mi-category-header p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.mi-filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.mi-filter-btn {
+    padding: 8px 18px;
+    border: 1px solid #dadce0;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.mi-filter-btn:hover,
+.mi-filter-btn.active {
+    background: #1a73e8;
+    color: white;
+    border-color: #1a73e8;
+}
+
+
+/* ==========================================
+   ৩. গ্রিড কন্টেন্ট লেআউট (ছবি অনুযায়ী)
+   ========================================== */
+
+.mi-cat-top-grid, 
+.mi-cat-bottom-grid {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ৩.১ প্রথম সারি: ২ কলামের গ্রিড (হেডলাইন ১ ও ২) */
 .mi-cat-top-grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
@@ -55,6 +138,10 @@
     text-decoration: none;
 }
 
+.mi-overlay-content h2 a:hover {
+    color: #38bdf8;
+}
+
 .mi-overlay-content .mi-time {
     font-size: 0.8rem;
     color: #cbd5e1;
@@ -98,7 +185,7 @@
     margin-bottom: 10px;
 }
 
-/* দ্বিতীয় সারি: ৩ কলামের বটম গ্রিড */
+/* ৩.২ দ্বিতীয় সারি: ৩ কলামের বটম গ্রিড */
 .mi-cat-bottom-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -114,7 +201,7 @@
 
 .mi-grid-card img {
     width: 100%;
-    height: 160px;
+    height: 150px;
     object-fit: cover;
     border-radius: 6px;
     margin-bottom: 10px;
@@ -149,14 +236,30 @@
     margin-top: auto;
 }
 
-/* রেসপনসিভ মোতাবেক লেআউট সমন্বয় */
-@media (max-width: 992px) {
+
+/* ==========================================
+   ৪. রেসপনসিভ (মোবাইল ও ট্যাবলেট ডিভাইসের জন্য)
+   ========================================== */
+
+@media (max-width: 991px) {
+    .mi-main-wrapper {
+        flex-direction: column;
+    }
+    
+    .mi-content,
+    #sidebarContainer {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
     .mi-cat-top-grid {
         grid-template-columns: 1fr;
     }
+
     .mi-top-news-overlay {
         height: 300px;
     }
+
     .mi-cat-bottom-grid {
         grid-template-columns: repeat(2, 1fr);
     }
