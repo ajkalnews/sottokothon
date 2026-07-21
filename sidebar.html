@@ -1,341 +1,190 @@
 <aside class="mi-sidebar">
-<!-- মডার্ন কার্ড ট্যাবড নিউজ উইজেট -->
-<div class="mi-premium-tab-card">
-    <!-- ট্যাব বাটনসমূহ (কার্ডের ভেতরে প্রিমিয়াম লুকে) -->
-    <div class="mi-modern-tabs">
-        <button class="mi-modern-tab-btn active" onclick="switchModernTab(event, 'mod-latest')">
-            <span class="mi-tab-icon">✨</span> সর্বশেষ
-        </button>
-        <button class="mi-modern-tab-btn" onclick="switchModernTab(event, 'mod-popular')">
-            <span class="mi-tab-icon">🔥</span> পঠিত
-        </button>
-        <button class="mi-modern-tab-btn" onclick="switchModernTab(event, 'mod-comments')">
-            <span class="mi-tab-icon">💬</span> মন্তব্য
-        </button>
-    </div>
-    
-    <!-- ট্যাব কন্টেন্ট বডি -->
-    <div class="mi-modern-tab-body">
+    <!-- মডার্ন কার্ড ট্যাবড নিউজ উইজেট -->
+    <div class="mi-premium-tab-card">
+        <!-- ট্যাব বাটনসমূহ -->
+        <div class="mi-modern-tabs">
+            <button class="mi-modern-tab-btn active" onclick="switchModernTab(event, 'mod-latest')">
+                <span class="mi-tab-icon">✨</span> সর্বশেষ
+            </button>
+            <button class="mi-modern-tab-btn" onclick="switchModernTab(event, 'mod-popular')">
+                <span class="mi-tab-icon">🔥</span> পঠিত
+            </button>
+            <button class="mi-modern-tab-btn" onclick="switchModernTab(event, 'mod-comments')">
+                <span class="mi-tab-icon">💬</span> আলোচনা
+            </button>
+        </div>
         
-        <!-- ১. সর্বশেষ খবরের তালিকা -->
-        <div id="mod-latest" class="mi-modern-pane active">
-            <ul class="mi-premium-list">
-                <li>
-                    <span class="mi-news-number">১</span>
-                    <a href="#">এই মাত্র পাওয়া: দেশের বিভিন্ন অঞ্চলে তীব্র ঝড়-বৃষ্টির পূর্বাভাস</a>
-                </li>
-                <li>
-                    <span class="mi-news-number">২</span>
-                    <a href="#">স্বর্ণের বাজারে বড় পতন, ভরি প্রতি কমল ৩ হাজার টাকা</a>
-                </li>
-                <li>
-                    <span class="mi-news-number">৩</span>
-                    <a href="#">ঢাকা বিশ্ববিদ্যালয়ে নতুন শিক্ষাবর্ষের ভর্তি পরীক্ষার তারিখ ঘোষণা</a>
-                </li>
-                <li>
-                    <span class="mi-news-number">৪</span>
-                    <a href="#">টি-টোয়েন্টি সিরিজে জয় দিয়ে শুরু করল বাংলাদেশ</a>
-                </li>
-            </ul>
-        </div>
+        <!-- ট্যাব কন্টেন্ট বডি -->
+        <div class="mi-modern-tab-body">
+            <!-- ১. সর্বশেষ খবরের তালিকা -->
+            <div id="mod-latest" class="mi-modern-pane active">
+                <ul class="mi-premium-list" id="sidebarLatestList">
+                    <li class="text-muted small">লোড হচ্ছে...</li>
+                </ul>
+            </div>
 
-        <!-- ২. সর্বাধিক পঠিত খবরের তালিকা -->
-        <div id="mod-popular" class="mi-modern-pane">
-            <ul class="mi-premium-list">
-                <li>
-                    <span class="mi-news-number">১</span>
-                    <a href="#">ফুটবলের অন্ধ ভক্ত হলে শরীরে যেসব समस्या হতে পারে</a>
-                </li>
-                <li>
-                    <span class="mi-news-number">২</span>
-                    <a href="#">ভাইজান বলেছিলেন—একদিন তোমাদের বিচ্ছেদ হবে: সোনাক্ষী</a>
-                </li>
-                <li>
-                    <span class="mi-news-number">৩</span>
-                    <a href="#">২০২৬ বিশ্বকাপ থেকে রেকর্ড ১৫ বিলিয়ন ডলার আয় করছে ফিফা</a>
-                </li>
-                <li>
-                    <span class="mi-news-number">৪</span>
-                    <a href="#">আন্তর্জাতিক গণিত অলিম্পিয়াডে বাংলাদেশের ছয় পদক</a>
-                </li>
-            </ul>
-        </div>
+            <!-- ২. সর্বাধিক পঠিত খবরের তালিকা -->
+            <div id="mod-popular" class="mi-modern-pane">
+                <ul class="mi-premium-list" id="sidebarPopularList">
+                    <li class="text-muted small">লোড হচ্ছে...</li>
+                </ul>
+            </div>
 
-        <!-- ৩. মন্তব্য হওয়া খবরের তালিকা -->
-        <div id="mod-comments" class="mi-modern-pane">
-            <ul class="mi-premium-list">
-                <li>
-                    <span class="mi-news-number">১</span>
-                    <a href="#">রেফারি নিয়ে আর্জেন্টিনার আপত্তিতে যা বলল ফিফা <span class="mi-comment-count">১২০</span></a>
-                </li>
-                <li>
-                    <span class="mi-news-number">২</span>
-                    <a href="#">নতুন বাজেট নিয়ে সাধারণ মানুষের মিশ্র প্রতিক্রিয়া <span class="mi-comment-count">৮৫</span></a>
-                </li>
-                <li>
-                    <span class="mi-news-number">৩</span>
-                    <a href="#">মেট্রো রেলের সময়সূচীতে পরিবর্তন, ক্ষোভ প্রকাশ <span class="mi-comment-count">৬৫</span></a>
-                </li>
-                <li>
-                    <span class="mi-news-number">৪</span>
-                    <a href="#">প্রিয়াঙ্কা চোপড়ার নতুন সিনেমা নিয়ে সোশ্যাল মিডিয়ায় ঝড় <span class="mi-comment-count">৪২</span></a>
-                </li>
-            </ul>
+            <!-- ৩. আলোচিত খবরের তালিকা -->
+            <div id="mod-comments" class="mi-modern-pane">
+                <ul class="mi-premium-list" id="sidebarCommentedList">
+                    <li class="text-muted small">লোড হচ্ছে...</li>
+                </ul>
+            </div>
         </div>
-
     </div>
-</div>
+
     <!-- বিজ্ঞাপন প্লেসহোল্ডার -->
     <div class="mi-widget">
-       <div class="mi-ad-placeholder">
-          <img src="img/ads1.JPG" alt="Konka Logo">
-      
+        <div class="mi-ad-placeholder">
+            <img src="img/ads1.JPG" alt="Advertisement">
         </div>
     </div>
-   <!-- বিজ্ঞানচিন্তা উইজেট সেকশন -->
-<div class="mi-widget">
-    <div class="mi-widget-header">
-        <span class="mi-category-flat">বিশ্ব</span>
-    </div>
-    
-    <!-- ফিচার্ড নিউজ (ছবি ও শিরোনাম) -->
-    <div class="mi-news-card-featured">
-        <a href="#">
-            <img src="img/p2.JPG" alt="বিজ্ঞানচিন্তা ফিচার্ড">
-        </a>
-        <div class="mi-card-body">
-            <h4><a href="#">ফুটবলের অন্ধ ভক্ত হলে শরীরে যেসব সমস্যা হতে পারে</a></h4>
+
+    <!-- বিশ্ব ক্যাটাগরি উইজেট সেকশন -->
+    <div class="mi-widget">
+        <div class="mi-widget-header">
+            <span class="mi-category-flat">বিশ্ব</span>
+        </div>
+        
+        <!-- ফিচার্ড নিউজ (ছবি ও শিরোনাম) -->
+        <div class="mi-news-card-featured" id="worldFeaturedPost">
+            <!-- ডাইনামিকভাবে আসবে -->
+        </div>
+        
+        <!-- অন্যান্য নিউজের লিস্ট -->
+        <ul class="mi-widget-list" id="worldPostList">
+            <!-- ডাইনামিকভাবে আসবে -->
+        </ul>
+        
+        <hr class="mi-divider">
+        
+        <div class="mi-widget-footer">
+            <a href="category.html?id=18" class="mi-btn-more">আরও</a>
         </div>
     </div>
-    
-    <!-- অন্যান্য নিউজের লিস্ট -->
-    <ul class="mi-widget-list">
-        <li>
-            <h4><a href="#">স্বর্ণের যম অ্যাকুয়া রেজিয়া</a></h4>
-        </li>
-        <li>
-            <h4><a href="#">আন্তর্জাতিক গণিত অলিম্পিয়াডে বাংলাদেশের ছয় পদক</a></h4>
-        </li>
-    </ul>
-    
-    <hr class="mi-divider">
-    
-    <!-- আরও বাটন -->
-    <div class="mi-widget-footer">
-        <a href="#" class="mi-btn-more">আরও</a>
-    </div>
-</div>
-    <!-- এলাকার খবর ফ্ল্যাট উইজেট সেকশন (s2.JPG অনুযায়ী) -->
-<div class="mi-flat-widget">
-    <div class="mi-widget-header-flat">
-        <span class="mi-category-flat">এলাকার খবর</span>
-    </div>
-    
-    <form class="mi-area-filter-form" action="#" method="GET">
-        <!-- বিভাগ সিলেক্ট -->
-        <div class="mi-filter-group">
-            <select name="division" class="mi-filter-select">
-                <option value="">বিভাগ</option>
-                <option value="dhaka">ঢাকা</option>
-                <option value="chittagong">চট্টগ্রাম</option>
-                <!-- অন্যান্য বিভাগ এখানে যুক্ত করতে পারেন -->
-            </select>
+
+    <!-- এলাকার খবর ফ্ল্যাট উইজেট সেকশন -->
+    <div class="mi-flat-widget">
+        <div class="mi-widget-header-flat">
+            <span class="mi-category-flat">এলাকার খবর</span>
         </div>
+        
+        <form class="mi-area-filter-form" action="category.html" method="GET">
+            <div class="mi-filter-group">
+                <select name="division" class="mi-filter-select">
+                    <option value="">বিভাগ</option>
+                    <option value="dhaka">ঢাকা</option>
+                    <option value="chittagong">চট্টগ্রাম</option>
+                    <option value="rajshahi">রাজশাহী</option>
+                    <option value="khulna">খুলনা</option>
+                    <option value="barisal">বরিশাল</option>
+                    <option value="sylhet">সিলেট</option>
+                    <option value="rangpur">রংপুর</option>
+                    <option value="mymensingh">ময়মনসিংহ</option>
+                </select>
+            </div>
 
-        <!-- জেলা সিলেক্ট -->
-        <div class="mi-filter-group">
-            <select name="district" class="mi-filter-select">
-                <option value="">জেলা</option>
-                <!-- ডাইনামিক ডেটা বা অপশনসমূহ -->
-            </select>
-        </div>
+            <div class="mi-filter-group">
+                <select name="district" class="mi-filter-select">
+                    <option value="">জেলা</option>
+                </select>
+            </div>
 
-        <!-- উপজেলা সিলেক্ট -->
-        <div class="mi-filter-group">
-            <select name="upazila" class="mi-filter-select">
-                <option value="">উপজেলা</option>
-                <!-- ডাইনামিক ডেটা বা অপশনসমূহ -->
-            </select>
-        </div>
+            <div class="mi-filter-group">
+                <select name="upazila" class="mi-filter-select">
+                    <option value="">উপজেলা</option>
+                </select>
+            </div>
 
-        <!-- খুঁজুন বাটন -->
-        <button type="submit" class="mi-btn-search">খুঁজুন</button>
-    </form>
-</div>
-    <!-- সাইডবার থাম্বনেইল লিস্ট উইজেট সেকশন (s3.JPG অনুযায়ী) -->
-<div class="mi-flat-widget">
-    <div class="mi-widget-header-flat">
-        <span class="mi-category-flat">বিনোদন</span>
+            <button type="submit" class="mi-btn-search">খুঁজুন</button>
+        </form>
     </div>
-    
-    <div class="mi-sidebar-thumb-list">
-        <!-- নিউজ আইটেম ১ -->
-        <article class="mi-sidebar-thumb-item">
-            <div class="mi-sidebar-thumb-img">
-                <img src="img/p2.JPG" alt="নিউজ থাম্বনেইল">
-            </div>
-            <div class="mi-sidebar-thumb-text">
-                <h4><a href="#">জন্মদিনে প্রকাশ পেল প্রিয়াঙ্কা চোপড়ার ভিন্ন রূপ</a></h4>
-            </div>
-        </article>
 
-        <!-- নিউজ আইটেম ২ -->
-        <article class="mi-sidebar-thumb-item">
-            <div class="mi-sidebar-thumb-img">
-                <img src="img/p2.JPG" alt="নিউজ থাম্বনেইল">
-            </div>
-            <div class="mi-sidebar-thumb-text">
-                <h4><a href="#">দুই বাংলাদেশি শিল্পীর গান শুনে মুগ্ধ এ আর রহমান, ভাসালেন প্রশংসায়</a></h4>
-            </div>
-        </article>
-
-        <!-- নিউজ আইটেম ৩ -->
-        <article class="mi-sidebar-thumb-item">
-            <div class="mi-sidebar-thumb-img">
-                <img src="img/p2.JPG" alt="নিউজ থাম্বনেইল">
-            </div>
-            <div class="mi-sidebar-thumb-text">
-                <h4><a href="#">ভাইজান বলেছিলেন—একদিন তোমাদের বিচ্ছেদ হবে: সোনাক্ষী</a></h4>
-            </div>
-        </article>
-
-        <!-- নিউজ আইটেম ৪ -->
-        <article class="mi-sidebar-thumb-item">
-            <div class="mi-sidebar-thumb-img">
-                <img src="img/p2.JPG" alt="নিউজ থাম্বনেইল">
-            </div>
-            <div class="mi-sidebar-thumb-text">
-                <h4><a href="#">অভিনেত্রী উর্মিলার ১৫ বছরের সংসারে ভাঙন</a></h4>
-            </div>
-        </article>
+    <!-- বিনোদন ক্যাটাগরি উইজেট সেকশন -->
+    <div class="mi-flat-widget">
+        <div class="mi-widget-header-flat">
+            <span class="mi-category-flat">বিনোদন</span>
+        </div>
+        
+        <div class="mi-sidebar-thumb-list" id="entertainmentList">
+            <!-- ডাইনামিকভাবে আসবে -->
+        </div>
     </div>
-</div>
+
     <!-- আর্কাইভ ক্যালেন্ডার উইজেট সেকশন -->
-<div class="mi-flat-widget">
-    <div class="mi-widget-header-flat">
-        <span class="mi-category-flat">আর্কাইভ ক্যালেন্ডার</span>
-    </div>
-    
-    <div class="mi-archive-calendar-wrapper">
-        <!-- ক্যালেন্ডার হেডার (মাস ও বছর পরিবর্তন করার জন্য) -->
-        <div class="mi-cal-header">
-            <button class="mi-cal-btn" type="button">&lt;</button>
-            <span class="mi-cal-month-year">জুলাই ২০২৬</span>
-            <button class="mi-cal-btn" type="button">&gt;</button>
+    <div class="mi-flat-widget">
+        <div class="mi-widget-header-flat">
+            <span class="mi-category-flat">আর্কাইভ ক্যালেন্ডার</span>
         </div>
         
-        <!-- ক্যালেন্ডার গ্রিড -->
-        <div class="mi-cal-grid">
-            <!-- বারের নাম -->
-            <div class="mi-cal-day-name">শনি</div>
-            <div class="mi-cal-day-name">রবি</div>
-            <div class="mi-cal-day-name">সোম</div>
-            <div class="mi-cal-day-name">মঙ্গল</div>
-            <div class="mi-cal-day-name">বুধ</div>
-            <div class="mi-cal-day-name">বৃহ</div>
-            <div class="mi-cal-day-name">শুক্র</div>
+        <div class="mi-archive-calendar-wrapper">
+            <div class="mi-cal-header">
+                <button class="mi-cal-btn" type="button">&lt;</button>
+                <span class="mi-cal-month-year">জুলাই ২০২৬</span>
+                <button class="mi-cal-btn" type="button">&gt;</button>
+            </div>
             
-            <!-- দিনসমূহ (উদাহরণস্বরূপ জুলাই ২০২৬ এর লেআউট) -->
-            <!-- ফাঁকা দিন (মাস যদি সপ্তাহের মাঝে শুরু হয়) -->
-            <div class="mi-cal-date mi-empty"></div>
-            <div class="mi-cal-date mi-empty"></div>
-            <div class="mi-cal-date mi-empty"></div>
-            <div class="mi-cal-date mi-empty"></div>
-            
-            <!-- আসল তারিখসমূহ -->
-            <a href="#" class="mi-cal-date">১</a>
-            <a href="#" class="mi-cal-date">২</a>
-            <a href="#" class="mi-cal-date">৩</a>
-            <a href="#" class="mi-cal-date">৪</a>
-            <a href="#" class="mi-cal-date">৫</a>
-            <a href="#" class="mi-cal-date">৬</a>
-            <a href="#" class="mi-cal-date">৭</a>
-            <a href="#" class="mi-cal-date">৮</a>
-            <a href="#" class="mi-cal-date">৯</a>
-            <a href="#" class="mi-cal-date">১০</a>
-            <a href="#" class="mi-cal-date">১১</a>
-            <a href="#" class="mi-cal-date">১২</a>
-            <a href="#" class="mi-cal-date">১৩</a>
-            <a href="#" class="mi-cal-date">১৪</a>
-            <a href="#" class="mi-cal-date">১৫</a>
-            <a href="#" class="mi-cal-date">১৬</a>
-            <a href="#" class="mi-cal-date">১৭</a>
-            <a href="#" class="mi-cal-date">১৮</a>
-            <!-- আজকের তারিখ হাইলাইট করার জন্য 'mi-current' ক্লাস -->
-            <a href="#" class="mi-cal-date mi-current">১৯</a>
-            <a href="#" class="mi-cal-date">২০</a>
-            <a href="#" class="mi-cal-date">২১</a>
-            <a href="#" class="mi-cal-date">২২</a>
-            <a href="#" class="mi-cal-date">২৩</a>
-            <a href="#" class="mi-cal-date">২৪</a>
-            <a href="#" class="mi-cal-date">২৫</a>
-            <a href="#" class="mi-cal-date">২৬</a>
-            <a href="#" class="mi-cal-date">২৭</a>
-            <a href="#" class="mi-cal-date">২৮</a>
-            <a href="#" class="mi-cal-date">২৯</a>
-            <a href="#" class="mi-cal-date">৩০</a>
-            <a href="#" class="mi-cal-date">৩১</a>
+            <div class="mi-cal-grid">
+                <div class="mi-cal-day-name">শনি</div>
+                <div class="mi-cal-day-name">রবি</div>
+                <div class="mi-cal-day-name">সোম</div>
+                <div class="mi-cal-day-name">মঙ্গল</div>
+                <div class="mi-cal-day-name">বুধ</div>
+                <div class="mi-cal-day-name">বৃহ</div>
+                <div class="mi-cal-day-name">শুক্র</div>
+                
+                <div class="mi-cal-date mi-empty"></div>
+                <div class="mi-cal-date mi-empty"></div>
+                <div class="mi-cal-date mi-empty"></div>
+                <div class="mi-cal-date mi-empty"></div>
+                
+                <a href="#" class="mi-cal-date">১</a>
+                <a href="#" class="mi-cal-date">২</a>
+                <a href="#" class="mi-cal-date">৩</a>
+                <a href="#" class="mi-cal-date">৪</a>
+                <a href="#" class="mi-cal-date">৫</a>
+                <a href="#" class="mi-cal-date">৬</a>
+                <a href="#" class="mi-cal-date">৭</a>
+                <a href="#" class="mi-cal-date">৮</a>
+                <a href="#" class="mi-cal-date">৯</a>
+                <a href="#" class="mi-cal-date">১০</a>
+                <a href="#" class="mi-cal-date">১১</a>
+                <a href="#" class="mi-cal-date">১২</a>
+                <a href="#" class="mi-cal-date">১৩</a>
+                <a href="#" class="mi-cal-date">১৪</a>
+                <a href="#" class="mi-cal-date">১৫</a>
+                <a href="#" class="mi-cal-date">১৬</a>
+                <a href="#" class="mi-cal-date">১৭</a>
+                <a href="#" class="mi-cal-date">১৮</a>
+                <a href="#" class="mi-cal-date mi-current">১৯</a>
+                <a href="#" class="mi-cal-date">২০</a>
+                <a href="#" class="mi-cal-date">২১</a>
+                <a href="#" class="mi-cal-date">২২</a>
+                <a href="#" class="mi-cal-date">২৩</a>
+                <a href="#" class="mi-cal-date">২৪</a>
+                <a href="#" class="mi-cal-date">২৫</a>
+                <a href="#" class="mi-cal-date">২৬</a>
+                <a href="#" class="mi-cal-date">২৭</a>
+                <a href="#" class="mi-cal-date">২৮</a>
+                <a href="#" class="mi-cal-date">২৯</a>
+                <a href="#" class="mi-cal-date">৩০</a>
+                <a href="#" class="mi-cal-date">৩১</a>
+            </div>
         </div>
     </div>
-</div>
+
     <!-- মতামত ও বিশ্লেষণ উইজেট -->
-<div class="mi-opinion-widget">
-    <ul class="mi-opinion-list">
-        
-        <!-- আইটেম ১ -->
-        <li>
-            <div class="mi-author-avatar">
-                <i class="fas fa-pencil-alt"></i> <!-- অথবা এখানে ইমেজ দিতে পারেন <img src="author1.jpg"> -->
-            </div>
-            <div class="mi-opinion-content">
-                <h4 class="mi-opinion-title">
-                    <span class="mi-op-tag">মতামত</span> • <a href="#">পে স্কেল বনাম দুর্নীতি: মফিজুল সাহেবের দেখা সেই সকালটি আসলে কার গল্প?</a>
-                </h4>
-                <span class="mi-op-author">লেখা: <a href="#">হুমায়ূন আহমেদ</a></span>
-            </div>
-        </li>
-
-        <!-- আইটেম ২ -->
-        <li>
-            <div class="mi-author-avatar">
-                <i class="fas fa-pencil-alt"></i>
-            </div>
-            <div class="mi-opinion-content">
-                <h4 class="mi-opinion-title">
-                    <span class="mi-op-tag">মতামত</span> • <a href="#">স্পেনের রূপার স্বপ্ন ও আর্জেন্টিনার ঐতিহাসিক রূপান্তর</a>
-                </h4>
-                <span class="mi-op-author">লেখা: <a href="#">সুজন চৌধুরী</a></span>
-            </div>
-        </li>
-
-        <!-- আইটেম ৩ -->
-        <li>
-            <div class="mi-author-avatar">
-                <i class="fas fa-pencil-alt"></i>
-            </div>
-            <div class="mi-opinion-content">
-                <h4 class="mi-opinion-title">
-                    <span class="mi-op-tag">বিশ্লেষণ</span> • <a href="#">অনলাইনে মাদক কেনাবেচায় মৃত্যুদণ্ড বিধানের ঝুঁকি</a>
-                </h4>
-                <span class="mi-op-author">লেখা: <a href="#">হাবিবুর রহমান</a></span>
-            </div>
-        </li>
-
-        <!-- আইটেম ৪ -->
-        <li>
-            <div class="mi-author-avatar">
-                <i class="fas fa-pencil-alt"></i>
-            </div>
-            <div class="mi-opinion-content">
-                <h4 class="mi-opinion-title">
-                    <span class="mi-op-tag">বিশেষ সাক্ষাৎকার</span>: শেখ মুহাম্মদ মেহেদী আহসান • <a href="#">বলিষ্ঠ নেতৃত্ব ছাড়া ঢাকা শহরকে বদলানো সম্ভব নয় কী?</a>
-                </h4>
-                <span class="mi-op-author"><a href="#">রাফসান গালিব</a></span>
-            </div>
-        </li>
-
-    </ul>
-</div>
+    <div class="mi-opinion-widget">
+        <ul class="mi-opinion-list" id="opinionList">
+            <!-- ডাইনামিকভাবে আসবে -->
+        </ul>
+    </div>
 </aside>
 
-<script src="js/script.js" defer></script>
+<script src="js/sidebar-dynamic.js"></script>
