@@ -3,18 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সত্য কথন- বাংলা নিউজ পেপার</title>
+    <title>সত্য কথন- ক্যাটাগরি পেজ</title>
     
-    <!-- 🔥 ফেভিকন কোড -->
     <link rel="icon" type="image/png" href="img/favicon.png">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Google Fonts - সোলায়মানলিপি -->
     <link href="https://fonts.googleapis.com/css2?family=Solaimanlipi&display=swap" rel="stylesheet">
-    
-    <!-- 🔥 ফন্ট-অসাম আইকন লাইব্রেরি (এটি মিসিং ছিল, যার কারণে সোশ্যাল আইকন ও হামবার্গার দেখা যাচ্ছিল না) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <!-- গ্লোবাল CSS -->
@@ -26,16 +21,17 @@
 </head>
 <body>
     <div class="mi-container">
+        <!-- হেডার -->
         <div id="headerContainer"></div>
 
         <div class="mi-main-wrapper">
             
-            <!-- মেইন কনটেন্ট (প্রথমে থাকবে, যা বাম পাশে দেখাবে) -->
+            <!-- মেইন কনটেন্ট এরিয়া -->
             <main class="mi-content">
                 <!-- ক্যাটাগরি হেডার -->
                 <div class="mi-category-header">
-                    <h1 id="categoryTitle">রাজনীতি</h1>
-                    <p id="categoryDesc">সর্বশেষ রাজনৈতিক খবর এবং আপডেট</p>
+                    <h1 id="categoryTitle">সংবাদ লোড হচ্ছে...</h1>
+                    <p id="categoryDesc">সর্বশেষ খবর এবং আপডেট</p>
                 </div>
 
                 <!-- ফিল্টার অপশন -->
@@ -45,43 +41,9 @@
                     <button class="mi-filter-btn" data-sort="trending">ট্রেন্ডিং</button>
                 </div>
 
-                <!-- খবর লিস্ট -->
-                <section class="mi-news-list">
-                    <article class="mi-list-item">
-                        <img src="https://via.placeholder.com/200x150" alt="খবর">
-                        <div class="mi-list-content">
-                            <span class="mi-category">রাজনীতি</span>
-                            <h3><a href="single-post.html?id=1">সংসদে নতুন বিল উপস্থাপন করা হয়েছে</a></h3>
-                            <p>আজ সংসদে একটি গুরুত্বপূর্ণ বিল উপস্থাপন করা হয়েছে যা শিক্ষা খাতের উন্নয়নে সহায়ক হবে। এই বিলটি তিন মাস ধরে আলোচনা করা হয়েছে।</p>
-                            <div class="mi-list-meta">
-                                <small>২ ঘণ্টা আগে | লেখক: রহিম আহমেদ | মন্তব্য: ২৩</small>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="mi-list-item">
-                        <img src="https://via.placeholder.com/200x150" alt="খবর">
-                        <div class="mi-list-content">
-                            <span class="mi-category">রাজনীতি</span>
-                            <h3><a href="single-post.html?id=2">প্রধানমন্ত্রী নতুন মন্ত্রিসভা গঠন করেছেন</a></h3>
-                            <p>প্রধানমন্ত্রী আজ নতুন মন্ত্রিসভা গঠনের ঘোষণা দিয়েছেন। এতে ১৫ জন নতুন মন্ত্রী অন্তর্ভুক্ত হয়েছেন।</p>
-                            <div class="mi-list-meta">
-                                <small>৫ ঘণ্টা আগে | লেখক: ফাতিমা বেগম | মন্তব্য: ১৮</small>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="mi-list-item">
-                        <img src="https://via.placeholder.com/200x150" alt="খবর">
-                        <div class="mi-list-content">
-                            <span class="mi-category">রাজনীতি</span>
-                            <h3><a href="single-post.html?id=3">নির্বাচন কমিশন নতুন নির্দেশনা জারি করেছে</a></h3>
-                            <p>নির্বাচন কমিশন আগামী নির্বাচনের জন্য নতুন নির্দেশনা জারি করেছে যা সকল পক্ষের জন্য বাধ্যতামুলক।</p>
-                            <div class="mi-list-meta">
-                                <small>৮ ঘণ্টা আগে | লেখক: করিম হোসেন | মন্তব্য: ৩২</small>
-                            </div>
-                        </div>
-                    </article>
+                <!-- ডাইনামিক খবর লিস্ট কন্টেইনার -->
+                <section class="mi-news-list" id="newsListContainer">
+                    <p class="text-muted p-3">পোস্ট লোড করা হচ্ছে...</p>
                 </section>
 
                 <!-- পেজিনেশন -->
@@ -90,22 +52,55 @@
                         <li class="page-item"><a class="page-link" href="#">আগের</a></li>
                         <li class="page-item active"><a class="page-link" href="#">১</a></li>
                         <li class="page-item"><a class="page-link" href="#">২</a></li>
-                        <li class="page-item"><a class="page-link" href="#">৩</a></li>
                         <li class="page-item"><a class="page-link" href="#">পরবর্তী</a></li>
                     </ul>
                 </nav>
             </main>
 
-            <!-- সাইডবার কনটেইনার (মেইন কনটেন্টের নিচে আনা হয়েছে, যা ডান পাশে দেখাবে) -->
+            <!-- সাইডবার কনটেইনার -->
             <div id="sidebarContainer"></div>
             
         </div>
 
+        <!-- ফুটার -->
         <div id="footerContainer"></div>
     </div>
 
-    <!-- Bootstrap JS ও Main JS -->
+    <!-- Bootstrap JS ও মূল জাভাস্ক্রিপ্টসমূহ -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/header-dynamic.js"></script>
+    <script src="js/sidebar-dynamic.js"></script>
+    <script src="js/category-dynamic.js"></script>
+
+    <script>
+        // সব কম্পোনেন্ট ও ক্যাটাগরি পোস্ট ডাটা লোড
+        async function loadCategoryPageComponents() {
+            try {
+                const [headerRes, sidebarRes, footerRes] = await Promise.all([
+                    fetch('header.html'),
+                    fetch('sidebar.html'),
+                    fetch('footer.html')
+                ]);
+
+                document.getElementById('headerContainer').innerHTML = await headerRes.text();
+                document.getElementById('sidebarContainer').innerHTML = await sidebarRes.text();
+                document.getElementById('footerContainer').innerHTML = await footerRes.text();
+
+                // ১. হেডার ও সাইডবার ডাইনামিক লোড
+                if (typeof updateBanglaDate === 'function') updateBanglaDate();
+                if (typeof loadBreakingNews === 'function') loadBreakingNews();
+                if (typeof loadDynamicSidebar === 'function') loadDynamicSidebar();
+
+                // ২. ক্যাটাগরি পেজের নির্দিষ্ট পোস্টসমূহ ডাটাবেজ থেকে লোড
+                if (typeof loadCategoryPosts === 'function') loadCategoryPosts();
+
+            } catch (error) {
+                console.error('কম্পোনেন্ট লোড করতে সমস্যা হয়েছে:', error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadCategoryPageComponents);
+    </script>
 </body>
 </html>
