@@ -1,8 +1,8 @@
-// সময়কে বাংলায় পরিবর্তন করার ফাংশন
+// সময়কে বাংলায় পরিবর্তন করার ফাংশন
 function formatDateInBangla(dateString) {
   if (!dateString) return '';
   const date = new Date(dateString);
-  const months = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+  const months = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
   
   const day = toBanglaNum(date.getDate());
   const month = months[date.getMonth()];
@@ -21,19 +21,39 @@ function toBanglaNum(num) {
   return num.toString().replace(/\d/g, d => banglaDigits[d]);
 }
 
-// সোশ্যাল শেয়ার লিংক আপডেট করার ফাংশন
+// সোশ্যাল শেয়ার লিংক আপডেট করার ফাংশন
 function setupShareButtons(title, url) {
   const encodedTitle = encodeURIComponent(title);
   const encodedUrl = encodeURIComponent(url);
 
-  document.getElementById('shareFb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-  document.getElementById('shareTw').href = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`;
-  document.getElementById('shareWa').href = `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`;
+  const fbBtn = document.getElementById('shareFb');
+  const twBtn = document.getElementById('shareTw');
+  const waBtn = document.getElementById('shareWa');
+
+  if (fbBtn) fbBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+  if (twBtn) twBtn.href = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`;
+  if (waBtn) waBtn.href = `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`;
 }
 
 function copyLink() {
   navigator.clipboard.writeText(window.location.href);
-  alert('খবরের লিংক কপি করা হয়েছে!');
+  alert('খবরের লিংক কপি করা হয়েছে!');
+}
+
+// ফেসবুক/সোশ্যাল মেটা ট্যাগ আপডেট করার ফাংশন
+function updateMetaTags(post) {
+  document.title = `${post.title} - সত্য কথন`;
+  
+  // OG Tags (যদি HTML এ এলিমেন্টগুলো থাকে)
+  const ogTitle = document.getElementById('ogTitle');
+  const ogDesc = document.getElementById('ogDesc');
+  const ogImage = document.getElementById('ogImage');
+  const ogUrl = document.getElementById('ogUrl');
+
+  if (ogTitle) ogTitle.setAttribute('content', post.title);
+  if (ogDesc) ogDesc.setAttribute('content', post.excerpt || post.title);
+  if (ogImage) ogImage.setAttribute('content', post.image_url);
+  if (ogUrl) ogUrl.setAttribute('content', window.location.href);
 }
 
 async function loadSinglePost() {
@@ -42,53 +62,66 @@ async function loadSinglePost() {
   const postId = urlParams.get('id');
 
   if (!postId) {
-    document.getElementById('loadingSpinner').innerHTML = '<h4 class="text-danger">সংবাদের আইডি পাওয়া যায়নি!</h4>';
+    document.getElementById('loadingSpinner').innerHTML = '<h4 class="text-danger">সংবাদের আইডি পাওয়া যায়নি!</h4>';
     return;
   }
 
   try {
-    // API থেকে পোস্ট ডাটা নিয়ে আসা
+    // API থেকে পোস্ট ডাটা নিয়ে আসা
     const res = await fetch(`/api/posts?id=${postId}`);
-    if (!res.ok) throw new Error('খবর পাওয়া যায়নি');
+    if (!res.ok) throw new Error('খবর পাওয়া যায়নি');
 
     const postData = await res.json();
-    // যদি API অবজেক্ট বা অ্যারে দেয় তা হ্যান্ডেল করা
+    // যদি API অবজেক্ট বা অ্যারে দেয় তা হ্যান্ডেল করা
     const post = Array.isArray(postData) ? postData.find(p => String(p.id) === String(postId)) : postData;
 
     if (!post) {
-      document.getElementById('loadingSpinner').innerHTML = '<h4 class="text-danger font-bold">অনুরোধকৃত খবরটি পাওয়া যায়নি।</h4>';
+      document.getElementById('loadingSpinner').innerHTML = '<h4 class="text-danger font-bold">অনুরোধকৃত খবরটি পাওয়া যায়নি।</h4>';
       return;
     }
 
-    // টাইটেল ও পেজ টাইটেল সেট করা
-    document.title = `${post.title} - সত্য কথন`;
+    // 🎯 ১. টাইটেল ও মেটা ট্যাগ আপডেট কল করা হলো
+    updateMetaTags(post);
+
     document.getElementById('postTitle').innerText = post.title;
 
     // ক্যাটাগরি সেট করা
     const catElem = document.getElementById('postCategory');
-    catElem.innerText = post.category_name || 'সংবাদ';
+    if (catElem) catElem.innerText = post.category_name || 'সংবাদ';
 
     // সময় ও লেখক
-    document.getElementById('postTime').innerText = formatDateInBangla(post.created_at);
+    const timeElem = document.getElementById('postTime');
+    if (timeElem) timeElem.innerText = formatDateInBangla(post.created_at);
+
     if (post.author) {
-      document.getElementById('postAuthor').innerText = post.author;
-      document.getElementById('authorName').innerText = post.author;
+      const authorElem = document.getElementById('postAuthor');
+      const authorNameElem = document.getElementById('authorName');
+      if (authorElem) authorElem.innerText = post.author;
+      if (authorNameElem) authorNameElem.innerText = post.author;
     }
 
     // ফিচার ইমেজ
     const imgElem = document.getElementById('postImage');
-    imgElem.src = post.image_url || 'https://via.placeholder.com/800x450';
-    imgElem.alt = post.title;
-
-    if (post.image_caption) {
-      document.getElementById('postCaption').innerText = post.image_caption;
+    if (imgElem) {
+      imgElem.src = post.image_url || 'https://via.placeholder.com/800x450';
+      imgElem.alt = post.title;
     }
 
-    // বিস্তারিত কনটেন্ট ফরম্যাটিং (\n লাইনব্রেকগুলোকে <p> ট্যাগে রূপান্তর)
+    if (post.image_caption) {
+      const captionElem = document.getElementById('postCaption');
+      if (captionElem) captionElem.innerText = post.image_caption;
+    }
+
+    // 🎯 ২. কন্টেন্ট ফরম্যাটিং সেফলি করা
     const contentElem = document.getElementById('postContent');
-    if (post.content) {
-      const paragraphs = post.content.split('\n').filter(p => p.trim() !== '');
-      contentElem.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+    if (post.content && contentElem) {
+      // যদি কন্টেন্টে ইতোমধ্যে HTML (<p>, <div>) থাকে তবে সরাসরি বসবে, নাহলে \n দিয়ে ভাগ করবে
+      if (post.content.includes('<p>') || post.content.includes('<div>')) {
+        contentElem.innerHTML = post.content;
+      } else {
+        const paragraphs = post.content.split('\n').filter(p => p.trim() !== '');
+        contentElem.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+      }
     }
 
     // শেয়ার বাটন সেটআপ
@@ -110,6 +143,8 @@ async function loadSinglePost() {
 // সংক্রান্ত ৩টি খবর দেখানোর ফাংশন
 async function loadRelatedPosts(categoryId, currentPostId) {
   const container = document.getElementById('relatedPostsContainer');
+  if (!container) return;
+
   try {
     const res = await fetch('/api/posts');
     if (!res.ok) return;
@@ -126,7 +161,7 @@ async function loadRelatedPosts(categoryId, currentPostId) {
     const finalRelated = related.length >= 3 ? related : allPosts.filter(p => String(p.id) !== String(currentPostId)).slice(0, 3);
 
     if (finalRelated.length === 0) {
-      container.innerHTML = '<p class="text-muted">কোনো সংক্রান্ত খবর পাওয়া যায়নি।</p>';
+      container.innerHTML = '<p class="text-muted">কোনো সংক্রান্ত খবর পাওয়া যায়নি।</p>';
       return;
     }
 
