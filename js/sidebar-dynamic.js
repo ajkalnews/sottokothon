@@ -27,6 +27,15 @@ async function loadDynamicSidebar() {
         const posts = await res.json();
         if (!posts || posts.length === 0) return;
 
+        // --- স্মার্ট ফিল্টার হেল্পার ফাংশন (ID, Name, Slug যেকোনো একটা মিললেই পোস্ট ফিল্টার করবে) ---
+        const filterByCat = (targetId, targetSlug, targetName) => {
+            return posts.filter(p => 
+                String(p.category_id) === String(targetId) || 
+                (p.category_slug && p.category_slug.toLowerCase() === targetSlug.toLowerCase()) ||
+                (p.category_name && p.category_name.trim() === targetName)
+            );
+        };
+
         // --- ১. সর্বশেষ ৪টি খবর (ট্যাব ১) ---
         const latest = posts.slice(0, 4);
         const latestContainer = document.getElementById('sidebarLatestList');
@@ -51,7 +60,7 @@ async function loadDynamicSidebar() {
             `).join('');
         }
 
-        // --- ৩. আলোচিত/মতামতের খবর (ট্যাব ৩) ---
+        // --- ৩. আলোচিত খবর (ট্যাব ৩) ---
         const commented = posts.slice(2, 6);
         const commentContainer = document.getElementById('sidebarCommentedList');
         if (commentContainer) {
@@ -63,8 +72,8 @@ async function loadDynamicSidebar() {
             `).join('');
         }
 
-        // --- ৪. বিশ্ব ক্যাটাগরির খবর (ক্যাটাগরি ID: ১৮ বা ক্যাটাগরি নাম অনুযায়ী) ---
-        const worldPosts = posts.filter(p => String(p.category_id) === '18' || p.category_name === 'বিশ্ব');
+        // --- ৪. বিশ্ব ক্যাটাগরি (ID: 18, Slug: 'world', Name: 'বিশ্ব') ---
+        const worldPosts = filterByCat(18, 'world', 'বিশ্ব');
         const finalWorld = worldPosts.length > 0 ? worldPosts : posts.slice(0, 3);
 
         const worldFeatured = document.getElementById('worldFeaturedPost');
@@ -88,8 +97,8 @@ async function loadDynamicSidebar() {
             `).join('');
         }
 
-        // --- ৫. বিনোদন ক্যাটাগরি (ক্যাটাগরি ID: ৬ বা 'বিনোদন') ---
-        const entPosts = posts.filter(p => String(p.category_id) === '6' || p.category_name === 'বিনোদন');
+        // --- ৫. বিনোদন ক্যাটাগরি (ID: 6, Slug: 'entertainment', Name: 'বিনোদন') ---
+        const entPosts = filterByCat(6, 'entertainment', 'বিনোদন');
         const finalEnt = entPosts.length > 0 ? entPosts.slice(0, 4) : posts.slice(1, 5);
 
         const entContainer = document.getElementById('entertainmentList');
@@ -106,8 +115,8 @@ async function loadDynamicSidebar() {
             `).join('');
         }
 
-        // --- ৬. মতামত ও বিশ্লেষণ উইজেট (ক্যাটাগরি ID: ১৯ বা 'মতামত') ---
-        const opinionPosts = posts.filter(p => String(p.category_id) === '19' || p.category_name === 'মতামত');
+        // --- ৬. মতামত উইজেট (ID: 19, Slug: 'opinion', Name: 'মতামত') ---
+        const opinionPosts = filterByCat(19, 'opinion', 'মতামত');
         const finalOpinion = opinionPosts.length > 0 ? opinionPosts.slice(0, 4) : posts.slice(0, 4);
 
         const opinionContainer = document.getElementById('opinionList');
@@ -132,5 +141,5 @@ async function loadDynamicSidebar() {
     }
 }
 
-// সাইডবার লোড হওয়া মাত্রই রান হবে
+// সাইডবার লোড হওয়ার পর এক্সিকিউট হবে
 document.addEventListener('DOMContentLoaded', loadDynamicSidebar);
