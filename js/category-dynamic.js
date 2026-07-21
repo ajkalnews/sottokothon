@@ -20,7 +20,7 @@ function timeAgo(dateString) {
   return `${toBanglaNum(days)} দিন আগে`;
 }
 
-// ২. ক্যাটাগরি পোস্ট লোডার
+// ২. গ্রিড অনুযায়ী পোস্ট সাজানো
 async function loadCategoryPosts() {
   const urlParams = new URLSearchParams(window.location.search);
   const categoryId = urlParams.get('id') || urlParams.get('cat');
@@ -34,26 +34,24 @@ async function loadCategoryPosts() {
     if (!res.ok) throw new Error('API Response Error');
 
     const posts = await res.json();
-    console.log("ডাটাবেজের পোস্টসমূহ:", posts); // ব্রাউজার কনসোলে পোস্ট দেখাবে
 
     if (!posts || posts.length === 0) {
       if (newsListContainer) newsListContainer.innerHTML = '<p class="text-muted p-3">কোনো পোস্ট পাওয়া যায়নি।</p>';
       return;
     }
 
-    // ফিল্টারিং লজিক (ID এবং Name উভয় দিয়েই ম্যাচ করা হবে)
+    // ফিল্টারিং
     let filteredPosts = posts;
     if (categoryId) {
       filteredPosts = posts.filter(p => {
         const catId = p.category_id || p.cat_id || p.category;
         const catName = p.category_name ? p.category_name.trim().toLowerCase() : '';
         const target = String(categoryId).trim().toLowerCase();
-
         return String(catId) === target || catName === target || catName.includes(target);
       });
     }
 
-    // শিরোনাম সেট করা
+    // টাইটেল আপডেট
     if (categoryTitleElem) {
       if (filteredPosts.length > 0 && filteredPosts[0].category_name) {
         categoryTitleElem.innerText = filteredPosts[0].category_name;
@@ -62,34 +60,72 @@ async function loadCategoryPosts() {
       }
     }
 
-    if (categoryDescElem) {
-      categoryDescElem.innerText = 'সর্বশেষ খবর এবং আপডেট';
+    if (!newsListContainer) return;
+
+    if (filteredPosts.length === 0) {
+      newsListContainer.innerHTML = `<div class="alert alert-warning my-3">এই বিভাগে বর্তমানে কোনো পোস্ট নেই।</div>`;
+      return;
     }
 
-    // পোস্ট রেন্ডার
-    if (newsListContainer) {
-      if (filteredPosts.length === 0) {
-        newsListContainer.innerHTML = `<div class="alert alert-warning my-3">এই বিভাগে বর্তমানে কোনো পোস্ট নেই।</div>`;
-        return;
-      }
+    // --- ছবির মত গ্রিড তৈরির লজিক ---
+    const topPost1 = filteredPosts[0];
+    const topPost2 = filteredPosts[1];
+    const otherPosts = filteredPosts.slice(2);
 
-      newsListContainer.innerHTML = filteredPosts.map(post => `
-        <article class="mi-list-item">
-            <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
-            <div class="mi-list-content">
-                <span class="mi-category">${post.category_name || 'সংবাদ'}</span>
-                <h3><a href="./single-post.html?id=${post.id}">${post.title}</a></h3>
-                <p>${post.content ? post.content.replace(/(<([^>]+)>)/gi, "").substring(0, 150) + '...' : ''}</p>
-                <div class="mi-list-meta">
-                    <small>${timeAgo(post.created_at)} | লেখক: ${post.author || 'সত্যকথন ডেস্ক'}</small>
-                </div>
+    let htmlContent = '';
+
+    // ১. টপ সেকশন (প্রথম ২টি পোস্ট)
+    if (topPost1) {
+      htmlContent += `<div class="mi-cat-top-grid">`;
+      
+      // বামের পোস্ট (ওভারলে ডিজাইন)
+      htmlContent += `
+        <div class="mi-top-news-overlay">
+            <img src="${topPost1.image_url || 'img/default.jpg'}" alt="${topPost1.title}">
+            <div class="mi-overlay-content">
+                <h2><a href="./single-post.html?id=${topPost1.id}">${topPost1.title}</a></h2>
+                <span class="mi-time">${timeAgo(topPost1.created_at)}</span>
             </div>
-        </article>
-      `).join('');
+        </div>
+      `;
+
+      // ডানের পোস্ট (সাধারণ সাইড কার্ড)
+      if (topPost2) {
+        htmlContent += `
+          <div class="mi-top-news-card">
+              <img src="${topPost2.image_url || 'img/default.jpg'}" alt="${topPost2.title}">
+              <h3><a href="./single-post.html?id=${topPost2.id}">${topPost2.title}</a></h3>
+              <p>${topPost2.content ? topPost2.content.replace(/(<([^>]+)>)/gi, "").substring(0, 110) + '...' : ''}</p>
+              <span class="mi-cat-time">${timeAgo(topPost2.created_at)}</span>
+          </div>
+        `;
+      }
+      
+      htmlContent += `</div>`;
     }
+
+    // ২. বটম সেকশন (৩ কলাম গ্রিড)
+    if (otherPosts.length > 0) {
+      htmlContent += `<div class="mi-cat-bottom-grid">`;
+      
+      otherPosts.forEach(post => {
+        htmlContent += `
+          <div class="mi-grid-card">
+              <img src="${post.image_url || 'img/default.jpg'}" alt="${post.title}">
+              <h4><a href="./single-post.html?id=${post.id}">${post.title}</a></h4>
+              <p>${post.content ? post.content.replace(/(<([^>]+)>)/gi, "").substring(0, 80) + '...' : ''}</p>
+              <span class="mi-cat-time">${timeAgo(post.created_at)}</span>
+          </div>
+        `;
+      });
+
+      htmlContent += `</div>`;
+    }
+
+    newsListContainer.innerHTML = htmlContent;
 
   } catch (error) {
-    console.error('ক্যাটাগরি পোস্ট লোডে সমস্যা:', error);
+    console.error('ক্যাটাগরি পোস্ট সাজাতে সমস্যা:', error);
     if (newsListContainer) {
       newsListContainer.innerHTML = `<p class="text-danger p-3">পোস্ট লোড করতে সমস্যা হয়েছে।</p>`;
     }
