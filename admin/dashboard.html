@@ -538,7 +538,7 @@
       <div class="card">
         <h3>সাম্প্রতিক পোস্টসমূহ</h3>
 
-        <!-- 🎯 ১. স্ট্যাটাস ফিল্টার মেনু (All, Published, Draft, Trash) -->
+        <!-- ১. স্ট্যাটাস ফিল্টার মেনু (All, Published, Draft, Trash) -->
         <div class="status-tabs">
           <button class="status-tab active" onclick="filterStatus('all')">সবগুলো (All)</button>
           <button class="status-tab" onclick="filterStatus('published')">পাবলিশড (Published)</button>
@@ -546,7 +546,7 @@
           <button class="status-tab" onclick="filterStatus('trash')">ডিলিট করা পোস্ট (Trash)</button>
         </div>
 
-        <!-- 🎯 ২. সার্চ ও ক্যাটাগরি ফিল্টার অপশন -->
+        <!-- ২. সার্চ ও ক্যাটাগরি ফিল্টার অপশন -->
         <div class="filter-bar">
           <input type="text" id="searchInput" placeholder="শিরোনাম লিখে সার্চ করুন..." oninput="applyFilters()">
           <select id="categoryFilter" onchange="applyFilters()">
@@ -562,7 +562,7 @@
           </select>
         </div>
 
-        <!-- 🎯 ৩. পোস্ট লিস্ট টেবিল -->
+        <!-- ৩. পোস্ট লিস্ট টেবিল -->
         <div class="table-container">
           <table>
             <thead>
@@ -581,7 +581,7 @@
           </table>
         </div>
 
-        <!-- 🎯 ৪. পেজিনেশন -->
+        <!-- ৪. পেজিনেশন -->
         <div class="pagination" id="pagination"></div>
 
       </div>
@@ -597,16 +597,17 @@
     let filteredPosts = [];
     let currentStatusFilter = 'all';
     let currentPage = 1;
-    const postsPerPage = 8; // প্রতি পেজে যতগুলো পোস্ট থাকবে
+    const postsPerPage = 8;
 
-    // 🎯 ওয়ার্ডপ্রেস স্টাইল রিচ টেক্সট এডিটর ইনিশিয়ালাইজ
+    // 🎯 ওয়ার্ডপ্রেস স্টাইল রিচ টেক্সট এডিটর ইনিশিয়ালাইজ (Justify সহ)
     var quill = new Quill('#editor-container', {
       theme: 'snow',
       modules: {
         toolbar: [
           [{ 'header': [1, 2, 3, false] }],
           ['bold', 'italic', 'underline', 'strike'],
-          [{ 'align': [] }],
+          // 🎯 এখানে Left, Center, Right এবং Justify যোগ করা হয়েছে
+          [{ 'align': '' }, { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }],
           [{ 'list': 'ordered'}, { 'list': 'bullet' }],
           ['link', 'image', 'video'],
           ['clean']
@@ -662,7 +663,7 @@
       }
     }
 
-    // 🎯 স্ট্যাটাস ট্যাব পরিবর্তন
+    // স্ট্যাটাস ট্যাব পরিবর্তন
     function filterStatus(status) {
       currentStatusFilter = status;
       document.querySelectorAll('.status-tab').forEach(btn => btn.classList.remove('active'));
@@ -670,7 +671,7 @@
       applyFilters();
     }
 
-    // 🎯 ফিল্টারিং ও সার্চ ফিল্টার লজিক
+    // ফিল্টারিং ও সার্চ ফিল্টার লজিক
     function applyFilters() {
       const search = document.getElementById('searchInput').value.toLowerCase();
       const cat = document.getElementById('categoryFilter').value;
@@ -693,7 +694,7 @@
       renderTable();
     }
 
-    // 🎯 টেবিল রেন্ডার করা
+    // টেবিল রেন্ডার করা
     function renderTable() {
       const tbody = document.getElementById('postsTableBody');
       const start = (currentPage - 1) * postsPerPage;
@@ -731,7 +732,7 @@
       renderPagination();
     }
 
-    // 🎯 পেজিনেশন রেন্ডার করা
+    // পেজিনেশন রেন্ডার করা
     function renderPagination() {
       const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
       const pagContainer = document.getElementById('pagination');
@@ -784,7 +785,7 @@
 
     function resetForm() {
       document.getElementById('newsForm').reset();
-      quill.setText(''); // এডিটর খালি করা
+      quill.setText('');
       document.getElementById('postId').value = '';
       document.getElementById('existingImageUrl').value = '';
       document.getElementById('image').required = true;
@@ -795,14 +796,14 @@
       document.getElementById('cancelEditBtn').style.display = 'none';
     }
 
-    // 🎯 ড্রাফট বা পাবলিশ সেভ করার প্রসেস
+    // ড্রাফট বা পাবলিশ সেভ করার প্রসেস
     async function submitPost(status) {
       const submitBtn = document.getElementById('submitBtn');
       const postId = document.getElementById('postId').value;
       const isEditing = !!postId;
 
       const title = document.getElementById('title').value;
-      const content = quill.root.innerHTML; // ওয়ার্ডপ্রেস এডিটর থেকে কন্টেন্ট নেওয়া
+      const content = quill.root.innerHTML;
 
       if (!title || quill.getText().trim().length === 0) {
         alert("শিরোনাম এবং কন্টেন্ট উভয় ফিল্ড পূরণ করা বাধ্যতামূলক!");
@@ -857,7 +858,7 @@
             isLead, 
             isSubLead,
             isCategoryFeatured,
-            status: status // 'published' অথবা 'draft'
+            status: status
           })
         });
 
@@ -873,7 +874,7 @@
       }
     }
 
-    // 🎯 পোস্ট ট্র্যাশ (ডিলিট) বা রিস্টোর করার ফাংশন
+    // পোস্ট ট্র্যাশ (ডিলিট) বা রিস্টোর করার ফাংশন
     async function changeStatus(id, newStatus) {
       const actionText = newStatus === 'trash' ? 'ট্র্যাশে পাঠাতে' : 'পাবলিশ করতে';
       if (!confirm(`আপনি কি নিশ্চিত যে পোস্টটি ${actionText} চান?`)) return;
