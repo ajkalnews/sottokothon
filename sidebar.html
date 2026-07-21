@@ -10,7 +10,7 @@
                 <span class="mi-tab-icon">🔥</span> পঠিত
             </button>
             <button class="mi-modern-tab-btn" onclick="switchModernTab(event, 'mod-comments')">
-                <span class="mi-tab-icon">💬</span> আলোচনা
+                <span class="mi-tab-icon">💬</span> মন্তব্য
             </button>
         </div>
         
@@ -30,7 +30,7 @@
                 </ul>
             </div>
 
-            <!-- ৩. আলোচিত খবরের তালিকা -->
+            <!-- ৩. মন্তব্য/আলোচিত খবরের তালিকা -->
             <div id="mod-comments" class="mi-modern-pane">
                 <ul class="mi-premium-list" id="sidebarCommentedList">
                     <li class="text-muted small">লোড হচ্ছে...</li>
@@ -46,20 +46,20 @@
         </div>
     </div>
 
-    <!-- বিশ্ব ক্যাটাগরি উইজেট সেকশন -->
+    <!-- বিশ্ব ক্যাটাগরি সেকশন (ID: 18) -->
     <div class="mi-widget">
         <div class="mi-widget-header">
             <span class="mi-category-flat">বিশ্ব</span>
         </div>
         
-        <!-- ফিচার্ড নিউজ (ছবি ও শিরোনাম) -->
+        <!-- ফিচার্ড পোস্ট -->
         <div class="mi-news-card-featured" id="worldFeaturedPost">
-            <!-- ডাইনামিকভাবে আসবে -->
+            <!-- ডাইনামিকভাবে পোস্ট আসবে -->
         </div>
         
         <!-- অন্যান্য নিউজের লিস্ট -->
         <ul class="mi-widget-list" id="worldPostList">
-            <!-- ডাইনামিকভাবে আসবে -->
+            <!-- ডাইনামিকভাবে পোস্ট আসবে -->
         </ul>
         
         <hr class="mi-divider">
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <!-- এলাকার খবর ফ্ল্যাট উইজেট সেকশন -->
+    <!-- এলাকার খবর সেকশন -->
     <div class="mi-flat-widget">
         <div class="mi-widget-header-flat">
             <span class="mi-category-flat">এলাকার খবর</span>
@@ -106,18 +106,18 @@
         </form>
     </div>
 
-    <!-- বিনোদন ক্যাটাগরি উইজেট সেকশন -->
+    <!-- বিনোদন ক্যাটাগরি সেকশন (ID: 6) -->
     <div class="mi-flat-widget">
         <div class="mi-widget-header-flat">
             <span class="mi-category-flat">বিনোদন</span>
         </div>
         
         <div class="mi-sidebar-thumb-list" id="entertainmentList">
-            <!-- ডাইনামিকভাবে আসবে -->
+            <!-- ডাইনামিকভাবে পোস্ট আসবে -->
         </div>
     </div>
 
-    <!-- আর্কাইভ ক্যালেন্ডার উইজেট সেকশন -->
+    <!-- আর্কাইভ ক্যালেন্ডার উইজেট -->
     <div class="mi-flat-widget">
         <div class="mi-widget-header-flat">
             <span class="mi-category-flat">আর্কাইভ ক্যালেন্ডার</span>
@@ -179,12 +179,13 @@
         </div>
     </div>
 
-    <!-- মতামত ও বিশ্লেষণ উইজেট -->
+    <!-- মতামত ও বিশ্লেষণ উইজেট (ID: 19) -->
     <div class="mi-opinion-widget">
         <ul class="mi-opinion-list" id="opinionList">
-            <!-- ডাইনামিকভাবে আসবে -->
+            <!-- ডাইনামিকভাবে পোস্ট আসবে -->
         </ul>
     </div>
 </aside>
 
-<script src="js/sidebar-dynamic.js"></script>
+<!-- সাইডবার ডায়নামিক করার জাভাস্ক্রিপ্ট ফাইল লিংক -->
+<script src="js/sidebar-dynamic.js" defer></script>
