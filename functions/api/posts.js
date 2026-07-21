@@ -32,13 +32,27 @@ export async function onRequest(context) {
     // ২. নতুন পোস্ট তৈরি করা (POST)
     if (method === 'POST') {
       const body = await request.json();
-      const { title, slug, content, imageUrl, imageCaption, categoryId, isLead, isSubLead } = body;
+      const { 
+        title, 
+        meta_title, 
+        meta_keywords, 
+        slug, 
+        content, 
+        imageUrl, 
+        imageCaption, 
+        categoryId, 
+        isLead, 
+        isSubLead 
+      } = body;
 
-      await env.DB.prepare(`
-        INSERT INTO posts (title, slug, content, image_url, image_caption, category_id, is_lead, is_sub_lead)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      // ডাটাবেজে ইনসার্ট
+      const info = await env.DB.prepare(`
+        INSERT INTO posts (title, meta_title, meta_keywords, slug, content, image_url, image_caption, category_id, is_lead, is_sub_lead)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `).bind(
         title,
+        meta_title || title, // মেটা টাইটেল না দিলে মূল টাইটেল ব্যবহার হবে
+        meta_keywords || null,
         slug,
         content,
         imageUrl || null,
@@ -48,7 +62,24 @@ export async function onRequest(context) {
         isSubLead ? 1 : 0
       ).run();
 
-      return new Response(JSON.stringify({ success: true, message: 'Post created successfully' }), {
+      const newPostId = info.meta.last_row_id;
+
+      // 🎯 IndexNow API-তে ব্যাকগ্রাউন্ডে অটো-পিং
+      if (newPostId) {
+        const postUrl = `https://sottokothon.pages.dev/single-post.html?id=${newPostId}`;
+        const apiKey = "sottokothonkey1234567890abcdef"; // তোমার API Key
+        
+        context.waitUntil(
+          fetch(`https://api.indexnow.org/indexnow?url=${encodeURIComponent(postUrl)}&key=${apiKey}`)
+            .catch(err => console.error("IndexNow Ping Error:", err))
+        );
+      }
+
+      return new Response(JSON.stringify({ 
+        success: true, 
+        message: 'Post created successfully',
+        id: newPostId 
+      }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
@@ -60,14 +91,27 @@ export async function onRequest(context) {
       }
 
       const body = await request.json();
-      const { title, slug, content, imageUrl, imageCaption, categoryId, isLead, isSubLead } = body;
+      const { 
+        title, 
+        meta_title, 
+        meta_keywords, 
+        slug, 
+        content, 
+        imageUrl, 
+        imageCaption, 
+        categoryId, 
+        isLead, 
+        isSubLead 
+      } = body;
 
       await env.DB.prepare(`
         UPDATE posts 
-        SET title = ?, slug = ?, content = ?, image_url = ?, image_caption = ?, category_id = ?, is_lead = ?, is_sub_lead = ?
+        SET title = ?, meta_title = ?, meta_keywords = ?, slug = ?, content = ?, image_url = ?, image_caption = ?, category_id = ?, is_lead = ?, is_sub_lead = ?
         WHERE id = ?
       `).bind(
         title,
+        meta_title || title,
+        meta_keywords || null,
         slug,
         content,
         imageUrl,
