@@ -341,7 +341,19 @@
 
           <div class="form-group">
             <label for="title">শিরোনাম (Title)</label>
-            <input type="text" id="title" required placeholder="খবরের শিরোনাম লিখুন" oninput="generateSlug()">
+            <input type="text" id="title" required placeholder="খবরের মূল শিরোনাম লিখুন" oninput="generateSlug()">
+          </div>
+
+          <!-- 🎯 মেটা টাইটেল ফিল্ড -->
+          <div class="form-group">
+            <label for="metaTitle">SEO টাইটেল / Meta Title <span style="font-weight: normal; color: #64748b;">(অপশনাল: খালি রাখলে মূল টাইটেল ব্যবহার হবে)</span></label>
+            <input type="text" id="metaTitle" placeholder="গুগল সার্চে দেখানোর জন্য সংক্ষিপ্ত টাইটেল">
+          </div>
+
+          <!-- 🎯 মেটা কীওয়ার্ড ফিল্ড -->
+          <div class="form-group">
+            <label for="metaKeywords">SEO কীওয়ার্ড / Meta Keywords <span style="font-weight: normal; color: #64748b;">(কমা দিয়ে লিখুন)</span></label>
+            <input type="text" id="metaKeywords" placeholder="যেমন: খবর, জাতীয়, নির্বাচন, ঢাকা">
           </div>
 
           <div class="form-group">
@@ -350,28 +362,29 @@
           </div>
 
           <div class="form-group">
-  <label for="categoryId">ক্যাটাগরি (Category)</label>
-  <select id="categoryId" required>
-    <option value="1">জাতীয়</option>
-    <option value="2">রাজনীতি</option>
-    <option value="3">অপরাধ</option>
-    <option value="4">অর্থনীতি</option>
-    <option value="5">খেলা</option>
-    <option value="6">বিনোদন</option>
-    <option value="11">শিক্ষা</option>
-    <option value="12">চাকরি</option>
-    <option value="13">সারাদেশ</option>
-    <option value="14">লাইফস্টাইল</option>
-    <option value="15">টেক</option>
-    <option value="18">বিশ্ব</option>
-    <option value="19">মতামত</option>
-    <option value="20">সম্পাদকীয়</option>
-    <option value="21">সাক্ষাৎকার</option>
-    <option value="22">প্রবাস</option>
-    <option value="23">কৃষি</option>
-    <option value="24">স্বাস্থ্য</option>
-  </select>
-</div>
+            <label for="categoryId">ক্যাটাগরি (Category)</label>
+            <select id="categoryId" required>
+              <option value="1">জাতীয়</option>
+              <option value="2">রাজনীতি</option>
+              <option value="3">অপরাধ</option>
+              <option value="4">অর্থনীতি</option>
+              <option value="5">খেলা</option>
+              <option value="6">বিনোদন</option>
+              <option value="11">শিক্ষা</option>
+              <option value="12">চাকরি</option>
+              <option value="13">সারাদেশ</option>
+              <option value="14">লাইফস্টাইল</option>
+              <option value="15">টেক</option>
+              <option value="18">বিশ্ব</option>
+              <option value="19">মতামত</option>
+              <option value="20">সম্পাদকীয়</option>
+              <option value="21">সাক্ষাৎকার</option>
+              <option value="22">প্রবাস</option>
+              <option value="23">কৃষি</option>
+              <option value="24">স্বাস্থ্য</option>
+            </select>
+          </div>
+
           <div class="form-group">
             <label for="content">বিস্তারিত খবর (Content)</label>
             <textarea id="content" rows="10" required placeholder="খবরের বিস্তারিত বিবরণ এখানে লিখুন..."></textarea>
@@ -456,7 +469,6 @@
 
     // টাইটেল থেকে স্বয়ংক্রিয় স্লাগ জেনারেটর
     function generateSlug() {
-      // এডিট মোডে থাকলে স্বয়ংক্রিয় স্লাগ পরিবর্তন হবে না
       if (document.getElementById('postId').value) return;
 
       const title = document.getElementById('title').value;
@@ -511,6 +523,8 @@
 
       document.getElementById('postId').value = post.id;
       document.getElementById('title').value = post.title || '';
+      document.getElementById('metaTitle').value = post.meta_title || post.metaTitle || '';
+      document.getElementById('metaKeywords').value = post.meta_keywords || post.metaKeywords || '';
       document.getElementById('slug').value = post.slug || '';
       document.getElementById('categoryId').value = post.category_id || post.categoryId || 1;
       document.getElementById('content').value = post.content || '';
@@ -557,6 +571,8 @@
       submitBtn.innerText = isEditing ? 'আপডেট হচ্ছে...' : 'আপলোড ও পোস্ট হচ্ছে...';
 
       const title = document.getElementById('title').value;
+      const meta_title = document.getElementById('metaTitle').value;
+      const meta_keywords = document.getElementById('metaKeywords').value;
       const slug = document.getElementById('slug').value;
       const categoryId = parseInt(document.getElementById('categoryId').value);
       const content = document.getElementById('content').value;
@@ -569,7 +585,7 @@
       try {
         let imageUrl = document.getElementById('existingImageUrl').value;
 
-        // ১. যদি নতুন ছবি সিলেক্ট করা হয় তবে R2 বাকেটে আপলোড হবে
+        // ১. নতুন ছবি দিলে আপলোড
         if (imageFile) {
           const formData = new FormData();
           formData.append('file', imageFile);
@@ -594,6 +610,8 @@
           body: JSON.stringify({ 
             id: postId ? parseInt(postId) : undefined,
             title, 
+            meta_title,
+            meta_keywords,
             slug, 
             categoryId, 
             content, 
@@ -609,7 +627,7 @@
 
         alert(isEditing ? 'পোস্টটি সফলভাবে আপডেট করা হয়েছে!' : 'নিউজ সফলভাবে লাইভ পাবলিশ করা হয়েছে!');
         resetForm();
-        switchTab('list'); // কাজ শেষে লিস্ট ট্যাবে নিয়ে যাবে
+        switchTab('list');
       } catch (err) {
         alert('ত্রুটি: ' + err.message);
       } finally {
