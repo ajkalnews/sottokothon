@@ -72,30 +72,48 @@ async function loadDynamicSidebar() {
             `).join('');
         }
 
-        // --- ৪. বিশ্ব ক্যাটাগরি (ID: 18, Slug: 'world', Name: 'বিশ্ব') ---
-        const worldPosts = filterByCat(18, 'world', 'বিশ্ব');
-        const finalWorld = worldPosts.length > 0 ? worldPosts : posts.slice(0, 3);
+       // --- ৪. বিশ্ব ক্যাটাগরি (ID: 18) ---
+// category_id সংখ্যা (18) বা স্ট্রিং ('18') অথবা নাম ('বিশ্ব') যেকোনোটি পেলেই ম্যাচ করবে
+const worldPosts = posts.filter(p => 
+    Number(p.category_id) === 18 || 
+    String(p.category_id).trim() === '18' || 
+    (p.category_name && p.category_name.trim() === 'বিশ্ব')
+);
 
-        const worldFeatured = document.getElementById('worldFeaturedPost');
-        if (worldFeatured && finalWorld[0]) {
-            worldFeatured.innerHTML = `
-                <a href="single-post.html?id=${finalWorld[0].id}">
-                    <img src="${finalWorld[0].image_url || 'img/p2.JPG'}" alt="${finalWorld[0].title}">
-                </a>
-                <div class="mi-card-body">
-                    <h4><a href="single-post.html?id=${finalWorld[0].id}">${finalWorld[0].title}</a></h4>
-                </div>
-            `;
-        }
+const worldFeatured = document.getElementById('worldFeaturedPost');
+const worldList = document.getElementById('worldPostList');
 
-        const worldList = document.getElementById('worldPostList');
-        if (worldList && finalWorld.length > 1) {
-            worldList.innerHTML = finalWorld.slice(1, 3).map(post => `
+if (worldPosts.length > 0) {
+    // বিশ্ব ক্যাটাগরিতে পোস্ট থাকলে আসল পোস্ট দেখাবে
+    if (worldFeatured) {
+        worldFeatured.innerHTML = `
+            <a href="single-post.html?id=${worldPosts[0].id}">
+                <img src="${worldPosts[0].image_url || 'img/p2.JPG'}" alt="${worldPosts[0].title}">
+            </a>
+            <div class="mi-card-body">
+                <h4><a href="single-post.html?id=${worldPosts[0].id}">${worldPosts[0].title}</a></h4>
+            </div>
+        `;
+    }
+
+    if (worldList) {
+        if (worldPosts.length > 1) {
+            worldList.innerHTML = worldPosts.slice(1, 3).map(post => `
                 <li>
                     <h4><a href="single-post.html?id=${post.id}">${post.title}</a></h4>
                 </li>
             `).join('');
+        } else {
+            worldList.innerHTML = ''; // ১টির বেশি পোস্ট না থাকলে লিস্ট ফাঁকা থাকবে
         }
+    }
+} else {
+    // যদি ডাটাবেজে একেবারেই বিশ্ব ক্যাটাগরির কোনো পোস্ট না পাওয়া যায়
+    if (worldFeatured) {
+        worldFeatured.innerHTML = `<p class="text-muted p-2">বিশ্ব বিভাগে নতুন কোনো খবর নেই।</p>`;
+    }
+    if (worldList) worldList.innerHTML = '';
+}
 
         // --- ৫. বিনোদন ক্যাটাগরি (ID: 6, Slug: 'entertainment', Name: 'বিনোদন') ---
         const entPosts = filterByCat(6, 'entertainment', 'বিনোদন');
