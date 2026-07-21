@@ -1,5 +1,4 @@
 <!-- ১. টপ বার (তারিখ ও সোশ্যাল লিঙ্ক) -->
-
 <div class="mi-top-bar">
     <div class="mi-top-left">
         <span class="mi-date-time" id="dateTime">লোড হচ্ছে...</span>
@@ -19,7 +18,7 @@
     <div class="mi-logo-container">
         <div class="mi-logo">
             <a href="index.html">
-                <img src="img/logo.JPG" alt="sottokontho Logo" class="mi-logo-img">
+                <img src="img/logo.JPG" alt="sottokothon Logo" class="mi-logo-img">
             </a>
         </div>
     </div>
@@ -31,7 +30,7 @@
     </div>
 </div>
 
-<!-- ৩. মোবাইল অ্যাকশন বার (মোবাইলে লোগো/অ্যাডের নিচে এবং ব্রেকিং নিউজের ওপরে) -->
+<!-- ৩. মোবাইল অ্যাকশন বার -->
 <div class="mi-mobile-action-bar">
     <button class="mi-mobile-menu-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#miMobileMenu">
         <i class="fas fa-bars"></i>
@@ -42,23 +41,23 @@
     </button>
 </div>
 
-<!-- ৪. ডেস্কটপ নেভিগেশন বার -->
+<!-- ৪. ডেস্কটপ নেভিগেশন বার (ডাটাবেজ ID অনুযায়ী লিংক) -->
 <nav class="mi-main-nav">
     <div class="mi-nav-wrapper">
         <a href="./index.html" class="mi-nav-item active">
-            <span class="mi-nav-icon">🏠</span> সর্বশেষ
+            <span class="mi-nav-icon">🏠</span> প্রচ্ছদ
         </a>
-        <a href="./category.html?cat=national" class="mi-nav-item">জাতীয়</a>
-        <a href="./category.html?cat=world" class="mi-nav-item">বিশ্ব</a>
-        <a href="./category.html?cat=politics" class="mi-nav-item">রাজনীতি</a>
-        <a href="./category.html?cat=country" class="mi-nav-item">সারাদেশ</a>
-        <a href="./category.html?cat=sports" class="mi-nav-item">খেলা</a>
-          <a href="./category.html?cat=sports" class="mi-nav-item">শিক্ষা</a>
-          <a href="./category.html?cat=sports" class="mi-nav-item">চাকুরী</a>
-        <a href="./category.html?cat=business" class="mi-nav-item">অর্থ-বাণিজ্য</a>
-        <a href="./category.html?cat=lifestyle" class="mi-nav-item">লাইফস্টাইল</a>
-        <a href="./category.html?cat=tech" class="mi-nav-item">তথ্য-প্রযুক্তি</a>
-        <a href="./category.html?cat=entertainment" class="mi-nav-item">বিনোদন</a>
+        <a href="./category.html?id=1" class="mi-nav-item">জাতীয়</a>
+        <a href="./category.html?id=2" class="mi-nav-item">রাজনীতি</a>
+        <a href="./category.html?id=13" class="mi-nav-item">সারাদেশ</a>
+        <a href="./category.html?id=18" class="mi-nav-item">বিশ্ব</a>
+        <a href="./category.html?id=4" class="mi-nav-item">অর্থনীতি</a>
+        <a href="./category.html?id=5" class="mi-nav-item">খেলা</a>
+        <a href="./category.html?id=6" class="mi-nav-item">বিনোদন</a>
+        <a href="./category.html?id=11" class="mi-nav-item">শিক্ষা</a>
+        <a href="./category.html?id=12" class="mi-nav-item">চাকরি</a>
+        <a href="./category.html?id=15" class="mi-nav-item">টেক</a>
+        <a href="./category.html?id=14" class="mi-nav-item">লাইফস্টাইল</a>
         
         <div class="mi-nav-item-mega">
             <a href="#" class="mi-nav-item mi-nav-more-btn">আরও ▼</a>
@@ -66,15 +65,16 @@
                 <div class="mi-mega-grid">
                     <div class="mi-mega-col">
                         <h4>অন্যান্য ক্যাটাগরি</h4>
-                        <a href="./category.html?cat=education">শিক্ষা</a>
-                        <a href="./category.html?cat=job">চাকরি</a>
-                        <a href="./category.html?cat=health">স্বাস্থ্য</a>
+                        <a href="./category.html?id=3">অপরাধ</a>
+                        <a href="./category.html?id=19">মতামত</a>
+                        <a href="./category.html?id=20">সম্পাদকীয়</a>
+                        <a href="./category.html?id=24">স্বাস্থ্য</a>
                     </div>
                     <div class="mi-mega-col">
-                        <h4>ফিচার ও স্পেশাল</h4>
-                        <a href="#">সাক্ষাৎকার</a>
-                        <a href="#">লাইফস্টাইল</a>
-                        <a href="#">প্রবাস</a>
+                        <h4>বিশেষ কন্টেন্ট</h4>
+                        <a href="./category.html?id=21">সাক্ষাৎকার</a>
+                        <a href="./category.html?id=22">প্রবাস</a>
+                        <a href="./category.html?id=23">কৃষি</a>
                     </div>
                     <div class="mi-mega-col">
                         <h4>যোগাযোগ</h4>
@@ -95,26 +95,29 @@
 <!-- ৫. মোবাইল অফক্যানভাস ড্রয়ার মেনু -->
 <div class="offcanvas offcanvas-start mi-offcanvas-menu d-lg-none" tabindex="-1" id="miMobileMenu">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title fw-bold text-danger">সত্য কণ্ঠ</h5>
+        <h5 class="offcanvas-title fw-bold text-danger">সত্য কথন</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <div class="mi-mobile-nav-list">
-            <a href="./index.html" class="active">🏠 সর্বশেষ</a>
-            <a href="./category.html?cat=national">জাতীয়</a>
-            <a href="./category.html?cat=world">বিশ্ব</a>
-            <a href="./category.html?cat=politics">রাজনীতি</a>
-            <a href="./category.html?cat=country">সারাদেশ</a>
-            <a href="./category.html?cat=sports">খেলা</a>
-            <a href="./category.html?cat=business">অর্থ-বাণিজ্য</a>
-            <a href="./category.html?cat=lifestyle">লাইফস্টাইল</a>
-            <a href="./category.html?cat=tech">তথ্য-প্রযুক্তি</a>
-            <a href="./category.html?cat=entertainment">বিনোদন</a>
+            <a href="./index.html" class="active">🏠 প্রচ্ছদ</a>
+            <a href="./category.html?id=1">জাতীয়</a>
+            <a href="./category.html?id=2">রাজনীতি</a>
+            <a href="./category.html?id=13">সারাদেশ</a>
+            <a href="./category.html?id=18">বিশ্ব</a>
+            <a href="./category.html?id=4">অর্থনীতি</a>
+            <a href="./category.html?id=5">খেলা</a>
+            <a href="./category.html?id=6">বিনোদন</a>
+            <a href="./category.html?id=11">শিক্ষা</a>
+            <a href="./category.html?id=12">চাকরি</a>
+            <a href="./category.html?id=15">টেক</a>
+            <a href="./category.html?id=14">লাইফস্টাইল</a>
             <hr>
             <div class="fw-bold px-2 py-1 text-muted">অন্যান্য মেনু</div>
-            <a href="./category.html?cat=education">শিক্ষা</a>
-            <a href="./category.html?cat=job">চাকরি</a>
-            <a href="./category.html?cat=health">স্বাস্থ্য</a>
+            <a href="./category.html?id=3">অপরাধ</a>
+            <a href="./category.html?id=19">মতামত</a>
+            <a href="./category.html?id=24">স্বাস্থ্য</a>
+            <a href="./category.html?id=23">কৃষি</a>
             <a href="#" onclick="toggleSearchOverlay(); return false;">🔍 অনুসন্ধান করুন</a>
         </div>
     </div>
@@ -135,17 +138,14 @@
     </div>
 </div>
 
-<!-- ৭. ব্রেকিং নিউজ (সদ্য প্রাপ্ত) -->
+<!-- ৭. ব্রেকিং নিউজ (ডাইনামিক কন্টেইনার) -->
 <div class="mi-breaking-news">
     <div class="mi-breaking-label">
         <span class="mi-breaking-dot">●</span> সদ্য প্রাপ্ত:
     </div>
-    <div class="mi-ticker-content">
+    <div class="mi-ticker-content" id="breakingTickerContainer">
         <div class="mi-ticker-item">
-            <a href="./single-post.html?id=1">দেশের অর্থনৈতিক উন্নয়ন নতুন উচ্চতায় পৌঁছেছে</a>
-        </div>
-        <div class="mi-ticker-item">
-            <a href="./single-post.html?id=2">ভারী বর্ষণের কারণে ১০ জুলাই পর্যন্ত বান্দরবানের সব পর্যটন কেন্দ্র বন্ধ</a>
+            <a href="#">সংবাদ লোড হচ্ছে...</a>
         </div>
     </div>
 </div>
