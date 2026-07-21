@@ -29,27 +29,25 @@
         <!-- নতুন হেডার লোড হবে এখানে -->
         <div id="headerContainer"></div>
 
-        <!-- মেইন কনটেন্ট wrapper (বুটস্ট্র্যাপ কন্টেইনার দিয়ে মোড়ানো) -->
+        <!-- মেইন কনটেন্ট wrapper -->
         <div class="container my-2 px-0">
             
             <!-- মেইন কন্টেন্ট ও সাইডবার সেকশন -->
             <div class="row">
                 
-                <!-- বাম পাশে মেইন কনটেন্ট এরিয়া (১২ ভাগের ৮ ভাগ জায়গা নেবে) -->
+                <!-- বাম পাশে মেইন কনটেন্ট এরিয়া -->
                 <main id="mainContentContainer" class="mi-content col-lg-8 col-md-12">
                     <!-- জাভাস্ক্রিপ্ট দিয়ে এখানে কনটেন্ট আসবে -->
                 </main>
 
-                <!-- ডান পাশে সাইডবার (১২ ভাগের ৪ ভাগ জায়গা নেবে) -->
+                <!-- ডান পাশে সাইডবার -->
                 <aside class="col-lg-4 col-md-12">
                     <div id="sidebarContainer"></div>
                 </aside>
 
-            </div> <!-- /row (মেইন কনটেন্ট ও সাইডবার শেষ) -->
+            </div> <!-- /row -->
 
-            <!-- ==========================================
-                 অ্যাড সেকশন (মেইন কন্টেন্ট ও সাইডবারের নিচে মিডিলে)
-                 ========================================== -->
+            <!-- অ্যাড সেকশন -->
             <div class="row my-4 justify-content-center text-center">
                 <div class="col-12">
                     <div class="mi-middle-ad-wrapper">
@@ -71,6 +69,8 @@
     <!-- মূল জাভাস্ক্রিপ্ট ফাইলসমূহ -->
     <script src="./js/main.js"></script>
     <script src="./js/home-dynamic.js"></script>
+    <!-- সাইডবারের জন্য জাভাস্ক্রিপ্ট ফাইল (যুক্ত করা হলো) -->
+    <script src="./js/sidebar-dynamic.js"></script>
     
     <script>
         // সব ফাইল (Header, Main Content, Sidebar, Footer) একসাথে লোড করার ফাংশন
@@ -88,9 +88,14 @@
                 document.getElementById('sidebarContainer').innerHTML = await sidebarRes.text();
                 document.getElementById('footerContainer').innerHTML = await footerRes.text();
 
-                // মেইন কনটেন্ট লোড শেষ হওয়ার পর ডাটাবেজ থেকে খবরগুলো এনে বসাবে
+                // ১. মেইন কনটেন্ট লোড শেষ হওয়ার পর ডাটাবেজ থেকে পোস্ট বসাবে
                 if (typeof loadDynamicHome === 'function') {
                     loadDynamicHome();
+                }
+
+                // ২. সাইডবার লোড শেষ হওয়ার পর সাইডবারের ডাটাবেজ পোস্ট বসাবে (যুক্ত করা হলো)
+                if (typeof loadDynamicSidebar === 'function') {
+                    loadDynamicSidebar();
                 }
 
             } catch (error) {
