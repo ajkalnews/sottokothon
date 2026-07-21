@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sottokothon.pages.dev/sitemap.xml
