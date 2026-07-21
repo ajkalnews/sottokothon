@@ -25,7 +25,7 @@
 
 @media (max-width: 768px) {
     .mi-sidebar {
-        display: none;
+      display: block !important;
     }
 
     .mi-main-wrapper {
