@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>অ্যাডমিন ড্যাশবোর্ড - সত্যকথন</title>
   
-  <!-- 🎯 ওয়ার্ডপ্রেস ক্লাসিক এডিটর (CKEditor 4 - ১০০% ফ্রি, কোনো API Key লাগবে না) -->
+  <!-- 🎯 ওয়ার্ডপ্রেস ক্লাসিক এডিটর (CKEditor 4 - ১০০% ফ্রি) -->
   <script src="https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js"></script>
 
   <style>
@@ -158,6 +158,77 @@
       outline: none;
       border-color: var(--primary-color);
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    /* এডিটরে সরাসরি ছবি আপলোডের বাটন */
+    .editor-toolbar-extra {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .btn-insert-img {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s ease;
+    }
+
+    .btn-insert-img:hover {
+      background: #0369a1;
+    }
+
+    /* গ্যালারি প্রিভিউ স্টাইল */
+    .gallery-preview-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 10px;
+      background: #f1f5f9;
+      border-radius: 8px;
+      min-height: 50px;
+    }
+
+    .gallery-thumb-wrapper {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .gallery-thumb-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-thumb-remove {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: rgba(239, 68, 68, 0.85);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* চেকবক্স লেআউট */
@@ -482,9 +553,15 @@
             </select>
           </div>
 
-          <!-- 🎯 ওয়ার্ডপ্রেস ক্লাসিক এডিটর টেক্সটএরিয়া -->
+          <!-- 🎯 ওয়ার্ডপ্রেস ক্লাসিক এডিটর + বডিতে দ্রুত ইমেজ বসানোর ফিচার -->
           <div class="form-group">
-            <label for="wp-editor">বিস্তারিত খবর (Wordpress Classic Editor)</label>
+            <div class="editor-toolbar-extra">
+              <label for="wp-editor" style="margin-bottom: 0;">বিস্তারিত খবর (Wordpress Classic Editor)</label>
+              <button type="button" class="btn-insert-img" onclick="document.getElementById('bodyImageInput').click()">
+                🖼️ নিউজে ছবি ইনসার্ট করুন
+              </button>
+              <input type="file" id="bodyImageInput" accept="image/*" style="display: none;" onchange="uploadAndInsertImage(this)">
+            </div>
             <textarea id="wp-editor" name="wp-editor"></textarea>
           </div>
 
@@ -496,6 +573,15 @@
           <div class="form-group">
             <label for="imageCaption">ছবির ক্যাপশন (Caption)</label>
             <input type="text" id="imageCaption" placeholder="যেমন: ফাইল ছবি">
+          </div>
+
+          <!-- 🎯 ফটো গ্যালারি ইনপুট সেকশন -->
+          <div class="form-group">
+            <label for="galleryImages">মাল্টিপল মিডিয়া গ্যালারী (Gallery Images) <span style="font-weight: normal; color: #64748b;">(ঐচ্ছিক - ফটো সংবাদের জন্য)</span></label>
+            <input type="file" id="galleryImages" accept="image/*" multiple onchange="handleGallerySelect(this)">
+            <div id="galleryPreview" class="gallery-preview-container">
+              <span style="color: #94a3b8; font-size: 13px;">কোনো গ্যালারি ছবি নির্বাচন করা হয়নি</span>
+            </div>
           </div>
 
           <label>হোমপেজ প্লেসমেন্ট অপশন:</label>
@@ -582,12 +668,15 @@
     let currentPage = 1;
     const postsPerPage = 8;
 
+    // গ্যালারির ছবি ট্র্যাকিংয়ের জন্য গ্লোবাল অ্যারে
+    let newGalleryFiles = [];
+    let existingGalleryUrls = [];
+
     // 🎯 WordPress Classic Editor (CKEditor 4) ইনিশিয়ালাইজেশন
     CKEDITOR.replace('wp-editor', {
       height: 400,
       font_defaultLabel: 'Segoe UI',
       fontSize_defaultLabel: '16px',
-      // সম্পূর্ণ ওয়ার্ডপ্রেসের মতো টুলবার সেটআপ
       toolbar: [
         { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print'] },
         { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
@@ -603,6 +692,98 @@
         { name: 'tools', items: ['Maximize', 'ShowBlocks'] }
       ]
     });
+
+    // 🎯 নিউজের বিস্তারিত অংশে সরাসরি ছবি ইনসার্ট করা
+    async function uploadAndInsertImage(input) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      const btn = document.querySelector('.btn-insert-img');
+      const originalText = btn.innerHTML;
+      
+      try {
+        btn.innerHTML = '⏳ আপলোড হচ্ছে...';
+        btn.disabled = true;
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const uploadRes = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!uploadRes.ok) throw new Error('ছবি আপলোড করা যায়নি');
+        const uploadData = await uploadRes.json();
+
+        // এডিটরে পিকচার ট্যাগ বসিয়ে দেওয়া
+        const imgHtml = `<p style="text-align:center;"><img src="${uploadData.url}" alt="News Image" style="max-width:100%; height:auto; border-radius:8px; margin:10px 0;" /></p><p></p>`;
+        CKEDITOR.instances['wp-editor'].insertHtml(imgHtml);
+        
+      } catch (err) {
+        alert('ছবি ইনসার্ট করতে ব্যর্থ: ' + err.message);
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        input.value = ''; // রিসেট
+      }
+    }
+
+    // 🎯 মিডিয়া গ্যালারি প্রিভিউ ও হ্যান্ডলিং
+    function handleGallerySelect(input) {
+      const files = Array.from(input.files);
+      newGalleryFiles = [...newGalleryFiles, ...files];
+      renderGalleryPreview();
+    }
+
+    function removeNewGalleryFile(index) {
+      newGalleryFiles.splice(index, 1);
+      renderGalleryPreview();
+    }
+
+    function removeExistingGalleryUrl(index) {
+      existingGalleryUrls.splice(index, 1);
+      renderGalleryPreview();
+    }
+
+    function renderGalleryPreview() {
+      const container = document.getElementById('galleryPreview');
+      container.innerHTML = '';
+
+      if (existingGalleryUrls.length === 0 && newGalleryFiles.length === 0) {
+        container.innerHTML = '<span style="color: #94a3b8; font-size: 13px;">কোনো গ্যালারি ছবি নির্বাচন করা হয়নি</span>';
+        return;
+      }
+
+      // পুরনো সেভ করা ছবিগুলোর জন্য
+      existingGalleryUrls.forEach((url, index) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'gallery-thumb-wrapper';
+        wrapper.innerHTML = `
+          <img src="${url}" alt="gallery">
+          <button type="button" class="gallery-thumb-remove" onclick="removeExistingGalleryUrl(${index})">✕</button>
+        `;
+        container.appendChild(wrapper);
+      });
+
+      // নতুন সিলেক্ট করা ফাইলগুলোর জন্য
+      newGalleryFiles.forEach((file, index) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'gallery-thumb-wrapper';
+        
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'gallery-thumb-remove';
+        btn.innerText = '✕';
+        btn.onclick = () => removeNewGalleryFile(index);
+
+        wrapper.appendChild(img);
+        wrapper.appendChild(btn);
+        container.appendChild(wrapper);
+      });
+    }
 
     function logout() {
       localStorage.removeItem('admin_token');
@@ -759,8 +940,17 @@
       document.getElementById('isSubLead').checked = !!post.is_sub_lead || !!post.isSubLead;
       document.getElementById('isCategoryFeatured').checked = !!post.is_category_featured || !!post.isCategoryFeatured;
 
-      // 🎯 Classic Editor (CKEditor) এ কন্টেন্ট সেট করা
+      // 🎯 Classic Editor এ কন্টেন্ট সেট করা
       CKEDITOR.instances['wp-editor'].setData(post.content || '');
+
+      // 🎯 গ্যালারি ইমেজ ডাটা সেটআপ
+      let gallery = post.gallery_images || post.galleryImages || [];
+      if (typeof gallery === 'string') {
+        try { gallery = JSON.parse(gallery); } catch(e) { gallery = []; }
+      }
+      existingGalleryUrls = [...gallery];
+      newGalleryFiles = [];
+      renderGalleryPreview();
 
       document.getElementById('image').required = false;
       document.getElementById('imgNote').innerText = '(নতুন ছবি না দিলে আগের ছবিটিই থাকবে)';
@@ -774,9 +964,15 @@
 
     function resetForm() {
       document.getElementById('newsForm').reset();
-      CKEDITOR.instances['wp-editor'].setData(''); // 🎯 এডিটর ফাকা করা
+      CKEDITOR.instances['wp-editor'].setData(''); 
       document.getElementById('postId').value = '';
       document.getElementById('existingImageUrl').value = '';
+      
+      // গ্যালারি ট্র্যাকার ক্লিয়ার
+      existingGalleryUrls = [];
+      newGalleryFiles = [];
+      renderGalleryPreview();
+
       document.getElementById('image').required = true;
       document.getElementById('imgNote').innerText = '(R2 Storage-এ আপলোড হবে)';
       
@@ -792,7 +988,6 @@
       const isEditing = !!postId;
 
       const title = document.getElementById('title').value;
-      // 🎯 Classic Editor থেকে মূল HTML কন্টেন্ট নেওয়া
       const content = CKEDITOR.instances['wp-editor'].getData(); 
 
       if (!title || !content.trim()) {
@@ -815,6 +1010,7 @@
       try {
         let imageUrl = document.getElementById('existingImageUrl').value;
 
+        // ১. ফিচার্ড ছবি আপলোড
         if (imageFile) {
           const formData = new FormData();
           formData.append('file', imageFile);
@@ -824,10 +1020,29 @@
             body: formData
           });
           
-          if (!uploadRes.ok) throw new Error('ছবি আপলোড ব্যর্থ হয়েছে!');
+          if (!uploadRes.ok) throw new Error('ফিচার্ড ছবি আপলোড ব্যর্থ হয়েছে!');
           const uploadData = await uploadRes.json();
           imageUrl = uploadData.url;
         }
+
+        // ২. নতুন গ্যালারি ছবি থাকলে সেগুলোর আপলোড সম্পন্ন করা
+        const uploadedGalleryUrls = [];
+        for (const file of newGalleryFiles) {
+          const formData = new FormData();
+          formData.append('file', file);
+
+          const gRes = await fetch('/api/upload', {
+            method: 'POST',
+            body: formData
+          });
+
+          if (gRes.ok) {
+            const gData = await gRes.json();
+            uploadedGalleryUrls.push(gData.url);
+          }
+        }
+
+        const finalGalleryList = [...existingGalleryUrls, ...uploadedGalleryUrls];
 
         const url = isEditing ? `/api/posts?id=${postId}` : '/api/posts';
         const method = isEditing ? 'PUT' : 'POST';
@@ -845,6 +1060,7 @@
             content, 
             imageUrl, 
             imageCaption, 
+            galleryImages: finalGalleryList, // 🎯 গ্যালারি ফটোর লিংক
             isLead, 
             isSubLead,
             isCategoryFeatured,
