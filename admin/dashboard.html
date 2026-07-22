@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>অ্যাডমিন ড্যাশবোর্ড - সত্যকথন</title>
   
-  <!-- 🎯 ওয়ার্ডপ্রেস ক্লাসিক এডিটর (CKEditor 4 - ১০০% ফ্রি) -->
+  <!-- 🎯 ওয়ার্ডপ্রেস ক্লাসিক এডিটর (CKEditor 4) -->
   <script src="https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js"></script>
 
   <style>
@@ -168,7 +168,7 @@
       margin-bottom: 8px;
     }
 
-    .btn-insert-img {
+    .btn-action-sm {
       background: #0284c7;
       color: white;
       border: none;
@@ -183,8 +183,15 @@
       transition: background 0.2s ease;
     }
 
-    .btn-insert-img:hover {
+    .btn-action-sm:hover {
       background: #0369a1;
+    }
+
+    .btn-media-lib {
+      background: #8b5cf6;
+    }
+    .btn-media-lib:hover {
+      background: #7c3aed;
     }
 
     /* গ্যালারি প্রিভিউ স্টাইল */
@@ -328,7 +335,7 @@
       min-width: 180px;
     }
 
-    /* স্ট্যাটাস ফিল্টার ট্যাব (All, Published, Draft, Trash) */
+    /* স্ট্যাটাস ফিল্টার ট্যাব */
     .status-tabs {
       display: flex;
       gap: 8px;
@@ -453,6 +460,123 @@
       color: white;
       border-color: var(--primary-color);
     }
+
+    /* 🎯 মিডিয়া লাইব্রেরি মোডাল (WordPress Style Popup) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .media-modal {
+      background: white;
+      width: 90%;
+      max-width: 950px;
+      height: 80vh;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .media-modal-header {
+      padding: 16px 20px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .media-modal-header h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #0f172a;
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #64748b;
+    }
+
+    .media-modal-body {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 12px;
+    }
+
+    .media-item {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      background: #f1f5f9;
+      transition: all 0.2s ease;
+    }
+
+    .media-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .media-item.selected {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+    }
+
+    .media-modal-footer {
+      padding: 15px 20px;
+      background: #f8fafc;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .preview-featured-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .preview-featured-box img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
   </style>
 
   <script>
@@ -553,21 +677,35 @@
             </select>
           </div>
 
-          <!-- 🎯 ওয়ার্ডপ্রেস ক্লাসিক এডিটর + বডিতে দ্রুত ইমেজ বসানোর ফিচার -->
+          <!-- 🎯 ওয়ার্ডপ্রেস ক্লাসিক এডিটর + মিডিয়া লাইব্রেরি ফিচার -->
           <div class="form-group">
             <div class="editor-toolbar-extra">
               <label for="wp-editor" style="margin-bottom: 0;">বিস্তারিত খবর (Wordpress Classic Editor)</label>
-              <button type="button" class="btn-insert-img" onclick="document.getElementById('bodyImageInput').click()">
-                🖼️ নিউজে ছবি ইনসার্ট করুন
+              
+              <button type="button" class="btn-action-sm btn-insert-img" onclick="document.getElementById('bodyImageInput').click()">
+                📤 সরাসরি আপলোড
+              </button>
+              <button type="button" class="btn-action-sm btn-media-lib" onclick="openMediaModal('editor')">
+                🖼️ মিডিয়া লাইব্রেরি
               </button>
               <input type="file" id="bodyImageInput" accept="image/*" style="display: none;" onchange="uploadAndInsertImage(this)">
             </div>
             <textarea id="wp-editor" name="wp-editor"></textarea>
           </div>
 
+          <!-- 🎯 ফিচার্ড ইমেজ সেকশন (ব্রাউজ অপশনসহ) -->
           <div class="form-group">
             <label for="image">ফিচার্ড ইমেজ <span id="imgNote" style="font-weight: normal; color: #64748b;">(R2 Storage-এ আপলোড হবে)</span></label>
-            <input type="file" id="image" accept="image/*">
+            <div style="display: flex; gap: 10px;">
+              <input type="file" id="image" accept="image/*" style="flex: 1;">
+              <button type="button" class="btn-action-sm btn-media-lib" onclick="openMediaModal('featured')">
+                🖼️ লাইব্রেরি থেকে সিলেক্ট করুন
+              </button>
+            </div>
+            <div id="featuredPreviewContainer" class="preview-featured-box" style="display: none;">
+              <img id="featuredPreviewImg" src="" alt="Featured Preview">
+              <span style="font-size: 13px; color: #10b981; font-weight: 600;">✓ লাইব্রেরি থেকে ইমেজি বাছাই করা হয়েছে</span>
+            </div>
           </div>
 
           <div class="form-group">
@@ -575,10 +713,15 @@
             <input type="text" id="imageCaption" placeholder="যেমন: ফাইল ছবি">
           </div>
 
-          <!-- 🎯 ফটো গ্যালারি ইনপুট সেকশন -->
+          <!-- 🎯 ফটো গ্যালারি সেকশন (লাইব্রেরি অপশনসহ) -->
           <div class="form-group">
             <label for="galleryImages">মাল্টিপল মিডিয়া গ্যালারী (Gallery Images) <span style="font-weight: normal; color: #64748b;">(ঐচ্ছিক - ফটো সংবাদের জন্য)</span></label>
-            <input type="file" id="galleryImages" accept="image/*" multiple onchange="handleGallerySelect(this)">
+            <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+              <input type="file" id="galleryImages" accept="image/*" multiple onchange="handleGallerySelect(this)">
+              <button type="button" class="btn-action-sm btn-media-lib" onclick="openMediaModal('gallery')">
+                🖼️ লাইব্রেরি থেকে গ্যালারি ইমেজ যোগ করুন
+              </button>
+            </div>
             <div id="galleryPreview" class="gallery-preview-container">
               <span style="color: #94a3b8; font-size: 13px;">কোনো গ্যালারি ছবি নির্বাচন করা হয়নি</span>
             </div>
@@ -661,6 +804,26 @@
 
   </div>
 
+  <!-- 🎯 মিডিয়া লাইব্রেরি পপআপ মোডাল HTML -->
+  <div id="mediaModal" class="modal-overlay">
+    <div class="media-modal">
+      <div class="media-modal-header">
+        <h3>🖼️ মিডিয়া লাইব্রেরি (আগে আপলোড করা ছবিসমূহ)</h3>
+        <button class="modal-close-btn" onclick="closeMediaModal()">✕</button>
+      </div>
+      <div class="media-modal-body">
+        <input type="text" id="mediaSearchInput" placeholder="ছবির নাম বা পোস্ট লিংক সার্চ করুন..." oninput="filterMediaGrid()">
+        <div id="mediaGrid" class="media-grid">
+          <!-- ডায়নামিক লোড হবে -->
+        </div>
+      </div>
+      <div class="media-modal-footer">
+        <span id="selectedMediaCount" style="font-size: 13px; color: #64748b;">কোনো ইমেজ নির্বাচিত হয়নি</span>
+        <button type="button" class="btn-submit" style="flex: 0 0 auto; padding: 10px 20px;" onclick="confirmMediaSelection()">ইনসার্ট করুন</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     let globalPosts = []; 
     let filteredPosts = [];
@@ -668,9 +831,13 @@
     let currentPage = 1;
     const postsPerPage = 8;
 
-    // গ্যালারির ছবি ট্র্যাকিংয়ের জন্য গ্লোবাল অ্যারে
     let newGalleryFiles = [];
     let existingGalleryUrls = [];
+
+    // মিডিয়া লাইব্রেরির ডাটা ট্র্যাকিং
+    let allMediaImages = [];
+    let currentMediaTarget = ''; // 'editor', 'featured', or 'gallery'
+    let selectedImageUrls = [];
 
     // 🎯 WordPress Classic Editor (CKEditor 4) ইনিশিয়ালাইজেশন
     CKEDITOR.replace('wp-editor', {
@@ -693,7 +860,123 @@
       ]
     });
 
-    // 🎯 নিউজের বিস্তারিত অংশে সরাসরি ছবি ইনসার্ট করা
+    // 🎯 মিডিয়া লাইব্রেরি পপআপ ম্যানেজমেন্ট
+    async function openMediaModal(target) {
+      currentMediaTarget = target;
+      selectedImageUrls = [];
+      document.getElementById('mediaModal').classList.add('active');
+      document.getElementById('selectedMediaCount').innerText = 'কোনো ইমেজ নির্বাচিত হয়নি';
+
+      // ডাটাবেজের সব আগের পোস্টের ইমেজ ফেচ করে লাইব্রেরি তৈরি
+      if (allMediaImages.length === 0) {
+        await fetchMediaFromPosts();
+      } else {
+        renderMediaGrid(allMediaImages);
+      }
+    }
+
+    function closeMediaModal() {
+      document.getElementById('mediaModal').classList.remove('active');
+    }
+
+    async function fetchMediaFromPosts() {
+      const grid = document.getElementById('mediaGrid');
+      grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #64748b;">ইমেজ লোড হচ্ছে...</div>';
+
+      try {
+        const res = await fetch('/api/posts');
+        if (!res.ok) throw new Error('ইমেজ তালিকা লোড হয়নি');
+        const posts = await res.json();
+
+        const imageSet = new Set();
+        posts.forEach(p => {
+          if (p.image_url) imageSet.add(p.image_url);
+          
+          let gal = p.gallery_images || p.galleryImages || [];
+          if (typeof gal === 'string') {
+            try { gal = JSON.parse(gal); } catch(e) { gal = []; }
+          }
+          if (Array.isArray(gal)) gal.forEach(url => imageSet.add(url));
+        });
+
+        allMediaImages = Array.from(imageSet);
+        renderMediaGrid(allMediaImages);
+
+      } catch(err) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; color: red; text-align: center;">ত্রুটি: ${err.message}</div>`;
+      }
+    }
+
+    function renderMediaGrid(images) {
+      const grid = document.getElementById('mediaGrid');
+      if (images.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #64748b;">কোনো ইমেজ পাওয়া যায়নি।</div>';
+        return;
+      }
+
+      grid.innerHTML = images.map(url => `
+        <div class="media-item" onclick="toggleSelectMedia('${url}', this)">
+          <img src="${url}" alt="Media Image" loading="lazy">
+        </div>
+      `).join('');
+    }
+
+    function filterMediaGrid() {
+      const query = document.getElementById('mediaSearchInput').value.toLowerCase();
+      const filtered = allMediaImages.filter(url => url.toLowerCase().includes(query));
+      renderMediaGrid(filtered);
+    }
+
+    function toggleSelectMedia(url, element) {
+      if (currentMediaTarget === 'gallery') {
+        // মাল্টিপল সিলেকশন
+        if (selectedImageUrls.includes(url)) {
+          selectedImageUrls = selectedImageUrls.filter(u => u !== url);
+          element.classList.remove('selected');
+        } else {
+          selectedImageUrls.push(url);
+          element.classList.add('selected');
+        }
+      } else {
+        // সিঙ্গেল সিলেকশন (editor or featured)
+        document.querySelectorAll('.media-item').forEach(el => el.classList.remove('selected'));
+        selectedImageUrls = [url];
+        element.classList.add('selected');
+      }
+
+      document.getElementById('selectedMediaCount').innerText = `${selectedImageUrls.length}টি ইমেজ নির্বাচিত হয়েছে`;
+    }
+
+    function confirmMediaSelection() {
+      if (selectedImageUrls.length === 0) {
+        alert('অনুগ্রহ করে একটি ছবি নির্বাচন করুন!');
+        return;
+      }
+
+      if (currentMediaTarget === 'editor') {
+        selectedImageUrls.forEach(url => {
+          const imgHtml = `<p style="text-align:center;"><img src="${url}" alt="Inserted Image" style="max-width:100%; height:auto; border-radius:8px; margin:10px 0;" /></p><p></p>`;
+          CKEDITOR.instances['wp-editor'].insertHtml(imgHtml);
+        });
+      } else if (currentMediaTarget === 'featured') {
+        const selectedUrl = selectedImageUrls[0];
+        document.getElementById('existingImageUrl').value = selectedUrl;
+        document.getElementById('featuredPreviewImg').src = selectedUrl;
+        document.getElementById('featuredPreviewContainer').style.display = 'flex';
+        document.getElementById('image').required = false;
+      } else if (currentMediaTarget === 'gallery') {
+        selectedImageUrls.forEach(url => {
+          if (!existingGalleryUrls.includes(url)) {
+            existingGalleryUrls.push(url);
+          }
+        });
+        renderGalleryPreview();
+      }
+
+      closeMediaModal();
+    }
+
+    // 🎯 এডিটরে সরাসরি ছবি আপলোড (Direct File Upload)
     async function uploadAndInsertImage(input) {
       if (!input.files || !input.files[0]) return;
       const file = input.files[0];
@@ -701,21 +984,16 @@
       const originalText = btn.innerHTML;
       
       try {
-        btn.innerHTML = '⏳ আপলোড হচ্ছে...';
+        btn.innerHTML = '⏳ আপলোড...';
         btn.disabled = true;
 
         const formData = new FormData();
         formData.append('file', file);
 
-        const uploadRes = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData
-        });
-
+        const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
         if (!uploadRes.ok) throw new Error('ছবি আপলোড করা যায়নি');
+        
         const uploadData = await uploadRes.json();
-
-        // এডিটরে পিকচার ট্যাগ বসিয়ে দেওয়া
         const imgHtml = `<p style="text-align:center;"><img src="${uploadData.url}" alt="News Image" style="max-width:100%; height:auto; border-radius:8px; margin:10px 0;" /></p><p></p>`;
         CKEDITOR.instances['wp-editor'].insertHtml(imgHtml);
         
@@ -724,7 +1002,7 @@
       } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;
-        input.value = ''; // রিসেট
+        input.value = '';
       }
     }
 
@@ -754,7 +1032,6 @@
         return;
       }
 
-      // পুরনো সেভ করা ছবিগুলোর জন্য
       existingGalleryUrls.forEach((url, index) => {
         const wrapper = document.createElement('div');
         wrapper.className = 'gallery-thumb-wrapper';
@@ -765,7 +1042,6 @@
         container.appendChild(wrapper);
       });
 
-      // নতুন সিলেক্ট করা ফাইলগুলোর জন্য
       newGalleryFiles.forEach((file, index) => {
         const wrapper = document.createElement('div');
         wrapper.className = 'gallery-thumb-wrapper';
@@ -833,7 +1109,6 @@
       }
     }
 
-    // স্ট্যাটাস ট্যাব পরিবর্তন
     function filterStatus(status) {
       currentStatusFilter = status;
       document.querySelectorAll('.status-tab').forEach(btn => btn.classList.remove('active'));
@@ -841,7 +1116,6 @@
       applyFilters();
     }
 
-    // ফিল্টারিং ও সার্চ ফিল্টার লজিক
     function applyFilters() {
       const search = document.getElementById('searchInput').value.toLowerCase();
       const cat = document.getElementById('categoryFilter').value;
@@ -864,7 +1138,6 @@
       renderTable();
     }
 
-    // টেবিল রেন্ডার করা
     function renderTable() {
       const tbody = document.getElementById('postsTableBody');
       const start = (currentPage - 1) * postsPerPage;
@@ -902,7 +1175,6 @@
       renderPagination();
     }
 
-    // পেজিনেশন রেন্ডার করা
     function renderPagination() {
       const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
       const pagContainer = document.getElementById('pagination');
@@ -922,7 +1194,6 @@
       renderTable();
     }
 
-    // এডিট করার জন্য ডাটা সেট
     function editPost(id) {
       const post = globalPosts.find(p => p.id === id);
       if (!post) return;
@@ -934,16 +1205,21 @@
       document.getElementById('slug').value = post.slug || '';
       document.getElementById('categoryId').value = post.category_id || post.categoryId || 1;
       document.getElementById('imageCaption').value = post.image_caption || post.imageCaption || '';
-      document.getElementById('existingImageUrl').value = post.image_url || '';
+      
+      const imgUrl = post.image_url || '';
+      document.getElementById('existingImageUrl').value = imgUrl;
+
+      if (imgUrl) {
+        document.getElementById('featuredPreviewImg').src = imgUrl;
+        document.getElementById('featuredPreviewContainer').style.display = 'flex';
+      }
 
       document.getElementById('isLead').checked = !!post.is_lead || !!post.isLead;
       document.getElementById('isSubLead').checked = !!post.is_sub_lead || !!post.isSubLead;
       document.getElementById('isCategoryFeatured').checked = !!post.is_category_featured || !!post.isCategoryFeatured;
 
-      // 🎯 Classic Editor এ কন্টেন্ট সেট করা
       CKEDITOR.instances['wp-editor'].setData(post.content || '');
 
-      // 🎯 গ্যালারি ইমেজ ডাটা সেটআপ
       let gallery = post.gallery_images || post.galleryImages || [];
       if (typeof gallery === 'string') {
         try { gallery = JSON.parse(gallery); } catch(e) { gallery = []; }
@@ -967,8 +1243,8 @@
       CKEDITOR.instances['wp-editor'].setData(''); 
       document.getElementById('postId').value = '';
       document.getElementById('existingImageUrl').value = '';
-      
-      // গ্যালারি ট্র্যাকার ক্লিয়ার
+      document.getElementById('featuredPreviewContainer').style.display = 'none';
+
       existingGalleryUrls = [];
       newGalleryFiles = [];
       renderGalleryPreview();
@@ -981,7 +1257,6 @@
       document.getElementById('cancelEditBtn').style.display = 'none';
     }
 
-    // ড্রাফট বা পাবলিশ সেভ করার প্রসেস
     async function submitPost(status) {
       const submitBtn = document.getElementById('submitBtn');
       const postId = document.getElementById('postId').value;
@@ -1010,32 +1285,22 @@
       try {
         let imageUrl = document.getElementById('existingImageUrl').value;
 
-        // ১. ফিচার্ড ছবি আপলোড
         if (imageFile) {
           const formData = new FormData();
           formData.append('file', imageFile);
 
-          const uploadRes = await fetch('/api/upload', {
-            method: 'POST',
-            body: formData
-          });
-          
+          const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
           if (!uploadRes.ok) throw new Error('ফিচার্ড ছবি আপলোড ব্যর্থ হয়েছে!');
           const uploadData = await uploadRes.json();
           imageUrl = uploadData.url;
         }
 
-        // ২. নতুন গ্যালারি ছবি থাকলে সেগুলোর আপলোড সম্পন্ন করা
         const uploadedGalleryUrls = [];
         for (const file of newGalleryFiles) {
           const formData = new FormData();
           formData.append('file', file);
 
-          const gRes = await fetch('/api/upload', {
-            method: 'POST',
-            body: formData
-          });
-
+          const gRes = await fetch('/api/upload', { method: 'POST', body: formData });
           if (gRes.ok) {
             const gData = await gRes.json();
             uploadedGalleryUrls.push(gData.url);
@@ -1060,7 +1325,7 @@
             content, 
             imageUrl, 
             imageCaption, 
-            galleryImages: finalGalleryList, // 🎯 গ্যালারি ফটোর লিংক
+            galleryImages: finalGalleryList,
             isLead, 
             isSubLead,
             isCategoryFeatured,
@@ -1080,7 +1345,6 @@
       }
     }
 
-    // পোস্ট ট্র্যাশ (ডিলিট) বা রিস্টোর করার ফাংশন
     async function changeStatus(id, newStatus) {
       const actionText = newStatus === 'trash' ? 'ট্র্যাশে পাঠাতে' : 'পাবলিশ করতে';
       if (!confirm(`আপনি কি নিশ্চিত যে পোস্টটি ${actionText} চান?`)) return;
