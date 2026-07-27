@@ -1,4 +1,7 @@
 User-agent: *
+
 Allow: /
 
 Sitemap: https://sottokothon.pages.dev/sitemap.xml
+
+Sitemap: https://sottokothon.pages.dev/news-sitemap.xml
