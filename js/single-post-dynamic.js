@@ -1,397 +1,178 @@
-// ==========================================
-// HELPER FUNCTIONS & UTILITIES
-// ==========================================
-
-// HTML Escaping Function for XSS Protection
-function escapeHTML(str) {
-  if (!str) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
-
-// Convert Digits to Bangla
-function toBanglaNum(num) {
-  if (num === null || num === undefined) return '';
-  const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-  return num.toString().replace(/\d/g, d => banglaDigits[d]);
-}
-
-// Format Date String into Bangla Format
+// সময়কে বাংলায় পরিবর্তন করার ফাংশন
 function formatDateInBangla(dateString) {
   if (!dateString) return '';
   const date = new Date(dateString);
-  if (isNaN(date.getTime())) return '';
-
-  const months = [
-    'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',
-    'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'
-  ];
-
+  const months = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+  
   const day = toBanglaNum(date.getDate());
   const month = months[date.getMonth()];
   const year = toBanglaNum(date.getFullYear());
-
+  
   let hours = date.getHours();
   const minutes = toBanglaNum(date.getMinutes().toString().padStart(2, '0'));
   const ampm = hours >= 12 ? 'অপরাহ্ন' : 'পূর্বাহ্ন';
   hours = hours % 12 || 12;
-
+  
   return `${day} ${month} ${year}, ${ampm} ${toBanglaNum(hours)}:${minutes}`;
 }
 
-// DOM Cache Singleton
-const DOM = {
-  get elements() {
-    if (!this._cache) {
-      this._cache = {
-        loadingSpinner: document.getElementById('loadingSpinner'),
-        postArticle: document.getElementById('postArticle'),
-        postTitle: document.getElementById('postTitle'),
-        postCategory: document.getElementById('postCategory'),
-        postTime: document.getElementById('postTime'),
-        postAuthor: document.getElementById('postAuthor'),
-        authorName: document.getElementById('authorName'),
-        postImage: document.getElementById('postImage'),
-        postCaption: document.getElementById('postCaption'),
-        postContent: document.getElementById('postContent'),
-        relatedPostsContainer: document.getElementById('relatedPostsContainer'),
-        shareFb: document.getElementById('shareFb'),
-        shareTw: document.getElementById('shareTw'),
-        shareWa: document.getElementById('shareWa'),
-        ogTitle: document.getElementById('ogTitle'),
-        ogDesc: document.getElementById('ogDesc'),
-        ogImage: document.getElementById('ogImage'),
-        ogUrl: document.getElementById('ogUrl')
-      };
-    }
-    return this._cache;
-  }
-};
-
-// Meta Element Helper (Update or Inject Meta/Link Elements)
-function setMetaTag(selector, attributeName, attributeValue, contentValue) {
-  let element = document.querySelector(selector);
-  if (!element) {
-    element = document.createElement(selector.startsWith('link') ? 'link' : 'meta');
-    if (selector.startsWith('meta[name=')) {
-      element.setAttribute('name', selector.match(/name="([^"]+)"/)[1]);
-    } else if (selector.startsWith('meta[property=')) {
-      element.setAttribute('property', selector.match(/property="([^"]+)"/)[1]);
-    } else if (selector.startsWith('link[rel=')) {
-      element.setAttribute('rel', selector.match(/rel="([^"]+)"/)[1]);
-    }
-    document.head.appendChild(element);
-  }
-  element.setAttribute(attributeName, contentValue);
+function toBanglaNum(num) {
+  const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return num.toString().replace(/\d/g, d => banglaDigits[d]);
 }
 
-// Extract Plain Text Excerpt safely
-function extractExcerpt(htmlOrText, length = 160) {
-  if (!htmlOrText) return '';
-  const div = document.createElement('div');
-  div.innerHTML = htmlOrText;
-  const text = div.textContent || div.innerText || '';
-  return text.trim().slice(0, length);
-}
-
-// ==========================================
-// SEO & METADATA MANAGEMENT
-// ==========================================
-
-function updateMetaTags(post) {
-  const currentUrl = window.location.href;
-  const siteName = 'সত্য কথন';
-  const cleanTitle = post.title ? post.title.trim() : 'সংবাদ';
-  const fullTitle = `${cleanTitle} - ${siteName}`;
-  const rawContent = post.excerpt || post.content || cleanTitle;
-  const description = extractExcerpt(rawContent, 160);
-  const keywords = post.keywords || `${post.category_name || 'সংবাদ'}, খবর, সত্য কথন, বাংলা খবর, ${cleanTitle}`;
-  const imageUrl = post.image_url || 'https://sottokothon.pages.dev/img/logo.png';
-
-  // 1. Title
-  document.title = fullTitle;
-
-  // 2. Standard Meta Tags
-  setMetaTag('meta[name="description"]', 'content', description);
-  setMetaTag('meta[name="keywords"]', 'content', keywords);
-  setMetaTag('link[rel="canonical"]', 'href', currentUrl);
-
-  // 3. Open Graph Tags
-  setMetaTag('meta[property="og:title"]', 'content', fullTitle);
-  setMetaTag('meta[property="og:description"]', 'content', description);
-  setMetaTag('meta[property="og:image"]', 'content', imageUrl);
-  setMetaTag('meta[property="og:url"]', 'content', currentUrl);
-  setMetaTag('meta[property="og:type"]', 'content', 'article');
-  setMetaTag('meta[property="og:site_name"]', 'content', siteName);
-
-  // Fallback support for legacy DOM element references
-  const { ogTitle, ogDesc, ogImage, ogUrl } = DOM.elements;
-  if (ogTitle) ogTitle.setAttribute('content', fullTitle);
-  if (ogDesc) ogDesc.setAttribute('content', description);
-  if (ogImage) ogImage.setAttribute('content', imageUrl);
-  if (ogUrl) ogUrl.setAttribute('content', currentUrl);
-
-  // 4. Twitter Card Tags
-  setMetaTag('meta[name="twitter:card"]', 'content', 'summary_large_image');
-  setMetaTag('meta[name="twitter:title"]', 'content', fullTitle);
-  setMetaTag('meta[name="twitter:description"]', 'content', description);
-  setMetaTag('meta[name="twitter:image"]', 'content', imageUrl);
-
-  // 5. JSON-LD NewsArticle Schema
-  updateNewsArticleSchema(post, fullTitle, description, imageUrl, currentUrl);
-}
-
-function updateNewsArticleSchema(post, title, description, imageUrl, currentUrl) {
-  let schemaScript = document.getElementById('newsArticleSchema');
-  if (!schemaScript) {
-    schemaScript = document.createElement('script');
-    schemaScript.id = 'newsArticleSchema';
-    schemaScript.type = 'application/ld+json';
-    document.head.appendChild(schemaScript);
-  }
-
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": currentUrl
-    },
-    "headline": title,
-    "description": description,
-    "image": [imageUrl],
-    "datePublished": post.created_at ? new Date(post.created_at).toISOString() : new Date().toISOString(),
-    "dateModified": post.updated_at ? new Date(post.updated_at).toISOString() : (post.created_at ? new Date(post.created_at).toISOString() : new Date().toISOString()),
-    "author": {
-      "@type": "Person",
-      "name": post.author || "সত্য কথন ডেস্ক"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "সত্য কথন",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://sottokothon.pages.dev/img/logo.png"
-      }
-    }
-  };
-
-  schemaScript.textContent = JSON.stringify(schemaData);
-}
-
-// Update Dynamic Breadcrumb Components
-function updateBreadcrumbs(categoryName, postTitle) {
-  const breadcrumbCat = document.getElementById('breadcrumbCategory');
-  const breadcrumbTitle = document.getElementById('breadcrumbTitle');
-
-  if (breadcrumbCat) breadcrumbCat.innerText = categoryName || 'সংবাদ';
-  if (breadcrumbTitle) breadcrumbTitle.innerText = postTitle || '';
-}
-
-// ==========================================
-// SOCIAL SHARING & INTERACTIONS
-// ==========================================
-
+// সোশ্যাল শেয়ার লিংক আপডেট করার ফাংশন
 function setupShareButtons(title, url) {
-  const currentUrl = url || window.location.href;
-  const encodedTitle = encodeURIComponent(title || document.title);
-  const encodedUrl = encodeURIComponent(currentUrl);
+  const encodedTitle = encodeURIComponent(title);
+  const encodedUrl = encodeURIComponent(url);
 
-  const { shareFb, shareTw, shareWa } = DOM.elements;
+  const fbBtn = document.getElementById('shareFb');
+  const twBtn = document.getElementById('shareTw');
+  const waBtn = document.getElementById('shareWa');
 
-  if (shareFb) shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-  if (shareTw) shareTw.href = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`;
-  if (shareWa) shareWa.href = `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`;
+  if (fbBtn) fbBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+  if (twBtn) twBtn.href = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`;
+  if (waBtn) waBtn.href = `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`;
 }
 
 function copyLink() {
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(window.location.href)
-      .then(() => alert('খবরের লিংক কপি করা হয়েছে!'))
-      .catch(() => fallbackCopyLink());
-  } else {
-    fallbackCopyLink();
-  }
+  navigator.clipboard.writeText(window.location.href);
+  alert('খবরের লিংক কপি করা হয়েছে!');
 }
 
-function fallbackCopyLink() {
-  const tempInput = document.createElement('input');
-  tempInput.value = window.location.href;
-  document.body.appendChild(tempInput);
-  tempInput.select();
-  try {
-    document.execCommand('copy');
-    alert('খবরের লিংক কপি করা হয়েছে!');
-  } catch (err) {
-    alert('লিংক কপি করতে ব্যর্থ হয়েছে।');
-  }
-  document.body.removeChild(tempInput);
-}
+// ফেসবুক/সোশ্যাল মেটা ট্যাগ আপডেট করার ফাংশন
+function updateMetaTags(post) {
+  document.title = `${post.title} - সত্য কথন`;
+  
+  // OG Tags (যদি HTML এ এলিমেন্টগুলো থাকে)
+  const ogTitle = document.getElementById('ogTitle');
+  const ogDesc = document.getElementById('ogDesc');
+  const ogImage = document.getElementById('ogImage');
+  const ogUrl = document.getElementById('ogUrl');
 
-// ==========================================
-// DATA FETCHING & RENDERING LOGIC
-// ==========================================
+  if (ogTitle) ogTitle.setAttribute('content', post.title);
+  if (ogDesc) ogDesc.setAttribute('content', post.excerpt || post.title);
+  if (ogImage) ogImage.setAttribute('content', post.image_url);
+  if (ogUrl) ogUrl.setAttribute('content', window.location.href);
+}
 
 async function loadSinglePost() {
-  const {
-    loadingSpinner,
-    postArticle,
-    postTitle,
-    postCategory,
-    postTime,
-    postAuthor,
-    authorName,
-    postImage,
-    postCaption,
-    postContent
-  } = DOM.elements;
-
+  // URL Parameter থেকে ID ধরা
   const urlParams = new URLSearchParams(window.location.search);
   const postId = urlParams.get('id');
 
   if (!postId) {
-    if (loadingSpinner) {
-      loadingSpinner.innerHTML = '<h4 class="text-danger">সংবাদের আইডি পাওয়া যায়নি!</h4>';
-    }
+    document.getElementById('loadingSpinner').innerHTML = '<h4 class="text-danger">সংবাদের আইডি পাওয়া যায়নি!</h4>';
     return;
   }
 
   try {
-    const res = await fetch(`/api/posts?id=${encodeURIComponent(postId)}`);
+    // API থেকে পোস্ট ডাটা নিয়ে আসা
+    const res = await fetch(`/api/posts?id=${postId}`);
     if (!res.ok) throw new Error('খবর পাওয়া যায়নি');
 
     const postData = await res.json();
-    const post = Array.isArray(postData)
-      ? postData.find(p => String(p.id) === String(postId))
-      : postData;
+    // যদি API অবজেক্ট বা অ্যারে দেয় তা হ্যান্ডেল করা
+    const post = Array.isArray(postData) ? postData.find(p => String(p.id) === String(postId)) : postData;
 
-    if (!post || !post.id) {
-      if (loadingSpinner) {
-        loadingSpinner.innerHTML = '<h4 class="text-danger font-bold">অনুরোধকৃত খবরটি পাওয়া যায়নি।</h4>';
-      }
+    if (!post) {
+      document.getElementById('loadingSpinner').innerHTML = '<h4 class="text-danger font-bold">অনুরোধকৃত খবরটি পাওয়া যায়নি।</h4>';
       return;
     }
 
-    // Update SEO Meta Tags, Schemas, and Breadcrumbs
+    // 🎯 ১. টাইটেল ও মেটা ট্যাগ আপডেট কল করা হলো
     updateMetaTags(post);
-    updateBreadcrumbs(post.category_name, post.title);
 
-    // Render Title
-    if (postTitle) postTitle.innerText = post.title || '';
+    document.getElementById('postTitle').innerText = post.title;
 
-    // Render Category
-    const categoryName = post.category_name || 'সংবাদ';
-    if (postCategory) postCategory.innerText = categoryName;
+    // ক্যাটাগরি সেট করা
+    const catElem = document.getElementById('postCategory');
+    if (catElem) catElem.innerText = post.category_name || 'সংবাদ';
 
-    // Render Time & Author
-    if (postTime) postTime.innerText = formatDateInBangla(post.created_at);
+    // সময় ও লেখক
+    const timeElem = document.getElementById('postTime');
+    if (timeElem) timeElem.innerText = formatDateInBangla(post.created_at);
+
     if (post.author) {
-      if (postAuthor) postAuthor.innerText = post.author;
-      if (authorName) authorName.innerText = post.author;
+      const authorElem = document.getElementById('postAuthor');
+      const authorNameElem = document.getElementById('authorName');
+      if (authorElem) authorElem.innerText = post.author;
+      if (authorNameElem) authorNameElem.innerText = post.author;
     }
 
-    // Render Featured Image safely with Performance Optimization
-    if (postImage) {
-      const fallbackImage = 'https://via.placeholder.com/800x450';
-      postImage.src = post.image_url || fallbackImage;
-      postImage.alt = post.title || 'সংবাদ চিত্র';
-      postImage.loading = 'eager';
-      postImage.setAttribute('fetchpriority', 'high');
-      postImage.setAttribute('decoding', 'async');
-      postImage.onerror = function () {
-        this.onerror = null;
-        this.src = fallbackImage;
-      };
+    // ফিচার ইমেজ
+    const imgElem = document.getElementById('postImage');
+    if (imgElem) {
+      imgElem.src = post.image_url || 'https://via.placeholder.com/800x450';
+      imgElem.alt = post.title;
     }
 
-    // Render Image Caption
-    if (postCaption) {
-      if (post.image_caption) {
-        postCaption.innerText = post.image_caption;
-        postCaption.style.display = 'block';
-      } else {
-        postCaption.style.display = 'none';
-      }
+    if (post.image_caption) {
+      const captionElem = document.getElementById('postCaption');
+      if (captionElem) captionElem.innerText = post.image_caption;
     }
 
-    // Render Safe Post Content
-    if (postContent) {
-      if (!post.content) {
-        postContent.innerHTML = '<p class="text-muted">কোনো কন্টেন্ট পাওয়া যায়নি।</p>';
-      } else if (post.content.includes('<p>') || post.content.includes('<div>')) {
-        postContent.innerHTML = post.content;
+    // 🎯 ২. কন্টেন্ট ফরম্যাটিং সেফলি করা
+    const contentElem = document.getElementById('postContent');
+    if (post.content && contentElem) {
+      // যদি কন্টেন্টে ইতোমধ্যে HTML (<p>, <div>) থাকে তবে সরাসরি বসবে, নাহলে \n দিয়ে ভাগ করবে
+      if (post.content.includes('<p>') || post.content.includes('<div>')) {
+        contentElem.innerHTML = post.content;
       } else {
         const paragraphs = post.content.split('\n').filter(p => p.trim() !== '');
-        postContent.innerHTML = paragraphs.map(p => `<p>${escapeHTML(p)}</p>`).join('');
+        contentElem.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
       }
     }
 
-    // Configure Social Sharing Buttons
+    // শেয়ার বাটন সেটআপ
     setupShareButtons(post.title, window.location.href);
 
-    // Display Article & Hide Loader
-    if (loadingSpinner) loadingSpinner.style.display = 'none';
-    if (postArticle) postArticle.style.display = 'block';
+    // পোস্ট রেন্ডার করার পর স্পিনার হাইড করে পোস্ট ভিজিবল করা
+    document.getElementById('loadingSpinner').style.display = 'none';
+    document.getElementById('postArticle').style.display = 'block';
 
-    // Fetch and Display Related Posts
+    // সংক্রান্ত খবর (Related Posts) লোড
     loadRelatedPosts(post.category_id || post.category_name, post.id);
 
   } catch (err) {
-    console.error('Error fetching post:', err);
-    if (loadingSpinner) {
-      loadingSpinner.innerHTML = `<h4 class="text-danger">ত্রুটি: ${escapeHTML(err.message)}</h4>`;
-    }
+    console.error(err);
+    document.getElementById('loadingSpinner').innerHTML = `<h4 class="text-danger">ত্রুটি: ${err.message}</h4>`;
   }
 }
 
-// Fetch and Render Related Posts
+// সংক্রান্ত ৩টি খবর দেখানোর ফাংশন
 async function loadRelatedPosts(categoryId, currentPostId) {
-  const container = DOM.elements.relatedPostsContainer;
+  const container = document.getElementById('relatedPostsContainer');
   if (!container) return;
 
   try {
     const res = await fetch('/api/posts');
-    if (!res.ok) throw new Error('সংক্রান্ত খবর পাওয়া যায়নি');
+    if (!res.ok) return;
 
     const allPosts = await res.json();
-    if (!Array.isArray(allPosts)) return;
-
-    // Filter posts from same category, excluding current post
+    
+    // বর্তমান পোস্ট বাদে একই ক্যাটাগরির ৩টি পোস্ট ফিল্টার
     const related = allPosts
-      .filter(p => String(p.id) !== String(currentPostId) &&
-        (String(p.category_id) === String(categoryId) || p.category_name === categoryId))
+      .filter(p => String(p.id) !== String(currentPostId) && 
+                  (String(p.category_id) === String(categoryId) || p.category_name === categoryId))
       .slice(0, 3);
 
-    // Fallback: If not enough related posts, fill with other recent posts
-    const finalRelated = related.length >= 3
-      ? related
-      : allPosts.filter(p => String(p.id) !== String(currentPostId)).slice(0, 3);
+    // যদি একই ক্যাটাগরির পোস্ট কম থাকে, অন্য সাম্প্রতিক ৩টি পোস্ট দেখানো
+    const finalRelated = related.length >= 3 ? related : allPosts.filter(p => String(p.id) !== String(currentPostId)).slice(0, 3);
 
     if (finalRelated.length === 0) {
       container.innerHTML = '<p class="text-muted">কোনো সংক্রান্ত খবর পাওয়া যায়নি।</p>';
       return;
     }
 
-    const fallbackImg = 'https://via.placeholder.com/250x150';
-
-    container.innerHTML = finalRelated.map(post => {
-      const safeTitle = escapeHTML(post.title || '');
-      const safeImg = post.image_url || fallbackImg;
-      const safeId = encodeURIComponent(post.id);
-
-      return `
-        <div class="col-md-4">
-            <a href="single-post.html?id=${safeId}" class="mi-related-item">
-                <img src="${safeImg}" alt="${safeTitle}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${fallbackImg}';">
-                <h6>${safeTitle}</h6>
-            </a>
-        </div>
-      `;
-    }).join('');
+    container.innerHTML = finalRelated.map(post => `
+      <div class="col-md-4">
+          <a href="single-post.html?id=${post.id}" class="mi-related-item">
+              <img src="${post.image_url || 'https://via.placeholder.com/250x150'}" alt="${post.title}">
+              <h6>${post.title}</h6>
+          </a>
+      </div>
+    `).join('');
 
   } catch (err) {
     console.error('সংক্রান্ত খবর লোড করতে সমস্যা:', err);
@@ -399,5 +180,5 @@ async function loadRelatedPosts(categoryId, currentPostId) {
   }
 }
 
-// Dynamic Event Listeners Setup
+// পেজ লোড হলে ফাংশন কল হবে
 document.addEventListener('DOMContentLoaded', loadSinglePost);
