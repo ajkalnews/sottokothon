@@ -1,424 +1,108 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <title id="pageTitle">
-        সত্য কথন | খবর লোড হচ্ছে...
-    </title>
-
-    <!-- ========================= -->
-    <!-- Primary SEO -->
-    <!-- ========================= -->
-
-    <meta id="meta-description"
-        name="description"
-        content="বাংলাদেশ ও বিশ্বের সর্বশেষ সংবাদ, রাজনীতি, অর্থনীতি, খেলা, বিনোদন, চাকরি, শিক্ষা ও লাইফস্টাইলের নির্ভরযোগ্য খবর।">
-
-    <meta id="meta-keywords"
-        name="keywords"
-        content="বাংলা নিউজ, বাংলাদেশ সংবাদ">
-
-    <meta name="author"
-        content="সত্য কথন">
-
-    <meta name="robots"
-        content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-
-    <meta name="googlebot"
-        content="index,follow">
-
-    <meta name="language"
-        content="Bangla">
-
-    <meta name="theme-color"
-        content="#b30000">
-
-    <meta name="referrer"
-        content="strict-origin-when-cross-origin">
-
-    <!-- Canonical -->
-
-    <link id="canonical"
-        rel="canonical"
-        href="https://sottokothon.pages.dev/">
-
-    <!-- ========================= -->
-    <!-- Open Graph -->
-    <!-- ========================= -->
-
-    <meta property="og:type"
-        content="article">
-
-    <meta property="og:site_name"
-        content="সত্য কথন">
-
-    <meta property="og:locale"
-        content="bn_BD">
-
-    <meta property="og:title"
-        id="ogTitle"
-        content="">
-
-    <meta property="og:description"
-        id="ogDesc"
-        content="">
-
-    <meta property="og:image"
-        id="ogImage"
-        content="https://sottokothon.pages.dev/img/default-share.jpg">
-
-    <meta property="og:url"
-        id="ogUrl"
-        content="">
-
-    <!-- ========================= -->
-    <!-- Twitter Card -->
-    <!-- ========================= -->
-
-    <meta name="twitter:card"
-        content="summary_large_image">
-
-    <meta name="twitter:title"
-        id="twitterTitle"
-        content="">
-
-    <meta name="twitter:description"
-        id="twitterDesc"
-        content="">
-
-    <meta name="twitter:image"
-        id="twitterImage"
-        content="https://sottokothon.pages.dev/img/default-share.jpg">
-
-    <!-- ========================= -->
-    <!-- Favicon -->
-    <!-- ========================= -->
-
-    <link rel="icon"
-        type="image/png"
-        href="img/favicon.png">
-
-    <link rel="apple-touch-icon"
-        href="img/favicon.png">
-
-    <!-- ========================= -->
-    <!-- Fonts -->
-    <!-- ========================= -->
-
-    <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=SolaimanLipi&display=swap"
-        rel="stylesheet">
-
-    <!-- ========================= -->
-    <!-- CSS -->
-    <!-- ========================= -->
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-    <link rel="stylesheet"
-        href="css/style.css">
-
-    <link rel="stylesheet"
-        href="css/header.css">
-
-    <link rel="stylesheet"
-        href="css/footer.css">
-
-    <link rel="stylesheet"
-        href="css/sidebar.css">
-
-    <link rel="stylesheet"
-        href="css/single-post.css">
-
-    <!-- ========================= -->
-    <!-- JSON-LD -->
-    <!-- ========================= -->
-
-    <script id="article-schema"
-        type="application/ld+json">
-    </script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">সত্য কথন - খবর লোড হচ্ছে...</title>
+    <!-- Open Graph Meta Tags for Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" id="ogTitle" content="সত্যকথন - বাংলা নিউজ" />
+  <meta property="og:description" id="ogDesc" content="সত্যকথন অনলাইন পোর্টাল" />
+  <meta property="og:image" id="ogImage" content="https://sottokothon.pages.dev/img/default-share.jpg" />
+  <meta property="og:url" id="ogUrl" content="https://sottokothon.pages.dev/" />
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Solaimanlipi&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/single-post.css">
 </head>
-
 <body>
+    <div class="mi-container">
+        <div id="headerContainer"></div>
 
-<div class="mi-container">
+        <!-- মূল কনটেন্ট এবং সাইডবার র‍্যাপার -->
+        <div class="mi-main-wrapper">
+            
+            <!-- খবর বা মেইন কনটেন্ট সেকশন -->
+            <main class="mi-content">
+                
+                <!-- লোডার -->
+                <div id="loadingSpinner" class="text-center my-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">লোডিং...</span>
+                    </div>
+                    <p class="mt-2 text-muted">সংবাদ লোড হচ্ছে...</p>
+                </div>
 
-<div id="headerContainer"></div>
+                <!-- পোস্ট কন্টেইনার (ডিফল্টভাবে হাইড থাকবে) -->
+                <article class="mi-post" id="postArticle" style="display: none;">
+                    <!-- খবর হেডার -->
+                    <div class="mi-post-header">
+                        <span id="postCategory" class="mi-category mi-cat-politics">সাধারণ</span>
+                        <h1 id="postTitle"></h1>
+                        <div class="mi-post-meta">
+                            <span>লেখক: <strong id="postAuthor">সত্যকথন ডেস্ক</strong></span>
+                            <span>প্রকাশ: <strong id="postTime"></strong></span>
+                        </div>
+                    </div>
 
-<div class="mi-main-wrapper">
-    <!-- =========================
-     Main Content
-========================= -->
+                    <!-- ফিচার ইমেজ -->
+                    <div class="mi-post-image">
+                        <img id="postImage" src="" alt="খবর ছবি">
+                        <div id="postCaption" class="text-muted fs-6 mt-1" style="font-style: italic;"></div>
+                    </div>
 
-<main class="mi-content">
+                    <!-- খবর কনটেন্ট -->
+                    <div class="mi-post-content" id="postContent"></div>
 
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="mb-3">
-        <ol class="breadcrumb">
+                    <!-- শেয়ার বোতাম -->
+                    <div class="mi-post-share">
+                        <h5>এই খবর শেয়ার করুন:</h5>
+                        <div class="mi-share-buttons">
+                            <a id="shareFb" href="#" target="_blank" class="mi-share-btn mi-facebook">📘 ফেসবুক</a>
+                            <a id="shareTw" href="#" target="_blank" class="mi-share-btn mi-twitter">🐦 টুইটার</a>
+                            <a id="shareWa" href="#" target="_blank" class="mi-share-btn mi-whatsapp">💬 হোয়াটসঅ্যাপ</a>
+                            <button onclick="copyLink()" class="mi-share-btn mi-copy">📋 কপি লিংক</button>
+                        </div>
+                    </div>
 
-            <li class="breadcrumb-item">
-                <a href="index.html">প্রচ্ছদ</a>
-            </li>
+                    <!-- লেখক তথ্য -->
+                    <div class="mi-author-info">
+                        <div class="mi-author-image">👤</div>
+                        <div class="mi-author-content">
+                            <h5 id="authorName">সত্যকথন ডেস্ক</h5>
+                            <p>সত্যকথন নিউজ পোর্টালে সর্বশেষ আপডেট এবং বস্তুনিষ্ঠ খবর পরিবেশন করা হয়।</p>
+                        </div>
+                    </div>
 
-            <li class="breadcrumb-item">
-                <a href="#" id="breadcrumbCategory">
-                    ক্যাটাগরি
-                </a>
-            </li>
+                    <!-- সংক্রান্ত খবর (সম্পর্কিত ক্যাটাগরির পোস্ট) -->
+                    <div class="mi-related-posts">
+                        <h3>সংক্রান্ত খবর</h3>
+                        <div class="row g-3" id="relatedPostsContainer">
+                            <p class="text-muted">সংক্রান্ত খবর লোড হচ্ছে...</p>
+                        </div>
+                    </div>
 
-            <li class="breadcrumb-item active"
-                aria-current="page"
-                id="breadcrumbTitle">
+                </article>
+            </main>
 
-                খবর
-
-            </li>
-
-        </ol>
-    </nav>
-
-    <!-- Loading -->
-
-    <div id="loadingSpinner"
-        class="text-center my-5">
-
-        <div class="spinner-border text-danger"
-            role="status">
-
-            <span class="visually-hidden">
-                Loading...
-            </span>
+            <!-- সাইডবার কনটেইনার -->
+            <div id="sidebarContainer"></div>
 
         </div>
 
-        <p class="mt-3">
-            সংবাদ লোড হচ্ছে...
-        </p>
-
+        <div id="footerContainer"></div>
     </div>
 
-    <!-- =========================
-         Article
-    ========================= -->
-
-    <article id="postArticle"
-        class="mi-post"
-        style="display:none;">
-
-        <!-- Category -->
-
-        <div class="mb-2">
-
-            <span id="postCategory"
-                class="badge bg-danger">
-
-                সাধারণ
-
-            </span>
-
-        </div>
-
-        <!-- Title -->
-
-        <h1 id="postTitle"
-            class="mb-3">
-        </h1>
-
-        <!-- Meta -->
-
-        <div class="mi-post-meta mb-4">
-
-            <span>
-
-                <i class="fa-solid fa-user"></i>
-
-                <strong id="postAuthor">
-                    সত্য কথন ডেস্ক
-                </strong>
-
-            </span>
-
-            &nbsp;&nbsp;
-
-            <span>
-
-                <i class="fa-regular fa-clock"></i>
-
-                <strong id="postTime"></strong>
-
-            </span>
-
-        </div>
-
-        <!-- Featured Image -->
-
-        <figure class="mi-post-image">
-
-            <img
-                id="postImage"
-                class="img-fluid rounded"
-                loading="lazy"
-                decoding="async"
-                fetchpriority="high"
-                src=""
-                alt="">
-
-            <figcaption
-                id="postCaption"
-                class="text-muted mt-2 fst-italic">
-
-            </figcaption>
-
-        </figure>
-
-        <!-- Content -->
-
-        <div id="postContent"
-            class="mi-post-content mt-4">
-
-        </div>
-
-        <!-- =========================
-             Share Buttons
-        ========================= -->
-
-        <div class="mi-post-share mt-5">
-
-            <h5>
-                এই সংবাদটি শেয়ার করুন
-            </h5>
-
-            <div class="mi-share-buttons">
-
-                <a id="shareFb"
-                    class="mi-share-btn mi-facebook"
-                    target="_blank"
-                    rel="noopener">
-
-                    <i class="fab fa-facebook-f"></i>
-
-                    Facebook
-
-                </a>
-
-                <a id="shareTw"
-                    class="mi-share-btn mi-twitter"
-                    target="_blank"
-                    rel="noopener">
-
-                    <i class="fab fa-x-twitter"></i>
-
-                    X
-
-                </a>
-
-                <a id="shareWa"
-                    class="mi-share-btn mi-whatsapp"
-                    target="_blank"
-                    rel="noopener">
-
-                    <i class="fab fa-whatsapp"></i>
-
-                    WhatsApp
-
-                </a>
-
-                <button
-                    class="mi-share-btn mi-copy"
-                    onclick="copyLink()">
-
-                    <i class="fa-solid fa-link"></i>
-
-                    কপি লিংক
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- =========================
-             Author
-        ========================= -->
-
-        <section class="mi-author-info mt-5">
-
-            <div class="mi-author-image">
-
-                <i class="fa-solid fa-user"></i>
-
-            </div>
-
-            <div class="mi-author-content">
-
-                <h5 id="authorName">
-
-                    সত্য কথন ডেস্ক
-
-                </h5>
-
-                <p>
-
-                    সত্য কথন নির্ভরযোগ্য,
-                    বস্তুনিষ্ঠ এবং দ্রুততম
-                    সংবাদ পরিবেশন করে।
-
-                </p>
-
-            </div>
-
-        </section>
-
-        <!-- =========================
-             Related Posts
-        ========================= -->
-
-        <section class="mi-related-posts mt-5">
-
-            <h3 class="mb-4">
-
-                আরও পড়ুন
-
-            </h3>
-
-            <div class="row g-3"
-                id="relatedPostsContainer">
-
-            </div>
-
-        </section>
-
-    </article>
-
-</main>
-
-<!-- Sidebar -->
-
-<div id="sidebarContainer"></div>
-
-</div>
-
-<!-- Footer -->
-
-<div id="footerContainer"></div>
-
-</div>
-<script src="single-post-dynamic.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <!-- সিঙ্গেল পোস্টের ডাইনামিক স্ক্রিপ্ট -->
+    <script src="js/single-post-dynamic.js"></script>
+<script src="js/header-dynamic.js"></script>
+    <script src="js/sidebar-dynamic.js"></script>
+</body>
+</html>
